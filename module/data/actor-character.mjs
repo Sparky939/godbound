@@ -56,7 +56,13 @@ export default class GodboundCharacter extends GodboundActorBase {
       xp: new fields.NumberField({ ...requiredInteger, initial: 0 }),
       armor: new fields.SchemaField({
         type: new fields.StringField({ initial: "unarmored" }),
-        penalties: new fields.ArrayField(fields.StringField({ options: Object.keys(CONFIG.GODBOUND.armorTypes).map(k => ({value: k, label: CONFIG.GODBOUND.armorTypes[k]})) }), {initial: []}),
+        penalties: new fields.ArrayField(
+          fields.StringField(
+            {
+              options: Object.keys(CONFIG.GODBOUND.armorTypes)
+              .map(k => ({value: k, label: CONFIG.GODBOUND.armorTypes[k]}))
+             }),
+              {initial: []}),
         shield: new fields.BooleanField({ initial: false }),
       }),
       move: new fields.SchemaField({

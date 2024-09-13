@@ -1,6 +1,17 @@
 import GodboundActorBase from "./base-actor.mjs";
+import CONFIG from "../helpers/config.mjs";
+import {ATTRIBUTE_MODIFIERS} from "../helpers/tables.mjs";
 
 export default class GodboundCharacter extends GodboundActorBase {
+
+  /**
+  @property {object} attributes
+  @property {number} attributes.level
+  @property {object} attributes.str/dex/con/wis/int/cha
+  @property {number} attributes.<attribute score abbr>.value
+  @property {number} attributes.<attribute score abbr>.mod
+  @property {number} attributes.<attribute score abbr>.label
+  */
 
   static defineSchema() {
     const fields = foundry.data.fields;
@@ -8,15 +19,13 @@ export default class GodboundCharacter extends GodboundActorBase {
     const schema = super.defineSchema();
 
     schema.attributes = new fields.SchemaField({
-      level: new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 1 })
-      }),
+      level: new fields.NumberField({ ...requiredInteger, initial: 1 })
     });
 
     // Iterate over ability names and create a new SchemaField for each.
-    schema.abilities = new fields.SchemaField(Object.keys(CONFIG.GODBOUND.abilities).reduce((obj, ability) => {
-      obj[ability] = new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
+    schema.attributes = new fields.SchemaField(Object.keys(CONFIG.GODBOUND.abilities).reduce((obj, attribute) => {
+      obj[attribute] = new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 3, max: 19 }),
       });
       return obj;
     }, {}));
@@ -25,27 +34,27 @@ export default class GodboundCharacter extends GodboundActorBase {
   }
 
   prepareDerivedData() {
-    // Loop through ability scores, and add their modifiers to our sheet output.
-    for (const key in this.abilities) {
+    // Loop through attribute scores, and add their modifiers to our sheet output.
+    for (const key in this.attributes) {
       // Calculate the modifier using d20 rules.
-      this.abilities[key].mod = Math.floor((this.abilities[key].value - 10) / 2);
-      // Handle ability label localization.
-      this.abilities[key].label = game.i18n.localize(CONFIG.GODBOUND.abilities[key]) ?? key;
+      this.attributes[key].mod = ATTRIBUTE_MODIFIERS.find(attr => this.attribute[key].value >= attr.min && this.attribute[key].value <= attr.max);
+      // Handle attribute label localization.
+      this.attributes[key].label = game.i18n.localize(CONFIG.GODBOUND.attributes[key]) ?? key;
     }
   }
 
   getRollData() {
     const data = {};
 
-    // Copy the ability scores to the top level, so that rolls can use
+    // Copy the attribute scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.
-    if (this.abilities) {
-      for (let [k,v] of Object.entries(this.abilities)) {
+    if (this.attributes) {
+      for (let [k,v] of Object.entries(this.attributes)) {
         data[k] = foundry.utils.deepClone(v);
       }
     }
 
-    data.lvl = this.attributes.level.value;
+    data.lvl = this.attributes.level;
 
     return data
   }

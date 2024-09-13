@@ -105,7 +105,6 @@ export default class GodboundCharacter extends GodboundActorBase {
       // Handle attribute label localization.
       this.attributes[key].label = game.i18n.localize(GODBOUND.attributes[key]) ?? key;
     }
-    
   }
 
   getRollData() {

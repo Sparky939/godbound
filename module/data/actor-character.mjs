@@ -1,5 +1,5 @@
 import GodboundActorBase from "./base-actor.mjs";
-import CONFIG from "../helpers/config.mjs";
+import {GODBOUND} from "../helpers/config.mjs";
 import {ATTRIBUTE_MODIFIERS} from "../helpers/tables.mjs";
 
 /**
@@ -57,10 +57,10 @@ export default class GodboundCharacter extends GodboundActorBase {
       armor: new fields.SchemaField({
         type: new fields.StringField({ initial: "unarmored" }),
         penalties: new fields.ArrayField(
-          fields.StringField(
+          new fields.StringField(
             {
-              options: Object.keys(CONFIG.GODBOUND.armorTypes)
-              .map(k => ({value: k, label: CONFIG.GODBOUND.armorTypes[k]}))
+              options: Object.keys(GODBOUND.armorTypes)
+              .map(k => ({value: k, label: GODBOUND.armorTypes[k]}))
              }),
               {initial: []}),
         shield: new fields.BooleanField({ initial: false }),
@@ -72,7 +72,7 @@ export default class GodboundCharacter extends GodboundActorBase {
         fly: new fields.NumberField({ ...requiredInteger, initial: 0 }),
       }),
       goal: new fields.StringField({ initial: "" }),
-      facts: new fields.ArrayField({ type: fields.StringField(), initial: [] }),
+      facts: new fields.ArrayField(new fields.StringField({ initial: "" }), { initial: [] }),
       wealth: new fields.NumberField({ ...requiredInteger, initial: 0 }),
     })
 
@@ -86,7 +86,7 @@ export default class GodboundCharacter extends GodboundActorBase {
     });
 
     // Iterate over ability names and create a new SchemaField for each.
-    schema.attributes = new fields.SchemaField(Object.keys(CONFIG.GODBOUND.abilities).reduce((obj, attribute) => {
+    schema.attributes = new fields.SchemaField(Object.keys(GODBOUND.attributes).reduce((obj, attribute) => {
       obj[attribute] = new fields.SchemaField({
         value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 3, max: 19 }),
       });
@@ -100,9 +100,10 @@ export default class GodboundCharacter extends GodboundActorBase {
     // Loop through attribute scores, and add their modifiers to our sheet output.
     for (const key in this.attributes) {
       // Calculate the modifier using d20 rules.
-      this.attributes[key].mod = ATTRIBUTE_MODIFIERS.find(attr => this.attribute[key].value >= attr.min && this.attribute[key].value <= attr.max);
+      this.attributes[key].mod = ATTRIBUTE_MODIFIERS.find(attr => this.attributes[key].value >= attr.min 
+                                                  && this.attributes[key].value <= attr.max).mod;
       // Handle attribute label localization.
-      this.attributes[key].label = game.i18n.localize(CONFIG.GODBOUND.attributes[key]) ?? key;
+      this.attributes[key].label = game.i18n.localize(GODBOUND.attributes[key]) ?? key;
     }
     
   }

@@ -52,7 +52,7 @@ export const GODBOUND = {
         alacrity: 'GODBOUND.Item.Word.Alacrity',
         apotheosis: 'GODBOUND.Item.Word.Apotheosis',
         artifice: 'GODBOUND.Item.Word.Artifice',
-        beasts: 'GODBOUND.Item.Word.Beast',
+        beasts: 'GODBOUND.Item.Word.Beasts',
         birds: 'GODBOUND.Item.Word.Birds',
         bow: 'GODBOUND.Item.Word.Bow',
         cities: 'GODBOUND.Item.Word.Cities',

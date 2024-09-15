@@ -48,9 +48,12 @@ Hooks.once('init', function () {
     CONFIG.Item.documentClass = GodboundItem
     CONFIG.Item.dataModels = {
         item: models.GodboundItem,
-        feature: models.GodboundFeature,
+        fact: models.GodboundFact,
         spell: models.GodboundSpell,
         project: models.GodboundProject,
+        word: models.GodboundWord,
+        gift: models.GodboundGift,
+        giftEffect: models.GodboundGiftEffect,
     }
 
     // Active Effects are never copied to the Actor,

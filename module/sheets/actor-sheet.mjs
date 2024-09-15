@@ -11,17 +11,17 @@ export class GodboundActorSheet extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['godbound', 'sheet', 'actor'],
-      width: 600,
-      height: 600,
-      tabs: [
-        {
-          navSelector: '.sheet-tabs',
-          contentSelector: '.sheet-body',
-          initial: 'features',
-        },
-      ],
-    });
+        classes: ['godbound', 'sheet', 'actor'],
+        width: 600,
+        height: 600,
+        tabs: [
+            {
+                navSelector: '.sheet-tabs',
+                contentSelector: '.sheet-body',
+                initial: 'facts',
+            },
+        ],
+    })
   }
 
   /** @override */
@@ -104,7 +104,7 @@ export class GodboundActorSheet extends ActorSheet {
   _prepareItems(context) {
     // Initialize containers.
     const gear = [];
-    const features = [];
+    const facts = []
     const projects = []
     const spells = {
         0: [],
@@ -128,9 +128,9 @@ export class GodboundActorSheet extends ActorSheet {
         } else if (i.type === 'project') {
             projects.push(i)
         }
-        // Append to features.
-        else if (i.type === 'feature') {
-            features.push(i)
+        // Append to facts.
+        else if (i.type === 'fact') {
+            facts.push(i)
         }
         // Append to spells.
         else if (i.type === 'spell') {
@@ -142,7 +142,7 @@ export class GodboundActorSheet extends ActorSheet {
 
     // Assign and return
     context.gear = gear;
-    context.features = features;
+    context.facts = facts
     context.spells = spells;
     context.projects = projects
   }

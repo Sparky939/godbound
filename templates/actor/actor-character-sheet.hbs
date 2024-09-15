@@ -8,23 +8,23 @@
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
       use both the "grid" and "grid-Ncol" class where "N" can be any number
       from 1 to 12 and will create that number of columns.  --}}
-      <div class="resources grid grid-3col">
+      <div class="resources grid grid-2col">
 
         {{!-- "flex-group-center" is also defined in the _grid.scss file
         and it will add a small amount of padding, a border, and will
         center all of its child elements content and text. --}}
         <div class="resource flex-group-center">
-          
+          <label for="system.details.health.value" class="resource-label">Health</label>
+          <div class="resource-content flexrow flex-center flex-between"></div>
+          <input type="text" name="system.details.health.value" value="{{system.health.value}}" data-dtype="Number"/>
+          <span> / </span>
+          <span class="resource-content-static">{{numberFormat system.details.health.max decimals=0}}</span>
+          </div>
         </div>
 
         <div class="resource flex-group-center">
          
         </div>
-
-        <div class="resource flex-group-center">
-          
-        </div>
-
       </div>
     </div>
   </header>
@@ -37,6 +37,7 @@
     <a class="item" data-tab="items">Items</a>
     <a class="item" data-tab="spells">Spells</a>
     <a class="item" data-tab="effects">Effects</a>
+    <a class="item" data-tab="projects">Projects</a>
   </nav>
 
   {{!-- Sheet Body --}}
@@ -89,6 +90,10 @@
     {{!-- Active Effects Tab --}}
     <div class="tab effects flexcol" data-group="primary" data-tab="effects">
       {{> "systems/godbound/templates/actor/parts/actor-effects.hbs"}}
+    </div>
+
+    <div class="tab projects flexcol" data-group="primary" data-tab="projects">
+      {{> "systems/godbound/templates/actor/parts/actor-projects.hbs"}}
     </div>
 
   </section>

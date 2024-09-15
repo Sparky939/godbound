@@ -1,6 +1,9 @@
-import GodboundActorBase from "./base-actor.mjs";
-import {GODBOUND} from "../helpers/config.mjs";
-import { ATTRIBUTE_MODIFIERS, LEVEL_REQUIREMENTS } from '../helpers/tables.mjs'
+import GodboundActorBase from './base-actor.mjs'
+import { GODBOUND } from '../../helpers/config.mjs'
+import {
+    ATTRIBUTE_MODIFIERS,
+    LEVEL_REQUIREMENTS,
+} from '../../helpers/tables.mjs'
 
 /**
  * @param {object} details
@@ -49,6 +52,8 @@ import { ATTRIBUTE_MODIFIERS, LEVEL_REQUIREMENTS } from '../helpers/tables.mjs'
  * @param {object} resources.influence
  * @param {number} resources.influence.max (derived)
  * @param {number} resources.influence.available (derived)
+ * @param {object} gifts
+ * @param {array} gifts.<word>
  */
 
 export default class GodboundCharacter extends GodboundActorBase {
@@ -211,12 +216,12 @@ export default class GodboundCharacter extends GodboundActorBase {
     }
 
     prepareDerivedData() {
-        // Loop through attribute scores, and add their modifiers to our sheet output.
-        this.updateModifiers()
-        this.updateLevel()
+        this.prepareModifiers()
+        this.prepareLevel()
+        this.prepareGifts()
     }
 
-    updateModifiers() {
+    prepareModifiers() {
         for (const key in this.attributes) {
             // Calculate the modifier using d20 rules.
             this.attributes[key].mod = ATTRIBUTE_MODIFIERS.find(
@@ -228,10 +233,10 @@ export default class GodboundCharacter extends GodboundActorBase {
             this.attributes[key].label =
                 game.i18n.localize(GODBOUND.attributes[key]) ?? key
         }
-        this.updateSaves()
+        this.prepareSaves()
     }
 
-    updateSaves() {
+    prepareSaves() {
         this.defence.hardinessMod = Math.max(
             this.attributes.con.mod,
             this.attributes.str.mod
@@ -246,13 +251,8 @@ export default class GodboundCharacter extends GodboundActorBase {
         )
     }
 
-    updateLevel() {
+    prepareLevel() {
         // TODO: get dominion spent from actor's project items
-        console.log(
-            this,
-            this.parent.items,
-            this.parent.items.filter((i) => i.type === 'project')
-        )
         const projects = this.parent.items.filter((i) => i.type === 'project')
         this.resources.dominion.spent = projects.reduce(
             (acc, p) => acc + p.system.cost.dominion,
@@ -280,10 +280,10 @@ export default class GodboundCharacter extends GodboundActorBase {
             newHealthMax,
             this.details.health.value + (newHealthMax - currentHealthMax)
         )
-        this.updateResources()
+        this.prepareResources()
     }
 
-    updateResources() {
+    prepareResources() {
         this.resources.effort.max =
             this.details.level * (2 + this.resources.effort.bonuses.level) +
             this.resources.effort.bonuses.flat
@@ -295,6 +295,15 @@ export default class GodboundCharacter extends GodboundActorBase {
             this.resources.influence.bonuses.flat
         // TODO: Update available influence based on spent influence.
         this.resources.influence.available = this.resources.influence.max
+    }
+
+    prepareGifts() {
+        this.gifts = {}
+        for (const word of Object.keys(GODBOUND.words)) {
+            this.gifts[word] = this.parent.items.filter(
+                (i) => i.type === 'gift' && i.word === word
+            )
+        }
     }
 
     getRollData() {

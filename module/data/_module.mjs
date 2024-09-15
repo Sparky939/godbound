@@ -1,11 +1,14 @@
 // Export Actors
-export { default as GodboundActorBase } from './base-actor.mjs'
-export { default as GodboundCharacter } from './actor-character.mjs'
-export { default as GodboundNPC } from './actor-npc.mjs'
+export { default as GodboundActorBase } from './actors/base-actor.mjs'
+export { default as GodboundCharacter } from './actors/actor-character.mjs'
+export { default as GodboundNPC } from './actors/actor-npc.mjs'
 
 // Export Items
-export { default as GodboundItemBase } from './base-item.mjs'
-export { default as GodboundItem } from './item-item.mjs'
-export { default as GodboundFeature } from './item-feature.mjs'
-export { default as GodboundSpell } from './item-spell.mjs'
-export { default as GodboundProject } from './item-project.mjs'
+export { default as GodboundItemBase } from './items/base-item.mjs'
+export { default as GodboundItem } from './items/item-item.mjs'
+export { default as GodboundFact } from './items/item-fact.mjs'
+export { default as GodboundSpell } from './items/item-spell.mjs'
+export { default as GodboundProject } from './items/item-project.mjs'
+export { default as GodboundWord } from './items/item-word.mjs'
+export { default as GodboundGift } from './items/item-gift.mjs'
+export { default as GodboundGiftEffect } from './items/item-gift-effect.mjs'

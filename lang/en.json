@@ -36,8 +36,70 @@
         },
         "Item": {
             "Spell": {
-                "SpellLVL": "Level {level} Spells",
-                "AddLVL": "Add LVL {level}"
+                "Level": {
+                    "Apprentice": "Apprentice",
+                    "Adept": "Adept",
+                    "Master": "Master",
+                    "Archmage": "Archmage"
+                }
+            },
+            "Word": {
+                "Alacrity": "Alacrity",
+                "Apotheosis": "Apotheosis",
+                "Artifice": "Artifice",
+                "Beasts": "Beasts",
+                "Birds": "Birds",
+                "Bow": "Bow",
+                "Cities": "Cities",
+                "Command": "Command",
+                "Dance": "Dance",
+                "Deception": "Deception",
+                "Desire": "Desire",
+                "Endurance": "Endurance",
+                "Engineering": "Engineering",
+                "Entropy": "Entropy",
+                "Fate": "Fate",
+                "Fear": "Fear",
+                "Fertility": "Fertility",
+                "Fire": "Fire",
+                "Health": "Health",
+                "Insects": "Insects",
+                "Journeying": "Journeying",
+                "Knowledge": "Knowledge",
+                "Luck": "Luck",
+                "Madness": "Madness",
+                "Might": "Might",
+                "Murder": "Murder",
+                "Music": "Music",
+                "Network": "Network",
+                "Night": "Night",
+                "Passion": "Passion",
+                "Protection": "Protection",
+                "Sea": "Sea",
+                "Shapeshifting": "Shapeshifting",
+                "Sky": "Sky",
+                "Sorcery": "Sorcery",
+                "Sun": "Sun",
+                "Sword": "Sword",
+                "Theft": "Theft",
+                "Time": "Time",
+                "Underworld": "Underworld",
+                "Vengeance": "Vengeance",
+                "War": "War",
+                "Wealth": "Wealth",
+                "Winter": "Winter"
+            },
+            "Gift": {
+                "Power": {
+                    "Lesser": "Lesser",
+                    "Greater": "Greater"
+                },
+                "Type": {
+                    "Passive": "Constant",
+                    "Instant": "Instant",
+                    "Turn": "On Turn",
+                    "Action": "Action"
+                }
             }
         },
         "Effect": {
@@ -48,52 +110,6 @@
             "Temporary": "Temporary Effects",
             "Passive": "Passive Effects",
             "Inactive": "Inactive Effects"
-        },
-        "Word": {
-            "Alacrity": "Alacrity",
-            "Apotheosis": "Apotheosis",
-            "Artifice": "Artifice",
-            "Beasts": "Beasts",
-            "Birds": "Birds",
-            "Bow": "Bow",
-            "Cities": "Cities",
-            "Command": "Command",
-            "Dance": "Dance",
-            "Deception": "Deception",
-            "Desire": "Desire",
-            "Endurance": "Endurance",
-            "Engineering": "Engineering",
-            "Entropy": "Entropy",
-            "Fate": "Fate",
-            "Fear": "Fear",
-            "Fertility": "Fertility",
-            "Fire": "Fire",
-            "Health": "Health",
-            "Insects": "Insects",
-            "Journeying": "Journeying",
-            "Knowledge": "Knowledge",
-            "Luck": "Luck",
-            "Madness": "Madness",
-            "Might": "Might",
-            "Murder": "Murder",
-            "Music": "Music",
-            "Network": "Network",
-            "Night": "Night",
-            "Passion": "Passion",
-            "Protection": "Protection",
-            "Sea": "Sea",
-            "Shapeshifting": "Shapeshifting",
-            "Sky": "Sky",
-            "Sorcery": "Sorcery",
-            "Sun": "Sun",
-            "Sword": "Sword",
-            "Theft": "Theft",
-            "Time": "Time",
-            "Underworld": "Underworld",
-            "Vengeance": "Vengeance",
-            "War": "War",
-            "Wealth": "Wealth",
-            "Winter": "Winter"
         }
     },
     "TYPES": {
@@ -103,9 +119,12 @@
         },
         "Item": {
             "item": "Item",
-            "feature": "Feature",
+            "fact": "Fact",
             "spell": "Spell",
-            "project": "Project"
+            "project": "Project",
+            "word": "Word",
+            "gift": "Gift",
+            "gift effect": "Gift Effect"
         }
     }
 }

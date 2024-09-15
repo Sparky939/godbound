@@ -15,15 +15,21 @@
         center all of its child elements content and text. --}}
         <div class="resource flex-group-center">
           <label for="system.details.health.value" class="resource-label">Health</label>
-          <div class="resource-content flexrow flex-center flex-between"></div>
-          <input type="text" name="system.details.health.value" value="{{system.health.value}}" data-dtype="Number"/>
-          <span> / </span>
-          <span class="resource-content-static">{{numberFormat system.details.health.max decimals=0}}</span>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="text" name="system.details.health.value" value="{{system.health.value}}" data-dtype="Number"/>
+            <span> / </span>
+            <span class="resource-content-static">{{numberFormat system.details.health.max decimals=0}}</span>
+
           </div>
         </div>
 
         <div class="resource flex-group-center">
-         
+         <label for="system.resources.effort.value" class="resource-label">Effort</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <input type="text" name="system.resources.effort.value" value="{{system.resources.effort.value}}" data-dtype="Number"/>
+            <span> / </span>
+            <span class="resource-content-static">{{numberFormat system.resources.effort.max decimals=0}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -32,7 +38,7 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="features">Features</a>
+    <a class="item" data-tab="facts">Facts</a>
     <a class="item" data-tab="description">Description</a>
     <a class="item" data-tab="items">Items</a>
     <a class="item" data-tab="spells">Spells</a>
@@ -43,8 +49,8 @@
   {{!-- Sheet Body --}}
   <section class="sheet-body">
 
-    {{!-- Owned Features Tab --}}
-    <div class="tab features" data-group="primary" data-tab="features">
+    {{!-- Owned Facts Tab --}}
+    <div class="tab facts" data-group="primary" data-tab="facts">
       <section class="grid grid-3col">
         <aside class="sidebar">
 
@@ -62,10 +68,10 @@
           </div>
         </aside>
 
-        {{!-- For the main features list, span the right two columns --}}
+        {{!-- For the main facts list, span the right two columns --}}
         <section class="main grid-span-2">
           {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
-          {{> "systems/godbound/templates/actor/parts/actor-features.hbs"}}
+          {{> "systems/godbound/templates/actor/parts/actor-facts.hbs"}}
         </section>
 
       </section>

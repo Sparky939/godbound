@@ -105,42 +105,46 @@ export class GodboundActorSheet extends ActorSheet {
     // Initialize containers.
     const gear = [];
     const features = [];
+    const projects = []
     const spells = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: [],
-    };
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+    }
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
-      i.img = i.img || Item.DEFAULT_ICON;
-      // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i);
-      }
-      // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i);
-      }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.system.spellLevel != undefined) {
-          spells[i.system.spellLevel].push(i);
+        i.img = i.img || Item.DEFAULT_ICON
+        // Append to gear.
+        if (i.type === 'item') {
+            gear.push(i)
+        } else if (i.type === 'project') {
+            projects.push(i)
         }
-      }
+        // Append to features.
+        else if (i.type === 'feature') {
+            features.push(i)
+        }
+        // Append to spells.
+        else if (i.type === 'spell') {
+            if (i.system.spellLevel != undefined) {
+                spells[i.system.spellLevel].push(i)
+            }
+        }
     }
 
     // Assign and return
     context.gear = gear;
     context.features = features;
     context.spells = spells;
+    context.projects = projects
   }
 
   /* -------------------------------------------- */

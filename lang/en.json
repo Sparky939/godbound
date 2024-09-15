@@ -1,110 +1,111 @@
 {
-  "GODBOUND": {
-    "Attribute": {
-      "Str": { "long": "Strength", "abbr": "str" },
-      "Con": { "long": "Constitution", "abbr": "con" },
-      "Dex": { "long": "Dexterity", "abbr": "dex" },
-      "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Wisdom", "abbr": "wis" },
-      "Cha": { "long": "Charisma", "abbr": "cha" }
+    "GODBOUND": {
+        "Attribute": {
+            "Str": { "long": "Strength", "abbr": "str" },
+            "Con": { "long": "Constitution", "abbr": "con" },
+            "Dex": { "long": "Dexterity", "abbr": "dex" },
+            "Int": { "long": "Intelligence", "abbr": "int" },
+            "Wis": { "long": "Wisdom", "abbr": "wis" },
+            "Cha": { "long": "Charisma", "abbr": "cha" }
+        },
+        "Armor": {
+            "None": "Unarmoured",
+            "Light": "Light",
+            "Medium": "Medium",
+            "Heavy": "Heavy",
+            "Shield": "Shield"
+        },
+        "Weapon": {
+            "Unarmed": "Unarmed",
+            "Light": "Light",
+            "Medium": "Medium",
+            "Heavy": "Heavy",
+            "OneHandedRanged": "One-Handed Ranged",
+            "TwoHandedRanged": "Two-Handed Ranged"
+        },
+        "Resource": {
+            "Effort": "Effort",
+            "Health": "Health",
+            "Influence": "Influence",
+            "Wealth": "Wealth",
+            "Dominion": "Dominion"
+        },
+        "SheetLabels": {
+            "Actor": "Godbound Actor Sheet",
+            "Item": "Godbound Item Sheet"
+        },
+        "Item": {
+            "Spell": {
+                "SpellLVL": "Level {level} Spells",
+                "AddLVL": "Add LVL {level}"
+            }
+        },
+        "Effect": {
+            "Source": "Source",
+            "Toggle": "Toggle Effect",
+            "Active": "Active Effects",
+            "Duration": "Duration",
+            "Temporary": "Temporary Effects",
+            "Passive": "Passive Effects",
+            "Inactive": "Inactive Effects"
+        },
+        "Word": {
+            "Alacrity": "Alacrity",
+            "Apotheosis": "Apotheosis",
+            "Artifice": "Artifice",
+            "Beasts": "Beasts",
+            "Birds": "Birds",
+            "Bow": "Bow",
+            "Cities": "Cities",
+            "Command": "Command",
+            "Dance": "Dance",
+            "Deception": "Deception",
+            "Desire": "Desire",
+            "Endurance": "Endurance",
+            "Engineering": "Engineering",
+            "Entropy": "Entropy",
+            "Fate": "Fate",
+            "Fear": "Fear",
+            "Fertility": "Fertility",
+            "Fire": "Fire",
+            "Health": "Health",
+            "Insects": "Insects",
+            "Journeying": "Journeying",
+            "Knowledge": "Knowledge",
+            "Luck": "Luck",
+            "Madness": "Madness",
+            "Might": "Might",
+            "Murder": "Murder",
+            "Music": "Music",
+            "Network": "Network",
+            "Night": "Night",
+            "Passion": "Passion",
+            "Protection": "Protection",
+            "Sea": "Sea",
+            "Shapeshifting": "Shapeshifting",
+            "Sky": "Sky",
+            "Sorcery": "Sorcery",
+            "Sun": "Sun",
+            "Sword": "Sword",
+            "Theft": "Theft",
+            "Time": "Time",
+            "Underworld": "Underworld",
+            "Vengeance": "Vengeance",
+            "War": "War",
+            "Wealth": "Wealth",
+            "Winter": "Winter"
+        }
     },
-    "Armor": {
-      "None": "None",
-      "Light": "Light",
-      "Medium": "Medium",
-      "Heavy": "Heavy",
-      "Shield": "Shield"
-    },
-    "Weapon": {
-      "Unarmed": "Unarmed",
-      "Light": "Light",
-      "Medium": "Medium",
-      "Heavy": "Heavy",
-      "OneHandedRanged": "One-Handed Ranged",
-      "TwoHandedRanged": "Two-Handed Ranged"
-    },
-    "Resource": {
-      "Effort": "Effort",
-      "Health": "Health",
-      "Influence": "Influence",
-      "Wealth": "Wealth",
-      "Dominion": "Dominion"
-    },
-    "SheetLabels": {
-      "Actor": "Godbound Actor Sheet",
-      "Item": "Godbound Item Sheet"
-    },
-    "Item": {
-      "Spell": {
-        "SpellLVL": "Level {level} Spells",
-        "AddLVL": "Add LVL {level}"
-      }
-    },
-    "Effect": {
-      "Source": "Source",
-      "Toggle": "Toggle Effect",
-      "Active": "Active Effects",
-      "Duration": "Duration",
-      "Temporary": "Temporary Effects",
-      "Passive": "Passive Effects",
-      "Inactive": "Inactive Effects"
-    },
-    "Word": {
-      "Alacrity": "Alacrity",
-      "Apotheosis": "Apotheosis",
-      "Artifice": "Artifice",
-      "Beasts": "Beasts",
-      "Birds": "Birds",
-      "Bow": "Bow",
-      "Cities": "Cities",
-      "Command": "Command",
-      "Dance": "Dance",
-      "Deception": "Deception",
-      "Desire": "Desire",
-      "Endurance": "Endurance",
-      "Engineering": "Engineering",
-      "Entropy": "Entropy",
-      "Fate": "Fate",
-      "Fear": "Fear",
-      "Fertility": "Fertility",
-      "Fire": "Fire",
-      "Health":"Health",
-      "Insects": "Insects",
-      "Journeying": "Journeying",
-      "Knowledge": "Knowledge",
-      "Luck": "Luck",
-      "Madness": "Madness",
-      "Might": "Might",
-      "Murder": "Murder",
-      "Music": "Music",
-      "Network": "Network",
-      "Night": "Night",
-      "Passion": "Passion",
-      "Protection": "Protection",
-      "Sea": "Sea",
-      "Shapeshifting": "Shapeshifting",
-      "Sky": "Sky",
-      "Sorcery": "Sorcery",
-      "Sun": "Sun",
-      "Sword": "Sword",
-      "Theft": "Theft",
-      "Time": "Time",
-      "Underworld": "Underworld",
-      "Vengeance": "Vengeance",
-      "War": "War",
-      "Wealth": "Wealth",
-      "Winter": "Winter"
+    "TYPES": {
+        "Actor": {
+            "character": "Character",
+            "npc": "NPC"
+        },
+        "Item": {
+            "item": "Item",
+            "feature": "Feature",
+            "spell": "Spell",
+            "project": "Project"
+        }
     }
-  },
-  "TYPES": {
-    "Actor": {
-      "character": "Character",
-      "npc": "NPC"
-    },
-    "Item": {
-      "item": "Item",
-      "feature": "Feature",
-      "spell": "Spell"
-    }
-  }
 }

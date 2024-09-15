@@ -249,6 +249,24 @@
 .godbound .tox .tox-edit-area {
   padding: 0 8px;
 }
+.godbound .sheet-sidebar {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 7px;
+  width: 180px;
+}
+.godbound .sheet-sidebar > .attribute-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+  grid-auto-rows: auto;
+}
+.godbound .sheet-sidebar > .attribute-list > .attribute {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-row: span 1;
+  margin-bottom: 5px;
+}
 .godbound .resource-label {
   font-weight: bold;
 }

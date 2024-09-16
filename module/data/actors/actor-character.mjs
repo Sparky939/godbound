@@ -216,6 +216,10 @@ export default class GodboundCharacter extends GodboundActorBase {
     }
 
     prepareDerivedData() {
+        this.words = game.settings
+            .get('godbound', 'words')
+            .split(',')
+            .map((str) => String(str).trim())
         this.prepareModifiers()
         this.prepareLevel()
         this.prepareGifts()
@@ -299,7 +303,7 @@ export default class GodboundCharacter extends GodboundActorBase {
 
     prepareGifts() {
         this.gifts = {}
-        for (const word of Object.keys(GODBOUND.words)) {
+        for (const word of this.words) {
             this.gifts[word] = this.parent.items.filter(
                 (i) => i.type === 'gift' && i.word === word
             )

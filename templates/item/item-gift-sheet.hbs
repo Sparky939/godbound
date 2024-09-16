@@ -17,7 +17,7 @@
                 /></h1>
             <div class='grid grid-3col'>
                 <span>
-                    {{localize system.word.label}}
+                    {{localize system.word}}
                 </span>
                 <span>
                     {{localize system.power.label}}
@@ -54,11 +54,11 @@
         <div class='tab attributes' data-group='primary' data-tab='details'>
             <div class='grid grid-2col'>
                 <label>{{localize 'Word'}}:</label>
-                <select name='system.word.value'>
+                <select name='system.word'>
                     <option value=''></option>
                     {{selectOptions
-                        config.words
-                        selected=system.word.value
+                        system.words
+                        selected=system.word
                         localize=true
                     }}
                 </select>

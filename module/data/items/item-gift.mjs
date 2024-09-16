@@ -3,9 +3,7 @@ import GodboundItemBase from './base-item.mjs'
 
 /**
  * @param {string} description
- * @param {object} word
- * @param {string} word.value
- * @param {string} word.label
+ * @param {string} word
  * @param {object} power // "lesser", "greater"
  * @param {string} power.value
  * @param {string} power.label
@@ -17,17 +15,14 @@ import GodboundItemBase from './base-item.mjs'
 export default class GodboundGift extends GodboundItemBase {
     static defineSchema() {
         const fields = foundry.data.fields
-        const schema = {}
+        const schema = super.defineSchema()
 
-        schema.word = new fields.SchemaField({
-            value: new fields.StringField({
-                required: true,
-                options: Object.keys(GODBOUND.words),
-            }),
-            label: new fields.StringField({
-                required: true,
-                default: '',
-            }),
+        schema.word = new fields.StringField({
+            required: true,
+            options: game.settings
+                .get('godbound', 'words')
+                .split(',')
+                .map((str) => String(str).trim()),
         })
 
         schema.power = new fields.SchemaField({
@@ -56,7 +51,14 @@ export default class GodboundGift extends GodboundItemBase {
 
     prepareDerivedData() {
         super.prepareDerivedData();
-        this.word.label = GODBOUND.words[this.word.value] ?? "";
+        this.words = game.settings
+            .get('godbound', 'words')
+            .split(',')
+            .reduce((acc, str) => {
+                const word = String(str).trim()
+                acc[word] = word
+                return acc
+            }, {})
         this.power.label = GODBOUND.gifts.power[this.power.value] ?? "";
         this.type.label = GODBOUND.gifts.type[this.type.value] ?? "";
     }

@@ -6,6 +6,10 @@ import { GodboundActorSheet } from './sheets/actor-sheet.mjs'
 import { GodboundItemSheet } from './sheets/item-sheet.mjs'
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs'
+import {
+    registerSystemSettings,
+    registerDeferredSettings,
+} from './settings.mjs'
 import { GODBOUND } from './helpers/config.mjs'
 // Import DataModel classes
 import * as models from './data/_module.mjs'
@@ -72,9 +76,33 @@ Hooks.once('init', function () {
         makeDefault: true,
         label: 'GODBOUND.SheetLabels.Item',
     })
+    registerSystemSettings()
 
     // Preload Handlebars templates.
     return preloadHandlebarsTemplates()
+})
+
+Hooks.once('setup', function () {
+    // Configure trackable & consumable attributes.
+    // _configureTrackableAttributes();
+    // _configureConsumableAttributes();
+
+    // CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
+    // game.dnd5e.moduleArt.registerModuleArt();
+    // Tooltips5e.activateListeners();
+    // game.dnd5e.tooltips.observe();
+
+    // Register settings after modules have had a chance to initialize
+    registerDeferredSettings()
+
+    // // Apply table of contents compendium style if specified in flags
+    // game.packs
+    //   .filter(p => p.metadata.flags?.display === "table-of-contents")
+    //   .forEach(p => p.applicationClass = applications.journal.TableOfContentsCompendium);
+
+    // // Apply custom item compendium
+    // game.packs.filter(p => p.metadata.type === "Item")
+    //   .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
 })
 
 /* -------------------------------------------- */
@@ -92,8 +120,9 @@ Handlebars.registerHelper('toLowerCase', function (str) {
 
 Hooks.once('ready', function () {
     // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-    Hooks.on('hotbarDrop', (bar, data, slot) => createItemMacro(data, slot))
+    Hooks.on('hotbarDrop', (_bar, data, slot) => createItemMacro(data, slot))
 })
+
 
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */

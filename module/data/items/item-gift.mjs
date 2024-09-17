@@ -10,11 +10,17 @@ import GodboundItemBase from './base-item.mjs'
  * @param {object} type // "passive", "instant", "turn", "action"
  * @param {string} type.value
  * @param {string} type.label
+ * @param {array} effects
  */
 
 export default class GodboundGift extends GodboundItemBase {
     static defineSchema() {
         const fields = foundry.data.fields
+        const requiredInteger = {
+            required: true,
+            nullable: false,
+            integer: true,
+        }
         const schema = super.defineSchema()
 
         schema.word = new fields.StringField({
@@ -46,11 +52,38 @@ export default class GodboundGift extends GodboundItemBase {
                 default: '',
             }),
         })
+
+        schema.effects = new fields.ArrayField(
+            new fields.SchemaField({
+                icon: new fields.FilePathField({ required: false }),
+                name: new fields.StringField({ required: true }),
+                description: new fields.StringField({ required: true }),
+                cost: new fields.NumberField({ ...requiredInteger }),
+                duration: new fields.SchemaField({
+                    value: new fields.NumberField({
+                        ...requiredInteger,
+                        initial: 0,
+                    }),
+                    type: new fields.StringField({
+                        required: true,
+                        options: [
+                            'round',
+                            'minute',
+                            'hour',
+                            'day',
+                            'week',
+                            'month',
+                            'year',
+                        ],
+                    }),
+                }),
+            })
+        )
         return schema
     }
 
     prepareDerivedData() {
-        super.prepareDerivedData();
+        super.prepareDerivedData()
         this.words = game.settings
             .get('godbound', 'words')
             .split(',')
@@ -59,7 +92,12 @@ export default class GodboundGift extends GodboundItemBase {
                 acc[word] = word
                 return acc
             }, {})
-        this.power.label = GODBOUND.gifts.power[this.power.value] ?? "";
-        this.type.label = GODBOUND.gifts.type[this.type.value] ?? "";
+        this.power.label = GODBOUND.gifts.power[this.power.value] ?? ''
+        this.type.label = GODBOUND.gifts.type[this.type.value] ?? ''
+    }
+
+    createGiftEffect(idx) {
+        const item = new GodboundGiftEffect(this.effects[idx], this)
+        this.parent.actor.createEmbeddedDocuments('Item', [item])
     }
 }

@@ -15,7 +15,7 @@ export default class GodboundSpell extends GodboundItemBase {
             type: String,
             required: true,
             default: 'Apprentice',
-            options: Object.values(GODBOUND.Item.Spell.Levels),
+            options: Object.values(GODBOUND.Item.Spell.Level),
         })
 
         return schema

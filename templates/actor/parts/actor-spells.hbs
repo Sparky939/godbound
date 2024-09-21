@@ -1,18 +1,18 @@
 <ol class='items-list'>
-  {{#each spells as |spells spellLevel|}}
+  {{#each system.spells as |spellGroup idx|}}
     <li class='item flexrow items-header'>
       <div class='item-name'>
-        {{localize 'GODBOUND.Item.Spell.SpellLVL' level=spellLevel}}
+        {{localize this.spellLevel}}
       </div>
       <div class='item-controls'>
         <a
           class='item-control item-create'
           title='{{localize "DOCUMENT.Create" type='Spell'}}'
           data-type='spell'
-          data-spell-level='{{spellLevel}}'
+          data-spell-level='{{this.spellLevel}}'
         >
           <i class='fas fa-plus'></i>
-          {{localize 'GODBOUND.Item.Spell.AddLVL' level=spellLevel}}
+          {{localize 'GODBOUND.Item.Spell.Add' level=spellLevel}}
         </a>
       </div>
     </li>

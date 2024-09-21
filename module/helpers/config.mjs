@@ -48,6 +48,14 @@ export const GODBOUND = {
             action: 'GODBOUND.Item.Gift.Type.Action',
         },
     },
+    spells: {
+        level: {
+            Apprentice: 'GODBOUND.Item.Spell.Level.Apprentice',
+            Adept: 'GODBOUND.Item.Spell.Level.Adept',
+            Master: 'GODBOUND.Item.Spell.Level.Master',
+            Archmage: 'GODBOUND.Item.Spell.Level.Archmage',
+        },
+    },
 }
 
 

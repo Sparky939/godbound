@@ -220,6 +220,12 @@ export default class GodboundCharacter extends GodboundActorBase {
             .get('godbound', 'words')
             .split(',')
             .map((str) => String(str).trim())
+        this.spells = Object.keys(GODBOUND.spells.level).map((lvl) => ({
+            spellLevel: GODBOUND.spells.level[lvl],
+            spells: this.parent.items.filter(
+                (i) => i.type == 'spell' && i.level == lvl
+            ),
+        }))
         this.prepareModifiers()
         this.prepareLevel()
         this.prepareGifts()

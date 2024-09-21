@@ -53,32 +53,32 @@ export default class GodboundGift extends GodboundItemBase {
             }),
         })
 
-        schema.effects = new fields.ArrayField(
-            new fields.SchemaField({
-                icon: new fields.FilePathField({ required: false }),
-                name: new fields.StringField({ required: true }),
-                description: new fields.StringField({ required: true }),
-                cost: new fields.NumberField({ ...requiredInteger }),
-                duration: new fields.SchemaField({
-                    value: new fields.NumberField({
-                        ...requiredInteger,
-                        initial: 0,
-                    }),
-                    type: new fields.StringField({
-                        required: true,
-                        options: [
-                            'round',
-                            'minute',
-                            'hour',
-                            'day',
-                            'week',
-                            'month',
-                            'year',
-                        ],
-                    }),
-                }),
-            })
-        )
+        // schema.effects = new fields.ArrayField(
+        //     new fields.SchemaField({
+        //         icon: new fields.FilePathField({ required: false }),
+        //         name: new fields.StringField({ required: true }),
+        //         description: new fields.StringField({ required: true }),
+        //         cost: new fields.NumberField({ ...requiredInteger }),
+        //         duration: new fields.SchemaField({
+        //             value: new fields.NumberField({
+        //                 ...requiredInteger,
+        //                 initial: 0,
+        //             }),
+        //             type: new fields.StringField({
+        //                 required: true,
+        //                 options: [
+        //                     'round',
+        //                     'minute',
+        //                     'hour',
+        //                     'day',
+        //                     'week',
+        //                     'month',
+        //                     'year',
+        //                 ],
+        //             }),
+        //         }),
+        //     })
+        // )
         return schema
     }
 

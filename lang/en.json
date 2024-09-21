@@ -41,7 +41,8 @@
                     "Adept": "Adept",
                     "Master": "Master",
                     "Archmage": "Archmage"
-                }
+                },
+                "Add": "Add Spell"
             },
             "Gift": {
                 "Power": {

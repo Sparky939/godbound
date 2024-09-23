@@ -52,8 +52,12 @@ import {
  * @param {object} resources.influence
  * @param {number} resources.influence.max (derived)
  * @param {number} resources.influence.available (derived)
+ * @param {array} words (settings)
  * @param {object} gifts
  * @param {array} gifts.<word>
+ * @param {object} spells
+ * @param {array} spells.<spellLevel>
+ * @param {array} giftEffects
  */
 
 export default class GodboundCharacter extends GodboundActorBase {
@@ -71,6 +75,10 @@ export default class GodboundCharacter extends GodboundActorBase {
                 value: new fields.NumberField({
                     ...requiredInteger,
                     initial: 0,
+                }),
+                max: new fields.NumberField({
+                    ...requiredInteger,
+                    initial: 10
                 }),
                 bonuses: new fields.SchemaField({
                     level: new fields.NumberField({
@@ -137,6 +145,10 @@ export default class GodboundCharacter extends GodboundActorBase {
                 required: true,
                 blank: false,
                 choices: ['1d8', '1d10', '1d12'],
+            }),
+            baseAttackBonus: new fields.NumberField({
+                ...requiredInteger,
+                initial: 1,
             }),
         })
 
@@ -229,6 +241,7 @@ export default class GodboundCharacter extends GodboundActorBase {
         this.prepareModifiers()
         this.prepareLevel()
         this.prepareGifts()
+        this.prepareSpells()
     }
 
     prepareModifiers() {
@@ -285,11 +298,14 @@ export default class GodboundCharacter extends GodboundActorBase {
                     this.details.health.bonuses.level +
                     Math.ceil(this.attributes.con.mod / 2)) +
             this.details.health.bonuses.flat
+        console.log(newHealthMax, this.details.health)
         this.details.health.max = newHealthMax
+        console.log(this.details.health)
         this.details.health.value = Math.min(
             newHealthMax,
             this.details.health.value + (newHealthMax - currentHealthMax)
         )
+        console.log(this.details.health)
         this.prepareResources()
     }
 
@@ -314,6 +330,15 @@ export default class GodboundCharacter extends GodboundActorBase {
                 (i) => i.type === 'gift' && i.word === word
             )
         }
+    }
+
+    prepareSpells() {
+        this.spells = {}
+        Object.keys(GODBOUND.spells.level).map((lvl) => {
+            this.spells[lvl] = this.parent.items
+                .filter((i) => i.type === 'spell' && i.level === lvl)
+                .sort((a, b) => a.name.localeCompare(b.name))
+        })
     }
 
     getRollData() {

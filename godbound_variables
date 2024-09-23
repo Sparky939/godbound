@@ -46,3 +46,35 @@ gifts -- items
 spells -- items
 projects -- items
 active_effects -- items
+
+
+
+
+
+Details: {
+    name: 'string',
+    ac: 'number',
+    health: 'value',
+    facts: 'string'
+},
+Social:{
+
+}
+Combat: {
+    movement: '',
+    offence: {
+        attacks: '',
+        spells: '',
+        gifts: '',
+        spells: ''.
+    },
+    defence: {
+        health: ''.
+        ac: '',
+        saves: ''
+        immunities: '' // words passives, gift effects & constant gifts
+    }
+}
+Exploration: {
+
+}

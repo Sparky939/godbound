@@ -5,20 +5,49 @@
 .sheet-header {
     flex: 0 auto;
     overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid !important;
+    grid-template-columns: 100px 1fr;
+    column-gap: 10px;
     justify-content: flex-start;
     margin-bottom: 10px;
+
+    .name-input {
+        font-size: 14px;
+    }
 
     .profile-img {
         flex: 0 0 100px;
         height: 100px;
-        margin-right: 10px;
     }
 
     .header-fields {
-        flex: 1;
+        display: flex;
+        flex-flow: row nowrap;
+        column-gap: 5px;
+        .resource-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: auto;
+            min-width: 0;
+            .effort-icon {
+                height: 16px;
+            }
+            input {
+                -webkit-appearance: none;
+                -moz-appearance: textfield;
+                width: 20px;
+                text-align: center;
+                border: 0px solid transparent;
+                outline: none;
+                border-bottom: 1px solid black;
+                border-radius: initial;
+            }
+            span.resource-content-static {
+                outline: none;
+                border-bottom: 0px solid transparent;
+            }
+        }
     }
 
     h1.charname {

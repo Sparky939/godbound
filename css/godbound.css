@@ -248,6 +248,10 @@
   border-bottom: 1px solid black;
   border-radius: initial;
 }
+.godbound .sheet-header .header-fields .resource-stack input:last-child {
+  border-bottom: 0px solid transparent;
+  outline: none;
+}
 .godbound .sheet-header .header-fields .resource-stack span.resource-content-static {
   outline: none;
   border-bottom: 0px solid transparent;

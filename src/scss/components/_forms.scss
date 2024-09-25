@@ -43,6 +43,10 @@
                 border-bottom: 1px solid black;
                 border-radius: initial;
             }
+            input:last-child {
+                border-bottom: 0px solid transparent;
+                outline: none;
+            }
             span.resource-content-static {
                 outline: none;
                 border-bottom: 0px solid transparent;

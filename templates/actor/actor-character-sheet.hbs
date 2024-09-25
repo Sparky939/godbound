@@ -54,6 +54,20 @@
           value="{{system.resources.dominion.gained}}"
           data-dtype="Number" />
       </div>
+      <div class>
+        XP
+        <input type="text" name="system.details.xp"
+          value="{{system.details.xp}}" data-dtype="Number" />
+      </div>
+      <div class>
+        level
+        <span class>{{numberFormat system.details.level decimals=0}}</span>
+      </div>
+      <div class>
+        AC
+        <span class>{{numberFormat system.defence.armor.value
+          decimals=0}}</span>
+      </div>
     </div>
   </header>
 
@@ -95,6 +109,38 @@
                 decimals=0 sign=true}}</span>
             </div>
             {{/each}}
+          </div>
+          <div class="saves flexcol">
+            <div>
+              <label for="system.defemce.hardiness">
+                Hardiness
+              </label>
+              <span class="save-mod rollable"
+                data-roll="d20+@defence.baseSaveMode+@defence.hardinessMod">
+                {{numberFormat system.defence.hardinessMod +
+                system.defence.baseSaveMode decimals=0 sign=true }}
+              </span>
+            </div>
+            <div>
+              <label for="system.defence.evasion">
+                Evasion
+              </label>
+              <span class="save-mod rollable"
+                data-roll="d20+@defence.baseSaveMode+@defence.evasionMod">
+                {{numberFormat system.defence.evasionMod +
+                system.defence.baseSaveMode decimals=0 sign=true }}
+              </span>
+            </div>
+            <div>
+              <label for="system.defence.spirit">
+                Spirit
+              </label>
+              <span class="save-mod rollable"
+                data-roll="d20+@defence.baseSaveMode+@defence.spiritMod">
+                {{numberFormat system.defence.spiritMod +
+                system.defence.baseSaveMode decimals=0 sign=true }}
+              </span>
+            </div>
           </div>
         </aside>
 

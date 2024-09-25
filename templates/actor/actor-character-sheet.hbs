@@ -75,75 +75,79 @@
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item" data-tab="facts">Facts</a>
-    <a class="item" data-tab="description">Description</a>
+    <a class="item" data-tab="biography">Biography</a>
     <a class="item" data-tab="items">Items</a>
     <a class="item" data-tab="spells">Spells</a>
     <a class="item" data-tab="effects">Effects</a>
+    <a class="item" data-tab="words">Words</a>
+    {{#if system.configMode}}
+    <a class="item" data-tab="debug">Debug</a>
+    {{/if}}
     <a class="item" data-tab="projects">Projects</a>
   </nav>
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
 
-    {{!-- Owned Facts Tab --}}
-    <div class="tab facts" data-group="primary" data-tab="facts">
-      <section class="grid grid-3col">
-        <aside class="sidebar">
+    <section class="grid grid-3col">
+      <aside class="sidebar">
 
-          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-          use both the "grid" and "grid-Ncol" class where "N" can be any number
-          from 1 to 12 and will create that number of columns. --}}
-          <div class="attributes flexcol">
-            {{#each system.attributes as |attribute key|}}
-            <div class="attribute flexrow flex-group-center">
-              <label for="system.attributes.{{key}}.value"
-                class="resource-label rollable flexlarge align-left"
-                data-roll="d20+@attributes.{{key}}.mod"
-                data-label="{{attribute.label}}">{{attribute.label}}</label>
-              <input type="text" name="system.attributes.{{key}}.value"
-                value="{{attribute.value}}"
-                data-dtype="Number" />
-              <span class="attribute-mod rollable"
-                data-roll="d20+@attributes.{{key}}.mod"
-                data-label="{{attribute.label}}">{{numberFormat attribute.mod
-                decimals=0 sign=true}}</span>
-            </div>
-            {{/each}}
+        {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
+        use both the "grid" and "grid-Ncol" class where "N" can be any number
+        from 1 to 12 and will create that number of columns. --}}
+        <div class="attributes flexcol">
+          {{#each system.attributes as |attribute key|}}
+          <div class="attribute flexrow flex-group-center">
+            <label for="system.attributes.{{key}}.value"
+              class="resource-label rollable flexlarge align-left"
+              data-roll="d20+@attributes.{{key}}.mod"
+              data-label="{{attribute.label}}">{{attribute.label}}</label>
+            <input type="text" name="system.attributes.{{key}}.value"
+              value="{{attribute.value}}"
+              data-dtype="Number" />
+            <span class="attribute-mod rollable"
+              data-roll="d20+@attributes.{{key}}.mod"
+              data-label="{{attribute.label}}">{{numberFormat attribute.mod
+              decimals=0 sign=true}}</span>
           </div>
-          <div class="saves flexcol">
-            <div>
-              <label for="system.defemce.hardiness">
-                Hardiness
-              </label>
-              <span class="save-mod rollable"
-                data-roll="d20+@defence.baseSaveMode+@defence.hardinessMod">
-                {{numberFormat system.defence.hardinessMod +
-                system.defence.baseSaveMode decimals=0 sign=true }}
-              </span>
-            </div>
-            <div>
-              <label for="system.defence.evasion">
-                Evasion
-              </label>
-              <span class="save-mod rollable"
-                data-roll="d20+@defence.baseSaveMode+@defence.evasionMod">
-                {{numberFormat system.defence.evasionMod +
-                system.defence.baseSaveMode decimals=0 sign=true }}
-              </span>
-            </div>
-            <div>
-              <label for="system.defence.spirit">
-                Spirit
-              </label>
-              <span class="save-mod rollable"
-                data-roll="d20+@defence.baseSaveMode+@defence.spiritMod">
-                {{numberFormat system.defence.spiritMod +
-                system.defence.baseSaveMode decimals=0 sign=true }}
-              </span>
-            </div>
+          {{/each}}
+        </div>
+        <div class="saves flexcol">
+          <div>
+            <label for="system.defemce.hardiness">
+              Hardiness
+            </label>
+            <span class="save-mod rollable"
+              data-roll="d20+@defence.baseSaveMode+@defence.hardinessMod">
+              {{numberFormat system.defence.hardinessMod +
+              system.defence.baseSaveMode decimals=0 sign=true }}
+            </span>
           </div>
-        </aside>
+          <div>
+            <label for="system.defence.evasion">
+              Evasion
+            </label>
+            <span class="save-mod rollable"
+              data-roll="d20+@defence.baseSaveMode+@defence.evasionMod">
+              {{numberFormat system.defence.evasionMod +
+              system.defence.baseSaveMode decimals=0 sign=true }}
+            </span>
+          </div>
+          <div>
+            <label for="system.defence.spirit">
+              Spirit
+            </label>
+            <span class="save-mod rollable"
+              data-roll="d20+@defence.baseSaveMode+@defence.spiritMod">
+              {{numberFormat system.defence.spiritMod +
+              system.defence.baseSaveMode decimals=0 sign=true }}
+            </span>
+          </div>
+        </div>
+      </aside>
 
+      {{!-- Owned Facts Tab --}}
+      <div class="tab facts" data-group="primary" data-tab="facts">
         {{!-- For the main facts list, span the right two columns --}}
         <section class="main grid-span-2">
           {{!-- This is a Handlebars partial. They're stored in the `/parts`
@@ -173,13 +177,23 @@
       {{> "systems/godbound/templates/actor/parts/actor-spells.hbs"}}
     </div>
 
+    {{!-- Words Tab --}}
+    <div class="tab words" data-group="primary" data-tab="words">
+      {{> "systems/godbound/templates/actor/parts/actor-words.hbs"}}
+    </div>
+
     {{!-- Active Effects Tab --}}
     <div class="tab effects flexcol" data-group="primary" data-tab="effects">
       {{> "systems/godbound/templates/actor/parts/actor-effects.hbs"}}
     </div>
 
+    {{!-- Projects Tab --}}
     <div class="tab projects flexcol" data-group="primary" data-tab="projects">
       {{> "systems/godbound/templates/actor/parts/actor-projects.hbs"}}
+    </div>
+
+    <div class="tab debug flexcol" data-group="primary" data-tab="projects">
+      {{> "systems/godbound/template/actor/parts/actor-debug.hbs"}}
     </div>
 
   </section>

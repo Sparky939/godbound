@@ -6,6 +6,7 @@ import {
 } from '../../helpers/tables.mjs'
 
 /**
+ * @param {boolean} configMode 
  * @param {object} details
  * @param {object} details.health
  * @param {number} details.health.value
@@ -69,6 +70,10 @@ export default class GodboundCharacter extends GodboundActorBase {
             integer: true,
         }
         const schema = super.defineSchema()
+
+        schema.configMode = new fields.BooleanField({
+            initial: false
+        })
 
         schema.details = new fields.SchemaField({
             health: new fields.SchemaField({

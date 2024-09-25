@@ -32,8 +32,27 @@
         <input type="text" name="system.resources.effort.value"
           value="{{system.resources.effort.value}}"
           data-dtype="Number" />
-        <span class="resource-content-static">{{numberFormat
-          system.resources.effort.max decimals=0}}</span>
+        <input type="text" name="system.resources.effort.max"
+          value="{{system.resources.effort.value}}" data-dtype="Number" />
+        {{!-- <span class="resource-content-static">{{numberFormat
+          system.resources.effort.max decimals=0}}</span> --}}
+      </div>
+      <div class="resource-stack">
+        influence-icon
+        <input type="text" name="system.resources.influence.available"
+          value="{{system.resources.influence.available}}"
+          data-dtype="Number" />
+        <input type="text" name="system.resources.influence.max"
+          value="{{system.resources.influence.max}}" data-dtype="Number" />
+      </div>
+      <div class="resource-stack">
+        dominion-icon
+        <input type="text" name="system.resources.dominion.spent"
+          value="{{system.resources.dominion.spent}}"
+          data-dtype="Number" />
+        <input type="text" name="system.resources.dominion.gained"
+          value="{{system.resources.dominion.gained}}"
+          data-dtype="Number" />
       </div>
     </div>
   </header>

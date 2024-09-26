@@ -1,5 +1,5 @@
 import { GODBOUND } from '../../helpers/config.mjs'
-import AttackField from '../fields/attack-field.mjs'
+import AttackField from '../activity/attack-data.mjs'
 import GodboundItemBase from './base-item.mjs'
 
 /**
@@ -12,11 +12,7 @@ import GodboundItemBase from './base-item.mjs'
  * @param {string} type.value
  * @param {string} type.label
  * @param {array} attacks
- * @param {object} attacks<number>
- * @param {string} attacks<number>.name
- * @param {string} attacks<number>.attribute
- * @param {string} attacks<number>.damageDie
- * @param {boolean} attacks<number>.straightDamage
+ * @param {AttackField[]} attacks
  * @param {array} defenses
  * @param {object} defenses<number>
  * @param {string} defenses<number>.name

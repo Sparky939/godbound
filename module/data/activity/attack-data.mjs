@@ -1,22 +1,24 @@
 import simplifyRollFormula from '../../dice/simplify-roll-formula.mjs'
-import FormulaField from './formula-field.mjs'
-import DamageField from './damage-field.mjs'
+import FormulaField from '../fields/formula-field.mjs'
+import DamageField from '../fields/damage-field.mjs'
 import BaseActivityData from './base-activity.mjs'
 import { GODBOUND } from '../../helpers/config.mjs'
 
-const { ArrayField, BooleanField, NumberField, SchemaField, StringField } =
-    foundry.data.fields
+const { ArrayField, SchemaField, StringField } = foundry.data.fields
 
 /**
  * Data model for an attack activity.
  *
  * @property {object} attack
- * @property {string} attack.ability              Ability used to make the attack and determine damage.
- * @property {string} attack.bonus                Arbitrary bonus added to the attack.
+ * @property {string} attack.name
+ * @property {string} attack.ability                Ability used to make the attack and determine damage.
+ * @property {string} attack.bonus                  Arbitrary bonus added to the attack.
  * @property {object} attack.type
- * @property {string} attack.type.value           Is this a melee or ranged attack?
- * @property {string} attack.type.classification  Is this a unarmed, weapon, or spell attack?
- * @property {DamageData[]} damageParts          Parts of damage to inflict.
+ * @property {string} attack.type.value             Is this a melee or ranged attack?
+ * @property {string} attack.type.classification    Is this a unarmed, weapon, or spell attack?
+ * @property {string} attack.damageType             Is this spiritual/emotional/fire damage?
+ * @property {boolean} attack.straightDamage        Should this damage be read straight, or applied via the table?
+ * @property {DamageData[]} damageParts             Parts of damage to inflict.
  */
 export default class AttackActivityData extends BaseActivityData {
     /** @inheritDoc */

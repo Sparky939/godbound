@@ -42,6 +42,7 @@ import {
  * @param {object} offence
  * @param {string} offence.frayDie
  * @param {string} offence.baseAttackBonus (derived)
+ * @param {array} offence.attacks
  * @param {object} resources
  * @param {object} resources.dominion
  * @param {number} resources.dominion.gained
@@ -245,6 +246,7 @@ export default class GodboundCharacter extends GodboundActorBase {
         }))
         this.prepareModifiers()
         this.prepareLevel()
+        this.prepareSaves()
         this.prepareGifts()
         this.prepareSpells()
     }
@@ -261,22 +263,18 @@ export default class GodboundCharacter extends GodboundActorBase {
             this.attributes[key].label =
                 game.i18n.localize(GODBOUND.attributes[key]) ?? key
         }
-        this.prepareSaves()
     }
 
     prepareSaves() {
-        this.defence.hardinessMod = Math.max(
-            this.attributes.con.mod,
-            this.attributes.str.mod
-        )
-        this.defence.evasionMod = Math.max(
-            this.attributes.dex.mod,
-            this.attributes.int.mod
-        )
-        this.defence.spiritMod = Math.max(
-            this.attributes.wis.mod,
-            this.attributes.cha.mod
-        )
+        this.defence.hardinessMod =
+            Math.max(this.attributes.con.mod, this.attributes.str.mod) +
+            this.defence.baseSaveBonus
+        this.defence.evasionMod =
+            Math.max(this.attributes.dex.mod, this.attributes.int.mod) +
+            this.defence.baseSaveBonus
+        this.defence.spiritMod =
+            Math.max(this.attributes.wis.mod, this.attributes.cha.mod) +
+            this.defence.baseSaveBonus
     }
 
     prepareLevel() {
@@ -303,14 +301,11 @@ export default class GodboundCharacter extends GodboundActorBase {
                     this.details.health.bonuses.level +
                     Math.ceil(this.attributes.con.mod / 2)) +
             this.details.health.bonuses.flat
-        console.log(newHealthMax, this.details.health)
         this.details.health.max = newHealthMax
-        console.log(this.details.health)
         this.details.health.value = Math.min(
             newHealthMax,
             this.details.health.value + (newHealthMax - currentHealthMax)
         )
-        console.log(this.details.health)
         this.prepareResources()
     }
 

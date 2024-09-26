@@ -118,9 +118,8 @@
               Hardiness
             </label>
             <span class="save-mod rollable"
-              data-roll="d20+@defence.baseSaveMode+@defence.hardinessMod">
-              {{numberFormat system.defence.hardinessMod +
-              system.defence.baseSaveMode decimals=0 sign=true }}
+              data-roll="d20+@defence.hardinessMod">
+              {{numberFormat system.defence.hardinessMod decimals=0 sign=true }}
             </span>
           </div>
           <div>
@@ -128,9 +127,8 @@
               Evasion
             </label>
             <span class="save-mod rollable"
-              data-roll="d20+@defence.baseSaveMode+@defence.evasionMod">
-              {{numberFormat system.defence.evasionMod +
-              system.defence.baseSaveMode decimals=0 sign=true }}
+              data-roll="d20+@defence.evasionMod">
+              {{numberFormat system.defence.evasionMod decimals=0 sign=true }}
             </span>
           </div>
           <div>
@@ -138,9 +136,8 @@
               Spirit
             </label>
             <span class="save-mod rollable"
-              data-roll="d20+@defence.baseSaveMode+@defence.spiritMod">
-              {{numberFormat system.defence.spiritMod +
-              system.defence.baseSaveMode decimals=0 sign=true }}
+              data-roll="d20@defence.spiritMod">
+              {{numberFormat system.defence.spiritMod decimals=0 sign=true }}
             </span>
           </div>
         </div>
@@ -193,7 +190,7 @@
     </div>
 
     <div class="tab debug flexcol" data-group="primary" data-tab="projects">
-      {{> "systems/godbound/template/actor/parts/actor-debug.hbs"}}
+      {{> "systems/godbound/templates/actor/parts/actor-debug.hbs"}}
     </div>
 
   </section>

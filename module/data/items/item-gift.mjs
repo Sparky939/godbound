@@ -1,4 +1,5 @@
 import { GODBOUND } from '../../helpers/config.mjs'
+import AttackField from '../fields/attack-field.mjs'
 import GodboundItemBase from './base-item.mjs'
 
 /**
@@ -10,7 +11,26 @@ import GodboundItemBase from './base-item.mjs'
  * @param {object} type // "passive", "instant", "turn", "action"
  * @param {string} type.value
  * @param {string} type.label
+ * @param {array} attacks
+ * @param {object} attacks<number>
+ * @param {string} attacks<number>.name
+ * @param {string} attacks<number>.attribute
+ * @param {string} attacks<number>.damageDie
+ * @param {boolean} attacks<number>.straightDamage
+ * @param {array} defenses
+ * @param {object} defenses<number>
+ * @param {string} defenses<number>.name
+ * @param {string} defenses<number>.type (immunity | ac)
+ * @param {array} bonuses
+ * @param {object} bonuses<number>
+ * @param {string} bonuses<number>.target (health | effort | influence)
+ * @param {boolean} bonuses<number>.scaling (true - level | false - flat)
+ * @param {string} bonuses<number>.value
  * @param {array} effects
+ * @param {object} effects<number>
+ * @param {string} effects<number>.name
+ * @param {number} effects<number>.cost
+ * @param {string} effects<number>.commitDuration (day | scene | flex)
  */
 
 export default class GodboundGift extends GodboundItemBase {
@@ -52,6 +72,8 @@ export default class GodboundGift extends GodboundItemBase {
                 default: '',
             }),
         })
+
+        schema.attacks = new fields.ArrayField(new AttackField())
 
         // schema.effects = new fields.ArrayField(
         //     new fields.SchemaField({

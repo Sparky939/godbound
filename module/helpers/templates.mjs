@@ -11,6 +11,8 @@ export const preloadHandlebarsTemplates = async function () {
       'systems/godbound/templates/actor/parts/actor-spells.hbs',
       'systems/godbound/templates/actor/parts/actor-effects.hbs',
       'systems/godbound/templates/actor/parts/actor-projects.hbs',
+      'systems/godbound/templates/actor/parts/actor-debug.hbs',
+      'systems/godbound/templates/actor/parts/actor-words.hbs',
       // Item partials
       'systems/godbound/templates/item/parts/item-effects.hbs',
   ])

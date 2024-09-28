@@ -13,12 +13,15 @@
           placeholder='Name' /></h1>
       <div class='grid grid-2col'>
         <div class='resource'>
-          <label class='resource-label'>Quantity</label>
-          <input
-            type='text'
-            name='system.quantity'
-            value='{{system.quantity}}'
-            data-dtype='Number' />
+          <label class='resource-label'>Type</label>
+          <select name="system.type">
+            <option value=""></option>
+            {{selectOptions system.types selected=system.type localize=true}}
+          </select>
+        </div>
+        <div class="resource">
+            <label class="resource-label">Armor Value</label>
+            <span class="">{{numberFormat system.value decimals=0}}</span>
         </div>
       </div>
     </div>

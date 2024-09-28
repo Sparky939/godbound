@@ -30,11 +30,12 @@ import {
  * @param {number} attributes.<attribute score abbr>.mod
  * @param {number} attributes.<attribute score abbr>.label
  * @param {object} defence
- * @param {object} defence.armor
- * @param {string} defence.armor.type
- * @param {number} defence.armor.value (derived)
- * @param {array} defence.armor.penalties
- * @param {boolean} defence.armor.shield
+ * @param {number} defence.naturalArmor
+ * @param {object} defence.wornArmor
+ * @param {string} defence.wornarmor.id (derived)
+ * @param {number} defence.wornArmor.value (derived)
+ * @param {array} defence.wornArmor.penalties
+ * @param {boolean} defence.wornShield
  * @param {number} defence.baseSaveBonus (derived)
  * @param {number} defence.hardinessMod (derived)
  * @param {number} defence.evasionMod (derived)
@@ -43,6 +44,7 @@ import {
  * @param {string} offence.frayDie
  * @param {string} offence.baseAttackBonus (derived)
  * @param {array} offence.attacks
+ * @param {array} inventory
  * @param {object} resources
  * @param {object} resources.dominion
  * @param {number} resources.dominion.gained
@@ -123,7 +125,12 @@ export default class GodboundCharacter extends GodboundActorBase {
         })
 
         schema.defence = new fields.SchemaField({
-            armor: new fields.SchemaField({
+            naturalArmor: new fields.NumberField({
+                ...requiredInteger,
+                max: 9,
+                initial: 9,
+            }),
+            wornArmor: new fields.SchemaField({
                 type: new fields.StringField({
                     initial: 'none',
                     choices: Object.keys(GODBOUND.armorTypes),

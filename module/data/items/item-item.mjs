@@ -15,12 +15,6 @@ export default class GodboundItem extends GodboundItemBase {
             initial: 1,
             min: 1,
         })
-        schema.weight = new fields.NumberField({
-            required: true,
-            nullable: false,
-            initial: 0,
-            min: 0,
-        })
 
         // Break down roll formula into three independent fields
         schema.roll = new fields.SchemaField({

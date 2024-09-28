@@ -53,7 +53,8 @@
                     "Passive": "Constant",
                     "Instant": "Instant",
                     "Turn": "On Turn",
-                    "Action": "Action"
+                    "Action": "Action",
+                    "SmiteAction": "(Smite) Action"
                 }
             }
         },
@@ -75,6 +76,7 @@
         "Item": {
             "item": "Item",
             "fact": "Fact",
+            "armor": "Armor",
             "spell": "Spell",
             "project": "Project",
             "word": "Word",

@@ -6,6 +6,7 @@ export { default as GodboundNPC } from './actors/actor-npc.mjs'
 // Export Items
 export { default as GodboundItemBase } from './items/base-item.mjs'
 export { default as GodboundItem } from './items/item-item.mjs'
+export { default as GodboundArmor } from './items/item-armor.mjs'
 export { default as GodboundFact } from './items/item-fact.mjs'
 export { default as GodboundSpell } from './items/item-spell.mjs'
 export { default as GodboundProject } from './items/item-project.mjs'

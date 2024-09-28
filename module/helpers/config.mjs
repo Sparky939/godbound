@@ -46,6 +46,7 @@ export const GODBOUND = {
             instant: 'GODBOUND.Item.Gift.Type.Instant',
             turn: 'GODBOUND.Item.Gift.Type.Turn',
             action: 'GODBOUND.Item.Gift.Type.Action',
+            smiteAction: 'GODBOUND.Item.Gift.Type.SmiteAction',
         },
     },
     spells: {

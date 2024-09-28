@@ -3,8 +3,7 @@
     "version": "2.0.0",
     "description": "CSS compiler for the Godbound system",
     "scripts": {
-        "build": "sass src/scss/godbound.scss css/godbound.css --style=expanded --no-source-map",
-        "watch": "sass src/scss/godbound.scss css/godbound.css --style=expanded --source-map --watch",
+        "build": "npx tailwindcss -i ./src/input.css -o ./css/godbound.css --watch",
         "load": "cp -rT ../godbound ~/.local/share/FoundryVTT/Data/systems/godbound && rm -rf ~/.local/share/FoundryVTT/Data/systems/godbound/.git",
         "deploy": "npm run build && npm run load"
     },
@@ -16,7 +15,7 @@
     "private": true,
     "devDependencies": {
         "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
-        "sass": "^1.53.0"
+        "tailwindcss": "^3.4.13"
     },
     "dependencies": {
         "prettier": "^3.3.3"

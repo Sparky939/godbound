@@ -31,7 +31,6 @@ import GodboundItemBase from './base-item.mjs'
 
 export default class GodboundGift extends GodboundItemBase {
     static defineSchema() {
-        const fields = foundry.data.fields
         const requiredInteger = {
             required: true,
             nullable: false,
@@ -69,35 +68,34 @@ export default class GodboundGift extends GodboundItemBase {
             }),
         })
 
-        schema.attacks = new fields.ArrayField(new AttackField())
+        // Description of the gift
+        schema.description = new fields.StringField({ required: true })
 
-        // schema.effects = new fields.ArrayField(
-        //     new fields.SchemaField({
-        //         icon: new fields.FilePathField({ required: false }),
-        //         name: new fields.StringField({ required: true }),
-        //         description: new fields.StringField({ required: true }),
-        //         cost: new fields.NumberField({ ...requiredInteger }),
-        //         duration: new fields.SchemaField({
-        //             value: new fields.NumberField({
-        //                 ...requiredInteger,
-        //                 initial: 0,
-        //             }),
-        //             type: new fields.StringField({
-        //                 required: true,
-        //                 options: [
-        //                     'round',
-        //                     'minute',
-        //                     'hour',
-        //                     'day',
-        //                     'week',
-        //                     'month',
-        //                     'year',
-        //                 ],
-        //             }),
-        //         }),
-        //     })
-        // )
-        return schema
+        // Define multiple activations with different effects on Effort
+        schema.activations = new fields.ArrayField(
+            new fields.SchemaField({
+                type: new fields.StringField({
+                    required: true,
+                    choices: ['flexible', 'scene', 'day'],
+                }), // Type of activation
+                effort: new fields.SchemaField({
+                    amount: new fields.NumberField({ initial: 1 }),
+                }),
+                effects: new fields.ArrayField(
+                    new fields.SchemaField({
+                        id: new fields.StringField({}),
+                    })
+                ),
+            })
+        )
+
+        // Define passive effects
+        schema.passiveEffects = new fields.ArrayField(
+            new fields.SchemaField({
+                target: new fields.StringField({ required: true }), // Target attribute
+                modifier: new fields.MixedField({ required: true }), // Static or dynamic modifier
+            })
+        )
     }
 
     prepareDerivedData() {

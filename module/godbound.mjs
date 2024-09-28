@@ -31,7 +31,7 @@ Hooks.once('init', function () {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: '1d20 + @abilities.dex.mod',
+    formula: '1d20 + @attributes.dex.mod',
     decimals: 2,
   };
 
@@ -48,7 +48,7 @@ Hooks.once('init', function () {
   CONFIG.Item.documentClass = GodboundItem;
   CONFIG.Item.dataModels = {
     item: models.GodboundItem,
-    feature: models.GodboundFeature,
+    fact: models.GodboundFact,
     spell: models.GodboundSpell
   }
 

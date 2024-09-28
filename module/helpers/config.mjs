@@ -1,25 +1,25 @@
 export const GODBOUND = {};
 
 /**
- * The set of Ability Scores used `within the system.
+ * The set of Attribute Scores used `within the system.
  * @type {Object}
  */
-GODBOUND.abilities = {
-  str: 'GODBOUND.Ability.Str.long',
-  dex: 'GODBOUND.Ability.Dex.long',
-  con: 'GODBOUND.Ability.Con.long',
-  int: 'GODBOUND.Ability.Int.long',
-  wis: 'GODBOUND.Ability.Wis.long',
-  cha: 'GODBOUND.Ability.Cha.long',
+GODBOUND.attributes = {
+  str: 'GODBOUND.Attribute.Str.long',
+  dex: 'GODBOUND.Attribute.Dex.long',
+  con: 'GODBOUND.Attribute.Con.long',
+  int: 'GODBOUND.Attribute.Int.long',
+  wis: 'GODBOUND.Attribute.Wis.long',
+  cha: 'GODBOUND.Attribute.Cha.long',
 };
 
 GODBOUND.abilityAbbreviations = {
-  str: 'GODBOUND.Ability.Str.abbr',
-  dex: 'GODBOUND.Ability.Dex.abbr',
-  con: 'GODBOUND.Ability.Con.abbr',
-  int: 'GODBOUND.Ability.Int.abbr',
-  wis: 'GODBOUND.Ability.Wis.abbr',
-  cha: 'GODBOUND.Ability.Cha.abbr',
+  str: 'GODBOUND.Attribute.Str.abbr',
+  dex: 'GODBOUND.Attribute.Dex.abbr',
+  con: 'GODBOUND.Attribute.Con.abbr',
+  int: 'GODBOUND.Attribute.Int.abbr',
+  wis: 'GODBOUND.Attribute.Wis.abbr',
+  cha: 'GODBOUND.Attribute.Cha.abbr',
 };
 
 GODBOUND.saves = {
@@ -27,3 +27,10 @@ GODBOUND.saves = {
   evasion: 'GODBOUND.Save.Evasion',
   spirit: 'GODBOUND.Save.Spirit'
 };
+
+GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle';
+
+GODBOUND.DifficultyPrompt = 'GODBOUND.DifficultyPrompt';
+
+GODBOUND.RollMode = 'GODBOUND.RollMode';
+GODBOUND.RelevantFactPrompt = 'GODBOUND.RelevantFactPrompt';

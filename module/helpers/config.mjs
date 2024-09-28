@@ -1,7 +1,7 @@
 export const GODBOUND = {};
 
 /**
- * The set of Ability Scores used within the system.
+ * The set of Ability Scores used `within the system.
  * @type {Object}
  */
 GODBOUND.abilities = {
@@ -20,4 +20,10 @@ GODBOUND.abilityAbbreviations = {
   int: 'GODBOUND.Ability.Int.abbr',
   wis: 'GODBOUND.Ability.Wis.abbr',
   cha: 'GODBOUND.Ability.Cha.abbr',
+};
+
+GODBOUND.saves = {
+  hardiness: 'GODBOUND.Save.Hardiness',
+  evasion: 'GODBOUND.Save.Evasion',
+  spirit: 'GODBOUND.Save.Spirit'
 };

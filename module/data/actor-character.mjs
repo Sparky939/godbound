@@ -1,7 +1,7 @@
+import { tables } from "../helpers/tables.mjs";
 import GodboundActorBase from "./base-actor.mjs";
 
 export default class GodboundCharacter extends GodboundActorBase {
-
   static defineSchema() {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
@@ -14,13 +14,22 @@ export default class GodboundCharacter extends GodboundActorBase {
     });
 
     // Iterate over ability names and create a new SchemaField for each.
-    schema.abilities = new fields.SchemaField(Object.keys(CONFIG.GODBOUND.abilities).reduce((obj, ability) => {
-      obj[ability] = new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
-      });
-      return obj;
-    }, {}));
-
+    schema.abilities = new fields.SchemaField(
+      Object.keys(CONFIG.GODBOUND.abilities).reduce((obj, ability) => {
+        obj[ability] = new fields.SchemaField({
+          value: new fields.NumberField({ ...requiredInteger, initial: 10, min: 0 }),
+        });
+        return obj;
+      }, {})
+    );
+    schema.saves = new fields.SchemaField(
+      Object.keys(CONFIG.GODBOUND.saves).reduce((obj, save) => {
+        obj[save] = new fields.SchemaField({
+          value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
+        });
+        return obj;
+      }, {})
+    );
     return schema;
   }
 
@@ -28,9 +37,13 @@ export default class GodboundCharacter extends GodboundActorBase {
     // Loop through ability scores, and add their modifiers to our sheet output.
     for (const key in this.abilities) {
       // Calculate the modifier using d20 rules.
-      this.abilities[key].mod = Math.floor((this.abilities[key].value - 10) / 2);
+      this.abilities[key].mod = tables.find(
+        (r) => this.abilities[key].value >= r.score.min
+          && this.abilities[key].value <= r.score.max
+      )?.modifier;
       // Handle ability label localization.
       this.abilities[key].label = game.i18n.localize(CONFIG.GODBOUND.abilities[key]) ?? key;
+      this.abilities[key].abbr = game.i18n.localize(CONFIG.GODBOUND.abilityAbbreviations[key]) ?? key;
     }
   }
 

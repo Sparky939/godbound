@@ -9,7 +9,8 @@ export default class GodboundCharacter extends GodboundActorBase {
 
     schema.attributes = new fields.SchemaField({
       level: new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 1 })
+        value: new fields.NumberField({ ...requiredInteger, initial: 1 }),
+        xp: new fields.NumberField({ ...requiredInteger, initial: 0 }),
       }),
     });
 
@@ -25,11 +26,15 @@ export default class GodboundCharacter extends GodboundActorBase {
     schema.saves = new fields.SchemaField(
       Object.keys(CONFIG.GODBOUND.saves).reduce((obj, save) => {
         obj[save] = new fields.SchemaField({
-          value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
         });
         return obj;
       }, {})
     );
+    schema.resources = new fields.SchemaField({
+      effort: new fields.SchemaField({
+        value: new fields.NumberField({ ...requiredInteger, initial: 2, min: 0 })
+      })
+    })
     return schema;
   }
 
@@ -42,8 +47,24 @@ export default class GodboundCharacter extends GodboundActorBase {
           && this.abilities[key].value <= r.score.max
       )?.modifier;
       // Handle ability label localization.
+      this.attributes[key].check = 21 - this.abilities[key].value;
       this.abilities[key].label = game.i18n.localize(CONFIG.GODBOUND.abilities[key]) ?? key;
       this.abilities[key].abbr = game.i18n.localize(CONFIG.GODBOUND.abilityAbbreviations[key]) ?? key;
+    }
+    for (const key in this.saves) {
+      this.saves[key].value = 16 - (this.getSaveMod(key) + this.attributes.level.value);
+      this.saves[key].label = game.i18n.localize(CONFIG.GODBOUND.saves[key]) ?? key;
+    }
+  }
+
+  getSaveMod(save) {
+    switch(save) {
+      case 'hardiness':
+        return Math.max(this.abilities.con.mod, this.abilities.str.mod);
+      case 'evasion':
+        return Math.max(this.abilities.dex.mod, this.abilities.int.mod);
+      case 'spirit':
+        return Math.max(this.abilities.wis.mod, this.abilities.cha.mod);
     }
   }
 

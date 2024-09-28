@@ -1,4 +1,6 @@
-export default class GodboundItemBase extends foundry.abstract.TypeDataModel {
+import GodboundDataModel from "./base-model.mjs";
+
+export default class GodboundItemBase extends GodboundDataModel {
 
   static defineSchema() {
     const fields = foundry.data.fields;
@@ -8,4 +10,5 @@ export default class GodboundItemBase extends foundry.abstract.TypeDataModel {
 
     return schema;
   }
+
 }

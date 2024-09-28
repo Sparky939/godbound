@@ -11,17 +11,17 @@ export class GodboundActorSheet extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-        classes: ['godbound', 'sheet', 'actor'],
-        width: 600,
-        height: 600,
-        tabs: [
-            {
-                navSelector: '.sheet-tabs',
-                contentSelector: '.sheet-body',
-                initial: 'facts',
-            },
-        ],
-    })
+      classes: ['godbound', 'sheet', 'actor'],
+      width: 600,
+      height: 600,
+      tabs: [
+        {
+          navSelector: '.sheet-tabs',
+          contentSelector: '.sheet-body',
+          initial: 'features',
+        },
+      ],
+    });
   }
 
   /** @override */
@@ -104,47 +104,43 @@ export class GodboundActorSheet extends ActorSheet {
   _prepareItems(context) {
     // Initialize containers.
     const gear = [];
-    const facts = []
-    const projects = []
+    const features = [];
     const spells = {
-        0: [],
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-        5: [],
-        6: [],
-        7: [],
-        8: [],
-        9: [],
-    }
+      0: [],
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+      5: [],
+      6: [],
+      7: [],
+      8: [],
+      9: [],
+    };
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
-        i.img = i.img || Item.DEFAULT_ICON
-        // Append to gear.
-        if (i.type === 'item') {
-            gear.push(i)
-        } else if (i.type === 'project') {
-            projects.push(i)
+      i.img = i.img || Item.DEFAULT_ICON;
+      // Append to gear.
+      if (i.type === 'item') {
+        gear.push(i);
+      }
+      // Append to features.
+      else if (i.type === 'feature') {
+        features.push(i);
+      }
+      // Append to spells.
+      else if (i.type === 'spell') {
+        if (i.system.spellLevel != undefined) {
+          spells[i.system.spellLevel].push(i);
         }
-        // Append to facts.
-        else if (i.type === 'fact') {
-            facts.push(i)
-        }
-        // Append to spells.
-        else if (i.type === 'spell') {
-            if (i.system.spellLevel != undefined) {
-                spells[i.system.spellLevel].push(i)
-            }
-        }
+      }
     }
 
     // Assign and return
     context.gear = gear;
-    context.facts = facts
+    context.features = features;
     context.spells = spells;
-    context.projects = projects
   }
 
   /* -------------------------------------------- */
@@ -185,7 +181,7 @@ export class GodboundActorSheet extends ActorSheet {
       onManageActiveEffect(ev, document);
     });
 
-    // Rollable attributes.
+    // Rollable abilities.
     html.on('click', '.rollable', this._onRoll.bind(this));
 
     // Drag events for macros.
@@ -247,7 +243,7 @@ export class GodboundActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      let label = dataset.label ? `[attribute] ${dataset.label}` : '';
+      let label = dataset.label ? `[ability] ${dataset.label}` : '';
       let roll = new Roll(dataset.roll, this.actor.getRollData());
       roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),

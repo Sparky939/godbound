@@ -1,85 +1,41 @@
 {
-    "GODBOUND": {
-        "Attribute": {
-            "Str": { "long": "Strength", "abbr": "str" },
-            "Con": { "long": "Constitution", "abbr": "con" },
-            "Dex": { "long": "Dexterity", "abbr": "dex" },
-            "Int": { "long": "Intelligence", "abbr": "int" },
-            "Wis": { "long": "Wisdom", "abbr": "wis" },
-            "Cha": { "long": "Charisma", "abbr": "cha" }
-        },
-        "Armor": {
-            "None": "Unarmoured",
-            "Light": "Light",
-            "Medium": "Medium",
-            "Heavy": "Heavy",
-            "Shield": "Shield"
-        },
-        "Weapon": {
-            "Unarmed": "Unarmed",
-            "Light": "Light",
-            "Medium": "Medium",
-            "Heavy": "Heavy",
-            "OneHandedRanged": "One-Handed Ranged",
-            "TwoHandedRanged": "Two-Handed Ranged"
-        },
-        "Resource": {
-            "Effort": "Effort",
-            "Health": "Health",
-            "Influence": "Influence",
-            "Wealth": "Wealth",
-            "Dominion": "Dominion"
-        },
-        "SheetLabels": {
-            "Actor": "Godbound Actor Sheet",
-            "Item": "Godbound Item Sheet"
-        },
-        "Item": {
-            "Spell": {
-                "Level": {
-                    "Apprentice": "Apprentice",
-                    "Adept": "Adept",
-                    "Master": "Master",
-                    "Archmage": "Archmage"
-                },
-                "Add": "Add Spell"
-            },
-            "Gift": {
-                "Power": {
-                    "Lesser": "Lesser",
-                    "Greater": "Greater"
-                },
-                "Type": {
-                    "Passive": "Constant",
-                    "Instant": "Instant",
-                    "Turn": "On Turn",
-                    "Action": "Action"
-                }
-            }
-        },
-        "Effect": {
-            "Source": "Source",
-            "Toggle": "Toggle Effect",
-            "Active": "Active Effects",
-            "Duration": "Duration",
-            "Temporary": "Temporary Effects",
-            "Passive": "Passive Effects",
-            "Inactive": "Inactive Effects"
-        }
+  "GODBOUND": {
+    "Ability": {
+      "Str": { "long": "Strength", "abbr": "str" },
+      "Con": { "long": "Constitution", "abbr": "con" },
+      "Dex": { "long": "Dexterity", "abbr": "dex" },
+      "Int": { "long": "Intelligence", "abbr": "int" },
+      "Wis": { "long": "Wisdom", "abbr": "wis" },
+      "Cha": { "long": "Charisma", "abbr": "cha" }
     },
-    "TYPES": {
-        "Actor": {
-            "character": "Character",
-            "npc": "NPC"
-        },
-        "Item": {
-            "item": "Item",
-            "fact": "Fact",
-            "spell": "Spell",
-            "project": "Project",
-            "word": "Word",
-            "gift": "Gift",
-            "gift effect": "Gift Effect"
-        }
+    "SheetLabels": {
+      "Actor": "Godbound Actor Sheet",
+      "Item": "Godbound Item Sheet"
+    },
+    "Item": {
+      "Spell": {
+        "SpellLVL": "Level {level} Spells",
+        "AddLVL": "Add LVL {level}"
+      }
+    },
+    "Effect": {
+      "Source": "Source",
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
     }
+  },
+
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "NPC"
+    },
+    "Item": {
+      "item": "Item",
+      "feature": "Feature",
+      "spell": "Spell"
+    }
+  }
 }

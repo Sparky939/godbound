@@ -1,109 +1,55 @@
 .item-form {
-    font-family: $font-primary;
+  font-family: $font-primary;
 }
 
 .sheet-header {
-    flex: 0 auto;
-    overflow: hidden;
-    display: grid !important;
-    grid-template-columns: 100px 1fr;
-    column-gap: 10px;
-    justify-content: flex-start;
-    margin-bottom: 10px;
+  flex: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
 
-    .name-input {
-        font-size: 14px;
-    }
+  .profile-img {
+    flex: 0 0 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
 
-    .profile-img {
-        flex: 0 0 100px;
-        height: 100px;
-    }
+  .header-fields {
+    flex: 1;
+  }
 
-    .header-fields {
-        display: flex;
-        flex-flow: row nowrap;
-        column-gap: 5px;
-        .resource-stack {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: auto;
-            min-width: 0;
-            .effort-icon {
-                height: 16px;
-            }
-            input {
-                -webkit-appearance: none;
-                -moz-appearance: textfield;
-                width: 20px;
-                text-align: center;
-                border: 0px solid transparent;
-                outline: none;
-                border-bottom: 1px solid black;
-                border-radius: initial;
-            }
-            input:last-child {
-                border-bottom: 0px solid transparent;
-                outline: none;
-            }
-            span.resource-content-static {
-                outline: none;
-                border-bottom: 0px solid transparent;
-            }
-        }
+  h1.charname {
+    height: 50px;
+    padding: 0px;
+    margin: 5px 0;
+    border-bottom: 0;
+    input {
+      width: 100%;
+      height: 100%;
+      margin: 0;
     }
-
-    h1.charname {
-        height: 50px;
-        padding: 0px;
-        margin: 5px 0;
-        border-bottom: 0;
-        input {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
-    }
+  }
 }
 
 .sheet-tabs {
-    flex: 0;
+  flex: 0;
 }
 
 .sheet-body,
 .sheet-body .tab,
 .sheet-body .tab .editor {
-    height: 100%;
+  height: 100%;
 }
 
 .tox {
-    .tox-editor-container {
-        background: $c-white;
-    }
+  .tox-editor-container {
+    background: $c-white;
+  }
 
-    .tox-edit-area {
-        padding: 0 8px;
-    }
-}
-
-.sheet-sidebar {
-    box-sizing: border-box;
-    height: 100%;
-    padding: 7px;
-    width: 180px;
-}
-
-.sheet-sidebar > .attribute-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 5px;
-    grid-auto-rows: auto;
-}
-
-.sheet-sidebar > .attribute-list > .attribute {
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-row: span 1;
-    margin-bottom: 5px;
+  .tox-edit-area {
+    padding: 0 8px;
+  }
 }

@@ -5,13 +5,12 @@
  */
 export const preloadHandlebarsTemplates = async function () {
   return loadTemplates([
-      // Actor partials.
-      'systems/godbound/templates/actor/parts/actor-facts.hbs',
-      'systems/godbound/templates/actor/parts/actor-items.hbs',
-      'systems/godbound/templates/actor/parts/actor-spells.hbs',
-      'systems/godbound/templates/actor/parts/actor-effects.hbs',
-      'systems/godbound/templates/actor/parts/actor-projects.hbs',
-      // Item partials
-      'systems/godbound/templates/item/parts/item-effects.hbs',
-  ])
+    // Actor partials.
+    'systems/godbound/templates/actor/parts/actor-features.hbs',
+    'systems/godbound/templates/actor/parts/actor-items.hbs',
+    'systems/godbound/templates/actor/parts/actor-spells.hbs',
+    'systems/godbound/templates/actor/parts/actor-effects.hbs',
+    // Item partials
+    'systems/godbound/templates/item/parts/item-effects.hbs',
+  ]);
 };

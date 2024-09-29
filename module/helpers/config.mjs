@@ -28,9 +28,18 @@ GODBOUND.saves = {
   spirit: 'GODBOUND.Save.Spirit'
 };
 
+GODBOUND.difficulties = {
+  Mortal: 'GODBOUND.Difficulty.Mortal',
+  PushLimits: 'GODBOUND.Difficulty.PushLimits',
+  Heroic: 'GODBOUND.Difficulty.Heroic',
+}
+
 GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle';
+GODBOUND.AttributeCheckResult = 'GODBOUND.AttributeCheckResult';
 
 GODBOUND.DifficultyPrompt = 'GODBOUND.DifficultyPrompt';
 
 GODBOUND.RollMode = 'GODBOUND.RollMode';
 GODBOUND.RelevantFactPrompt = 'GODBOUND.RelevantFactPrompt';
+GODBOUND.RollExample = 'GODBOUND.RollExample';
+GODBOUND.Roll = 'GODBOUND.Roll';

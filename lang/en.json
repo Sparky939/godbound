@@ -26,7 +26,18 @@
             "Inactive": "Inactive Effects"
         },
         "AttributePromptTitle": "{attribute} Ability Check",
-        "RollMode": "Roll Mode"
+        "AttributeCheckResult": "{attribute} Check Result: {result}",
+        "DifficultyPrompt": "Select Difficulty",
+        "RelevantFactPrompt": "Relevant Fact?",
+        "RollSituationalBonus": "Situational Bonus?",
+        "RollMode": "Roll Mode",
+        "Roll": "Roll",
+        "Difficulty": {
+            "Mortal": "Mortal Task",
+            "PushLimits": "Pushing Human Limits",
+            "Heroic": "Truly Heroic Challenge"
+        },
+        "RollExample": "e.g. d8 + 2"
     },
 
     "TYPES": {

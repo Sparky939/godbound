@@ -34,6 +34,12 @@ GODBOUND.difficulties = {
   Heroic: 'GODBOUND.Difficulty.Heroic',
 }
 
+GODBOUND.itemTypes = {
+  Weapon: 'GODBOUND.ItemTypes.Weapon',
+  Armour: 'GODBOUND.ItemTypes.Armour',
+  Item: 'GODBOUND.ItemTypes.Item'
+}
+
 GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle';
 GODBOUND.AttributeCheckResult = 'GODBOUND.AttributeCheckResult';
 

@@ -37,7 +37,12 @@
             "PushLimits": "Pushing Human Limits",
             "Heroic": "Truly Heroic Challenge"
         },
-        "RollExample": "e.g. d8 + 2"
+        "RollExample": "e.g. d8 + 2",
+        "ItemTypes": {
+            "Weapon": "Weapon",
+            "Armour": "Armour",
+            "Item": "Item"
+        }
     },
 
     "TYPES": {

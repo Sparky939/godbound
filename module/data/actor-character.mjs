@@ -188,13 +188,14 @@ export default class GodboundCharacter extends GodboundActorBase {
         const submitData = foundry.utils.expandObject(formData.object)
         console.log(formData, submitData)
         // create Roll
-        const roll = await new Roll('d20').evaluate()
+        const roll = await new Roll('d20' + (submitData.relevantFact ? "+4" : "")).evaluate()
         const result = roll.total;
         console.log("result", result)
-        const checkRequirement = 21 - this.attributes[attributeId].value
+        const difficulty = submitData.difficulty == 'Mortal' ? 0 : submitData.difficulty == 'PushLimits' ? 4 : 8
+        const checkRequirement = 21 - this.attributes[attributeId].value + difficulty;
         const outcome =
             (result == 20 ||
-            result >= checkRequirement) && result != 1
+                result >= checkRequirement) && result != 1
         // translate result into succes/failure
         const messageData = {
             speaker: {

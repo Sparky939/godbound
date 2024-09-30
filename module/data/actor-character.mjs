@@ -1,4 +1,3 @@
-import GodboundAbilityCheck from '../dice/abilityCheck.mjs'
 import { tables } from '../helpers/tables.mjs'
 import GodboundActorBase from './base-actor.mjs'
 

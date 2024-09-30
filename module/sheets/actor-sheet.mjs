@@ -123,7 +123,7 @@ export class GodboundActorSheet extends ActorSheet {
         for (let i of context.items) {
             i.img = i.img || Item.DEFAULT_ICON
             // Append to gear.
-            if (i.type === 'item') {
+            if (i.type === 'item' || i.type === 'weapon' || i.type === 'armor') {
                 gear.push(i)
             }
             // Append to facts.

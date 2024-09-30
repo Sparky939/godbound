@@ -37,7 +37,17 @@ GODBOUND.difficulties = {
 GODBOUND.itemTypes = {
   Weapon: 'GODBOUND.ItemTypes.Weapon',
   Armour: 'GODBOUND.ItemTypes.Armour',
-  Item: 'GODBOUND.ItemTypes.Item'
+  Item: 'GODBOUND.ItemTypes.Item',
+  Fact: 'GODBOUND.ItemTypes.Fact',
+  Spell: 'GODBOUND.ItemTypes.Spell',
+  Armour: 'GODBOUND.ItemTypes.Armour',
+}
+
+GODBOUND.ArmourTypes = {
+  None: 'GODBOUND.ArmourTypes.None',
+  Light: 'GODBOUND.ArmourTypes.Light',
+  Medium: 'GODBOUND.ArmourTypes.Medium',
+  Heavy: 'GODBOUND.ArmourTypes.Heavy',
 }
 
 GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle';

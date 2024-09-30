@@ -42,6 +42,12 @@
             "Weapon": "Weapon",
             "Armour": "Armour",
             "Item": "Item"
+        },
+        "ArmourTypes": {
+            "None": "None",
+            "Light": "Light",
+            "Medium": "Medium",
+            "Heavy": "Heavy"
         }
     },
 
@@ -53,7 +59,8 @@
         "Item": {
             "item": "Item",
             "fact": "Fact",
-            "spell": "Spell"
+            "spell": "Spell",
+            "armour": "Armour"
         }
     }
 }

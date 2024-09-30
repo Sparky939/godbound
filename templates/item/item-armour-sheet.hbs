@@ -15,7 +15,9 @@
         /></h1>
       <div class='grid grid-2col'>
         <div class='resource'>
-          <label class='resource-label'>Quantity</label>
+          <label class='resource-label'>Type</label>
+          <select name='system.type'>
+            {{selectOptions config.ArmourTypes selected=system.type  localize=true}}
           <input
             type='text'
             name='system.quantity'

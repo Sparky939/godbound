@@ -49,7 +49,8 @@ Hooks.once('init', function () {
   CONFIG.Item.dataModels = {
     item: models.GodboundItem,
     fact: models.GodboundFact,
-    spell: models.GodboundSpell
+    spell: models.GodboundSpell,
+    armour: models.GodboundArmour
   }
 
   // Active Effects are never copied to the Actor,

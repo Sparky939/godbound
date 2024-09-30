@@ -26,7 +26,7 @@
             "Inactive": "Inactive Effects"
         },
         "AttributePromptTitle": "{attribute} Ability Check",
-        "AttributeCheckResult": "{attribute} Check Result: {result}",
+        "AttributeCheckResult": "{attribute} Check vs {checkTarget}",
         "DifficultyPrompt": "Select Difficulty",
         "RelevantFactPrompt": "Relevant Fact?",
         "RollSituationalBonus": "Situational Bonus?",

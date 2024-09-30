@@ -1,3 +1,4 @@
+import GodboundAbilityCheck from '../dice/abilityCheck.mjs'
 import { tables } from '../helpers/tables.mjs'
 import GodboundActorBase from './base-actor.mjs'
 
@@ -190,6 +191,7 @@ export default class GodboundCharacter extends GodboundActorBase {
         // create Roll
         const roll = await new Roll('d20' + (submitData.relevantFact ? "+4" : "")).evaluate()
         const result = roll.total;
+        console.log(roll)
         console.log("result", result)
         const difficulty = submitData.difficulty == 'Mortal' ? 0 : submitData.difficulty == 'PushLimits' ? 4 : 8
         const checkRequirement = 21 - this.attributes[attributeId].value + difficulty;
@@ -204,8 +206,9 @@ export default class GodboundCharacter extends GodboundActorBase {
             },
             flavor: game.i18n.format(CONFIG.GODBOUND.AttributeCheckResult, {
                 attribute: this.attributes[attributeId].label,
-                result: outcome ? 'Success' : 'Failure',
+                checkTarget: checkRequirement
             }),
+            outcome: `${result} vs. ${checkRequirement}: ${outcome ? 'Pass' : 'Fail'}`,
             rollMode: submitData.rollMode,
         }
         console.log(messageData)

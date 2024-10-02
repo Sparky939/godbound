@@ -60,7 +60,10 @@
             "item": "Item",
             "fact": "Fact",
             "spell": "Spell",
-            "armour": "Armour"
+            "armour": "Armour",
+            "weapon": "Weapon",
+            "word": "Word",
+            "gift": "Gift"
         }
     }
 }

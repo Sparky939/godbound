@@ -41,6 +41,9 @@ GODBOUND.itemTypes = {
   Fact: 'GODBOUND.ItemTypes.Fact',
   Spell: 'GODBOUND.ItemTypes.Spell',
   Armour: 'GODBOUND.ItemTypes.Armour',
+  Weapon: "GODBOUND.ItemTypes.Weapon",
+  Word: "GODBOUND.ItemTypes.Word",
+  Gift: "GODBOUND.ItemTypes.Gift"
 }
 
 GODBOUND.ArmourTypes = {

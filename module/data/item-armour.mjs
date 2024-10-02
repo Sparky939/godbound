@@ -33,7 +33,6 @@ export default class GodboundArmour extends GodboundItem {
     }
 
     prepareDerivedData() {
-        console.log(this);
         this.baseArmour = ARMOUR_VALUE[this.type];
     }
 }

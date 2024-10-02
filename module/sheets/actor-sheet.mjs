@@ -104,7 +104,9 @@ export class GodboundActorSheet extends ActorSheet {
     _prepareItems(context) {
         // Initialize containers.
         // TODO: Move Facts to Characters only
-        const gear = []
+        const items = [];
+        const weapons = [];
+        const armours = [];
         const facts = []
         const spells = {
             0: [],
@@ -117,14 +119,28 @@ export class GodboundActorSheet extends ActorSheet {
             7: [],
             8: [],
             9: [],
-        }
+        };
+        const words = [];
+        const gifts = [];
 
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || Item.DEFAULT_ICON
-            // Append to gear.
-            if (i.type === 'item' || i.type === 'weapon' || i.type === 'armor') {
-                gear.push(i)
+            if (i.type === 'item') {
+                items.push(i)
+            }
+            if (i.type === 'weapon') {
+                weapons.push(i)
+            }
+            if (i.type === 'armour') {
+                const augArmour = {...i, worn: i._id == this.actor.system.wornArmourId}
+                armours.push(augArmour)
+            }
+            if (i.type === 'word') {
+                words.push(i)
+            }
+            if (i.type === 'gift') {
+                gifts.push(i)
             }
             // Append to facts.
             else if (i.type === 'fact') {
@@ -139,7 +155,9 @@ export class GodboundActorSheet extends ActorSheet {
         }
 
         // Assign and return
-        context.gear = gear
+        context.items = items
+        context.weapons = weapons
+        context.armours = armours
         context.facts = facts
         context.spells = spells
     }
@@ -196,6 +214,7 @@ export class GodboundActorSheet extends ActorSheet {
                 li.addEventListener('dragstart', handler, false)
             })
         }
+        html.on('click', '.wearable', this._onWear.bind(this))
     }
 
     /**
@@ -255,6 +274,13 @@ export class GodboundActorSheet extends ActorSheet {
             })
             return roll
         }
+    }
+
+    _onWear(event) {
+        event.preventDefault()
+        const element = event.currentTarget
+        const dataset = element.dataset;
+        return this.actor.system.wearArmour(dataset.id);
     }
 
     async _onAttributeCheck(event) {

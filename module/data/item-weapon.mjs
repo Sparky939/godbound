@@ -4,7 +4,7 @@ const WEAPON_DIE_SIZE = {
     // TODO: Weapon die size
 }
 
-export default class GodboundArmour extends GodboundItem {
+export default class GodboundWeapon extends GodboundItem {
     static defineSchema() {
         const fields = foundry.data.fields
         const requiredInteger = {

@@ -1,6 +1,6 @@
 import GodboundItem from './item-item.mjs'
 
-export default class GodboundArmour extends GodboundItem {
+export default class GodboundWord extends GodboundItem {
     static defineSchema() {
         // const fields = foundry.data.fields
         // const requiredInteger = {

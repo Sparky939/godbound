@@ -40,7 +40,6 @@ export default class GodboundCharacter extends GodboundActorBase {
                 return obj
             }, {})
         )
-        schema.wornArmourId = new fields.StringField({ initial: "" });
         schema.resources = new fields.SchemaField({
             effort: new fields.SchemaField({
                 value: new fields.NumberField({
@@ -111,11 +110,11 @@ export default class GodboundCharacter extends GodboundActorBase {
             this.saves[key].label =
                 game.i18n.localize(CONFIG.GODBOUND.saves[key]) ?? key
         }
-        const wornItem = this.parent.items.find(i => i.key == this.wornArmourId);
-        if (wornItem && wornItem.value.system.type == "armour") {
-            this.ac = wornItem.value.system.baseArmour - this.attributes.dex.mod;
+        const wornItem = this.parent.items.filter(i => i.type === 'armour' && i.worn)[0]
+        if (wornItem && wornItem.value.system.type == 'armour') {
+            this.ac = wornItem.value.system.baseArmour - this.attributes.dex.mod
         } else {
-            this.ac = 9 - this.attributes.dex.mod;
+            this.ac = 9 - this.attributes.dex.mod
         }
         // TODO: Find if there are any Gifts that modify these values.
         this.resources.effort.max = this.details.level.value + 2
@@ -143,11 +142,15 @@ export default class GodboundCharacter extends GodboundActorBase {
     }
 
     wearArmour(id) {
-        if (this.wornArmourId == id) {
-            this.wornArmourId = "";
-        } else {
-            this.wornArmourId = id;
-        }
+        this.parent.items
+            .filter((i) => i.type == 'armour')
+            .forEach((i) => {
+                if (i._id == id) {
+                    i.update({ 'system.worn': !i.system.worn })
+                } else {
+                    i.update({ 'system.worn': false })
+                }
+            })
     }
 
     getRollData() {
@@ -200,13 +203,20 @@ export default class GodboundCharacter extends GodboundActorBase {
         const formData = new FormDataExtended(html[0].querySelector('form'))
         const submitData = foundry.utils.expandObject(formData.object)
         // create Roll
-        const roll = await new Roll('d20' + (submitData.relevantFact ? "+4" : "")).evaluate()
-        const result = roll.total;
-        const difficulty = submitData.difficulty == 'Mortal' ? 0 : submitData.difficulty == 'PushLimits' ? 4 : 8
-        const checkRequirement = 21 - this.attributes[attributeId].value + difficulty;
+        const roll = await new Roll(
+            'd20' + (submitData.relevantFact ? '+4' : '')
+        ).evaluate()
+        const result = roll.total
+        const difficulty =
+            submitData.difficulty == 'Mortal'
+                ? 0
+                : submitData.difficulty == 'PushLimits'
+                  ? 4
+                  : 8
+        const checkRequirement =
+            21 - this.attributes[attributeId].value + difficulty
         const outcome =
-            (result == 20 ||
-                result >= checkRequirement) && result != 1
+            (result == 20 || result >= checkRequirement) && result != 1
         // translate result into succes/failure
         const messageData = {
             speaker: {
@@ -215,7 +225,7 @@ export default class GodboundCharacter extends GodboundActorBase {
             },
             flavor: game.i18n.format(CONFIG.GODBOUND.AttributeCheckResult, {
                 attribute: this.attributes[attributeId].label,
-                checkTarget: checkRequirement
+                checkTarget: checkRequirement,
             }),
             outcome: `${result} vs. ${checkRequirement}: ${outcome ? 'Pass' : 'Fail'}`,
             rollMode: submitData.rollMode,

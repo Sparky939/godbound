@@ -133,8 +133,7 @@ export class GodboundActorSheet extends ActorSheet {
                 weapons.push(i)
             }
             if (i.type === 'armour') {
-                const augArmour = {...i, worn: i._id == this.actor.system.wornArmourId}
-                armours.push(augArmour)
+                armours.push(i)
             }
             if (i.type === 'word') {
                 words.push(i)
@@ -277,6 +276,7 @@ export class GodboundActorSheet extends ActorSheet {
     }
 
     _onWear(event) {
+        // get item using the id, toggle the worn state on the item
         event.preventDefault()
         const element = event.currentTarget
         const dataset = element.dataset;

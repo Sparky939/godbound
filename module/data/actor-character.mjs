@@ -199,6 +199,25 @@ export default class GodboundCharacter extends GodboundActorBase {
         })
     }
 
+    async saveCheck(saveId, options = {}) {
+        const roll = await new Roll("d20").evaluate();
+        const result = roll.total;
+        const checkRequirement = this.saves[saveId].value;
+        const outcome = result >= checkRequirement;
+        const messageData = {
+            speaker: {
+                alias: this.name,
+                actor: this.parent
+            },
+            flavor: game.i18n.format(CONFIG.GODBOUND.SaveCheckResult, { save: this.saves[saveId].label, checkTarget: checkRequirement }),
+            outcome: `${result} vs ${checkRequirement}: ${outcome ? 'Pass' : 'Fail'}`,
+            rollMode: game.settings.get('core', 'rollMode')
+        }
+        roll.toMessage(messageData)
+
+        return roll;
+    }
+
     async _onDialogSubmit(html, attributeId) {
         const formData = new FormDataExtended(html[0].querySelector('form'))
         const submitData = foundry.utils.expandObject(formData.object)
@@ -211,12 +230,12 @@ export default class GodboundCharacter extends GodboundActorBase {
             submitData.difficulty == 'Mortal'
                 ? 0
                 : submitData.difficulty == 'PushLimits'
-                  ? 4
-                  : 8
+                    ? 4
+                    : 8
         const checkRequirement =
             21 - this.attributes[attributeId].value + difficulty
         const outcome =
-            (result == 20 || result >= checkRequirement) && result != 1
+            (roll.number == 20 || result >= checkRequirement) && roll.number != 1
         // translate result into succes/failure
         const messageData = {
             speaker: {

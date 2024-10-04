@@ -45,8 +45,8 @@
       </div>
     </li>
   {{/each}}<li class='item flexrow items-header'>
+    <div class='item-worn'>{{localize 'Worn'}}</div>
     <div class='item-name'>{{localize 'Name'}}</div>
-    <div class='item-formula'>{{localize 'Roll Formula'}}</div>
     <div class='item-controls'>
       <a
         class='item-control item-create'
@@ -60,9 +60,16 @@
   </li>
   {{#each armours as |armour id|}}
     <li class='item flexrow' data-item-id='{{armour._id}}'>
+      <div class="item-worn">
+        {{#if armour.system.worn}}
+          <i class="fa-regular fa-square-check wearable" data-id="{{armour._id}}"></i>
+        {{else}}
+          <i class="fa-regular fa-square wearable" data-id="{{armour._id}}"></i>
+        {{/if}}
+      </div>
       <div class='item-name'>
         <div class='item-image'>
-          <a class='wearable' data-id="{{armour._id}}">
+          <a class='print' data-id="{{armour._id}}">
             <img
               src='{{armour.img}}'
               title='{{armour.name}}'
@@ -71,10 +78,8 @@
             />
           </a>
         </div>
-        <div>{{armour.system.worn}}</div>
         <h4>{{armour.name}}</h4>
       </div>
-      <div class='item-formula item-prop'>{{armour.system.formula}}</div>
       <div class='item-controls'>
         <a
           class='item-control item-edit'

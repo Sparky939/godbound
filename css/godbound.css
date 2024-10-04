@@ -298,6 +298,11 @@
   white-space: nowrap;
   overflow-x: hidden;
 }
+.godbound .items-list .item-worn {
+  display: flex;
+  flex: 0 1 auto;
+  padding: 0 5px;
+}
 .godbound .items-list .item-controls {
   display: flex;
   flex: 0 0 100px;

@@ -42,7 +42,9 @@
                     "Master": "Master",
                     "Archmage": "Archmage"
                 },
-                "Add": "Add Spell"
+                "Add": "Add Spell",
+                "AddLVL": "{}",
+                "SpellLVL": "Spell Level"
             },
             "Gift": {
                 "Power": {
@@ -65,8 +67,33 @@
             "Temporary": "Temporary Effects",
             "Passive": "Passive Effects",
             "Inactive": "Inactive Effects"
+        },
+        "AttributePromptTitle": "{attribute} Ability Check",
+        "AttributeCheckResult": "{attribute} Check vs {checkTarget}",
+        "DifficultyPrompt": "Select Difficulty",
+        "RelevantFactPrompt": "Relevant Fact?",
+        "RollSituationalBonus": "Situational Bonus?",
+        "RollMode": "Roll Mode",
+        "Roll": "Roll",
+        "Difficulty": {
+            "Mortal": "Mortal Task",
+            "PushLimits": "Pushing Human Limits",
+            "Heroic": "Truly Heroic Challenge"
+        },
+        "RollExample": "e.g. d8 + 2",
+        "ItemTypes": {
+            "Weapon": "Weapon",
+            "Armour": "Armour",
+            "Item": "Item"
+        },
+        "ArmourTypes": {
+            "None": "None",
+            "Light": "Light",
+            "Medium": "Medium",
+            "Heavy": "Heavy"
         }
     },
+
     "TYPES": {
         "Actor": {
             "character": "Character",
@@ -77,9 +104,10 @@
             "fact": "Fact",
             "spell": "Spell",
             "project": "Project",
+            "armour": "Armour",
+            "weapon": "Weapon",
             "word": "Word",
-            "gift": "Gift",
-            "gift effect": "Gift Effect"
+            "gift": "Gift"
         }
     }
 }

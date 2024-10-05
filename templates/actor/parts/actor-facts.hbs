@@ -8,7 +8,7 @@
         data-type='fact'
       >
         <i class='fas fa-plus'></i>
-        {{localize 'DOCUMENT.New' type='Fact'}}
+        {{localize 'DOCUMENT.New' type='fact'}}
       </a>
     </div>
   </li>
@@ -30,7 +30,7 @@
       <div class='item-controls'>
         <a
           class='item-control item-edit'
-          title='{{localize "DOCUMENT.Update" type='fact'}}'
+          title='{{localize "DOCUMENT.Edit" type='fact'}}'
         >
           <i class='fas fa-edit'></i>
         </a>
@@ -44,3 +44,4 @@
     </li>
   {{/each}}
 </ol>
+{{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}

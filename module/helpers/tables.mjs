@@ -1,89 +1,71 @@
-export const LEVEL_REQUIREMENTS = [
-    { xp: 0, dp: 0 },
-    { xp: 3, dp: 2 },
-    { xp: 6, dp: 4 },
-    { xp: 12, dp: 10 },
-    { xp: 24, dp: 22 },
-    { xp: 48, dp: 38 },
-    { xp: 72, dp: 57 },
-    { xp: 96, dp: 76 },
-    { xp: 130, dp: 95 },
-    { xp: 170, dp: 124 },
-];
+export const tables = {}
 
-export const ATTRIBUTE_MODIFIERS = [
-    { max: 3, min: 3, mod: -3 },
-    { max: 5, min: 4, mod: -2 },
-    { max: 8, min: 6, mod: -1 },
-    { max: 12, min: 9, mod: 0 },
-    { max: 15, min: 13, mod: 1 },
-    { max: 17, min: 16, mod: 2 },
-    { max: 18, min: 18, mod: 3 },
-    { max: 19, min: 19, mod: 4 }
-];
+tables.attr = [
+    { score: { min: 3, max: 3 }, modifier: -3 },
+    { score: { min: 4, max: 5 }, modifier: -2 },
+    { score: { min: 6, max: 8 }, modifier: -1 },
+    { score: { min: 9, max: 12 }, modifier: 0 },
+    { score: { min: 13, max: 15 }, modifier: 1 },
+    { score: { min: 16, max: 17 }, modifier: 2 },
+    { score: { min: 18, max: 18 }, modifier: 3 },
+    { score: { min: 19, max: 19 }, modifier: 4 },
+]
 
-export const ARMOR_TYPES = [
+tables.damage = [
+    { roll: { min: undefined, max: 1 }, damage: 0 },
+    { roll: { min: 2, max: 5 }, damage: 1 },
+    { roll: { min: 6, max: 9 }, damage: 2 },
+    { roll: { min: 10, max: undefined }, damage: 4 },
+]
+
+tables.advancement = [
+    { level: 1, requirements: { xp: 0, dominionSpent: 0 } },
+    { level: 2, requirements: { xp: 3, dominionSpent: 2 } },
+    { level: 3, requirements: { xp: 6, dominionSpent: 4 } },
+    { level: 4, requirements: { xp: 12, dominionSpent: 10 } },
+    { level: 5, requirements: { xp: 24, dominionSpent: 22 } },
+    { level: 6, requirements: { xp: 48, dominionSpent: 38 } },
+    { level: 7, requirements: { xp: 72, dominionSpent: 57 } },
+    { level: 8, requirements: { xp: 96, dominionSpent: 76 } },
+    { level: 9, requirements: { xp: 130, dominionSpent: 95 } },
+    { level: 10, requirements: { xp: 170, dominionSpent: 124 } },
+]
+
+tables.weapons = [
     {
-        value: 'none',
-        label: 'GODBOUND.Armor.None',
-        baseAC: 9,
-        penalties: 0
+        value: 'unarmed',
+        label: 'GODBOUND.Weapon.Unarmed',
+        damage: '1d2',
+        attribute: ['str', 'dex'],
     },
     {
         value: 'light',
-        label: 'GODBOUND.Armor.Light',
-        baseAC: 7,
-        penalties: 0
+        label: 'GODBOUND.Weapon.Light',
+        damage: '1d6',
+        attribute: ['str', 'dex'],
     },
     {
         value: 'medium',
-        label: 'GODBOUND.Armor.Medium',
-        baseAC: 5,
-        penalties: 1
+        label: 'GODBOUND.Weapon.Medium',
+        damage: '1d8',
+        attribute: ['str'],
     },
     {
         value: 'heavy',
-        label: 'GODBOUND.Armor.Heavy',
-        baseAC: 3,
-        penalties: 2
-    }
-];
-
-export const WEAPON_TYPES = [
-    {
-        value: "unarmed",
-        label: "GODBOUND.Weapon.Unarmed",
-        damage: "1d2",
-        attribute: ["str", "dex"]
+        label: 'GODBOUND.Weapon.Heavy',
+        damage: '1d10',
+        attribute: ['str'],
     },
     {
-        value: "light",
-        label: "GODBOUND.Weapon.Light",
-        damage: "1d6",
-        attribute: ["str", "dex"]
+        value: 'ranged1h',
+        label: 'GODBOUND.Weapon.OneHandedRanged',
+        damage: '1d6',
+        attribute: ['dex'],
     },
     {
-        value: "medium",
-        label: "GODBOUND.Weapon.Medium",
-        damage: "1d8",
-        attribute: ["str"]
+        value: 'ranged2h',
+        label: 'GODBOUND.Weapon.TwoHandedRanged',
+        damage: '1d8',
+        attribute: ['dex'],
     },
-    {
-        value: "heavy",
-        label: "GODBOUND.Weapon.Heavy",
-        damage: "1d10",
-        attribute: ["str"]
-    },
-    {
-        value: "ranged1h",
-        label: "GODBOUND.Weapon.OneHandedRanged",
-        damage: "1d6",
-        attribute: ["dex"]
-    },
-    {
-        value: "ranged2h",
-        label: "GODBOUND.Weapon.TwoHandedRanged",
-        damage: "1d8",
-        attribute: ["dex"]
-    }
 ]

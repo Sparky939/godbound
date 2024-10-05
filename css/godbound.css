@@ -210,51 +210,19 @@
 .godbound .sheet-header {
   flex: 0 auto;
   overflow: hidden;
-  display: grid !important;
-  grid-template-columns: 100px 1fr;
-  column-gap: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
   margin-bottom: 10px;
-}
-.godbound .sheet-header .name-input {
-  font-size: 14px;
 }
 .godbound .sheet-header .profile-img {
   flex: 0 0 100px;
   height: 100px;
+  margin-right: 10px;
 }
 .godbound .sheet-header .header-fields {
-  display: flex;
-  flex-flow: row nowrap;
-  column-gap: 5px;
-}
-.godbound .sheet-header .header-fields .resource-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: auto;
-  min-width: 0;
-}
-.godbound .sheet-header .header-fields .resource-stack .effort-icon {
-  height: 16px;
-}
-.godbound .sheet-header .header-fields .resource-stack input {
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  width: 20px;
-  text-align: center;
-  border: 0px solid transparent;
-  outline: none;
-  border-bottom: 1px solid black;
-  border-radius: initial;
-}
-.godbound .sheet-header .header-fields .resource-stack input:last-child {
-  border-bottom: 0px solid transparent;
-  outline: none;
-}
-.godbound .sheet-header .header-fields .resource-stack span.resource-content-static {
-  outline: none;
-  border-bottom: 0px solid transparent;
+  flex: 1;
 }
 .godbound .sheet-header h1.charname {
   height: 50px;
@@ -280,24 +248,6 @@
 }
 .godbound .tox .tox-edit-area {
   padding: 0 8px;
-}
-.godbound .sheet-sidebar {
-  box-sizing: border-box;
-  height: 100%;
-  padding: 7px;
-  width: 180px;
-}
-.godbound .sheet-sidebar > .attribute-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 5px;
-  grid-auto-rows: auto;
-}
-.godbound .sheet-sidebar > .attribute-list > .attribute {
-  display: grid;
-  grid-template-columns: subgrid;
-  grid-row: span 1;
-  margin-bottom: 5px;
 }
 .godbound .resource-label {
   font-weight: bold;
@@ -347,6 +297,11 @@
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
+}
+.godbound .items-list .item-worn {
+  display: flex;
+  flex: 0 1 auto;
+  padding: 0 5px;
 }
 .godbound .items-list .item-controls {
   display: flex;

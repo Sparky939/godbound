@@ -55,6 +55,12 @@
     }
   }
 
+  .item-worn {
+    display: flex;
+    flex: 0 1 auto;
+    padding: 0 5px;
+  }
+
   // Control Buttons
   .item-controls {
     display: flex;

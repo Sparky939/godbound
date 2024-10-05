@@ -1,16 +1,8 @@
 {
-  "Actor": {
-    "types": ["character", "npc"]
-  },
-  "Item": {
-      "types": [
-          "item",
-          "fact",
-          "spell",
-          "project",
-          "word",
-          "gift",
-          "gift effect"
-      ]
-  }
+    "Actor": {
+        "types": ["character", "npc"]
+    },
+    "Item": {
+        "types": ["item", "fact", "spell", "armour", "weapon", "word", "gift", "project"]
+    }
 }

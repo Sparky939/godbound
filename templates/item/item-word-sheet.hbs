@@ -1,5 +1,3 @@
-{{! This template is a fallback for when items don't have more specific templates. }}
-{{! Generally, you'll want to make more specific templates when possible. }}
 <form class='{{cssClass}}' autocomplete='off'>
   <header class='sheet-header'>
     <img
@@ -15,13 +13,15 @@
           value='{{item.name}}'
           placeholder='Name'
         /></h1>
+      <div class='grid grid-2col'>
+      </div>
     </div>
   </header>
 
   {{! Sheet Tab Navigation }}
   <nav class='sheet-tabs tabs' data-group='primary'>
     <a class='item' data-tab='description'>Description</a>
-    <a class='item' data-tab='passive'>Passive</a>
+    <a class='item' data-tab='effects'>Effects</a>
   </nav>
 
   {{! Sheet Body }}
@@ -39,21 +39,9 @@
       }}
     </div>
 
-    {{! Attributes Tab }}
-    <div class='tab passive' data-group='primary' data-tab='passive'>
-      <div class="grid grid-2col">
-        <label>{{localize 'Name'}}:</label>
-        <input type="text" name="system.passive.name" value="{{system.passive.name}}" />
-      </div>
-      {{
-        editor
-          enrichedDescription
-          target='system.passive.description'
-          engine='prosemirror'
-          button=true
-          editable=editable
-      }}
-      {{! As you add new fields, add them in here! }}
+    {{! Effects Tab }}
+    <div class='tab effects' data-group='primary' data-tab='effects'>
+      {{> "systems/godbound/templates/item/parts/item-effects.hbs"}}
     </div>
   </section>
 </form>

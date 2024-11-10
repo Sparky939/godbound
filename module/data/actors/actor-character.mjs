@@ -1,4 +1,5 @@
-import { tables } from '../helpers/tables.mjs'
+import { tables } from '../../helpers/tables.mjs'
+import fns from '../../helpers/numbers.mjs'
 import GodboundActorBase from './base-actor.mjs'
 
 export default class GodboundCharacter extends GodboundActorBase {
@@ -10,6 +11,17 @@ export default class GodboundCharacter extends GodboundActorBase {
             integer: true,
         }
         const schema = super.defineSchema()
+
+        schema.health = new fields.SchemaField({
+            value: new fields.NumberField({
+                ...requiredInteger,
+                initial: 8
+            }),
+            max: new fields.NumberField({
+                ...requiredInteger,
+                initial: 8
+            })
+        })
 
         schema.details = new fields.SchemaField({
             level: new fields.SchemaField({
@@ -37,11 +49,15 @@ export default class GodboundCharacter extends GodboundActorBase {
                     initial: 0,
                 }),
             }),
-            frayDie: new fields.NumberField({
+            frayDie: new fields.StringField({
                 ...requiredInteger,
-                initial: 8,
-                choices: [4, 6, 8, 10, 12],
+                initial: "8",
+                choices: {"4": "4", "6": "6", "8": "8", "10": "10", "12": "12"},
             }),
+            wealth: new fields.NumberField({
+                ...requiredInteger,
+                initial: 0,
+            })
         })
 
         // Iterate over attribute names and create a new SchemaField for each.
@@ -110,7 +126,29 @@ export default class GodboundCharacter extends GodboundActorBase {
     }
 
     prepareDerivedData() {
-        // Loop through attribute scores, and add their modifiers to our sheet output.
+        this.prepareAttributes();
+        this.prepareSaves();
+        this.prepareLevelValues();
+        this.words = game.settings
+            .get('godbound', 'words')
+            .split(',')
+            .map((str) => String(str).trim());
+        const wornItem = this.parent.items.filter(
+            (i) => i.type === 'armour' && i.worn
+        )[0]
+        if (wornItem && wornItem.value.system.type == 'armour') {
+            this.ac = wornItem.value.system.baseArmour - this.attributes.dex.mod
+        } else {
+            this.ac = 9 - this.attributes.dex.mod
+        }
+    }
+
+    applyActiveEffects() {
+        // TODO: Apply active effects if the order matters
+        return super.applyActiveEffects();
+    }
+
+    prepareAttributes() {
         for (const key in this.attributes) {
             // Calculate the modifier using d20 rules.
             this.attributes[key].mod = tables.attr.find(
@@ -126,30 +164,42 @@ export default class GodboundCharacter extends GodboundActorBase {
                 game.i18n.localize(CONFIG.GODBOUND.abilityAbbreviations[key]) ??
                 key
         }
-        // Loop through save scores, and add their modifiers to our sheet output.
+    }
+    prepareSaves() {
         for (const key in this.saves) {
             this.saves[key].value =
                 16 - (this.getSaveMod(key) + this.details.level.value)
             this.saves[key].label =
                 game.i18n.localize(CONFIG.GODBOUND.saves[key]) ?? key
         }
-        this.words = game.settings
-            .get('godbound', 'words')
-            .split(',')
-            .map((str) => String(str).trim())
-        const wornItem = this.parent.items.filter(
-            (i) => i.type === 'armour' && i.worn
-        )[0]
-        if (wornItem && wornItem.value.system.type == 'armour') {
-            this.ac = wornItem.value.system.baseArmour - this.attributes.dex.mod
-        } else {
-            this.ac = 9 - this.attributes.dex.mod
-        }
-        // TODO: Find if there are any Gifts that modify these values.
-        this.resources.effort.max = this.details.level.value + 2
-        this.resources.influence.max = this.details.level.value + 2
     }
-
+    prepareLevelValues() {
+        const { dominionSpent, influenceUsed } = this.parent.items.filter(i =>
+            i.type == 'project').reduce(
+                (acc, i) =>
+                ({
+                    dominionSpent: acc.dominionSpent + i.system.cost.dominion,
+                    influenceUsed: acc.influenceUsed + i.system.cost.influence
+                }),
+                { dominionSpent: 0, influenceUsed: 0 });
+        this.resources.dominion.spent = dominionSpent;
+        this.details.level.value = tables.advancement.find(r =>
+            r.requirements.xp <= this.details.level.xp &&
+            r.requirements.dominionSpent <= this.resources.dominion.spent)?.level ?? 1;
+        this.advancement = this.details.level.values < 10
+            ? tables.advancement.find(
+                req =>
+                    req.level = this.details.level.value + 1)?.requirements
+            : { xp: 0, dominionSpent: 0 }
+        this.resources.effort.max = (this.details.level.value - 1) + 2
+        this.resources.influence.max = (this.details.level.value - 1) + 2
+        this.resources.effort.value = this.resources.effort.max
+        this.resources.influence.value = this.resources.influence.max - influenceUsed;
+        this.health.max = (8 + this.attributes.con.mod)
+            + (this.details.level.value - 1)
+             * (4 + Math.ceil(this.attributes.con.mod/2))
+        this.health.value = fns.bound(this.health.value, 0, this.health.max)
+    }
     getSaveMod(save) {
         switch (save) {
             case 'hardiness':
@@ -262,8 +312,8 @@ export default class GodboundCharacter extends GodboundActorBase {
             submitData.difficulty == 'Mortal'
                 ? 0
                 : submitData.difficulty == 'PushLimits'
-                  ? 4
-                  : 8
+                    ? 4
+                    : 8
         const checkRequirement =
             21 - this.attributes[attributeId].value + difficulty
         const outcome =

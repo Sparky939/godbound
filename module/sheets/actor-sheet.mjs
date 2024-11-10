@@ -93,7 +93,9 @@ export class GodboundActorSheet extends ActorSheet {
      */
     _prepareCharacterData(context) {
         // This is where you can enrich character-specific editor fields
-        // or setup anything else that's specific to this type
+        // or setup anything else that's specific to this type    
+        context.dominionAvailable = context.system.resources.dominion.gained - context.system.resources.dominion.spent;
+        //context.dominionAvailable = this.resources.dominion.gained - this.resources.dominion.spent
     }
 
     /**

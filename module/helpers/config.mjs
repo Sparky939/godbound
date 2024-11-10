@@ -67,6 +67,7 @@ GODBOUND.WeaponTypes = {
     heavy: 'GODBOUND.Weapon.Heavy',
     ranged1h: 'GODBOUND.Weapon.OneHandedRanged',
     ranged2h: 'GODBOUND.Weapon.TwoHandedRanged',
+    custom: 'GODBOUND.Weapon.Custom',
 }
 
 GODBOUND.gifts = {

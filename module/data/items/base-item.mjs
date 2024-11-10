@@ -1,4 +1,4 @@
-import GodboundDataModel from "./base-model.mjs";
+import GodboundDataModel from "../base-model.mjs";
 
 export default class GodboundItemBase extends GodboundDataModel {
 

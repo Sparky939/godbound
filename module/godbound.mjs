@@ -78,6 +78,9 @@ Hooks.once('init', function () {
     label: 'GODBOUND.SheetLabels.Item',
   });
 
+  // Register system settings
+  registerSystemSettings();
+
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
 });

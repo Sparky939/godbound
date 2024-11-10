@@ -8,6 +8,11 @@
             "Wis": { "long": "Wisdom", "abbr": "wis" },
             "Cha": { "long": "Charisma", "abbr": "cha" }
         },
+        "Save":{
+            "Hardiness": "Hardiness",
+            "Evasion": "Evasion",
+            "Spirit": "Spirit"
+        },
         "Armor": {
             "None": "Unarmoured",
             "Light": "Light",
@@ -21,7 +26,8 @@
             "Medium": "Medium",
             "Heavy": "Heavy",
             "OneHandedRanged": "One-Handed Ranged",
-            "TwoHandedRanged": "Two-Handed Ranged"
+            "TwoHandedRanged": "Two-Handed Ranged",
+            "Custom": "Custom"
         },
         "Resource": {
             "Effort": "Effort",

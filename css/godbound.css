@@ -207,33 +207,63 @@
 .godbound .item-form {
   font-family: "Roboto", sans-serif;
 }
-.godbound .sheet-header {
+.godbound form.character.godbound {
+  display: grid;
+  grid-template-areas: "header" "tabs" "body";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr;
+  row-gap: 10px;
+}
+.godbound form.character.godbound .sheet-header {
+  display: grid;
+  grid-template-areas: "name name debug" "image details details";
+  grid-template-columns: 110px 1fr 12px;
+  grid-template-rows: auto auto;
   flex: 0 auto;
   overflow: hidden;
-  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 10px;
 }
-.godbound .sheet-header .profile-img {
+.godbound form.character.godbound .sheet-header .profile-img {
+  grid-area: image;
   flex: 0 0 100px;
   height: 100px;
-  margin-right: 10px;
 }
-.godbound .sheet-header .header-fields {
+.godbound form.character.godbound .sheet-header .header-fields {
+  grid-area: details;
+  height: 100%;
   flex: 1;
 }
-.godbound .sheet-header h1.charname {
+.godbound form.character.godbound .sheet-header .header-fields .resources {
+  height: 100%;
+  margin: 0;
+  grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));
+}
+.godbound form.character.godbound .sheet-header h1.charname {
+  grid-area: name;
   height: 50px;
   padding: 0px;
   margin: 5px 0;
   border-bottom: 0;
 }
-.godbound .sheet-header h1.charname input {
+.godbound form.character.godbound .sheet-header h1.charname input {
   width: 100%;
   height: 100%;
   margin: 0;
+}
+.godbound form.character.godbound .sheet-tabs {
+  margin: 0;
+}
+.godbound form.character.godbound aside.sidebar {
+  row-gap: 3px;
+}
+.godbound form.character.godbound aside.sidebar .flexcol {
+  display: grid;
+  grid-template-rows: subgrid;
+}
+.godbound form.character.godbound aside.sidebar .flexcol .flexrow {
+  height: 26px;
 }
 .godbound .sheet-tabs {
   flex: 0;

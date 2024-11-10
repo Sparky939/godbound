@@ -29,6 +29,7 @@ export class GodboundItemSheet extends ItemSheet {
     const path = 'systems/godbound/templates/item';
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.hbs`;
+    console.log(this);
 
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.hbs`.

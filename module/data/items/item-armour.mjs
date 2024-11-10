@@ -24,7 +24,7 @@ export default class GodboundArmour extends GodboundItem {
         })
         schema.type = new fields.StringField({
             initial: 'None',
-            choices: CONFIG.GODBOUND.armourTypes,
+            choices: CONFIG.GODBOUND.ArmourTypes,
         })
         schema.worn = new fields.BooleanField({ initial: false })
         schema.hardinessPenalty = new fields.BooleanField({ initial: false })

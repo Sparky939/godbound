@@ -1,21 +1,21 @@
 <div class='compact-section'>
   <div class='influence-value'>
-    <span>{{localize 'Influence'}}:</span>{{system.resources.influence.value}}
+    <label class="project-header-label">{{localize 'Influence'}}:</label>{{system.resources.influence.value}}
   </div>
   <div class='dominion-available'>
-    <span>{{localize 'Dominion'}}:</span>{{dominionAvailable}}
+    <label class="project-header-label">{{localize 'Dominion'}}:</label>{{dominionAvailable}}
   </div>
   <div class="dominion-gained">
-    <label for="dominion-gained">
+    <label for="dominion-gained" class="project-header-label">
       Gained:
     </label>
     <input type="text" name="system.resources.dominion.gained"
       value="{{system.resources.dominion.gained}}" data-dtype="Number" />
   </div>
   <div class='dominion-income'>
-    <label for='dominion-income'>{{localize 'Per Month'}}:</label>
     <input type='text' name='system.resources.dominion.income'
       value='{{system.resources.dominion.income}}' data-dtype="Number" />
+    <label for='dominion-income' class="project-header-label">{{localize 'Per Month'}}</label>
   </div>
 </div>
 <ol class='items-list'>

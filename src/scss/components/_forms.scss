@@ -10,10 +10,6 @@ form.character.godbound {
   row-gap: 10px;
 
   .sheet-header {
-    display: grid;
-    grid-template-areas: "name name debug" "image details details";
-    grid-template-columns: 110px 1fr 12px;
-    grid-template-rows: auto auto;
     flex: 0 auto;
     overflow: hidden;
     flex-direction: row;
@@ -27,9 +23,54 @@ form.character.godbound {
     }
 
     .header-fields {
-      grid-area: details;
       height: 100%;
       flex: 1;
+      .header-row {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        padding-top: 5px;
+        width: 100%;
+        .short-input {
+          width: 35px;
+        }
+        label {
+          padding-right: 7px;
+        }
+        input {
+          margin-right: 10px;
+        }
+        .fraction-group {
+          display: flex;
+          flex-flow: column nowrap;
+          padding-right: 10px;
+          justify-content: center;
+          input {
+            margin-right: 0;
+            text-align: center;
+          }
+          .denominator {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+      .fraction-group {
+        input {
+          width: 20px;
+        }
+        .span {
+          width: 20px;
+          border-top: 1px solid black;
+        }
+        .fraction-group {
+          display: flex;
+          flex-flow: column nowrap;
+        }
+      }
+      input {
+        width: 120px;
+      }
       .resources {
         height: 100%;
         margin: 0;

@@ -246,6 +246,9 @@
 .godbound form.character.godbound .sheet-header .header-fields .header-row input {
   margin-right: 10px;
 }
+.godbound form.character.godbound .sheet-header .header-fields .header-row span.level-value {
+  margin-right: 10px;
+}
 .godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group {
   display: flex;
   flex-flow: column nowrap;

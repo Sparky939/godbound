@@ -215,10 +215,6 @@
   row-gap: 10px;
 }
 .godbound form.character.godbound .sheet-header {
-  display: grid;
-  grid-template-areas: "name name debug" "image details details";
-  grid-template-columns: 110px 1fr 12px;
-  grid-template-rows: auto auto;
   flex: 0 auto;
   overflow: hidden;
   flex-direction: row;
@@ -231,9 +227,52 @@
   height: 100px;
 }
 .godbound form.character.godbound .sheet-header .header-fields {
-  grid-area: details;
   height: 100%;
   flex: 1;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding-top: 5px;
+  width: 100%;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row .short-input {
+  width: 35px;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row label {
+  padding-right: 7px;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row input {
+  margin-right: 10px;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-right: 10px;
+  justify-content: center;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group input {
+  margin-right: 0;
+  text-align: center;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group .denominator {
+  width: 100%;
+  text-align: center;
+}
+.godbound form.character.godbound .sheet-header .header-fields .fraction-group input {
+  width: 20px;
+}
+.godbound form.character.godbound .sheet-header .header-fields .fraction-group .span {
+  width: 20px;
+  border-top: 1px solid black;
+}
+.godbound form.character.godbound .sheet-header .header-fields .fraction-group .fraction-group {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.godbound form.character.godbound .sheet-header .header-fields input {
+  width: 120px;
 }
 .godbound form.character.godbound .sheet-header .header-fields .resources {
   height: 100%;

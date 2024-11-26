@@ -2,68 +2,41 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}"
-        placeholder="Name" /></h1>
     <img class="profile-img" src="{{actor.img}}" data-edit="img"
       title="{{actor.name}}" height="100" width="100" />
     <div class="header-fields">
-      {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-      use both the "grid" and "grid-Ncol" class where "N" can be any number
-      from 1 to 12 and will create that number of columns. --}}
-      <div class="resources grid grid-3col">
-
-        {{!-- "flex-group-center" is also defined in the _grid.scss file
-        and it will add a small amount of padding, a border, and will
-        center all of its child elements content and text. --}}
-        <div class="resource flex-group-center">
-          <label for="system.health.value" class="resource-label">Health</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="system.health.value"
-              value="{{system.health.value}}" data-dtype="Number" />
-            <span> / </span>
-            <span class="resource-max">{{system.health.max}}</span>
-          </div>
+      <div class="header-row">
+        <input name="name" type="text" value="{{actor.name}}"
+          placeholder="Name" />
+        <label for="system.details.level.xp"
+          class="header-label">XP:</label>
+        <input type="text" class="short-input" name="system.details.level.xp"
+          value="{{system.details.level.xp}}" data-dtype="Number" />
+        <label for="system.details.level.value"
+          class="header-label">Level:</label>
+        <span class="level-value">{{system.details.level.value}}</span>
+        <span class="header-info">Next Level: <span class="inline-value">
+            {{system.advancement.xp}}
+          </span>XP,
+          <span class="inline-value">
+            {{system.advancement.dominionSpent}}
+          </span>
+          DP</span>
+      </div>
+      <div class="header-row">
+        <label for="system.health.value" class="header-label">Health:</label>
+        <div class="fraction-group">
+          <input type="text" name="system.health.value"
+            value="{{system.health.value}}" data-dtype="Number" />
+          <span class="denominator">{{system.health.max}}</span>
         </div>
-
-        <div class="resource flex-group-center">
-          <label for="system.effort.value" class="resource-label">Effort</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <span
-              class="resource-value">{{system.resources.effort.value}}</span>
-          </div>
-        </div>
-
-        <div class="resource flex-group-center">
-          <label for="system.details.level.value"
-            class="resource-label">Level</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <span class="resource-value">{{system.details.level.value}}</span>
-            <label for="system.details.level.xp" class>
-              XP
-            </label>
-            <input type="text" name="system.details.level.xp"
-              value="{{system.details.level.xp}}" data-dtype="Number" />
-            <div>
-              <span>Next Level:</span>
-              <label>
-                XP:
-              </label>
-              <div>{{system.advancement.xp}}</div>
-              <label>
-                Dominion Spent:
-              </label>
-              <div>{{system.advancement.dominionSpent}}</div>
-            </div>
-          </div>
-        </div>
-        <div class="resources flex-group-center">
-          <label for="system.details.wealth"
-            class="resource-label">Wealth</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <span class="resource-value">{{system.details.wealth}}</span>
-          </div>
-        </div>
-
+        <label for="system.effort.value" class="header-label">Effort:</label>
+        <input type="text" class="short-input"
+          name="system.resources.effort.value"
+          value="{{system.resources.effort.value}}" data-dtype="Number" />
+        <label for="system.details.wealth" class="header-label">Wealth:</label>
+        <input type="text" class="short-input" name="system.details.wealth"
+          value="{{system.details.wealth}}" data-dtype="Number" />
       </div>
     </div>
   </header>
@@ -74,7 +47,7 @@
     <a class="item" data-tab="facts">Facts</a>
     <a class="item" data-tab="inventory">Inventory</a>
     <a class="item" data-tab="projects">Projects</a>
-    <a class="item" data-tab="spells">Spells</a>
+    {{!-- <a class="item" data-tab="spells">Spells</a> --}}
     <a class="item" data-tab="effects">Effects</a>
   </nav>
 

@@ -15,13 +15,11 @@
         <label for="system.details.level.value"
           class="header-label">Level:</label>
         <span class="level-value">{{system.details.level.value}}</span>
-        <span class="header-info">Next Level: <span class="inline-value">
-            {{system.advancement.xp}}
-          </span>XP,
-          <span class="inline-value">
-            {{system.advancement.dominionSpent}}
-          </span>
-          DP</span>
+        <label class="header-label">Next Level:</label>
+        <span class="header-info">
+          {{system.advancement.xp}}XP,
+          {{system.advancement.dominionSpent}}DP
+        </span>
       </div>
       <div class="header-row">
         <label for="system.health.value" class="header-label">Health:</label>

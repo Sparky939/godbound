@@ -37,7 +37,7 @@
     "packs": [],
     "packFolders": [],
     "socket": false,
-    "manifest": "https://raw.githubusercontent.com/Sparky939/godbound/main/system.json",
+    "manifest": "https://raw.githubusercontent.com/Sparky939/godbound/refs/head/main/system.json",
     "download": "https://github.com/Sparky939/godbound/releases/download/release-0.1.0/godbound-beta-release-0.1.0.zip",
     "background": "systems/godbound/assets/anvil-impact.png",
     "gridDistance": 5,

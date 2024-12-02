@@ -97,10 +97,7 @@ export class GodboundActorSheet extends ActorSheet {
         context.dominionAvailable =
             context.system.resources.dominion.gained -
             context.system.resources.dominion.spent
-        const wornArmour = context.armours.find((a) => {
-            console.log('armor', a)
-            return a.value.system.worn || a.value.system.wornArmour || a.worn
-        })
+        const wornArmour = context.armours.find((a) => a.system.worn)
         if (wornArmour) {
             context.ac =
                 wornArmour.value.system.baseArmour -

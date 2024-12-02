@@ -28,11 +28,17 @@
             value="{{system.health.value}}" data-dtype="Number" />
           <span class="denominator">{{system.health.max}}</span>
         </div>
-        <label for="system.effort.value" class="header-label">Effort:</label>
+        <label>{{localize 'AC'}}:</label>
+        <div>{{ac}}</div>
+      </div>
+      <div class="header-row">
+        <label for="system.effort.value"
+          class="header-label">Effort:</label>
         <input type="text" class="short-input"
           name="system.resources.effort.value"
           value="{{system.resources.effort.value}}" data-dtype="Number" />
-        <label for="system.details.wealth" class="header-label">Wealth:</label>
+        <label for="system.details.wealth"
+          class="header-label">Wealth:</label>
         <input type="text" class="short-input" name="system.details.wealth"
           value="{{system.details.wealth}}" data-dtype="Number" />
       </div>
@@ -57,8 +63,10 @@
       <section class="grid grid-3col">
         <aside class="sidebar">
 
-          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-          use both the "grid" and "grid-Ncol" class where "N" can be any number
+          {{!-- The grid classes are defined in scss/global/_grid.scss. To
+          use,
+          use both the "grid" and "grid-Ncol" class where "N" can be any
+          number
           from 1 to 12 and will create that number of columns. --}}
           <div class="attributes flexcol">
             {{#each system.attributes as |attribute key|}}
@@ -70,7 +78,8 @@
               <input type="text" name="system.attributes.{{key}}.value"
                 value="{{attribute.value}}" data-dtype="Number" />
               <span class="attribute-mod rollable"
-                data-attribute="{{key}}">{{numberFormat attribute.mod decimals=0
+                data-attribute="{{key}}">{{numberFormat attribute.mod
+                decimals=0
                 sign=true}}</span>
             </div>
             {{/each}}
@@ -91,7 +100,8 @@
         {{!-- For the main facts list, span the right two columns --}}
         <section class="main grid-span-2">
           {{!-- This is a Handlebars partial. They're stored in the `/parts`
-          folder next to this sheet, and defined in module/helpers/templates.mjs
+          folder next to this sheet, and defined in
+          module/helpers/templates.mjs
           --}}
           {{> "systems/godbound/templates/actor/parts/actor-facts.hbs"}}
         </section>
@@ -115,7 +125,8 @@
     </div>
 
     {{!-- Active Effects Tab --}}
-    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+    <div class="tab effects flexcol" data-group="primary"
+      data-tab="effects">
       {{> "systems/godbound/templates/actor/parts/actor-effects.hbs"}}
     </div>
 

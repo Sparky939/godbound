@@ -93,9 +93,18 @@ export class GodboundActorSheet extends ActorSheet {
      */
     _prepareCharacterData(context) {
         // This is where you can enrich character-specific editor fields
-        // or setup anything else that's specific to this type    
-        context.dominionAvailable = context.system.resources.dominion.gained - context.system.resources.dominion.spent;
-        //context.dominionAvailable = this.resources.dominion.gained - this.resources.dominion.spent
+        // or setup anything else that's specific to this type
+        context.dominionAvailable =
+            context.system.resources.dominion.gained -
+            context.system.resources.dominion.spent
+        const wornArmour = context.armours.find((a) => a.worn)
+        if (wornArmour) {
+            context.ac =
+                wornArmour.value.system.baseArmour -
+                context.system.attributes.dex.mod
+        } else {
+            context.ac = 9 - context.system.attributes.dex.mod
+        }
     }
 
     /**
@@ -106,19 +115,19 @@ export class GodboundActorSheet extends ActorSheet {
     _prepareItems(context) {
         // Initialize containers.
         // TODO: Move Facts to Characters only
-        const items = [];
-        const weapons = [];
-        const armours = [];
-        const facts = [];
-        const projects = [];
+        const items = []
+        const weapons = []
+        const armours = []
+        const facts = []
+        const projects = []
         const spells = {
-          "Apprentice": [],
-            "Adept": [],
-            "Master": [],
-            "Archmage": [], 
-        };
-        const words = [];
-        const gifts = [];
+            Apprentice: [],
+            Adept: [],
+            Master: [],
+            Archmage: [],
+        }
+        const words = []
+        const gifts = []
 
         // Iterate through items, allocating to containers
         for (let i of context.items) {
@@ -282,18 +291,18 @@ export class GodboundActorSheet extends ActorSheet {
         // get item using the id, toggle the worn state on the item
         event.preventDefault()
         const element = event.currentTarget
-        const dataset = element.dataset;
-        return this.actor.system.wearArmour(dataset.id);
+        const dataset = element.dataset
+        return this.actor.system.wearArmour(dataset.id)
     }
 
     async _onAttributeCheck(event) {
         event.preventDefault()
         const attributeId = event.currentTarget.dataset.attribute
-        return this.actor.system.attributeCheck(attributeId, {});
+        return this.actor.system.attributeCheck(attributeId, {})
     }
     async _onSaveCheck(event) {
-        event.preventDefault();
-        const saveId = event.currentTarget.dataset.save;
-        return this.actor.system.saveCheck(saveId, {});
+        event.preventDefault()
+        const saveId = event.currentTarget.dataset.save
+        return this.actor.system.saveCheck(saveId, {})
     }
 }

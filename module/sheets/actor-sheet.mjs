@@ -100,8 +100,7 @@ export class GodboundActorSheet extends ActorSheet {
         const wornArmour = context.armours.find((a) => a.system.worn)
         if (wornArmour) {
             context.ac =
-                wornArmour.value.system.baseArmour -
-                context.system.attributes.dex.mod
+                wornArmour.system.baseArmour - context.system.attributes.dex.mod
         } else {
             context.ac = 9 - context.system.attributes.dex.mod
         }

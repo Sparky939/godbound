@@ -93,6 +93,7 @@ GODBOUND.spells = {
 
 GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle'
 GODBOUND.AttributeCheckResult = 'GODBOUND.AttributeCheckResult'
+GODBOUND.SaveCheckResult = 'GODBOUND.SaveCheckResult'
 
 GODBOUND.DifficultyPrompt = 'GODBOUND.DifficultyPrompt'
 

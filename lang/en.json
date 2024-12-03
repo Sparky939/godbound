@@ -8,7 +8,7 @@
             "Wis": { "long": "Wisdom", "abbr": "wis" },
             "Cha": { "long": "Charisma", "abbr": "cha" }
         },
-        "Save":{
+        "Save": {
             "Hardiness": "Hardiness",
             "Evasion": "Evasion",
             "Spirit": "Spirit"
@@ -76,6 +76,7 @@
         },
         "AttributePromptTitle": "{attribute} Ability Check",
         "AttributeCheckResult": "{attribute} Check vs {checkTarget}",
+        "SaveCheckResult": "{save} Save vs {checkTarget}",
         "DifficultyPrompt": "Select Difficulty",
         "RelevantFactPrompt": "Relevant Fact?",
         "RollSituationalBonus": "Situational Bonus?",

@@ -101,8 +101,17 @@ export class GodboundActorSheet extends ActorSheet {
         if (wornArmour) {
             context.ac =
                 wornArmour.system.baseArmour - context.system.attributes.dex.mod
+            context.system.saves.hardiness.penalty =
+                wornArmour.system.hardinessPenalty
+            context.system.saves.evasion.penalty =
+                wornArmour.system.evasionPenalty
+            context.system.saves.spirit.penalty =
+                wornArmour.system.spiritPenalty
         } else {
             context.ac = 9 - context.system.attributes.dex.mod
+            context.system.saves.hardiness.penalty = false
+            context.system.saves.evasion.penalty = false
+            context.system.saves.spirit.penalty = false
         }
     }
 
@@ -301,7 +310,7 @@ export class GodboundActorSheet extends ActorSheet {
     }
     async _onSaveCheck(event) {
         event.preventDefault()
-        const saveId = event.currentTarget.dataset.save
+        const saveId = event.currentTarget.dataset.attribute
         return this.actor.system.saveCheck(saveId, {})
     }
 }

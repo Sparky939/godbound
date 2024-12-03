@@ -91,7 +91,8 @@
                 class="resource-label rollable flexlarge align-left"
                 data-label="{{localize (lookup @root.config.saves key)}}">{{localize
                 (lookup @root.config.saves key)}}</label>
-              <span class="save rollable">{{save.value}}</span>
+              <span data-attribute="{{key}}"
+                class="save rollable save-check {{#if save.penalty}}save-penalty{{/if}}">{{save.value}}</span>
             </div>
             {{/each}}
           </div>

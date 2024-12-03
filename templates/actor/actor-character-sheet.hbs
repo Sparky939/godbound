@@ -88,7 +88,8 @@
             {{#each system.saves as |save key|}}
             <div class="save flexrow flex-group-center">
               <label for="system.saves.{{key}}.value"
-                class="resource-label rollable flexlarge align-left"
+                class="resource-label rollable save-check flexlarge align-left"
+                data-attribute="{{key}}"
                 data-label="{{localize (lookup @root.config.saves key)}}">{{localize
                 (lookup @root.config.saves key)}}</label>
               <span data-attribute="{{key}}"

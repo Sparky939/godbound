@@ -307,6 +307,9 @@
 .godbound form.character.godbound aside.sidebar .flexcol .flexrow {
   height: 26px;
 }
+.godbound .save-penalty.rollable {
+  color: rgb(145, 21, 21);
+}
 .godbound .sheet-tabs {
   flex: 0;
 }

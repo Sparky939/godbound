@@ -15,12 +15,12 @@ export default class GodboundCharacter extends GodboundActorBase {
         schema.health = new fields.SchemaField({
             value: new fields.NumberField({
                 ...requiredInteger,
-                initial: 8
+                initial: 8,
             }),
             max: new fields.NumberField({
                 ...requiredInteger,
-                initial: 8
-            })
+                initial: 8,
+            }),
         })
 
         schema.details = new fields.SchemaField({
@@ -51,13 +51,13 @@ export default class GodboundCharacter extends GodboundActorBase {
             }),
             frayDie: new fields.StringField({
                 ...requiredInteger,
-                initial: "8",
-                choices: {"4": "4", "6": "6", "8": "8", "10": "10", "12": "12"},
+                initial: '8',
+                choices: { 4: '4', 6: '6', 8: '8', 10: '10', 12: '12' },
             }),
             wealth: new fields.NumberField({
                 ...requiredInteger,
                 initial: 0,
-            })
+            }),
         })
 
         // Iterate over attribute names and create a new SchemaField for each.
@@ -126,13 +126,13 @@ export default class GodboundCharacter extends GodboundActorBase {
     }
 
     prepareDerivedData() {
-        this.prepareAttributes();
-        this.prepareSaves();
-        this.prepareLevelValues();
+        this.prepareAttributes()
+        this.prepareSaves()
+        this.prepareLevelValues()
         this.words = game.settings
             .get('godbound', 'words')
             .split(',')
-            .map((str) => String(str).trim());
+            .map((str) => String(str).trim())
         const wornItem = this.parent.items.filter(
             (i) => i.type === 'armour' && i.worn
         )[0]
@@ -145,7 +145,7 @@ export default class GodboundCharacter extends GodboundActorBase {
 
     applyActiveEffects() {
         // TODO: Apply active effects if the order matters
-        return super.applyActiveEffects();
+        return super.applyActiveEffects()
     }
 
     prepareAttributes() {
@@ -174,30 +174,39 @@ export default class GodboundCharacter extends GodboundActorBase {
         }
     }
     prepareLevelValues() {
-        const { dominionSpent, influenceUsed } = this.parent.items.filter(i =>
-            i.type == 'project').reduce(
-                (acc, i) =>
-                ({
+        const { dominionSpent, influenceUsed } = this.parent.items
+            .filter((i) => i.type == 'project')
+            .reduce(
+                (acc, i) => ({
                     dominionSpent: acc.dominionSpent + i.system.cost.dominion,
-                    influenceUsed: acc.influenceUsed + i.system.cost.influence
+                    influenceUsed: acc.influenceUsed + i.system.cost.influence,
                 }),
-                { dominionSpent: 0, influenceUsed: 0 });
-        this.resources.dominion.spent = dominionSpent;
-        this.details.level.value = tables.advancement.find(r =>
-            r.requirements.xp <= this.details.level.xp &&
-            r.requirements.dominionSpent <= this.resources.dominion.spent)?.level ?? 1;
-        this.advancement = this.details.level.values < 10
-            ? tables.advancement.find(
-                req =>
-                    req.level = this.details.level.value + 1)?.requirements
-            : { xp: 0, dominionSpent: 0 }
-        this.resources.effort.max = (this.details.level.value - 1) + 2
-        this.resources.influence.max = (this.details.level.value - 1) + 2
+                { dominionSpent: 0, influenceUsed: 0 }
+            )
+        this.resources.dominion.spent = dominionSpent
+        this.details.level.value =
+            tables.advancement.find(
+                (r) =>
+                    r.requirements.xp <= this.details.level.xp &&
+                    r.requirements.dominionSpent <=
+                        this.resources.dominion.spent
+            )?.level ?? 1
+        this.advancement =
+            this.details.level.values < 10
+                ? tables.advancement.find(
+                      (req) => (req.level = this.details.level.value + 1)
+                  )?.requirements
+                : { xp: 0, dominionSpent: 0 }
+        this.resources.effort.max = this.details.level.value - 1 + 2
+        this.resources.influence.max = this.details.level.value - 1 + 2
         this.resources.effort.value = this.resources.effort.max
-        this.resources.influence.value = this.resources.influence.max - influenceUsed;
-        this.health.max = (8 + this.attributes.con.mod)
-            + (this.details.level.value - 1)
-             * (4 + Math.ceil(this.attributes.con.mod/2))
+        this.resources.influence.value =
+            this.resources.influence.max - influenceUsed
+        this.health.max =
+            8 +
+            this.attributes.con.mod +
+            (this.details.level.value - 1) *
+                (4 + Math.ceil(this.attributes.con.mod / 2))
         this.health.value = fns.bound(this.health.value, 0, this.health.max)
     }
     getSaveMod(save) {
@@ -262,7 +271,12 @@ export default class GodboundCharacter extends GodboundActorBase {
         ).then((content) => {
             return new Promise((resolve) =>
                 new Dialog({
-                    title: `${game.i18n.format(CONFIG.GODBOUND.AttributePromptTitle, { attribute: dialogParams.attribute })}: ${this.parent.name}`,
+                    title: `${game.i18n.format(
+                        CONFIG.GODBOUND.AttributePromptTitle,
+                        {
+                            attribute: dialogParams.attribute,
+                        }
+                    )}: ${this.parent.name}`,
                     content,
                     buttons: {
                         roll: {
@@ -279,7 +293,8 @@ export default class GodboundCharacter extends GodboundActorBase {
     }
 
     async saveCheck(saveId, options = {}) {
-        const roll = await new Roll('d20').evaluate()
+        const penalty = this.saves[saveId].penalty
+        const roll = await new Roll('d20' + (penalty ? '-4' : '')).evaluate()
         const result = roll.total
         const checkRequirement = this.saves[saveId].value
         const outcome = result >= checkRequirement
@@ -292,7 +307,9 @@ export default class GodboundCharacter extends GodboundActorBase {
                 save: this.saves[saveId].label,
                 checkTarget: checkRequirement,
             }),
-            outcome: `${result} vs ${checkRequirement}: ${outcome ? 'Pass' : 'Fail'}`,
+            outcome: `${result} vs ${checkRequirement}: ${
+                outcome ? 'Pass' : 'Fail'
+            }`,
             rollMode: game.settings.get('core', 'rollMode'),
         }
         roll.toMessage(messageData)
@@ -312,8 +329,8 @@ export default class GodboundCharacter extends GodboundActorBase {
             submitData.difficulty == 'Mortal'
                 ? 0
                 : submitData.difficulty == 'PushLimits'
-                    ? 4
-                    : 8
+                ? 4
+                : 8
         const checkRequirement =
             21 - this.attributes[attributeId].value + difficulty
         const outcome =
@@ -329,7 +346,9 @@ export default class GodboundCharacter extends GodboundActorBase {
                 attribute: this.attributes[attributeId].label,
                 checkTarget: checkRequirement,
             }),
-            outcome: `${result} vs. ${checkRequirement}: ${outcome ? 'Pass' : 'Fail'}`,
+            outcome: `${result} vs. ${checkRequirement}: ${
+                outcome ? 'Pass' : 'Fail'
+            }`,
             rollMode: submitData.rollMode,
         }
         roll.toMessage(messageData)

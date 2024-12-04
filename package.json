@@ -3,9 +3,9 @@
     "version": "0.1.1",
     "description": "CSS compiler for the Godbound system",
     "scripts": {
-        "build": "sass src/scss/godbound.scss css/godbound.css --style=expanded --no-source-map && rm -rf ./_build/ && mkdir -p ./_build/godbound && cp -a ./css ./assets ./lang ./module ./templates ./LICENSE ./README.md ./system.json ./template.json ./_build/godbound/ && cp -a system.json _build/ && zip -r ./_build/godbound.zip ./_build/godbound && rm -rf ./_build/godbound",
+        "build": "sass src/scss/godbound.scss css/godbound.css --style=expanded --no-source-map && rm -rf ./_build/ && mkdir -p ./_build/godbound && cp -a ./css ./assets ./lang ./module ./templates ./LICENSE ./README.md ./system.json ./template.json ./_build/godbound/ && cp -a system.json _build/ && cd _build && zip -r ./godbound.zip ./godbound && cd .. && rm -rf ./_build/godbound",
         "watch": "sass src/scss/godbound.scss css/godbound.css --style=expanded --source-map --watch",
-        "load": "rm -rf ~/.local/share/FoundryVTT/Data/system/godbound && cp -pfr ../godbound/* ~/.local/share/FoundryVTT/Data/systems/godbound && rm -rf ~/.local/share/FoundryVTT/Data/systems/godbound/.git",
+        "load": "rm -rf ~/.local/share/FoundryVTT/Data/system/godbound && unzip ./_build/godbound.zip -d ~/.local/share/FoundryVTT/Data/systems",
         "deploy": "npm run build && npm run load",
         "release": "gh release create"
     },

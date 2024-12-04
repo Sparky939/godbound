@@ -292,6 +292,63 @@ export default class GodboundCharacter extends GodboundActorBase {
         })
     }
 
+    async attack(item) {
+        // To avoid having to enter AC every time we're calculating the AC
+        // the resulting attack would have successfully hit
+        const hitRoll = await new Roll(item.formula).evaluate()
+        const attribute = this.attributes[item.attribute]
+        const damageRoll = await new Roll(
+            `d${item.damageDie}+${attribute.mod}`
+        ).evaluate()
+        // To hit we need to get have roll + ac >= 20
+        const lowestACHit = 20 - hitRoll.total
+        const outcome =
+            hitRoll.number == 20
+                ? 'Hit'
+                : lowestACHit > 9
+                ? 'Miss'
+                : `Hits AC ${lowestACHit}`
+        const messageData = {
+            speaker: {
+                alias: this.name,
+                actor: this.parent,
+            },
+            // TODO: Add this reference to config & translations
+            flavor: game.i18n.format(CONFIG.GODBOUND.AttackResult, {
+                item: item.name,
+            }),
+            outcome,
+            rollMode: game.settings.get('core', 'rollMode'),
+        }
+        hitRoll.toMessage(messageData)
+        const damageResult = item.straightDamage
+            ? damageRoll.total
+            : this.getRollDamage(damageRoll.total)
+        damageRoll.toMessage({
+            ...messageData,
+            // TODO: Add this reference to config & translations
+            flavor: game.i18n.format(CONFIG.GODBOUND.DamageResult, {
+                item: item.name,
+            }),
+            outcome: `Damage: ${damageResult}`,
+            rollMode: game.settings.get('core', 'rollMode'),
+        })
+        return roll
+    }
+
+    getRollDamage(result) {
+        if (result <= 1) {
+            return 0
+        }
+        if (result <= 5) {
+            return 1
+        }
+        if (result <= 9) {
+            return 2
+        }
+        return 4
+    }
+
     async saveCheck(saveId, options = {}) {
         const penalty = this.saves[saveId].penalty
         const roll = await new Roll('d20' + (penalty ? '-4' : '')).evaluate()

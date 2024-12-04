@@ -292,9 +292,10 @@ export default class GodboundCharacter extends GodboundActorBase {
         })
     }
 
-    async attack(item) {
+    async attack(rawItem) {
         // To avoid having to enter AC every time we're calculating the AC
         // the resulting attack would have successfully hit
+        const item = rawItem.system
         const hitRoll = await new Roll(item.formula).evaluate()
         const attribute = this.attributes[item.attribute]
         const damageRoll = await new Roll(
@@ -333,7 +334,7 @@ export default class GodboundCharacter extends GodboundActorBase {
             outcome: `Damage: ${damageResult}`,
             rollMode: game.settings.get('core', 'rollMode'),
         })
-        return roll
+        return hitRoll
     }
 
     getRollDamage(result) {

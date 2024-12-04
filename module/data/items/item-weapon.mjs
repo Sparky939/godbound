@@ -45,7 +45,7 @@ export default class GodboundWeapon extends GodboundItem {
             this.damageDie = weaponDie
         }
         this.isCustomType = this.type == 'custom'
-        this.roll.diceBonus = `+${this.attribute}.mod`
+        this.roll.diceBonus = `+@${this.attribute}.mod`
         this.formula = `${this.roll.diceNum}${this.roll.diceSize}${this.roll.diceBonus}`
     }
 }

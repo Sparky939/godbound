@@ -280,6 +280,13 @@ export class GodboundActorSheet extends ActorSheet {
                 const item = this.actor.items.get(itemId)
                 if (item) return item.roll()
             }
+            if (dataset.rollType == 'weapon') {
+                const itemId = element.closest('.item').dataset.itemId
+                const item = this.actor.items.get(itemId)
+                if (item) {
+                    return this.actor.system.attack(item)
+                }
+            }
         }
 
         // Handle rolls that supply the formula directly.

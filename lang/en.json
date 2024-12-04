@@ -77,6 +77,8 @@
         "AttributePromptTitle": "{attribute} Ability Check",
         "AttributeCheckResult": "{attribute} Check vs {checkTarget}",
         "SaveCheckResult": "{save} Save vs {checkTarget}",
+        "AttackResult": "{item} Attack",
+        "DamageResult": "{item} Damage",
         "DifficultyPrompt": "Select Difficulty",
         "RelevantFactPrompt": "Relevant Fact?",
         "RollSituationalBonus": "Situational Bonus?",

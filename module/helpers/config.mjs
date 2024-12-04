@@ -94,7 +94,8 @@ GODBOUND.spells = {
 GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle'
 GODBOUND.AttributeCheckResult = 'GODBOUND.AttributeCheckResult'
 GODBOUND.SaveCheckResult = 'GODBOUND.SaveCheckResult'
-
+GODBOUND.AttackResult = 'GODBOUND.AttackResult'
+GODBOUND.DamageResult = 'GODBOUND.DamageResult'
 GODBOUND.DifficultyPrompt = 'GODBOUND.DifficultyPrompt'
 
 GODBOUND.RollMode = 'GODBOUND.RollMode'

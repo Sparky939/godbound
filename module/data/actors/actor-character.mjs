@@ -316,7 +316,7 @@ export default class GodboundCharacter extends GodboundActorBase {
             },
             // TODO: Add this reference to config & translations
             flavor: game.i18n.format(CONFIG.GODBOUND.AttackResult, {
-                item: item.name,
+                item: rawItem.name,
             }),
             outcome,
             rollMode: game.settings.get('core', 'rollMode'),
@@ -329,7 +329,7 @@ export default class GodboundCharacter extends GodboundActorBase {
             ...messageData,
             // TODO: Add this reference to config & translations
             flavor: game.i18n.format(CONFIG.GODBOUND.DamageResult, {
-                item: item.name,
+                item: rawItem.name,
             }),
             outcome: `Damage: ${damageResult}`,
             rollMode: game.settings.get('core', 'rollMode'),

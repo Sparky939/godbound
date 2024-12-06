@@ -293,6 +293,7 @@ export default class GodboundCharacter extends GodboundActorBase {
         })
     }
 
+    // TODO: We need to re-introduce flavour text from the Weapon/Gift used
     async attack(rawItem) {
         // To avoid having to enter AC every time we're calculating the AC
         // the resulting attack would have successfully hit
@@ -302,54 +303,6 @@ export default class GodboundCharacter extends GodboundActorBase {
         }).evaluate()
         attackRoll.toMessage()
         return attackRoll
-        const hitRoll = await new Roll(item.formula).evaluate()
-        const attribute = this.attributes[item.attribute]
-        const damageRoll = await new Roll(
-            `d${item.damageDie}+${attribute.mod}`
-        ).evaluate()
-        const newDamageRoll = await new GBDamageRoll(
-            `d${item.damageDie}+${attribute.mod}`,
-            this.getRollData(),
-            {
-                rollMode: game.settings.get('core', 'rollMode'),
-                straightDamage: item.straightDamage,
-            }
-        ).evaluate()
-        console.log(newDamageRoll, newDamageRoll.total, newDamageRoll.result)
-        // To hit we need to get have roll + ac >= 20
-        const lowestACHit = 20 - hitRoll.total
-        const outcome =
-            hitRoll.number == 20
-                ? 'Hit'
-                : lowestACHit > 9
-                ? 'Miss'
-                : `Hits AC ${lowestACHit}`
-        const messageData = {
-            speaker: {
-                alias: this.name,
-                actor: this.parent,
-            },
-            // TODO: Add this reference to config & translations
-            flavor: game.i18n.format(CONFIG.GODBOUND.AttackResult, {
-                item: rawItem.name,
-            }),
-            outcome,
-            rollMode: game.settings.get('core', 'rollMode'),
-        }
-        hitRoll.toMessage(messageData)
-        const damageResult = item.straightDamage
-            ? damageRoll.total
-            : this.getRollDamage(damageRoll.total)
-        damageRoll.toMessage({
-            ...messageData,
-            // TODO: Add this reference to config & translations
-            flavor: game.i18n.format(CONFIG.GODBOUND.DamageResult, {
-                item: rawItem.name,
-            }),
-            outcome: `Damage: ${damageResult}`,
-            rollMode: game.settings.get('core', 'rollMode'),
-        })
-        return hitRoll
     }
 
     getRollDamage(result) {

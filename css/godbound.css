@@ -444,3 +444,13 @@
 .godbound .effects .item .effect-controls {
   border: none;
 }
+
+.dice-roll .dice-result .dice-total {
+  display: flex;
+  justify-content: center;
+}
+.dice-roll .dice-result .dice-total .dice-total-details {
+  font-weight: normal;
+  font-size: 15px;
+  padding-left: 5px;
+}

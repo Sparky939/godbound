@@ -10,7 +10,7 @@ import {
     registerSystemSettings,
     registerDeferredSettings,
 } from './settings.mjs'
-import { GBDamageRoll } from './helpers/roll.mjs'
+import { GBDamageRoll, GBHitRoll } from './helpers/roll.mjs'
 import { GODBOUND } from './helpers/config.mjs'
 // Import DataModel classes
 import * as models from './data/_module.mjs'
@@ -79,7 +79,7 @@ Hooks.once('init', function () {
         label: 'GODBOUND.SheetLabels.Item',
     })
 
-    CONFIG.Dice.rolls = [...CONFIG.Dice.rolls, GBDamageRoll]
+    CONFIG.Dice.rolls = [...CONFIG.Dice.rolls, GBDamageRoll, GBHitRoll]
 
     // Register system settings
     registerSystemSettings()

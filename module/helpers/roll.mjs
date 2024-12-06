@@ -13,7 +13,7 @@ import { systemPath } from '../constants.mjs'
  */
 class GBAttackRoll {
     constructor(rollParams, data, options) {
-        this.attackRoll = new Roll(
+        this.attackRoll = new GBHitRoll(
             `d20 + @${rollParams.attribute}.mod${
                 rollParams.hitBonus ? ` + ${rollParams.hitBonus}` : ''
             }`,
@@ -28,8 +28,6 @@ class GBAttackRoll {
             options
         )
     }
-
-    static CHAT_TEMPLATE = systemPath('templates/dice/roll.html')
 
     /**
      * Execute the Roll asynchronously, replacing dice and evaluating the total result
@@ -76,7 +74,6 @@ class GBAttackRoll {
             },
             messageData
         )
-        console.log(this.attackRoll, this.damageRoll)
         messageData.rolls = [this.attackRoll, this.damageRoll]
 
         // Either create the message or just return the chat data
@@ -92,11 +89,55 @@ class GBAttackRoll {
     }
 }
 
+class GBHitRoll extends Roll {
+    constructor(formula, data, options) {
+        super(formula, data, options)
+    }
+
+    static CHAT_TEMPLATE = systemPath('templates/dice/hitRoll.html')
+    static TOOLTIP_TEMPLATE = systemPath('templates/dice/tooltip.html')
+
+    /**
+     * Render a Roll instance to HTML
+     * @param {object} [options={}]               Options which affect how the Roll is rendered
+     * @param {string} [options.flavor]             Flavor text to include
+     * @param {string} [options.template]           A custom HTML template path
+     * @param {boolean} [options.isPrivate=false]   Is the Roll displayed privately?
+     * @returns {Promise<string>}                 The rendered HTML template as a string
+     */
+    async render({
+        flavor,
+        template = this.constructor.CHAT_TEMPLATE,
+        isPrivate = false,
+    } = {}) {
+        if (!this._evaluated)
+            await this.evaluate({ allowInteractive: !isPrivate })
+        const lowestACHit = 20 - this.total
+        const armorClass =
+            this.number == 20
+                ? 'Hit'
+                : lowestACHit > 9
+                ? 'Miss'
+                : `AC ${lowestACHit}`
+        const chatData = {
+            formula: isPrivate ? '???' : this._formula,
+            flavor: isPrivate ? null : flavor ?? this.options.flavor,
+            user: game.user.id,
+            tooltip: isPrivate ? '' : await this.getTooltip(),
+            total: isPrivate ? '?' : Math.round(this.total * 100) / 100,
+            armorClass: isPrivate ? '?' : armorClass,
+        }
+        return renderTemplate(template, chatData)
+    }
+}
+
 class GBDamageRoll extends Roll {
     constructor(formula, data, options = { straightDamage: false }) {
         super(formula, data, options)
     }
 
+    static CHAT_TEMPLATE = systemPath('templates/dice/damageRoll.html')
+    static TOOLTIP_TEMPLATE = systemPath('templates/dice/tooltip.html')
     /**
      *
      * @param {number} damage
@@ -117,56 +158,36 @@ class GBDamageRoll extends Roll {
         }
     }
 
-    /**
-     * Return the total result of the Roll expression if it has been evaluated.
-     * @type {number}
-     */
-    get result() {
-        if (this.options.straightDamage) {
-            return Number(this._total)
-        } else {
-            return this._getTranslatedDamage(this._total) || 0
-        }
+    get damage() {
+        return this._getTranslatedDamage(this.total)
     }
 
     /**
-     * Recreate a Roll instance using a provided data object
-     * @param {object} data   Unpacked data representing the Roll
-     * @returns {Roll}         A reconstructed Roll instance
+     * Render a Roll instance to HTML
+     * @param {object} [options={}]               Options which affect how the Roll is rendered
+     * @param {string} [options.flavor]             Flavor text to include
+     * @param {string} [options.template]           A custom HTML template path
+     * @param {boolean} [options.isPrivate=false]   Is the Roll displayed privately?
+     * @returns {Promise<string>}                 The rendered HTML template as a string
      */
-    static fromData(data) {
-        // Redirect to the proper Roll class definition
-        console.log(data)
-        if (data.class && data.class !== this.name) {
-            const cls = CONFIG.Dice.rolls.find((cls) => cls.name === data.class)
-            if (!cls)
-                throw new Error(
-                    `Unable to recreate ${data.class} instance from provided data`
-                )
-            return cls.fromData(data)
+    async render({
+        flavor,
+        template = this.constructor.CHAT_TEMPLATE,
+        isPrivate = false,
+    } = {}) {
+        if (!this._evaluated)
+            await this.evaluate({ allowInteractive: !isPrivate })
+        const chatData = {
+            formula: isPrivate ? '???' : this._formula,
+            flavor: isPrivate ? null : flavor ?? this.options.flavor,
+            user: game.user.id,
+            tooltip: isPrivate ? '' : await this.getTooltip(),
+            total: isPrivate ? '?' : Math.round(this.total * 100) / 100,
+            convertedDamage: !this.options.straightDamage,
+            damage: isPrivate ? '?' : this._getTranslatedDamage(this.total),
         }
-
-        // Create the Roll instance
-        const roll = new this(data.formula, data.data, data.options)
-
-        // Expand terms
-        roll.terms = data.terms.map((t) => {
-            if (t.class) {
-                if (t.class === 'DicePool') t.class = 'PoolTerm' // Backwards compatibility
-                if (t.class === 'MathTerm') t.class = 'FunctionTerm'
-                return RollTerm.fromData(t)
-            }
-            return t
-        })
-
-        // Repopulate evaluated state
-        if (data.evaluated ?? true) {
-            roll._total = data.total
-            roll._dice = (data.dice || []).map((t) => DiceTerm.fromData(t))
-            roll._evaluated = true
-        }
-        return roll
+        return renderTemplate(template, chatData)
     }
 }
 
-export { GBAttackRoll, GBDamageRoll }
+export { GBAttackRoll, GBDamageRoll, GBHitRoll }

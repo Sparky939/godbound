@@ -10,6 +10,7 @@ import {
     registerSystemSettings,
     registerDeferredSettings,
 } from './settings.mjs'
+import { GBDamageRoll } from './helpers/roll.mjs'
 import { GODBOUND } from './helpers/config.mjs'
 // Import DataModel classes
 import * as models from './data/_module.mjs'

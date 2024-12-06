@@ -1,6 +1,7 @@
 import { tables } from '../../helpers/tables.mjs'
 import fns from '../../helpers/numbers.mjs'
 import GodboundActorBase from './base-actor.mjs'
+import { GBAttackRoll, GBDamageRoll } from '../../helpers/roll.mjs'
 
 export default class GodboundCharacter extends GodboundActorBase {
     static defineSchema() {
@@ -296,11 +297,25 @@ export default class GodboundCharacter extends GodboundActorBase {
         // To avoid having to enter AC every time we're calculating the AC
         // the resulting attack would have successfully hit
         const item = rawItem.system
+        const attackRoll = await new GBAttackRoll(item, this.getRollData(), {
+            straightDamage: item.straightDamage,
+        }).evaluate()
+        attackRoll.toMessage()
+        return attackRoll
         const hitRoll = await new Roll(item.formula).evaluate()
         const attribute = this.attributes[item.attribute]
         const damageRoll = await new Roll(
             `d${item.damageDie}+${attribute.mod}`
         ).evaluate()
+        const newDamageRoll = await new GBDamageRoll(
+            `d${item.damageDie}+${attribute.mod}`,
+            this.getRollData(),
+            {
+                rollMode: game.settings.get('core', 'rollMode'),
+                straightDamage: item.straightDamage,
+            }
+        ).evaluate()
+        console.log(newDamageRoll, newDamageRoll.total, newDamageRoll.result)
         // To hit we need to get have roll + ac >= 20
         const lowestACHit = 20 - hitRoll.total
         const outcome =

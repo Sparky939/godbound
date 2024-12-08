@@ -299,13 +299,90 @@
 }
 .godbound form.character.godbound aside.sidebar {
   row-gap: 3px;
+  display: grid;
+  grid-template-columns: 1fr 50px 50px;
+  grid-auto-rows: 26px;
 }
 .godbound form.character.godbound aside.sidebar .flexcol {
   display: grid;
   grid-template-rows: subgrid;
+  grid-template-columns: subgrid;
 }
 .godbound form.character.godbound aside.sidebar .flexcol .flexrow {
   height: 26px;
+}
+.godbound form.character.godbound aside.sidebar .saves.flexcol {
+  grid-column: 1/-1;
+  grid-row: 7/10;
+}
+.godbound form.character.godbound aside.sidebar .saves.flexcol .flex-group-center {
+  display: grid;
+  grid-column: 1/-1;
+  grid-template-columns: subgrid;
+}
+.godbound form.character.godbound aside.sidebar .attributes.flexcol {
+  grid-row: 1/7;
+  grid-column: 1/-1;
+}
+.godbound form.character.godbound aside.sidebar .attributes.flexcol .flex-group-center {
+  display: grid;
+  grid-column: 1/-1;
+  grid-template-columns: subgrid;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section input {
+  width: auto;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .dominon-row {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .dominon-row input {
+  width: 30px;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .word-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  width: 100%;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .word-list .row-header {
+  width: auto;
+  padding-right: 5px;
+  font-weight: bold;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .word-list .word-pill {
+  display: flex;
+  width: auto;
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
+  padding: 3px 7px;
+  margin: 0 4px;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .word-list .word-pill .item-delete {
+  display: none;
+  margin-left: 5px;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .word-list .word-pill:hover .item-delete {
+  display: block;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .passives-list {
+  padding: 0;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .passives-list .title-row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-weight: bold;
+}
+.godbound form.character.godbound section.sheet-body .tab.active.facts .grid {
+  margin: 0;
 }
 .godbound .save-penalty.rollable {
   color: rgb(145, 21, 21);
@@ -345,6 +422,18 @@
   padding-left: 5px;
   text-align: left;
   display: flex;
+}
+.godbound .items-header .item-cost {
+  font-weight: bold;
+  padding-left: 5px;
+  text-align: left;
+  display: flex;
+}
+.godbound .passives-list {
+  list-style: none;
+}
+.godbound .passives-list .passive-item {
+  margin-left: 5px;
 }
 .godbound .items-list {
   list-style: none;
@@ -390,7 +479,7 @@
 }
 .godbound .items-list .item {
   align-items: center;
-  padding: 0 2px;
+  padding: 3px 2px;
   border-bottom: 1px solid #c9c7b8;
 }
 .godbound .items-list .item:last-child {
@@ -400,11 +489,30 @@
   color: #191813;
 }
 .godbound .items-list .item .item-name .item-image {
-  flex: 0 0 30px;
-  height: 30px;
-  background-size: 30px;
+  flex: 0 0 auto;
+  height: 24px;
+  width: 24px;
   border: none;
   margin-right: 5px;
+}
+.godbound .items-list .itme.flex-row {
+  align-items: center;
+}
+.godbound .items-list .item.gift-row .fixed-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+}
+.godbound .items-list .item.gift-row .description {
+  visibility: hidden;
+  width: 100%;
+  height: 0;
+}
+.godbound .items-list .item.gift-row.expanded .description {
+  visibility: visible;
+  height: auto;
+  width: 100%;
 }
 .godbound .items-list .item-prop {
   text-align: center;

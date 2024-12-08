@@ -50,6 +50,7 @@
     {{!-- Default tab is specified in actor-sheet.mjs --}}
     <a class="item" data-tab="facts">Facts</a>
     <a class="item" data-tab="inventory">Inventory</a>
+    <a class="item" data-tab="powers">Powers</a>
     <a class="item" data-tab="projects">Projects</a>
     {{!-- <a class="item" data-tab="spells">Spells</a> --}}
     <a class="item" data-tab="effects">Effects</a>
@@ -114,6 +115,11 @@
     {{!-- Owned Items Tab --}}
     <div class="tab inventory" data-group="primary" data-tab="inventory">
       {{> "systems/godbound/templates/actor/parts/actor-inventory.hbs"}}
+    </div>
+
+    {{!-- Owned Powers Tab --}}
+    <div class="tab powers" data-group="primary" data-tab="powers">
+      {{> "systems/godbound/templates/actor/parts/actor-powers.hbs"}}
     </div>
 
     {{!-- Owned Spells Tab --}}

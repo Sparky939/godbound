@@ -82,6 +82,21 @@ export class GodboundActorSheet extends ActorSheet {
             // as well as any items
             this.actor.allApplicableEffects()
         )
+        console.log('wordPassives', context.effects.passive.effects)
+        console.log(
+            'wordPassives-filter',
+            context.effects.passive.effects.filter((i) => {
+                console.log(i, i.parent, i.parent.type, i.parent.type == 'word')
+                return true
+            })
+        )
+        context.wordPassives = []
+        for (let i of context.effects.passive.effects) {
+            if (i.parent.type != 'word') continue
+            context.wordPassives.push(i)
+        }
+        console.log('final', context.wordPassives)
+        console.log('passive', context.effects.passive)
 
         return context
     }
@@ -178,6 +193,12 @@ export class GodboundActorSheet extends ActorSheet {
         context.facts = facts
         context.spells = spells
         context.projects = projects
+        context.words = words
+        context.gifts = gifts
+        // context.passives = context.effects.passive.effects
+        // context.passives = context.effects.passive.filter(
+        //     (i) => i.parent.type == 'word'
+        // )
     }
 
     /* -------------------------------------------- */
@@ -189,6 +210,7 @@ export class GodboundActorSheet extends ActorSheet {
         // Render the item sheet for viewing/editing prior to the editable check.
         html.on('click', '.item-edit', (ev) => {
             const li = $(ev.currentTarget).parents('.item')
+            console.log(li, li.data('itemId'))
             const item = this.actor.items.get(li.data('itemId'))
             item.sheet.render(true)
         })
@@ -223,6 +245,10 @@ export class GodboundActorSheet extends ActorSheet {
 
         // Rollable attributes.
         html.on('click', '.rollable', this._onRoll.bind(this))
+        // Expandable sections
+        html.on('click', '.expandable', this._expand.bind(this))
+        // Gift Activation - Effort consumption & Chat-logging
+        html.on('click', '.gift-activate', this._onGift.bind(this))
 
         // Drag events for macros.
         if (this.actor.isOwner) {
@@ -261,6 +287,22 @@ export class GodboundActorSheet extends ActorSheet {
 
         // Finally, create the item!
         return await Item.create(itemData, { parent: this.actor })
+    }
+
+    /**
+     * Handle clickable expandables.
+     * @param {Event} event   The originating click event
+     * @private
+     */
+    _expand(event) {
+        event.preventDefault()
+        const element = event.currentTarget
+        const dataset = element.dataset
+        element.classList.toggle('expanded')
+    }
+
+    _onGift(event) {
+        event.preventDefault()
     }
 
     /**

@@ -100,11 +100,98 @@ form.character.godbound {
   }
   aside.sidebar {
     row-gap: 3px;
+    display: grid;
+    grid-template-columns: 1fr 50px 50px;
+    grid-auto-rows: 26px;
     .flexcol {
       display: grid;
       grid-template-rows: subgrid;
+      grid-template-columns: subgrid;
       .flexrow {
         height: 26px;
+      }
+    }
+    .saves.flexcol {
+      grid-column: 1 / -1;
+      grid-row: 7 / 10;
+      .flex-group-center {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: subgrid;
+      }
+    }
+    .attributes.flexcol {
+      grid-row: 1 / 7;
+      grid-column: 1 / -1;
+      .flex-group-center {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: subgrid;
+      }
+    }
+  }
+  section.sheet-body {
+    .tab.active {
+      .compact-section {
+        input {
+          width: auto;
+        }
+        .dominon-row {
+          display: flex;
+          flex-flow: row nowrap;
+          width: 100%;
+          input {
+            width: 30px;
+          }
+        }
+      }
+      .word-list {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+        width: 100%;
+        .row-header {
+          width: auto;
+          padding-right: 5px;
+          font-weight: bold;
+        }
+        .word-pill {
+          display: flex;
+          width: auto;
+          border: 1px solid #a6a6a6;
+          border-radius: 5px;
+          padding: 3px 7px;
+          margin: 0 4px;
+          .item-delete {
+            display: none;
+            margin-left: 5px
+          }
+        }
+        .word-pill:hover {
+          .item-delete {
+            display: block;
+          }
+        }
+      }
+      .passives-list {
+        padding: 0;
+        .title-row {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          font-weight: bold;
+        }
+      }
+    }
+    .tab.active.facts {
+      .grid {
+        margin: 0;
       }
     }
   }

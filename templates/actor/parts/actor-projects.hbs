@@ -1,21 +1,26 @@
 <div class='compact-section'>
   <div class='influence-value'>
-    <label class="project-header-label">{{localize 'Influence'}}:</label>{{system.resources.influence.value}}
+    <label class="project-header-label">{{localize
+      'Influence'}}:</label>{{system.resources.influence.value}}
   </div>
-  <div class='dominion-available'>
-    <label class="project-header-label">{{localize 'Dominion'}}:</label>{{dominionAvailable}}
-  </div>
-  <div class="dominion-gained">
-    <label for="dominion-gained" class="project-header-label">
-      Gained:
-    </label>
-    <input type="text" name="system.resources.dominion.gained"
-      value="{{system.resources.dominion.gained}}" data-dtype="Number" />
-  </div>
-  <div class='dominion-income'>
-    <input type='text' name='system.resources.dominion.income'
-      value='{{system.resources.dominion.income}}' data-dtype="Number" />
-    <label for='dominion-income' class="project-header-label">{{localize 'Per Month'}}</label>
+  <div class="dominion-row">
+    <div class='dominion-available'>
+      <label class="project-header-label">{{localize
+        'Dominion'}}:</label>{{dominionAvailable}}
+    </div>
+    <div class="dominion-gained">
+      <label for="dominion-gained" class="project-header-label">
+        Gained:
+      </label>
+      <input type="text" name="system.resources.dominion.gained"
+        value="{{system.resources.dominion.gained}}" data-dtype="Number" />
+    </div>
+    <div class='dominion-income'>
+      <input type='text' name='system.resources.dominion.income'
+        value='{{system.resources.dominion.income}}' data-dtype="Number" />
+      <label for='dominion-income' class="project-header-label">{{localize
+        'Per Month'}}</label>
+    </div>
   </div>
 </div>
 <ol class='items-list'>
@@ -50,13 +55,9 @@
     <div>
       {{#if item.system.cost.dominion}}
       <h4>{{localize "Dominion:"}}{{item.system.cost.dominion}}</h4>
-      {{else}}
-      <h4>0</h4>
       {{/if}}
       {{#if item.system.cost.influence}}
       <h4>{{localize "Influence:"}}{{item.system.cost.influence}}</h4>
-      {{else}}
-      <h4>0</h4>
       {{/if}}
     </div>
     <div class='item-controls'>

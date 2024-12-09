@@ -1,7 +1,7 @@
 import { tables } from '../../helpers/tables.mjs'
 import fns from '../../helpers/numbers.mjs'
 import GodboundActorBase from './base-actor.mjs'
-import { GBAttackRoll, GBDamageRoll } from '../../helpers/roll.mjs'
+import { GBAttackRoll } from '../../helpers/roll.mjs'
 
 export default class GodboundCharacter extends GodboundActorBase {
     static defineSchema() {
@@ -185,19 +185,23 @@ export default class GodboundCharacter extends GodboundActorBase {
                 { dominionSpent: 0, influenceUsed: 0 }
             )
         this.resources.dominion.spent = dominionSpent
-        this.details.level.value =
-            tables.advancement.find(
-                (r) =>
+        const { level, idx } = tables.advancement.reduce(
+            (acc, r, idx) => {
+                if (
                     r.requirements.xp <= this.details.level.xp &&
                     r.requirements.dominionSpent <=
-                        this.resources.dominion.spent
-            )?.level ?? 1
-        this.advancement =
-            this.details.level.values < 10
-                ? tables.advancement.find(
-                      (req) => (req.level = this.details.level.value + 1)
-                  )?.requirements
-                : { xp: 0, dominionSpent: 0 }
+                        this.resources.dominion.spent &&
+                    r.level >= acc
+                ) {
+                    return { level: r.level, idx }
+                } else {
+                    return acc
+                }
+            },
+            { level: 1, idx: 0 }
+        ) ?? { level: 1, idx: 0 }
+        this.details.level.value = level
+        this.advancement = tables.advancement[idx + 1].requirements
         this.resources.effort.max = this.details.level.value - 1 + 2
         this.resources.influence.max = this.details.level.value - 1 + 2
         this.resources.effort.value = this.resources.effort.max

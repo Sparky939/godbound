@@ -297,7 +297,7 @@ export class GodboundActorSheet extends ActorSheet {
     _expand(event) {
         event.preventDefault()
         const element = event.currentTarget
-        const dataset = element.dataset
+        // const dataset = element.dataset
         element.classList.toggle('expanded')
     }
 

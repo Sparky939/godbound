@@ -191,7 +191,7 @@ export default class GodboundCharacter extends GodboundActorBase {
                     r.requirements.xp <= this.details.level.xp &&
                     r.requirements.dominionSpent <=
                         this.resources.dominion.spent &&
-                    r.level >= acc
+                    r.level >= acc.level
                 ) {
                     return { level: r.level, idx }
                 } else {

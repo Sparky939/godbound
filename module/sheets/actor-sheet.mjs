@@ -82,21 +82,11 @@ export class GodboundActorSheet extends ActorSheet {
             // as well as any items
             this.actor.allApplicableEffects()
         )
-        console.log('wordPassives', context.effects.passive.effects)
-        console.log(
-            'wordPassives-filter',
-            context.effects.passive.effects.filter((i) => {
-                console.log(i, i.parent, i.parent.type, i.parent.type == 'word')
-                return true
-            })
-        )
         context.wordPassives = []
         for (let i of context.effects.passive.effects) {
             if (i.parent.type != 'word') continue
             context.wordPassives.push(i)
         }
-        console.log('final', context.wordPassives)
-        console.log('passive', context.effects.passive)
 
         return context
     }
@@ -210,7 +200,6 @@ export class GodboundActorSheet extends ActorSheet {
         // Render the item sheet for viewing/editing prior to the editable check.
         html.on('click', '.item-edit', (ev) => {
             const li = $(ev.currentTarget).parents('.item')
-            console.log(li, li.data('itemId'))
             const item = this.actor.items.get(li.data('itemId'))
             item.sheet.render(true)
         })

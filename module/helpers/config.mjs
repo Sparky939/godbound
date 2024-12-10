@@ -90,6 +90,13 @@ GODBOUND.spells = {
         Archmage: 'GODBOUND.Item.Spell.Level.Archmage',
     },
 }
+GODBOUND.frayDice = {
+    4: 'GODBOUND.FrayDice.4',
+    6: 'GODBOUND.FrayDice.6',
+    8: 'GODBOUND.FrayDice.8',
+    10: 'GODBOUND.FrayDice.10',
+    12: 'GODBOUND.FrayDice.12',
+}
 
 GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle'
 GODBOUND.AttributeCheckResult = 'GODBOUND.AttributeCheckResult'

@@ -1,7 +1,7 @@
 import { tables } from '../../helpers/tables.mjs'
 import fns from '../../helpers/numbers.mjs'
 import GodboundActorBase from './base-actor.mjs'
-import { GBAttackRoll } from '../../helpers/roll.mjs'
+import { GBAttackRoll, GBDamageRoll } from '../../helpers/roll.mjs'
 
 export default class GodboundCharacter extends GodboundActorBase {
     static defineSchema() {
@@ -309,19 +309,6 @@ export default class GodboundCharacter extends GodboundActorBase {
         return attackRoll
     }
 
-    getRollDamage(result) {
-        if (result <= 1) {
-            return 0
-        }
-        if (result <= 5) {
-            return 1
-        }
-        if (result <= 9) {
-            return 2
-        }
-        return 4
-    }
-
     async saveCheck(saveId, options = {}) {
         const penalty = this.saves[saveId].penalty
         const roll = await new Roll('d20' + (penalty ? '-4' : '')).evaluate()
@@ -345,6 +332,16 @@ export default class GodboundCharacter extends GodboundActorBase {
         roll.toMessage(messageData)
 
         return roll
+    }
+
+    async rollFrayDie() {
+        const damageRoll = await new GBDamageRoll(
+            `d${this.details.frayDie}`,
+            this.getRollData(),
+            { straightDamage: false }
+        ).evaluate()
+        damageRoll.toMessage()
+        return damageRoll
     }
 
     async _onDialogSubmit(html, attributeId) {

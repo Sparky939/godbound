@@ -210,6 +210,7 @@ export class GodboundActorSheet extends ActorSheet {
 
         html.on('click', '.attribute-mod', this._onAttributeCheck.bind(this))
         html.on('click', '.save-check', this._onSaveCheck.bind(this))
+        html.on('click', '.fray-die', this._rollFrayDie.bind(this))
 
         // Add Inventory Item
         html.on('click', '.item-create', this._onItemCreate.bind(this))
@@ -350,5 +351,9 @@ export class GodboundActorSheet extends ActorSheet {
         event.preventDefault()
         const saveId = event.currentTarget.dataset.attribute
         return this.actor.system.saveCheck(saveId, {})
+    }
+    async _rollFrayDie(event) {
+        event.preventDefault()
+        return this.actor.system.rollFrayDie()
     }
 }

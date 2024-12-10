@@ -237,6 +237,19 @@
   padding-top: 5px;
   width: 100%;
 }
+.godbound form.character.godbound .sheet-header .header-fields .header-row .left-group {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row .right-group {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: auto;
+  flex-shrink: 0;
+}
 .godbound form.character.godbound .sheet-header .header-fields .header-row .short-input {
   width: 35px;
 }

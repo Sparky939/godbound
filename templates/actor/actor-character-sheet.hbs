@@ -1,0 +1,151 @@
+<form class="{{cssClass}} {{actor.type}} godbound flexcol" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img"
+      title="{{actor.name}}" height="100" width="100" />
+    <div class="header-fields">
+      <div class="header-row">
+        <input name="name" type="text" value="{{actor.name}}"
+          placeholder="Name" />
+        <label class="header-label">XP:</label>
+        <input type="text" class="short-input" name="system.details.level.xp"
+          value="{{system.details.level.xp}}" data-dtype="Number" />
+        <label class="header-label">Level:</label>
+        <span class="level-value">{{system.details.level.value}}</span>
+        {{#if system.advancement}}
+        <label class="header-label">Next Level:</label>
+        <span class="header-info">
+          {{system.advancement.xp}}XP,
+          {{system.advancement.dominionSpent}}DP
+        </span>
+        {{/if}}
+      </div>
+      <div class="header-row">
+        <div class="left-group">
+          <label for="system.health.value" class="header-label">Health:</label>
+          <div class="fraction-group">
+            <input type="text" name="system.health.value"
+              value="{{system.health.value}}" data-dtype="Number" />
+            <span class="denominator">{{system.health.max}}</span>
+          </div>
+          <label>{{localize 'AC'}}:</label>
+          <div>{{ac}}</div>
+        </div>
+        <div class="right-group">
+          <label class="fray-die rollable">Fray Die:</label>
+          <select name="system.details.frayDie">
+            {{selectOptions config.frayDice selected=system.details.frayDie
+            localize=true}}
+          </select>
+        </div>
+      </div>
+      <div class="header-row">
+        <label for="system.effort.value"
+          class="header-label">Effort:</label>
+        <input type="text" class="short-input"
+          name="system.resources.effort.value"
+          value="{{system.resources.effort.value}}" data-dtype="Number" />
+        <label for="system.details.wealth"
+          class="header-label">Wealth:</label>
+        <input type="text" class="short-input" name="system.details.wealth"
+          value="{{system.details.wealth}}" data-dtype="Number" />
+      </div>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    {{!-- Default tab is specified in actor-sheet.mjs --}}
+    <a class="item" data-tab="facts">Facts</a>
+    <a class="item" data-tab="inventory">Inventory</a>
+    <a class="item" data-tab="powers">Powers</a>
+    <a class="item" data-tab="projects">Projects</a>
+    {{!-- <a class="item" data-tab="spells">Spells</a> --}}
+    <a class="item" data-tab="effects">Effects</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Owned Facts Tab --}}
+    <div class="tab facts" data-group="primary" data-tab="facts">
+      <section class="grid grid-3col">
+        <aside class="sidebar">
+
+          {{!-- The grid classes are defined in scss/global/_grid.scss. To
+          use,
+          use both the "grid" and "grid-Ncol" class where "N" can be any
+          number
+          from 1 to 12 and will create that number of columns. --}}
+          <div class="attributes flexcol">
+            {{#each system.attributes as |attribute key|}}
+            <div class="attribute flexrow flex-group-center">
+              <label for="system.attributes.{{key}}.value"
+                class="resource-label attribute-mod rollable flexlarge align-left"
+                data-label="{{localize (lookup @root.config.attributes key)}}">{{localize
+                (lookup @root.config.attributes key)}}</label>
+              <input type="text" name="system.attributes.{{key}}.value"
+                value="{{attribute.value}}" data-dtype="Number" />
+              <span class="attribute-mod rollable"
+                data-attribute="{{key}}">{{numberFormat attribute.mod
+                decimals=0
+                sign=true}}</span>
+            </div>
+            {{/each}}
+          </div>
+          <div class="saves flexcol">
+            {{#each system.saves as |save key|}}
+            <div class="save flexrow flex-group-center">
+              <label for="system.saves.{{key}}.value"
+                class="resource-label rollable save-check flexlarge align-left"
+                data-attribute="{{key}}"
+                data-label="{{localize (lookup @root.config.saves key)}}">{{localize
+                (lookup @root.config.saves key)}}</label>
+              <span data-attribute="{{key}}"
+                class="save rollable save-check {{#if save.penalty}}save-penalty{{/if}}">{{save.value}}</span>
+            </div>
+            {{/each}}
+          </div>
+        </aside>
+
+        {{!-- For the main facts list, span the right two columns --}}
+        <section class="main grid-span-2">
+          {{!-- This is a Handlebars partial. They're stored in the `/parts`
+          folder next to this sheet, and defined in
+          module/helpers/templates.mjs
+          --}}
+          {{> "systems/godbound/templates/actor/parts/actor-facts.hbs"}}
+        </section>
+
+      </section>
+    </div>
+
+    {{!-- Owned Items Tab --}}
+    <div class="tab inventory" data-group="primary" data-tab="inventory">
+      {{> "systems/godbound/templates/actor/parts/actor-inventory.hbs"}}
+    </div>
+
+    {{!-- Owned Powers Tab --}}
+    <div class="tab powers" data-group="primary" data-tab="powers">
+      {{> "systems/godbound/templates/actor/parts/actor-powers.hbs"}}
+    </div>
+
+    {{!-- Owned Spells Tab --}}
+    <div class="tab spells" data-group="primary" data-tab="spells">
+      {{> "systems/godbound/templates/actor/parts/actor-spells.hbs"}}
+    </div>
+
+    {{!-- Owned Projects Tab --}}
+    <div class="tab projects" data-group="primary" data-tab="projects">
+      {{> "systems/godbound/templates/actor/parts/actor-projects.hbs"}}
+    </div>
+
+    {{!-- Active Effects Tab --}}
+    <div class="tab effects flexcol" data-group="primary"
+      data-tab="effects">
+      {{> "systems/godbound/templates/actor/parts/actor-effects.hbs"}}
+    </div>
+
+  </section>
+</form>

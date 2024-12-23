@@ -1,0 +1,14 @@
+
+.dice-roll {
+    .dice-result {
+        .dice-total {
+            display: flex;
+            justify-content: center;
+            .dice-total-details {
+                font-weight: normal;
+                font-size: 15px;
+                padding-left: 5px;
+            }
+        }
+    }
+}

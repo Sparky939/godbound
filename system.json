@@ -1,0 +1,49 @@
+{
+    "id": "godbound",
+    "title": "Godbound",
+    "description": "The Godbound system for FoundryVTT!",
+    "version": "0.1.11",
+    "authors": [
+        {
+            "name": "Cyberspark",
+            "discord": "cyberspark"
+        }
+    ],
+    "url": "https://github.com/Sparky939/godbound",
+    "license": "LICENSE",
+    "readme": "README.md",
+    "bugs": "Replace this with a link to file issues or tickets",
+    "changelog": "CHANGELOG.md",
+    "media": [
+        {
+            "type": "setup",
+            "url": "systems/godbound/assets/anvil-impact.png",
+            "thumbnail": "systems/godbound/assets/anvil-impact.png"
+        }
+    ],
+    "compatibility": {
+        "minimum": 12,
+        "verified": 12
+    },
+    "esmodules": ["module/godbound.mjs"],
+    "styles": ["css/godbound.css"],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "packs": [],
+    "packFolders": [],
+    "socket": false,
+    "manifest": "https://raw.githubusercontent.com/Sparky939/godbound/refs/heads/main/system.json",
+    "download": "https://github.com/Sparky939/godbound/releases/download/release-0.1.11/godbound.zip",
+    "background": "systems/godbound/assets/anvil-impact.png",
+    "grid": {
+        "distance": 5,
+        "units": "ft"
+    },
+    "primaryTokenAttribute": "health",
+    "secondaryTokenAttribute": "power"
+}

@@ -1,0 +1,80 @@
+Xname -- string
+health_max -- derived
+Xhealth_current -- number
+Xhealth_level_bonus -- number
+Xhealth_flat_bonus -- number
+armor_class -- derived
+Xarmor_type -- string
+Xshield_bonus -- boolean
+Xwealth -- number
+Xarmor_penalties -- string[]
+effort_total -- derived
+effort_available -- derived
+level -- derived
+next_level_requirements -- derived
+experience -- number
+dominion_gained -- number
+dominion_monthly -- number
+influence_total -- derived
+move_land -- number
+move_swim -- number
+move_burrow -- number
+move_fly -- number
+goal -- string
+facts -- string[]
+strength_score -- number
+strength_mod -- derived
+dexterity_score -- number
+dexterity_mod -- derived
+constitution_score -- number
+constitution_mod -- derived
+intelligence_score -- number
+intelligence_mod -- derived
+wisdom_score -- number
+wisdom_mod -- derived
+charisma_score -- number
+charisma_mod -- derived
+base_attack_bonus -- derived
+base_save -- derived
+hardiness_mod -- derived
+evasion_mod -- derived
+spirit_mod -- derived
+fray_die -- string
+weapons -- items
+words -- items
+gifts -- items
+spells -- items
+projects -- items
+active_effects -- items
+
+
+
+
+
+Details: {
+    name: 'string',
+    ac: 'number',
+    health: 'value',
+    facts: 'string'
+},
+Social:{
+
+}
+Combat: {
+    movement: '',
+    offence: {
+        attacks: '',
+        spells: '',
+        gifts: '',
+        spells: ''.
+    },
+    defence: {
+        health: ''.
+        ac: '',
+        saves: ''
+        immunities: '' // words passives, gift effects & constant gifts
+    }
+}
+Exploration: {
+
+}

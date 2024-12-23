@@ -1,0 +1,23 @@
+header
+name, health, effort, move, ac & shield, xp, level, Effects (symbol for duration/type of commit)
+Fray Dice, Level requirements, dominion spent
+
+side bar - make collapsible
+attr - modal should have fact checkbox & challenge select
+saves
+
+content - general
+Attacks (from items & Gifts in one place) - collapsible
+
+Inventory - Name, Desc, count
+Items need to be able to effect sheet
+Armor as Item - Penalties set - worn checkbox
+
+Section for Spells
+
+Projects - Dominion & Influence & Project list
+
+Print-Item-to-chat
+
+
+May need sheets for other GM stuff

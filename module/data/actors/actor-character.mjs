@@ -375,9 +375,7 @@ export default class GodboundCharacter extends GodboundActorBase {
         const roll = await new Roll(
             'd20' +
                 (submitData.relevantFact ? '+4' : '') +
-                (submitData.otherModifiers
-                    ? `+ ${submitData.otherModifiers}`
-                    : '')
+                (submitData.bonus ? `+ ${submitData.bonus}` : '')
         ).evaluate()
         const result = roll.total
         const difficulty =

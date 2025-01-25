@@ -5,6 +5,12 @@ import GodboundItemBase from './base-item.mjs'
  * @param {object} passive
  * @param {string} passive.name // The name of the passive ability
  * @param {string} passive.description // The description of the passive ability
+ * @param {boolean} passive.show // Whether to show the passive ability
+ * @param {array} costs
+ * @param {object} cost
+ * @param {number} cost.amount
+ * @param {string} cost.duration.type // "constant", "toggle", "scene", "round", "day"
+ * @param {number} cost.duration.value // number of duration.type units
  */
 
 export default class GodboundWord extends GodboundItemBase {
@@ -23,6 +29,24 @@ export default class GodboundWord extends GodboundItemBase {
                 required: true,
                 blank: true,
             }),
+            show: new fields.BooleanField({
+                required: true,
+                initial: true,
+            }),
+            gifts: new fields.ArrayField(
+                new fields.SchemaField({
+                    name: new fields.StringField({
+                        required: true,
+                    }),
+                    description: new fields.StringField({
+                        required: true,
+                    }),
+                    power: new fields.StringField({
+                        required: true,
+                        options: Object.keys(GODBOUND.gifts.power),
+                    }),
+                })
+            ),
         })
         return schema
     }

@@ -53,32 +53,63 @@ export default class GodboundGift extends GodboundItemBase {
             }),
         })
 
-        // schema.effects = new fields.ArrayField(
-        //     new fields.SchemaField({
-        //         icon: new fields.FilePathField({ required: false }),
-        //         name: new fields.StringField({ required: true }),
-        //         description: new fields.StringField({ required: true }),
-        //         cost: new fields.NumberField({ ...requiredInteger }),
-        //         duration: new fields.SchemaField({
-        //             value: new fields.NumberField({
-        //                 ...requiredInteger,
-        //                 initial: 0,
-        //             }),
-        //             type: new fields.StringField({
-        //                 required: true,
-        //                 options: [
-        //                     'round',
-        //                     'minute',
-        //                     'hour',
-        //                     'day',
-        //                     'week',
-        //                     'month',
-        //                     'year',
-        //                 ],
-        //             }),
-        //         }),
-        //     })
-        // )
+        schema.effortEffects = new fields.ArrayField(
+            fields.SchemaField({
+                icon: new fields.FilePathField({
+                    required: false,
+                }),
+                description: new fields.StringField({
+                    required: true,
+                    default: '',
+                }),
+                amount: new fields.NumberField({
+                    required: true,
+                    initial: 0,
+                }),
+                active: new fields.BooleanField({ default: false }),
+                effects: new fields.ArrayField(
+                    new fields.SchemaField({
+                        field: new fields.StringField({
+                            required: true,
+                        }),
+                        modifierType: new fields.StringField({
+                            required: true,
+                            choices: ['override', 'add', 'multiply'],
+                        }),
+                        valueType: new fields.StringField({
+                            required: true,
+                            choices: [
+                                'number',
+                                'string',
+                                'boolean',
+                                'array',
+                                'object',
+                            ],
+                        }),
+                        value: new fields.StringField({
+                            required: true,
+                        }),
+                    })
+                ),
+                duration: new fields.SchemaField({
+                    type: new fields.StringField({
+                        required: true,
+                        choices: [
+                            'constant',
+                            'toggle',
+                            'scene',
+                            'round',
+                            'day',
+                        ],
+                    }),
+                    value: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                    }),
+                }),
+            })
+        )
+
         return schema
     }
 

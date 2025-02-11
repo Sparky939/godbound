@@ -82,7 +82,7 @@ export default class GodboundCharacter extends GodboundActorBase {
         )
         schema.resources = new fields.SchemaField({
             effort: new fields.SchemaField({
-                s: new fields.NumberField({
+                value: new fields.NumberField({
                     ...requiredInteger,
                     initial: 2,
                     min: 0,

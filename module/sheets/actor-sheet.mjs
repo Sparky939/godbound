@@ -334,6 +334,18 @@ export class GodboundActorSheet extends ActorSheet {
         }
     }
 
+    _onPrint(event) {
+        event.preventDefault()
+        const element = event.currentTarget
+        const dataset = element.dataset
+
+        if (dataset.itemType) {
+            const itemId = element.closest('.item').dataset.itemId
+            const item = this.actor.items.get(itemId)
+            if (item) return item.print({ author: this.actor })
+        }
+    }
+
     _onWear(event) {
         // get item using the id, toggle the worn state on the item
         event.preventDefault()

@@ -36,20 +36,12 @@
         </div>
     </li>
     {{#each gifts as |item id|}}
-    <li class='item gift-row flexcol expandable' data-item-id='{{item._id}}'>
+    <li class='item gift-row flexcol row' data-item-id='{{item._id}}'>
         <div class="fixed-row flexrow">
+            <i class="fa-solid fa-angle-right hide-expanded"></i>
+            <i class="fa-solid fa-angle-down hide-collapsed"></i>
+            <i class="d20 gift-activate"></i>
             <div class='item-name'>
-                <div class='item-image'>
-                    {{!-- TODO: Add effort consumer item creation and logging
-                    gift activation to chat --}}
-                    <div class='gift-activate' data-roll-type='item'>
-                        <img
-                            src='{{item.img}}'
-                            title='{{item.name}}'
-                            width='24'
-                            height='24' />
-                    </div>
-                </div>
                 <h4>{{item.name}}</h4>
             </div>
             <div class='item-controls'>

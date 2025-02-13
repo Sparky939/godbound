@@ -107,7 +107,7 @@
   .itme.flex-row {
     align-items: center;
   }
-  .item.gift-row {
+  .item.row {
     .fixed-row {
       display: flex;
       flex-flow: row nowrap;
@@ -120,12 +120,18 @@
       height: 0;
     }
   }
-  .item.gift-row.expanded {
+  .item.row.expanded {
     .description {
       visibility: visible;
       height: auto;
       width: 100%;
     }
+  }
+  .item.row.expanded > .fixed-row > .hide-expanded {
+    display: none;
+  }
+  .item.row:not(.expanded) > .fixed-row > .hide-collapsed {
+    display: none;
   }
 
   .item-prop {

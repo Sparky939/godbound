@@ -335,12 +335,13 @@ export class GodboundActorSheet extends ActorSheet {
         }
     }
 
-    _onPrint(element, dataset) {
-        if (dataset.itemType) {
-            const itemId = element.closest('.item').dataset.itemId
-            const item = this.actor.items.get(itemId)
-            if (item) return item.print({ author: this.actor })
-        }
+    _onPrint(element, _dataset) {
+        const itemId = element.closest('.item').dataset.itemId
+        const item = this.actor.items.get(itemId)
+        if (item)
+            return item.system.print({
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            })
     }
 
     _onEquip(_element, dataset) {

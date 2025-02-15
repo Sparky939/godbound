@@ -128,4 +128,10 @@ export default class GodboundGift extends GodboundItemBase {
         const item = new GodboundGiftEffect(this.effects[idx], this)
         this.parent.actor.createEmbeddedDocuments('Item', [item])
     }
+    print({ speaker }) {
+        ChatMessage.create({
+            speaker,
+            content: `<b>${this.parent.name}:</b> ${this.description}`,
+        })
+    }
 }

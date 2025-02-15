@@ -216,6 +216,7 @@
   grid-template-columns: 1fr;
   grid-template-rows: auto auto 1fr;
   row-gap: 10px;
+  min-width: 490px;
 }
 .godbound form.character.godbound .sheet-header {
   flex: 0 auto;
@@ -239,6 +240,9 @@
   align-items: center;
   padding-top: 5px;
   width: 100%;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row div:has(+ label) {
+  padding-right: 10px;
 }
 .godbound form.character.godbound .sheet-header .header-fields .header-row .fa-solid.fa-heart.fa-xl.pr-4px {
   padding-right: 4px;
@@ -358,6 +362,63 @@
   display: grid;
   grid-column: 1/-1;
   grid-template-columns: subgrid;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid {
+  display: grid;
+  grid-template-columns: [label-start] auto [label-end value-start] auto [value-end max-start] auto [max-end income-start] auto [income-end];
+  grid-template-rows: 30px 30px 30px 30px;
+  width: fit-content;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .header {
+  grid-column: label-start/income-end;
+  grid-row: 1/2;
+  grid-template-columns: subgrid;
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .header div {
+  border-bottom: 1px solid var(--color-underline-header);
+  text-align: center;
+  vertical-align: middle;
+  padding: 0 5px;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .influence-row {
+  grid-column: label-start/income-end;
+  grid-row: 2/3;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .influence-row * {
+  text-align: center;
+  vertical-align: middle;
+  width: auto;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row {
+  grid-column: label-start/income-end;
+  grid-row: 3/4;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row * {
+  text-align: center;
+  vertical-align: middle;
+  width: auto;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row * input {
+  width: 15px;
+  height: 20px;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .spent-row {
+  grid-column: label-start/income-end;
+  grid-row: 4/5;
+}
+.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .spent-row * {
+  text-align: left;
+  vertical-align: middle;
+  width: auto;
 }
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section input {
   width: auto;

@@ -33,7 +33,8 @@
           <div>{{ac}}</div>
         </div>
         <div class="right-group">
-          <label class="fray-die rollable">Fray Die:</label>
+          <label class="fray-die clickable" data-click-type="fray-die">Fray
+            Die:</label>
           <select name="system.details.frayDie">
             {{selectOptions config.frayDice selected=system.details.frayDie
             localize=true}}
@@ -87,13 +88,15 @@
             {{#each system.attributes as |attribute key|}}
             <div class="attribute flexrow flex-group-center">
               <label for="system.attributes.{{key}}.value"
-                class="resource-label attribute-mod rollable flexlarge align-left"
+                class="resource-label attribute-mod clickable flexlarge align-left"
                 data-attribute="{{key}}"
+                data-click-type="attribute-check"
                 data-label="{{localize (lookup @root.config.attributes key)}}">{{localize
                 (lookup @root.config.attributes key)}}</label>
               <input type="text" name="system.attributes.{{key}}.value"
                 value="{{attribute.value}}" data-dtype="Number" />
-              <span class="attribute-mod rollable"
+              <span class="attribute-mod clickable"
+                data-click-type="attribute-check"
                 data-attribute="{{key}}">{{numberFormat attribute.mod
                 decimals=0
                 sign=true}}</span>
@@ -104,12 +107,14 @@
             {{#each system.saves as |save key|}}
             <div class="save flexrow flex-group-center">
               <label for="system.saves.{{key}}.value"
-                class="resource-label rollable save-check flexlarge align-left"
+                class="resource-label clickable save-check flexlarge align-left"
+                data-click-type="save-check"
                 data-attribute="{{key}}"
                 data-label="{{localize (lookup @root.config.saves key)}}">{{localize
                 (lookup @root.config.saves key)}}</label>
               <span data-attribute="{{key}}"
-                class="save rollable save-check {{#if save.penalty}}save-penalty{{/if}}">{{save.value}}</span>
+                data-click-type="save-check"
+                class="save clickable save-check {{#if save.penalty}}save-penalty{{/if}}">{{save.value}}</span>
             </div>
             {{/each}}
           </div>

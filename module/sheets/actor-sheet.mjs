@@ -197,48 +197,10 @@ export class GodboundActorSheet extends ActorSheet {
     activateListeners(html) {
         super.activateListeners(html)
 
-        // Render the item sheet for viewing/editing prior to the editable check.
-        html.on('click', '.item-edit', (ev) => {
-            const li = $(ev.currentTarget).parents('.item')
-            const item = this.actor.items.get(li.data('itemId'))
-            item.sheet.render(true)
-        })
-
         // -------------------------------------------------------------
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return
-
-        html.on('click', '.attribute-mod', this._onAttributeCheck.bind(this))
-        html.on('click', '.save-check', this._onSaveCheck.bind(this))
-        html.on('click', '.fray-die', this._rollFrayDie.bind(this))
-
-        // Add Inventory Item
-        html.on('click', '.item-create', this._onItemCreate.bind(this))
-
-        // Delete Inventory Item
-        html.on('click', '.item-delete', (ev) => {
-            const li = $(ev.currentTarget).parents('.item')
-            const item = this.actor.items.get(li.data('itemId'))
-            item.delete()
-            li.slideUp(200, () => this.render(false))
-        })
-
-        // Active Effect management
-        html.on('click', '.effect-control', (ev) => {
-            const row = ev.currentTarget.closest('li')
-            const document =
-                row.dataset.parentId === this.actor.id
-                    ? this.actor
-                    : this.actor.items.get(row.dataset.parentId)
-            onManageActiveEffect(ev, document)
-        })
-
-        // Rollable attributes.
-        html.on('click', '.rollable', this._onRoll.bind(this))
-        // Expandable sections
-        html.on('click', '.expandable', this._expand.bind(this))
-        // Gift Activation - Effort consumption & Chat-logging
-        html.on('click', '.gift-activate', this._onGift.bind(this))
+        html.on('click', '.clickable', this._handleClick.bind(this))
 
         // Drag events for macros.
         if (this.actor.isOwner) {
@@ -249,7 +211,6 @@ export class GodboundActorSheet extends ActorSheet {
                 li.addEventListener('dragstart', handler, false)
             })
         }
-        html.on('click', '.wearable', this._onWear.bind(this))
     }
 
     /**
@@ -257,13 +218,11 @@ export class GodboundActorSheet extends ActorSheet {
      * @param {Event} event   The originating click event
      * @private
      */
-    async _onItemCreate(event) {
-        event.preventDefault()
-        const header = event.currentTarget
+    async _onItemCreate(_element, dataset) {
         // Get the type of item to create.
-        const type = header.dataset.type
+        const type = dataset.type
         // Grab any data associated with this control.
-        const data = duplicate(header.dataset)
+        const data = duplicate(dataset)
         // Initialize a default name.
         const name = `New ${type.capitalize()}`
         // Prepare the item object.
@@ -279,20 +238,66 @@ export class GodboundActorSheet extends ActorSheet {
         return await Item.create(itemData, { parent: this.actor })
     }
 
+    _onItemDelete(element) {
+        const li = $(element).parents('.item')
+        const item = this.actor.items.get(li.data('itemId'))
+        item.delete()
+        li.slideUp(200, () => this.render(false))
+    }
+    _onItemEdit(element, dataset) {
+        const li = $(element).parents('.item')
+        const item = this.actor.items.get(li.data('itemId'))
+        item.sheet.render(true)
+    }
+
     /**
      * Handle clickable expandables.
      * @param {Event} event   The originating click event
      * @private
      */
-    _expand(event) {
+    _handleClick(event) {
         event.preventDefault()
         const element = event.currentTarget
+        const dataset = element.dataset
+        switch (dataset.clickType) {
+            case 'print': {
+                return this._onPrint(element, dataset)
+            }
+            case 'expand': {
+                return this._onExpand(element)
+            }
+            case 'roll': {
+                return this._onRoll(element, dataset)
+            }
+            case 'attribute-check': {
+                return this._onAttributeCheck(element, dataset)
+            }
+            case 'save-check': {
+                return this._onSaveCheck(element, dataset)
+            }
+            case 'fray-die': {
+                return this._rollFrayDie(element, dataset)
+            }
+            case 'item-create': {
+                return this._onItemCreate(element, dataset)
+            }
+            case 'item-edit': {
+                return this._onItemEdit(element, dataset)
+            }
+            case 'item-delete': {
+                return this._onItemDelete(element, dataset)
+            }
+            case 'effect-control': {
+                return this._onEffectControl(element, dataset)
+            }
+            case 'equip': {
+                return this._onEquip(element, dataset)
+            }
+        }
+    }
+    _onExpand(element) {
         const row = element.closest('.row')
         row.classList.toggle('expanded')
-    }
-
-    _onGift(event) {
-        event.preventDefault()
     }
 
     /**
@@ -300,11 +305,7 @@ export class GodboundActorSheet extends ActorSheet {
      * @param {Event} event   The originating click event
      * @private
      */
-    _onRoll(event) {
-        event.preventDefault()
-        const element = event.currentTarget
-        const dataset = element.dataset
-
+    _onRoll(element, dataset) {
         // Handle item rolls.
         if (dataset.rollType) {
             if (dataset.rollType == 'item') {
@@ -334,11 +335,7 @@ export class GodboundActorSheet extends ActorSheet {
         }
     }
 
-    _onPrint(event) {
-        event.preventDefault()
-        const element = event.currentTarget
-        const dataset = element.dataset
-
+    _onPrint(element, dataset) {
         if (dataset.itemType) {
             const itemId = element.closest('.item').dataset.itemId
             const item = this.actor.items.get(itemId)
@@ -346,26 +343,27 @@ export class GodboundActorSheet extends ActorSheet {
         }
     }
 
-    _onWear(event) {
-        // get item using the id, toggle the worn state on the item
-        event.preventDefault()
-        const element = event.currentTarget
-        const dataset = element.dataset
+    _onEquip(_element, dataset) {
         return this.actor.system.wearArmour(dataset.id)
     }
+    _onEffectControl(element) {
+        const row = element.closest('li')
+        const document =
+            row.dataset.parentId === this.actor.id
+                ? this.actor
+                : this.actor.items.get(row.dataset.parentId)
+        onManageActiveEffect(element, document)
+    }
 
-    async _onAttributeCheck(event) {
-        event.preventDefault()
-        const attributeId = event.currentTarget.dataset.attribute
+    async _onAttributeCheck(_element, dataset) {
+        const attributeId = dataset.attribute
         return this.actor.system.attributeCheck(attributeId, {})
     }
-    async _onSaveCheck(event) {
-        event.preventDefault()
-        const saveId = event.currentTarget.dataset.attribute
+    async _onSaveCheck(_element, dataset) {
+        const saveId = dataset.attribute
         return this.actor.system.saveCheck(saveId, {})
     }
-    async _rollFrayDie(event) {
-        event.preventDefault()
+    async _rollFrayDie() {
         return this.actor.system.rollFrayDie()
     }
 }

@@ -1,8 +1,7 @@
 .window-app {
   font-family: $font-primary;
 }
-
-.rollable {
+.clickable {
   &:hover,
   &:focus {
     color: #000;

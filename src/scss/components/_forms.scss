@@ -1,6 +1,9 @@
 .item-form {
   font-family: $font-primary;
 }
+.clickable {
+  cursor: pointer;
+}
 
 form.character.godbound {
   display: grid;
@@ -203,13 +206,23 @@ form.character.godbound {
       }
     }
     .tab.active.facts {
-      .grid {
+      display: flex;
+      section {
+        flex: 1 1 100%;
         margin: 0;
+        section {
+          display: grid;
+          grid-template-rows: auto 1fr;
+          .editor {
+            flex: 1 1 100%;
+            min-height: 50px;
+          }
+        }
       }
     }
   }
 }
-.save-penalty.rollable {
+.save-penalty.clickable {
   color: rgb(145, 21, 21);
 }
 

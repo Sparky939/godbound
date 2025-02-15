@@ -4,7 +4,7 @@
   font-family: "Roboto", sans-serif;
 }
 
-.rollable:hover, .rollable:focus {
+.clickable:hover, .clickable:focus {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer;
@@ -207,6 +207,9 @@
 .godbound .item-form {
   font-family: "Roboto", sans-serif;
 }
+.godbound .clickable {
+  cursor: pointer;
+}
 .godbound form.character.godbound {
   display: grid;
   grid-template-areas: "header" "tabs" "body";
@@ -394,10 +397,22 @@
   width: 100%;
   font-weight: bold;
 }
-.godbound form.character.godbound section.sheet-body .tab.active.facts .grid {
+.godbound form.character.godbound section.sheet-body .tab.active.facts {
+  display: flex;
+}
+.godbound form.character.godbound section.sheet-body .tab.active.facts section {
+  flex: 1 1 100%;
   margin: 0;
 }
-.godbound .save-penalty.rollable {
+.godbound form.character.godbound section.sheet-body .tab.active.facts section section {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+.godbound form.character.godbound section.sheet-body .tab.active.facts section section .editor {
+  flex: 1 1 100%;
+  min-height: 50px;
+}
+.godbound .save-penalty.clickable {
   color: rgb(145, 21, 21);
 }
 .godbound .sheet-tabs {
@@ -516,14 +531,19 @@
   flex-flow: row nowrap;
   align-items: center;
   width: 100%;
+  flex: 1 0 100%;
+}
+.godbound .items-list .item.row .fixed-row i {
+  flex: 0 0 auto;
+  padding-right: 5px;
 }
 .godbound .items-list .item.row .description {
-  visibility: hidden;
+  display: none;
   width: 100%;
   height: 0;
 }
 .godbound .items-list .item.row.expanded .description {
-  visibility: visible;
+  display: block;
   height: auto;
   width: 100%;
 }

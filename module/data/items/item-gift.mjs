@@ -54,10 +54,7 @@ export default class GodboundGift extends GodboundItemBase {
         })
 
         schema.effortEffects = new fields.ArrayField(
-            fields.SchemaField({
-                icon: new fields.FilePathField({
-                    required: false,
-                }),
+            new fields.SchemaField({
                 description: new fields.StringField({
                     required: true,
                     default: '',

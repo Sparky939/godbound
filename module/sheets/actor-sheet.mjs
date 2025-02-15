@@ -105,7 +105,9 @@ export class GodboundActorSheet extends ActorSheet {
         const wornArmour = context.armours.find((a) => a.system.worn)
         if (wornArmour) {
             context.ac =
-                wornArmour.system.baseArmour - context.system.attributes.dex.mod
+                wornArmour.system.baseArmour -
+                context.system.attributes.dex.mod -
+                (context.system.useShield ? 1 : 0)
             context.system.saves.hardiness.penalty =
                 wornArmour.system.hardinessPenalty
             context.system.saves.evasion.penalty =
@@ -113,7 +115,10 @@ export class GodboundActorSheet extends ActorSheet {
             context.system.saves.spirit.penalty =
                 wornArmour.system.spiritPenalty
         } else {
-            context.ac = 9 - context.system.attributes.dex.mod
+            context.ac =
+                9 -
+                context.system.attributes.dex.mod -
+                (context.system.useShield ? 1 : 0)
             context.system.saves.hardiness.penalty = false
             context.system.saves.evasion.penalty = false
             context.system.saves.spirit.penalty = false
@@ -263,6 +268,9 @@ export class GodboundActorSheet extends ActorSheet {
             case 'print': {
                 return this._onPrint(element, dataset)
             }
+            case 'toggle-shield': {
+                return this._onShieldToggle(element, dataset)
+            }
             case 'expand': {
                 return this._onExpand(element)
             }
@@ -342,6 +350,9 @@ export class GodboundActorSheet extends ActorSheet {
             return item.system.print({
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             })
+    }
+    _onShieldToggle(_element, _dataset) {
+        return this.actor.system.toggleShield()
     }
 
     _onEquip(_element, dataset) {

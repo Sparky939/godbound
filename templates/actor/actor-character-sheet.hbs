@@ -23,14 +23,17 @@
       </div>
       <div class="header-row">
         <div class="left-group">
-          <label for="system.health.value" class="header-label">Health:</label>
+          <i class="fa-solid fa-heart fa-xl pr-4px"></i>
           <div class="fraction-group">
             <input type="text" name="system.health.value"
               value="{{system.health.value}}" data-dtype="Number" />
             <span class="denominator">{{system.health.max}}</span>
           </div>
           <label>{{localize 'AC'}}:</label>
-          <div>{{ac}}</div>
+          <div>{{system.ac}}</div>
+          <label>{{localize 'Shield'}}:</label>
+          <input type="checkbox" name="system.useShield"
+            {{checked system.useShield}} />
         </div>
         <div class="right-group">
           <label class="fray-die clickable" data-click-type="fray-die">Fray

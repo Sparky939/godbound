@@ -34,11 +34,25 @@ form.character.godbound {
         align-items: center;
         padding-top: 5px;
         width: 100%;
+        .fa-solid.fa-heart.fa-xl.pr-4px {
+          padding-right: 4px;
+        }
         .left-group {
           display: flex;
           flex-flow: row nowrap;
           align-items: center;
           width: 100%;
+          div:has( + label) {
+            padding-right: 10px;
+          }
+          label:has( + input[type="checkbox"]) {
+            padding-right: 2px;
+          }
+          input[type="checkbox"] {
+            height: 12px;
+            width: 12px;
+            margin: 0;
+          }
         }
         .right-group {
           display: flex;

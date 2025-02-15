@@ -80,6 +80,9 @@ export default class GodboundCharacter extends GodboundActorBase {
                 return obj
             }, {})
         )
+        schema.useShield = new fields.BooleanField({
+            initial: false,
+        })
         schema.resources = new fields.SchemaField({
             effort: new fields.SchemaField({
                 value: new fields.NumberField({
@@ -134,13 +137,16 @@ export default class GodboundCharacter extends GodboundActorBase {
             .get('godbound', 'words')
             .split(',')
             .map((str) => String(str).trim())
-        const wornItem = this.parent.items.filter(
-            (i) => i.type === 'armour' && i.worn
-        )[0]
-        if (wornItem && wornItem.value.system.type == 'armour') {
-            this.ac = wornItem.value.system.baseArmour - this.attributes.dex.mod
+        const wornItem = this.parent.items.find((i) => {
+            return i.type === 'armour' && i.system.worn
+        })
+        if (wornItem && wornItem.type == 'armour') {
+            this.ac =
+                wornItem.system.baseArmour -
+                this.attributes.dex.mod -
+                (this.useShield ? 1 : 0)
         } else {
-            this.ac = 9 - this.attributes.dex.mod
+            this.ac = 9 - this.attributes.dex.mod - (this.useShield ? 1 : 0)
         }
     }
 
@@ -272,6 +278,9 @@ export default class GodboundCharacter extends GodboundActorBase {
         data.lvl = this.details.level.value
 
         return data
+    }
+    toggleShield() {
+        this.useShield = !this.useShield
     }
 
     attributeCheck(attributeId, options = {}) {

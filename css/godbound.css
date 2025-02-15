@@ -240,11 +240,25 @@
   padding-top: 5px;
   width: 100%;
 }
+.godbound form.character.godbound .sheet-header .header-fields .header-row .fa-solid.fa-heart.fa-xl.pr-4px {
+  padding-right: 4px;
+}
 .godbound form.character.godbound .sheet-header .header-fields .header-row .left-group {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   width: 100%;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row .left-group div:has(+ label) {
+  padding-right: 10px;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row .left-group label:has(+ input[type=checkbox]) {
+  padding-right: 2px;
+}
+.godbound form.character.godbound .sheet-header .header-fields .header-row .left-group input[type=checkbox] {
+  height: 12px;
+  width: 12px;
+  margin: 0;
 }
 .godbound form.character.godbound .sheet-header .header-fields .header-row .right-group {
   display: flex;

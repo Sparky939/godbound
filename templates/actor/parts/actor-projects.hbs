@@ -42,7 +42,7 @@
   <li class='item flexrow' data-item-id='{{item._id}}'>
     <div class='item-name'>
       <div class='item-image'>
-        <a class='clikcable' data-click-type="roll" data-roll-type='item'>
+        <a class='clickable' data-click-type="roll" data-roll-type='item'>
           <img
             src='{{item.img}}'
             title='{{item.name}}'
@@ -63,7 +63,7 @@
     </div>
     <div class='item-controls'>
       <a
-        class='item-control item-edit'
+        class='item-control clickable item-edit' data-click-type="item-edit"
         title='{{localize "DOCUMENT.Edit" type='project'}}'>
         <i class='fas fa-edit'></i>
       </a>

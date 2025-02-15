@@ -2,7 +2,7 @@
     <label class="row-header">{{localize 'Words'}}:</label>
     {{#each words as |word id|}}
     <li class="item word-pill" data-item-id='{{word._id}}'>
-        <a class="item-control item-edit">
+        <a class="item-control clickable item-edit" data-click-type="item-edit">
             {{word.name}}
         </a>
         <a

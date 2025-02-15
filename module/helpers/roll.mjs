@@ -14,7 +14,7 @@ import { systemPath } from '../constants.mjs'
 class GBAttackRoll {
     constructor(rollParams, data, options) {
         this.attackRoll = new GBHitRoll(
-            `d20 + @${rollParams.attribute}.mod${
+            `d20 + ${data.lvl} + @${rollParams.attribute}.mod${
                 rollParams.hitBonus ? ` + ${rollParams.hitBonus}` : ''
             }`,
             data,

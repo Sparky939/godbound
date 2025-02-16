@@ -1,15 +1,9 @@
-<ol class="word-list">
-    <label class="row-header">{{localize 'Words'}}:</label>
-    {{#each words as |word id|}}
-    <li class="item word-pill" data-item-id='{{word._id}}'>
-        <a class="item-control clickable item-edit" data-click-type="item-edit">
-            {{word.name}}
-        </a>
-        <a
-            class='item-control item-delete clickable'
-            data-click-type="item-delete"
-            title='{{localize "DOCUMENT.Delete" type='word'}}'>
-            <i class='fas fa-trash'></i>
+<ol class="committed-effort-list">
+    <label class="row-header">{{localize 'Committed Effort'}}:</label>
+    {{#each effects as |effect id|}}
+    <li class="item word-pill" data-item-id='{{effect._id}}'>
+        <a class="item-control clickable item-edit">
+            {{effect.name}}
         </a>
     </li>
     {{/each}}
@@ -19,7 +13,8 @@
             'Passives'}}</label></div>
     {{#each wordPassives as |passive|}}
     <li class="passive-item">
-        {{{passive.description}}}
+        {{passive.name}}:
+        {{passive.description}}
     </li>
     {{/each}}
 </ol>
@@ -31,44 +26,102 @@
                 class='item-control item-create clickable'
                 data-click-type="item-create"
                 title='Create item'
-                data-type='gift'>
+                data-type="word"
+                data-show="true">
                 <i class='fas fa-plus'></i>
-                {{localize 'DOCUMENT.New' type='gift'}}
+                {{localize 'DOCUMENT.New' type='word'}}
             </a>
         </div>
     </li>
-    {{#each gifts as |item id|}}
-    <li class='item gift-row flexcol row' data-item-id='{{item._id}}'>
+    {{#each powers as |power id|}}
+    <li {{#if
+        power.word.system.dropdown}}class="item word-row flexcol row expanded"
+        {{else}}class="item word-row flexcol row"{{/if}}
+        data-item-id="{{power.word._id}}">
         <div class="fixed-row flexrow">
             <i
                 class="fa-solid fa-angle-right clickable expandable hide-expanded"
+                data-item-id="{{power.word._id}}"
                 data-click-type="expand"></i>
             <i
                 class="fa-solid fa-angle-down clickable expandable hide-collapsed"
+                data-item-id="{{power.word._id}}"
                 data-click-type="expand"></i>
             <i class="fa-solid fa-dice-d20 clickable"
                 data-click-type="gift"></i>
             <div class='item-name clickable' data-click-type="print">
-                <h4>{{item.name}}</h4>
+                <h4>{{power.word.name}}</h4>
             </div>
-            <div class='item-controls'>
-                <a
-                    class='item-control clickable item-edit'
+            <div class="item-controls">
+                <a class="item-control clickable item-create"
+                    data-click-type="create-gift"
+                    title="Create Gift"
+                    data-type="gift"
+                    data-word-id="{{power.word._id}}"
+                    data-word-name="{{power.word.name}}">
+                    <i class="fas fa-plus"></i>
+                    {{localize 'DOCUMENT.New' type="gift"}}
+                </a>
+                <a class="item-control clickable item-edit"
                     data-click-type="item-edit"
-                    title='{{localize "DOCUMENT.Edit" type='project'}}'>
-                    <i class='fas fa-edit'></i>
+                    title="{{localize 'DOCUMENT.Edit' type='word'}}">
+                    <i class="fas fa-edit"></i>
                 </a>
                 <a
                     class='item-control item-delete clickable'
                     data-click-type="item-delete"
-                    title='{{localize "DOCUMENT.Delete" type='project'}}'>
+                    title='{{localize "DOCUMENT.Delete" type='word'}}'>
                     <i class='fas fa-trash'></i>
                 </a>
             </div>
         </div>
-        <div class="description">
-            {{{item.system.description}}}
-        </div>
+        <ol class="dropdown-content">
+            {{#each power.gifts as |giftItem giftId|}}
+            <li {{#if
+                giftItem.system.dropdown}}class='item gift-row flexcol row expanded'
+                {{else}}class='item gift-row flexcol row'{{/if}}
+                data-item-id='{{giftItem._id}}'>
+                <div class="fixed-row flexrow">
+                    <i
+                        class="fa-solid fa-angle-right clickable expandable hide-expanded"
+                        data-item-id="{{giftItem._id}}"
+                        data-click-type="expand"></i>
+                    <i
+                        class="fa-solid fa-angle-down clickable expandable hide-collapsed"
+                        data-item-id="{{giftItem._id}}"
+                        data-click-type="expand"></i>
+                    <i class="fa-solid fa-dice-d20 clickable"
+                        data-click-type="gift"></i>
+                    <div class='item-name clickable' data-click-type="print">
+                        <h4>{{giftItem.name}}</h4>
+                    </div>
+                    <div class="gift-power">
+                        {{localize giftItem.system.power.label}}
+                    </div>
+                    <div class="gift-type">
+                        {{localize giftItem.system.type.label}}
+                    </div>
+                    <div class='item-controls'>
+                        <a
+                            class='item-control clickable item-edit'
+                            data-click-type="item-edit"
+                            title='{{localize "DOCUMENT.Edit" type='gift'}}'>
+                            <i class='fas fa-edit'></i>
+                        </a>
+                        <a
+                            class='item-control item-delete clickable'
+                            data-click-type="item-delete"
+                            title='{{localize "DOCUMENT.Delete" type='gift'}}'>
+                            <i class='fas fa-trash'></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown-content">
+                    {{{giftItem.system.description}}}
+                </div>
+            </li>
+            {{/each}}
+        </ol>
     </li>
     {{/each}}
 </ol>

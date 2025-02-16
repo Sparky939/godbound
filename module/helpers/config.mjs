@@ -41,6 +41,10 @@ GODBOUND.difficulties = {
     PushLimits: 'GODBOUND.Difficulty.PushLimits',
     Heroic: 'GODBOUND.Difficulty.Heroic',
 }
+GODBOUND.powerTypes = {
+    Gift: 'GODBOUND.PowerType.Gift',
+    Word: 'GODBOUND.PowerType.Word',
+}
 
 GODBOUND.rollTypes = {
     Normal: 'GODBOUND.RollType.Normal',
@@ -106,6 +110,7 @@ GODBOUND.frayDice = {
 
 GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle'
 GODBOUND.AttributeCheckResult = 'GODBOUND.AttributeCheckResult'
+GODBOUND.PowerCreatePromptTitle = 'GODBOUND.PowerCreatePromptTitle'
 GODBOUND.SaveCheckResult = 'GODBOUND.SaveCheckResult'
 GODBOUND.SavePromptTitle = 'GODBOUND.SavePromptTitle'
 GODBOUND.AttackResult = 'GODBOUND.AttackResult'
@@ -116,3 +121,4 @@ GODBOUND.RollMode = 'GODBOUND.RollMode'
 GODBOUND.RelevantFactPrompt = 'GODBOUND.RelevantFactPrompt'
 GODBOUND.RollExample = 'GODBOUND.RollExample'
 GODBOUND.Roll = 'GODBOUND.Roll'
+GODBOUND.Create = 'GODBOUND.Create'

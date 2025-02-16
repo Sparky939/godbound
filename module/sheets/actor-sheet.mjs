@@ -146,7 +146,7 @@ export class GodboundActorSheet extends ActorSheet {
         }
         const words = []
         const gifts = []
-
+        const commitments = []
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || Item.DEFAULT_ICON
@@ -167,6 +167,9 @@ export class GodboundActorSheet extends ActorSheet {
             }
             if (i.type === 'project') {
                 projects.push(i)
+            }
+            if (i.type === 'commitment') {
+                commitments.push(i)
             }
             // Append to facts.
             else if (i.type === 'fact') {
@@ -190,6 +193,17 @@ export class GodboundActorSheet extends ActorSheet {
         context.projects = projects
         context.words = words
         context.gifts = gifts
+        context.powers = words
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((word) => {
+                return {
+                    word,
+                    gifts: gifts.filter((g) => {
+                        return g.system.word.id == word._id
+                    }),
+                }
+            })
+        context.commitments = commitments
         // context.passives = context.effects.passive.effects
         // context.passives = context.effects.passive.filter(
         //     (i) => i.parent.type == 'word'
@@ -206,6 +220,7 @@ export class GodboundActorSheet extends ActorSheet {
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return
         html.on('click', '.clickable', this._handleClick.bind(this))
+        html.on('contextmenu', '.clickable', this._handleRClick.bind(this))
 
         // Drag events for macros.
         if (this.actor.isOwner) {
@@ -242,14 +257,37 @@ export class GodboundActorSheet extends ActorSheet {
         // Finally, create the item!
         return await Item.create(itemData, { parent: this.actor })
     }
-
+    async _onGiftCreate(_element, dataset) {
+        const type = dataset.type
+        const name = `New ${type.capitalize()}`
+        const giftData = {
+            name,
+            type,
+            system: {
+                dropdown: true,
+                word: {
+                    id: dataset.wordId,
+                    name: dataset.wordName,
+                },
+                power: {
+                    value: 'lesser',
+                    label: 'GODBOUND.Item.Gift.Power.Lesser',
+                },
+                type: {
+                    value: 'action',
+                    label: 'GODBOUND.Item.Gift.Type.Action',
+                },
+            },
+        }
+        return await Item.create(giftData, { parent: this.actor })
+    }
     _onItemDelete(element) {
         const li = $(element).parents('.item')
         const item = this.actor.items.get(li.data('itemId'))
         item.delete()
         li.slideUp(200, () => this.render(false))
     }
-    _onItemEdit(element, dataset) {
+    _onItemEdit(element, _dataset) {
         const li = $(element).parents('.item')
         const item = this.actor.items.get(li.data('itemId'))
         item.sheet.render(true)
@@ -272,7 +310,7 @@ export class GodboundActorSheet extends ActorSheet {
                 return this._onShieldToggle(element, dataset)
             }
             case 'expand': {
-                return this._onExpand(element)
+                return this._onExpand(element, dataset)
             }
             case 'roll': {
                 return this._onRoll(element, dataset)
@@ -285,6 +323,9 @@ export class GodboundActorSheet extends ActorSheet {
             }
             case 'fray-die': {
                 return this._rollFrayDie(element, dataset)
+            }
+            case 'create-gift': {
+                return this._onGiftCreate(element, dataset)
             }
             case 'item-create': {
                 return this._onItemCreate(element, dataset)
@@ -303,9 +344,22 @@ export class GodboundActorSheet extends ActorSheet {
             }
         }
     }
-    _onExpand(element) {
-        const row = element.closest('.row')
-        row.classList.toggle('expanded')
+    _handleRClick(event) {
+        event.preventDefault()
+        const element = event.currentTarget
+        const dataset = element.dataset
+        console.log(event, element, dataset)
+        switch (dataset.context) {
+            case 'decrement-effort': {
+                return this._onDecrementEffort(element, dataset)
+            }
+        }
+    }
+    _onExpand(_element, dataset) {
+        // const row = element.closest('.row')
+        // row.classList.toggle('expanded')
+        const item = this.actor.items.get(dataset.itemId)
+        item.update({ 'system.dropdown': !item.system.dropdown })
     }
 
     /**

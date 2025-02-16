@@ -16,19 +16,15 @@ import GodboundItemBase from './base-item.mjs'
 export default class GodboundGift extends GodboundItemBase {
     static defineSchema() {
         const fields = foundry.data.fields
-        const requiredInteger = {
-            required: true,
-            nullable: false,
-            integer: true,
-        }
         const schema = super.defineSchema()
 
-        schema.word = new fields.StringField({
-            required: true,
-            options: game.settings
-                .get('godbound', 'words')
-                .split(',')
-                .map((str) => String(str).trim()),
+        schema.word = new fields.SchemaField({
+            id: new fields.StringField({
+                required: true,
+            }),
+            name: new fields.StringField({
+                required: true,
+            }),
         })
 
         schema.power = new fields.SchemaField({
@@ -112,14 +108,10 @@ export default class GodboundGift extends GodboundItemBase {
 
     prepareDerivedData() {
         super.prepareDerivedData()
-        this.words = game.settings
-            .get('godbound', 'words')
-            .split(',')
-            .reduce((acc, str) => {
-                const word = String(str).trim()
-                acc[word] = word
-                return acc
-            }, {})
+        var words = this.parent.parent.items.filter((i) => i.type == 'word')
+        var selectedWord = words.find((i) => i._id == this.word.id) ?? words[0]
+        this.word.id = selectedWord._id
+        this.word.name = selectedWord.name
         this.power.label = GODBOUND.gifts.power[this.power.value] ?? ''
         this.type.label = GODBOUND.gifts.type[this.type.value] ?? ''
     }

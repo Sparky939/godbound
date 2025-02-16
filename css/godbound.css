@@ -431,7 +431,7 @@
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .dominon-row input {
   width: 30px;
 }
-.godbound form.character.godbound section.sheet-body .tab.active .word-list {
+.godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -441,12 +441,12 @@
   font-size: 15px;
   width: 100%;
 }
-.godbound form.character.godbound section.sheet-body .tab.active .word-list .row-header {
+.godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .row-header {
   width: auto;
   padding-right: 5px;
   font-weight: bold;
 }
-.godbound form.character.godbound section.sheet-body .tab.active .word-list .word-pill {
+.godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .word-pill {
   display: flex;
   width: auto;
   border: 1px solid #a6a6a6;
@@ -454,11 +454,11 @@
   padding: 3px 7px;
   margin: 0 4px;
 }
-.godbound form.character.godbound section.sheet-body .tab.active .word-list .word-pill .item-delete {
+.godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .word-pill .item-delete {
   display: none;
   margin-left: 5px;
 }
-.godbound form.character.godbound section.sheet-body .tab.active .word-list .word-pill:hover .item-delete {
+.godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .word-pill:hover .item-delete {
   display: block;
 }
 .godbound form.character.godbound section.sheet-body .tab.active .passives-list {
@@ -598,7 +598,7 @@
   border: none;
   margin-right: 5px;
 }
-.godbound .items-list .itme.flex-row {
+.godbound .items-list .item.flex-row {
   align-items: center;
 }
 .godbound .items-list .item.row .fixed-row {
@@ -612,21 +612,33 @@
   flex: 0 0 auto;
   padding-right: 5px;
 }
-.godbound .items-list .item.row .description {
+.godbound .items-list .item.row .fixed-row .item-controls {
+  flex: 0 0 150px;
+}
+.godbound .items-list .item.row .fixed-row .item-controls i {
+  padding: 0;
+}
+.godbound .items-list .item.row > .dropdown-content {
   display: none;
   width: 100%;
   height: 0;
 }
-.godbound .items-list .item.row.expanded .description {
+.godbound .items-list .item.row.expanded > .dropdown-content {
   display: block;
   height: auto;
   width: 100%;
+  margin: 0;
+  border-top: 1px solid rgb(201, 199, 184);
 }
 .godbound .items-list .item.row.expanded > .fixed-row > .hide-expanded {
   display: none;
 }
 .godbound .items-list .item.row:not(.expanded) > .fixed-row > .hide-collapsed {
   display: none;
+}
+.godbound .items-list .item.row.word-row > .fixed-row > div > h4 {
+  font-size: 16px;
+  font-weight: bold;
 }
 .godbound .items-list .item-prop {
   text-align: center;

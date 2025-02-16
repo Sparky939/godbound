@@ -13,13 +13,16 @@
     </div>
   </li>
   {{#each facts as |item id|}}
-  <li class='item flexrow row' data-item-id='{{item._id}}'>
+  <li {{#if item.system.dropdown}}class='item flexrow row expanded'
+    {{else}}class='item flexrow row'{{/if}} data-item-id='{{item._id}}'>
     <div class="fixed-row flexrow">
       <i
         class="fa-solid fa-angle-right clickable expandable hide-expanded"
+        data-item-id="{{item._id}}"
         data-click-type="expand"></i>
       <i
         class="fa-solid fa-angle-down clickable expandable hide-collapsed"
+        data-item-id="{{item._id}}"
         data-click-type="expand"></i>
       <div class='item-name'>
         <h4>{{item.name}}</h4>
@@ -39,7 +42,7 @@
         </a>
       </div>
     </div>
-    <div class="description">
+    <div class="dropdown-content">
       {{{item.system.description}}}
     </div>
   </li>

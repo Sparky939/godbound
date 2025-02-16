@@ -1,4 +1,5 @@
-{{! This template is a fallback for when items don't have more specific templates. }}
+{{! This template is a fallback for when items don't have more specific
+templates. }}
 {{! Generally, you'll want to make more specific templates when possible. }}
 <form class='{{cssClass}}' autocomplete='off'>
     <header class='sheet-header'>
@@ -6,18 +7,16 @@
             class='profile-img'
             src='{{item.img}}'
             data-edit='img'
-            title='{{item.name}}'
-        />
+            title='{{item.name}}' />
         <div class='header-fields'>
             <h1 class='charname'><input
                     name='name'
                     type='text'
                     value='{{item.name}}'
-                    placeholder='Name'
-                /></h1>
+                    placeholder='Name' /></h1>
             <div class='grid grid-3col'>
                 <span>
-                    {{localize system.word}}
+                    {{localize system.word.name}}
                 </span>
                 <span>
                     {{localize system.power.label}}
@@ -40,13 +39,14 @@
 
         {{! Description Tab }}
         <div class='tab' data-group='primary' data-tab='description'>
-            {{! Editors must receive enriched text data from getData to properly handle rolls }}
+            {{! Editors must receive enriched text data from getData to properly
+            handle rolls }}
             {{editor
-                enrichedDescription
-                target='system.description'
-                engine='prosemirror'
-                button=true
-                editable=editable
+            enrichedDescription
+            target='system.description'
+            engine='prosemirror'
+            button=true
+            editable=editable
             }}
         </div>
 
@@ -55,29 +55,29 @@
             <div class='grid grid-2col'>
                 <label>{{localize 'Word'}}:</label>
                 <select name='system.word'>
-                    <option value=''></option>
+                    <option value></option>
                     {{selectOptions
-                        system.words
-                        selected=system.word
-                        localize=true
+                    words
+                    selected=system.word.id
+                    localize=true
                     }}
                 </select>
                 <label>{{localize 'Power'}}:</label>
                 <select name='system.power.value'>
-                    <option value=''></option>
+                    <option value></option>
                     {{selectOptions
-                        config.gifts.power
-                        selected=system.power.value
-                        localize=true
+                    config.gifts.power
+                    selected=system.power.value
+                    localize=true
                     }}
                 </select>
                 <label>{{localize 'Type'}}:</label>
                 <select name='system.type.value'>
-                    <option value=''></option>
+                    <option value></option>
                     {{selectOptions
-                        config.gifts.type
-                        selected=system.type.value
-                        localize=true
+                    config.gifts.type
+                    selected=system.type.value
+                    localize=true
                     }}
                 </select>
             </div>

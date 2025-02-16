@@ -63,6 +63,16 @@ export class GodboundItemSheet extends ItemSheet {
         // Add the item's data to context.data for easier access, as well as flags.
         context.system = itemData.system
         context.flags = itemData.flags
+        var items = this.item.actor?.items
+        context.words = (items ?? [])
+            .filter((i) => i.type == 'word')
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .reduce((acc, i) => {
+                console.log(acc, i)
+                acc[i._id] = i.name
+                return acc
+            }, {})
+        console.log(this.item)
 
         // Adding a pointer to CONFIG.GODBOUND
         context.config = CONFIG.GODBOUND

@@ -18,7 +18,6 @@ export default class GodboundWord extends GodboundItemBase {
     static defineSchema() {
         const fields = foundry.data.fields
         const schema = super.defineSchema()
-
         schema.passive = new fields.SchemaField({
             name: new fields.StringField({
                 type: String,

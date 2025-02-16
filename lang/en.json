@@ -83,6 +83,8 @@
         },
         "AttributePromptTitle": "{attribute} Ability Check",
         "AttributeCheckResult": "{attribute} Check vs {checkTarget}",
+        "PowerCreatePromptTitle": "Create Power Item",
+        "PowerTypePrompt": "Power Type",
         "SavePromptTitle": "{save} Save",
         "SaveCheckResult": "{save} Save vs {checkTarget}",
         "AttackResult": "{item} Attack",
@@ -92,6 +94,7 @@
         "RollSituationalBonus": "Situational Bonus?",
         "RollMode": "Roll Mode",
         "Roll": "Roll",
+        "Create": "Create",
         "RollType": {
             "Normal": "Normal",
             "Advantage": "Advantage",
@@ -102,6 +105,10 @@
             "Mortal": "Mortal Task",
             "PushLimits": "Pushing Human Limits",
             "Heroic": "Truly Heroic Challenge"
+        },
+        "PowerType": {
+            "Gift": "Gift",
+            "Word": "Word"
         },
         "RollExample": "e.g. d8 + 2",
         "ItemTypes": {

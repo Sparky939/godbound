@@ -9,6 +9,7 @@ export default class GodboundItemBase extends GodboundDataModel {
             required: true,
             blank: true,
         })
+        schema.dropdown = new fields.BooleanField({ default: true })
 
         return schema
     }

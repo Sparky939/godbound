@@ -1,0 +1,12 @@
+<form>
+    <div class="form-group">
+        <label>{{localize "GODBOUND.PowerNamePrompt"}}</label>
+        <input type="text" name="itemName"
+            value="{{defaultName}}"
+            placeholder="{{localize "GODBOUND.PowerNamePlaceholder"}}" />
+        <label>{{localize "GODBOUND.PowerTypePrompt"}}</label>
+        <select name="itemType">
+            {{selectOptions powerTypes selected=defaultType localize=true}}
+        </select>
+    </div>
+</form>

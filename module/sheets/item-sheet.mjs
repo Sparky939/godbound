@@ -68,11 +68,9 @@ export class GodboundItemSheet extends ItemSheet {
             .filter((i) => i.type == 'word')
             .sort((a, b) => a.name.localeCompare(b.name))
             .reduce((acc, i) => {
-                console.log(acc, i)
                 acc[i._id] = i.name
                 return acc
             }, {})
-        console.log(this.item)
 
         // Adding a pointer to CONFIG.GODBOUND
         context.config = CONFIG.GODBOUND

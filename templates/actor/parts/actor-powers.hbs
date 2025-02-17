@@ -2,8 +2,10 @@
     <label class="row-header">{{localize 'Committed Effort'}}:</label>
     {{#each effects as |effect id|}}
     <li class="item word-pill" data-item-id='{{effect._id}}'>
-        <a class="item-control clickable item-edit">
+        <a class="item-control clickable" data-item-id="{{effect._id}}"
+            data-context="decrement-effort" data-click-type="increment-effort">
             {{effect.name}}
+            {{effect.system.effort}}
         </a>
     </li>
     {{/each}}
@@ -47,10 +49,20 @@
                 class="fa-solid fa-angle-down clickable expandable hide-collapsed"
                 data-item-id="{{power.word._id}}"
                 data-click-type="expand"></i>
-            <i class="fa-solid fa-dice-d20 clickable"
-                data-click-type="gift"></i>
+            <i class="fa-solid fa-bolt clickable"
+                data-item-id="{{power.word._id}}"
+                data-context="decrement-effort"
+                data-click-type="increment-effort"></i>
             <div class='item-name clickable' data-click-type="print">
                 <h4>{{power.word.name}}</h4>
+            </div>
+            <div class="word-effort">
+                <label>{{localize "Effort"}}:</label>
+                <div class="item-effort clickable"
+                    data-item-id="{{power.word._id}}"
+                    data-click-type="clear-effort">
+                    {{power.word.system.effort}}
+                </div>
             </div>
             <div class="item-controls">
                 <a class="item-control clickable item-create"
@@ -90,8 +102,10 @@
                         class="fa-solid fa-angle-down clickable expandable hide-collapsed"
                         data-item-id="{{giftItem._id}}"
                         data-click-type="expand"></i>
-                    <i class="fa-solid fa-dice-d20 clickable"
-                        data-click-type="gift"></i>
+                    <i class="fa-solid fa-bolt clickable"
+                        data-item-id="{{giftItem._id}}"
+                        data-context="decrement-effort"
+                        data-click-type="increment-effort"></i>
                     <div class='item-name clickable' data-click-type="print">
                         <h4>{{giftItem.name}}</h4>
                     </div>
@@ -100,6 +114,14 @@
                     </div>
                     <div class="gift-type">
                         {{localize giftItem.system.type.label}}
+                    </div>
+                    <div class="gift-effort">
+                        <label>{{localize "Effort"}}:</label>
+                        <div class="item-effort clickable"
+                            data-item-id="{{giftItem._id}}"
+                            data-click-type="clear-effort">
+                            {{giftItem.system.effort}}
+                        </div>
                     </div>
                     <div class='item-controls'>
                         <a

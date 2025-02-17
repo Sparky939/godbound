@@ -432,6 +432,7 @@
   width: 30px;
 }
 .godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list {
+  height: 26px;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -517,7 +518,7 @@
   font-weight: bold;
 }
 .godbound .items-header > * {
-  font-size: 14px;
+  font-size: 13px;
   text-align: center;
 }
 .godbound .items-header .item-name {
@@ -639,6 +640,24 @@
 .godbound .items-list .item.row.word-row > .fixed-row > div > h4 {
   font-size: 16px;
   font-weight: bold;
+}
+.godbound .items-list .item.row.gift-row > .fixed-row {
+  font-size: 13px;
+  flex: 0 0 auto;
+}
+.godbound .items-list .item.row.gift-row > .fixed-row > .gift-effort {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.godbound .items-list .item.row.word-row > .fixed-row > .word-effort {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.godbound .items-list .item.row.gift-row > .fixed-row > .gift-effort > label {
+  padding-right: 5px;
+}
+.godbound .items-list .item.row.word-row > .fixed-row > .word-effort > label {
+  padding-right: 5px;
 }
 .godbound .items-list .item-prop {
   text-align: center;

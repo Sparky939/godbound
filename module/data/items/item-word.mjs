@@ -18,6 +18,15 @@ export default class GodboundWord extends GodboundItemBase {
     static defineSchema() {
         const fields = foundry.data.fields
         const schema = super.defineSchema()
+        const requiredInteger = {
+            required: true,
+            integer: true,
+        }
+        schema.effort = new fields.NumberField({
+            ...requiredInteger,
+            default: 0,
+            inital: 0,
+        })
         schema.passive = new fields.SchemaField({
             name: new fields.StringField({
                 type: String,
@@ -49,5 +58,10 @@ export default class GodboundWord extends GodboundItemBase {
             ),
         })
         return schema
+    }
+
+    prepareDerivedData() {
+        super.prepareDerivedData()
+        this.effort = this.effort ?? 0
     }
 }

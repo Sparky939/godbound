@@ -76,17 +76,17 @@ export class GodboundActorSheet extends ActorSheet {
             }
         )
 
-        // Prepare active effects
-        context.effects = prepareActiveEffectCategories(
-            // A generator that returns all effects stored on the actor
-            // as well as any items
-            this.actor.allApplicableEffects()
-        )
-        context.wordPassives = []
-        for (let i of context.effects.passive.effects) {
-            if (i.parent.type != 'word') continue
-            context.wordPassives.push(i)
-        }
+        // // Prepare active effects
+        // context.effects = prepareActiveEffectCategories(
+        //     // A generator that returns all effects stored on the actor
+        //     // as well as any items
+        //     this.actor.allApplicableEffects()
+        // )
+        // context.wordPassives = []
+        // for (let i of context.effects.passive.effects) {
+        //     if (i.parent.type != 'word') continue
+        //     context.wordPassives.push(i)
+        // }
 
         return context
     }
@@ -146,7 +146,6 @@ export class GodboundActorSheet extends ActorSheet {
         }
         const words = []
         const gifts = []
-        const commitments = []
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || Item.DEFAULT_ICON
@@ -167,9 +166,6 @@ export class GodboundActorSheet extends ActorSheet {
             }
             if (i.type === 'project') {
                 projects.push(i)
-            }
-            if (i.type === 'commitment') {
-                commitments.push(i)
             }
             // Append to facts.
             else if (i.type === 'fact') {
@@ -193,6 +189,16 @@ export class GodboundActorSheet extends ActorSheet {
         context.projects = projects
         context.words = words
         context.gifts = gifts
+        context.effects = words
+            .concat(gifts)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((i) => {
+                return {
+                    ...i,
+                    name: i.type == 'word' ? `${i.name} Miracles` : i.name,
+                }
+            })
+            .filter((i) => i.system.effort > 0)
         context.powers = words
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((word) => {
@@ -203,11 +209,12 @@ export class GodboundActorSheet extends ActorSheet {
                     }),
                 }
             })
-        context.commitments = commitments
-        // context.passives = context.effects.passive.effects
-        // context.passives = context.effects.passive.filter(
-        //     (i) => i.parent.type == 'word'
-        // )
+
+        gifts.forEach((i) => {
+            if (i.system.word.id == null) {
+                i.delete()
+            }
+        })
     }
 
     /* -------------------------------------------- */
@@ -324,6 +331,12 @@ export class GodboundActorSheet extends ActorSheet {
             case 'fray-die': {
                 return this._rollFrayDie(element, dataset)
             }
+            case 'increment-effort': {
+                return this._onEffortIncrement(element, dataset)
+            }
+            case 'clear-effort': {
+                return this._onEffortClear(element, dataset)
+            }
             case 'create-gift': {
                 return this._onGiftCreate(element, dataset)
             }
@@ -348,12 +361,28 @@ export class GodboundActorSheet extends ActorSheet {
         event.preventDefault()
         const element = event.currentTarget
         const dataset = element.dataset
-        console.log(event, element, dataset)
         switch (dataset.context) {
             case 'decrement-effort': {
-                return this._onDecrementEffort(element, dataset)
+                return this._onEffectDecrement(element, dataset)
             }
         }
+    }
+    _onEffortIncrement(_element, dataset) {
+        if (this.actor.system.resources.effort.value > 0) {
+            const item = this.actor.items.get(dataset.itemId)
+            item.update({ 'system.effort': item.system.effort + 1 })
+        }
+    }
+    _onEffectDecrement(_element, dataset) {
+        const item = this.actor.items.get(dataset.itemId)
+        const newEffort = Math.max(item.system.effort - 1, 0)
+        item.update({
+            'system.effort': newEffort,
+        })
+    }
+    _onEffortClear(_element, dataset) {
+        const item = this.actor.items.get(dataset.itemId)
+        item.update({ 'system.effort': 0 })
     }
     _onExpand(_element, dataset) {
         // const row = element.closest('.row')

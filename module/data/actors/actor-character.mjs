@@ -222,7 +222,13 @@ export default class GodboundCharacter extends GodboundActorBase {
         }
         this.resources.effort.max = this.details.level.value - 1 + 2
         this.resources.influence.max = this.details.level.value - 1 + 2
-        this.resources.effort.value = this.resources.effort.max
+        this.resources.effort.value = this.parent.items.reduce(
+            (acc, i) =>
+                ['word', 'gift'].includes(i.type)
+                    ? Math.max(acc - i.system.effort, 0)
+                    : acc,
+            this.resources.effort.max
+        )
         this.resources.influence.value =
             this.resources.influence.max - influenceUsed
         this.health.max =

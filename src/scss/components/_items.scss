@@ -8,7 +8,7 @@
   border: $border-groove;
   font-weight: bold;
   > * {
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
   }
   .item-name {
@@ -147,6 +147,24 @@
   .item.row.word-row > .fixed-row > div > h4 {
     font-size: 16px;
     font-weight: bold;
+  }
+  .item.row.gift-row > .fixed-row {
+    font-size: 13px;
+    flex: 0 0 auto;
+  }
+  .item.row.gift-row > .fixed-row > .gift-effort {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .item.row.word-row > .fixed-row > .word-effort {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .item.row.gift-row > .fixed-row > .gift-effort > label {
+    padding-right: 5px;
+  }
+  .item.row.word-row > .fixed-row > .word-effort > label {
+    padding-right: 5px;
   }
 
   .item-prop {

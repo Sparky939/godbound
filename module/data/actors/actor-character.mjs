@@ -189,15 +189,30 @@ export default class GodboundCharacter extends GodboundActorBase {
         }
     }
     prepareLevelValues() {
-        const { dominionSpent, influenceUsed } = this.parent.items
-            .filter((i) => i.type == 'project')
-            .reduce(
-                (acc, i) => ({
-                    dominionSpent: acc.dominionSpent + i.system.cost.dominion,
-                    influenceUsed: acc.influenceUsed + i.system.cost.influence,
-                }),
-                { dominionSpent: 0, influenceUsed: 0 }
-            )
+        const { dominionSpent, influenceUsed, bonusEffort, bonusInfluence } =
+            this.parent.items
+                .filter((i) => i.type == 'project' || i.type == 'word')
+                .reduce(
+                    (acc, i) => ({
+                        dominionSpent:
+                            acc.dominionSpent + (i.system?.cost?.dominion || 0),
+                        influenceUsed:
+                            acc.influenceUsed +
+                            (i.system?.cost?.influence || 0),
+                        bonusEffort:
+                            acc.bonusEffort +
+                            (i.system?.effortOfTheWord ? 1 : 0),
+                        bonusInfluence:
+                            acc.bonusInfluence +
+                            (i.system?.influenceOfTheWord ? 1 : 0),
+                    }),
+                    {
+                        dominionSpent: 0,
+                        influenceUsed: 0,
+                        bonusEffort: 0,
+                        bonusInfluence: 0,
+                    }
+                )
         this.resources.dominion.spent = dominionSpent
         const { level, idx } = tables.advancement.reduce(
             (acc, r, idx) => {
@@ -220,8 +235,10 @@ export default class GodboundCharacter extends GodboundActorBase {
         } else {
             this.advancement = false
         }
-        this.resources.effort.max = this.details.level.value - 1 + 2
-        this.resources.influence.max = this.details.level.value - 1 + 2
+        this.resources.effort.max =
+            this.details.level.value - 1 + 2 + bonusEffort
+        this.resources.influence.max =
+            this.details.level.value - 1 + 2 + bonusInfluence
         this.resources.effort.value = this.parent.items.reduce(
             (acc, i) =>
                 ['word', 'gift'].includes(i.type)

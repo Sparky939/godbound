@@ -4,15 +4,13 @@
       class='profile-img'
       src='{{item.img}}'
       data-edit='img'
-      title='{{item.name}}'
-    />
+      title='{{item.name}}' />
     <div class='header-fields'>
       <h1 class='charname'><input
           name='name'
           type='text'
           value='{{item.name}}'
-          placeholder='Name'
-        /></h1>
+          placeholder='Name' /></h1>
       <div class='grid grid-2col'>
       </div>
     </div>
@@ -21,7 +19,7 @@
   {{! Sheet Tab Navigation }}
   <nav class='sheet-tabs tabs' data-group='primary'>
     <a class='item' data-tab='description'>Description</a>
-    <a class='item' data-tab='effects'>Effects</a>
+    <a class='item' data-tab='gifts-of-the-word'>Gifts of the Word</a>
   </nav>
 
   {{! Sheet Body }}
@@ -29,19 +27,21 @@
 
     {{! Description Tab }}
     <div class='tab' data-group='primary' data-tab='description'>
-      {{! Editors must receive enriched text data from getData to properly handle rolls }}
+      {{! Editors must receive enriched text data from getData to properly
+      handle rolls }}
       {{editor
-        enrichedDescription
-        target='system.description'
-        engine='prosemirror'
-        button=true
-        editable=editable
+      enrichedDescription
+      target='system.description'
+      engine='prosemirror'
+      button=true
+      editable=editable
       }}
     </div>
 
     {{! Effects Tab }}
-    <div class='tab effects' data-group='primary' data-tab='effects'>
-      {{> "systems/godbound/templates/item/parts/item-effects.hbs"}}
+    <div class='tab gifts-of-the-word' data-group='primary'
+      data-tab='gifts-of-the-word'>
+      {{> "systems/godbound/templates/item/parts/gifts-of-the-word.hbs"}}
     </div>
   </section>
 </form>

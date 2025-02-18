@@ -27,6 +27,18 @@ export default class GodboundWord extends GodboundItemBase {
             default: 0,
             inital: 0,
         })
+        schema.effortOfTheWord = new fields.BooleanField({
+            required: true,
+            initial: false,
+        })
+        schema.influenceOfTheWord = new fields.BooleanField({
+            required: true,
+            initial: false,
+        })
+        schema.excellenceOfTheWord = new fields.BooleanField({
+            required: true,
+            initial: false,
+        })
         schema.passive = new fields.SchemaField({
             name: new fields.StringField({
                 type: String,

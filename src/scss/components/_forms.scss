@@ -311,6 +311,18 @@ form.character.godbound {
 .sheet-body .tab .editor {
   height: 100%;
 }
+.sheet-body > .tab > .checkbox-list {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.sheet-body > .tab > .checkbox-list > label {
+  display: flex;
+  align-items: center;
+}
+.sheet-body > .tab > .checkbox-list > label > input[type="checkbox"] {
+  height: 15px;
+  width: 15px;
+}
 
 .tox {
   .tox-editor-container {

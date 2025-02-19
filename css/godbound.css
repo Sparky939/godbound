@@ -439,7 +439,7 @@
   align-items: center;
   margin: 0;
   padding: 0;
-  font-size: 15px;
+  font-size: 14px;
   width: 100%;
 }
 .godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .row-header {
@@ -498,6 +498,18 @@
 .godbound .sheet-body .tab,
 .godbound .sheet-body .tab .editor {
   height: 100%;
+}
+.godbound .sheet-body > .tab > .checkbox-list {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.godbound .sheet-body > .tab > .checkbox-list > label {
+  display: flex;
+  align-items: center;
+}
+.godbound .sheet-body > .tab > .checkbox-list > label > input[type=checkbox] {
+  height: 15px;
+  width: 15px;
 }
 .godbound .tox .tox-editor-container {
   background: #fff;

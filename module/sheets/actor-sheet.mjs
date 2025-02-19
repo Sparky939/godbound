@@ -204,15 +204,18 @@ export class GodboundActorSheet extends ActorSheet {
             .map((word) => {
                 return {
                     word,
-                    gifts: gifts.filter((g) => {
-                        return g.system.word.id == word._id
-                    }),
+                    gifts: gifts
+                        .filter((g) => {
+                            return g.system.word.id == word._id
+                        })
+                        .sort((a, b) => a.name.localeCompare(b.name)),
                 }
             })
 
         gifts.forEach((i) => {
             if (i.system.word.id == null) {
-                i.delete()
+                const item = this.actor.items.get(i._id)
+                if (item) item.delete()
             }
         })
     }
@@ -385,8 +388,6 @@ export class GodboundActorSheet extends ActorSheet {
         item.update({ 'system.effort': 0 })
     }
     _onExpand(_element, dataset) {
-        // const row = element.closest('.row')
-        // row.classList.toggle('expanded')
         const item = this.actor.items.get(dataset.itemId)
         item.update({ 'system.dropdown': !item.system.dropdown })
     }

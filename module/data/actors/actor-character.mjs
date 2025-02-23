@@ -1,7 +1,7 @@
 import { tables } from '../../helpers/tables.mjs'
 import fns from '../../helpers/numbers.mjs'
 import GodboundActorBase from './base-actor.mjs'
-import { GBAttackRoll, GBDamageRoll } from '../../helpers/roll.mjs'
+import { GBAttackRoll, GBDamageRoll, GBSaveRoll } from '../../helpers/roll.mjs'
 
 export default class GodboundCharacter extends GodboundActorBase {
     static defineSchema() {
@@ -133,10 +133,6 @@ export default class GodboundCharacter extends GodboundActorBase {
         this.prepareAttributes()
         this.prepareSaves()
         this.prepareLevelValues()
-        this.words = game.settings
-            .get('godbound', 'words')
-            .split(',')
-            .map((str) => String(str).trim())
         const wornItem = this.parent.items.find((i) => {
             return i.type === 'armour' && i.system.worn
         })
@@ -349,9 +345,29 @@ export default class GodboundCharacter extends GodboundActorBase {
         // To avoid having to enter AC every time we're calculating the AC
         // the resulting attack would have successfully hit
         const item = rawItem.system
-        const attackRoll = await new GBAttackRoll(item, this.getRollData(), {
-            straightDamage: item.straightDamage,
-        }).evaluate()
+        const attackParams = {
+            attackBonus: `@lvl + @${item.attribute}.mod${
+                item.hitBonus ? ' + @extraBonus.hit' : ''
+            }`,
+            damageBonus: `@${item.attribute}.mod${
+                item.damageBonus ? ' + @extraBonus.dmg' : ''
+            }`,
+            damageDie: item.damageDie,
+        }
+        const attackRoll = await new GBAttackRoll(
+            attackParams,
+            {
+                ...this.getRollData(),
+                extraBonus: {
+                    hit: item.hitBonus,
+                    dmg: item.damageBonus,
+                },
+            },
+            {
+                flavor: `${this.parent.name} attacks with ${item.parent.name}`,
+                straightDamage: item.straightDamage,
+            }
+        ).evaluate()
         attackRoll.toMessage()
         return attackRoll
     }
@@ -444,31 +460,16 @@ export default class GodboundCharacter extends GodboundActorBase {
         const formData = new FormDataExtended(html[0].querySelector('form'))
         const submitData = foundry.utils.expandObject(formData.object)
         const penalty = this.saves[saveId].penalty
-        let rollAug = ''
-        switch (submitData.rollType) {
-            case 'Normal':
-                rollAug = ''
-                break
-            case 'Advantage':
-                rollAug = 'kh'
-                break
-            case 'Disadvantage':
-                rollAug = 'kl'
-                break
-        }
         // create Roll
-        const roll = await new Roll(
-            `${submitData.rollType == 'Normal' ? 1 : 2}d20` +
-                rollAug +
-                (penalty ? `-4` : '') +
-                (submitData.otherModifiers
-                    ? `+ ${submitData.otherModifiers}`
-                    : '')
+        const roll = await new GBSaveRoll(
+            {
+                modifier: (penalty ? -4 : 0) + submitData.otherModifiers,
+            },
+            {
+                rollType: submitData.rollType,
+                checkRequirement: this.saves[saveId].value,
+            }
         ).evaluate()
-        const result = roll.total
-        const checkRequirement = this.saves[saveId].value
-        const outcome = result >= checkRequirement
-        // translate result into succes/failure
         const messageData = {
             speaker: {
                 alias: this.name,
@@ -476,14 +477,12 @@ export default class GodboundCharacter extends GodboundActorBase {
             },
             flavor: game.i18n.format(CONFIG.GODBOUND.SaveCheckResult, {
                 save: this.saves[saveId].label,
-                checkTarget: checkRequirement,
             }),
-            outcome: `${result} vs. ${checkRequirement}: ${
-                outcome ? 'Pass' : 'Fail'
-            }`,
             rollMode: submitData.rollMode,
         }
         roll.toMessage(messageData)
+        return roll
+        // translate result into success/failure
 
         return roll
     }

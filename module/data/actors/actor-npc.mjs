@@ -1,4 +1,14 @@
+import { GBSaveRoll } from '../../helpers/roll.mjs'
 import GodboundActorBase from './base-actor.mjs'
+
+const WEAPON_DIE_SIZE = {
+    unarmed: 2,
+    light: 6,
+    medium: 8,
+    heavy: 10,
+    ranged1h: 6,
+    ranged2h: 8,
+}
 
 /**
  * @param {object} resources
@@ -8,8 +18,7 @@ import GodboundActorBase from './base-actor.mjs'
  * @param {object} resources.effort
  * @param {number} resources.effort.value
  * @param {number} resources.effort.max
- * @param {number} defence.highSave
- * @param {number} defence.lowSave
+ * @param {number} defence.save
  * @param {number} defence.ac
  * @param {object} details
  * @param {string} details.move
@@ -26,6 +35,9 @@ export default class GodboundNPC extends GodboundActorBase {
             integer: true,
         }
         const schema = super.defineSchema()
+        schema.settings = new fields.SchemaField({
+            editMode: new fields.BooleanField({ initial: false }),
+        })
 
         schema.resources = new fields.SchemaField({
             hd: new fields.SchemaField({
@@ -41,24 +53,33 @@ export default class GodboundNPC extends GodboundActorBase {
                     initial: 0,
                 }),
                 max: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+                canSave: new fields.BooleanField({ initial: true }),
             }),
         })
 
         schema.defence = new fields.SchemaField({
-            highSave: new fields.NumberField({
+            save: new fields.NumberField({
                 ...requiredInteger,
                 initial: 12,
             }),
-            lowSave: new fields.NumberField({
-                ...requiredInteger,
-                initial: 15,
-            }),
             ac: new fields.NumberField({ ...requiredInteger, initial: 9 }),
+            supernatural: new fields.BooleanField({ initial: false }),
+        })
+        schema.offense = new fields.SchemaField({
+            actions: new fields.NumberField({
+                ...requiredInteger,
+                initial: 1,
+            }),
+            attack: new fields.NumberField({
+                ...requiredInteger,
+                initial: 0,
+            }),
+            damageDie: new fields.NumberField({ initial: 6 }),
+            damageBonus: new fields.NumberField({ initial: 0 }),
+            straightDamage: new fields.BooleanField({ initial: false }),
         })
 
         schema.details = new fields.SchemaField({
-            description: new fields.StringField({ initial: '' }),
-            goal: new fields.StringField({ initial: '' }),
             move: new fields.StringField({ initial: '30 ft.' }),
         })
 
@@ -69,11 +90,93 @@ export default class GodboundNPC extends GodboundActorBase {
 
     getRollData() {
         const data = {}
-
-        data.highsave = this.defence.highSave
-        data.lowsave = this.defence.lowSave
+        data.attackBonus = this.offense.attack
+        data.damageDie = this.offense.damageDie
+        data.damageBonus = this.offense.damageBonus
+        data.save = this.defence.save
         data.ac = this.defence.ac
 
         return data
+    }
+
+    toggleMode() {
+        this.settings.editMode = !this.settings.editMode
+    }
+
+    async attack() {
+        const attackParams = {
+            attackBonus: `@attackBonus`,
+            damageBonus: `@damageBonus`,
+        }
+        const attackRoll = await new GBAttackRoll(
+            attackParams,
+            this.getRollData(),
+            {
+                straightDamage: this.offense.straightDamage,
+            }
+        ).evaluate()
+        attackRoll.toMessage()
+        return attackRoll
+    }
+
+    async save() {
+        const dialogParams = {
+            options: CONFIG.GODBOUND.rollTypes, // Normal, Advantage, Disadvantage
+            defaultRollType: 'Normal',
+            rollModes: CONFIG.Dice.rollModes,
+            defaultRollMode: game.settings.get('core', 'rollMode'),
+        }
+        renderTemplate(
+            'systems/godbound/templates/actor/modal/save-check.hbs',
+            dialogParams
+        ).then((content) => {
+            return new Promise((resolve) => {
+                new Dialog({
+                    title: `${game.i18n.format(
+                        CONFIG.GODBOUND.SavePromptTitle,
+                        {
+                            save: this.saves[saveId].label,
+                        }
+                    )}: ${this.parent.name}`,
+                    content,
+                    buttons: {
+                        roll: {
+                            label: game.i18n.localize(CONFIG.GODBOUND.Roll),
+                            callback: (html) =>
+                                this._onSaveDialogSubmit(html, saveId),
+                        },
+                    },
+                    default: 'roll',
+                    close: () => resolve(null),
+                }).render(true)
+            })
+        })
+    }
+    async _onSaveDialogSubmit(html, saveId) {
+        const formData = new FormDataExtended(html[0].querySelector('form'))
+        const submitData = foundry.utils.expandObject(formData.object)
+        // create Roll
+        const roll = await new GBSaveRoll(
+            { modifier: submitData.otherModifiers },
+            { rollType: submitData.rollType, checkRequirement: this.save }
+        ).evaluate()
+
+        const result = roll.total
+        const checkRequirement = this.save
+        const outcome = result >= checkRequirement
+        const messageData = {
+            speaker: {
+                alias: this.name,
+                actor: this.parent,
+            },
+            flavor: game.i18n.format(CONFIG.GODBOUND.NPCSaveCheckResult),
+            outcome: `${result} vs. ${checkRequirement}: ${
+                outcome ? 'Pass' : 'Fail'
+            }`,
+            rollMode: submitData.rollMode,
+        }
+        roll.toMessage(messageData)
+
+        return roll
     }
 }

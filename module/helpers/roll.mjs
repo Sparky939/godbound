@@ -13,20 +13,27 @@ import { systemPath } from '../constants.mjs'
  */
 class GBAttackRoll {
     constructor(rollParams, data, options) {
-        this.attackRoll = new GBHitRoll(
-            `d20 + ${data.lvl} + @${rollParams.attribute}.mod${
-                rollParams.hitBonus ? ` + ${rollParams.hitBonus}` : ''
-            }`,
-            data,
-            options
-        )
-        this.damageRoll = new GBDamageRoll(
-            `d${rollParams.damageDie} + @${rollParams.attribute}.mod${
-                rollParams.damageBonus ? ` + ${rollParams.damageBonus}` : ''
-            }`,
-            data,
-            options
-        )
+        const { flavor, ...rest } = options
+        if (rollParams.damageDie) {
+            // TODO: Need to remove the reference to attribute to allow for split modifiers
+            this.attackRoll = new GBHitRoll(
+                `d20 + ${rollParams.attackBonus || 0}`,
+                data,
+                options
+            )
+            this.damageRoll = new GBDamageRoll(
+                `d${rollParams.damageDie} + ${rollParams.damageBonus || 0}`,
+                data,
+                {
+                    ...rest,
+                    flavor: `Damage${
+                        options.damageType ? ` [${options.damageType}]` : ''
+                    }`,
+                }
+            )
+        } else {
+            throw 'No damage die provided for attack'
+        }
     }
 
     /**
@@ -190,4 +197,48 @@ class GBDamageRoll extends Roll {
     }
 }
 
-export { GBAttackRoll, GBDamageRoll, GBHitRoll }
+class GBSaveRoll extends Roll {
+    constructor(data, options = { rollType: 'Normal', checkRequirement: 15 }) {
+        let rollAug = ''
+        switch (options.rollType) {
+            case 'Normal':
+                rollAug = ''
+                break
+            case 'Advantage':
+                rollAug = 'kh'
+                break
+            case 'Disadvantage':
+                rollAug = 'kl'
+                break
+        }
+        const formula =
+            `${options.rollType == 'Normal' ? 1 : 2}d20${rollAug}` +
+            (data.modifier ? ` + @modifier` : '')
+        super(formula, data, options)
+    }
+
+    static CHAT_TEMPLATE = systemPath('templates/dice/saveRoll.html')
+    static TOOLTIP_TEMPLATE = systemPath('templates/dice/tooltip.html')
+
+    async render({
+        flavor,
+        template = this.constructor.CHAT_TEMPLATE,
+        isPrivate = false,
+    } = {}) {
+        if (!this._evaluated)
+            await this.evaluate({ allowInteractive: !isPrivate })
+        const chatData = {
+            formula: isPrivate ? '???' : this._formula,
+            flavor: isPrivate ? null : flavor ?? this.options.flavor,
+            user: game.user.id,
+            tooltip: isPrivate ? '' : await this.getTooltip(),
+            total: isPrivate ? '?' : Math.round(this.total * 100) / 100,
+            success: isPrivate
+                ? '?'
+                : this.total >= this.options.checkRequirement,
+        }
+        return renderTemplate(template, chatData)
+    }
+}
+
+export { GBAttackRoll, GBDamageRoll, GBHitRoll, GBSaveRoll }

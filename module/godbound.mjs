@@ -2,7 +2,9 @@
 import { GodboundActor } from './documents/actor.mjs'
 import { GodboundItem } from './documents/item.mjs'
 // Import sheet classes.
-import { GodboundActorSheet } from './sheets/actor-sheet.mjs'
+import { GodboundCharacterActorSheet } from './sheets/actor-character-sheet.mjs'
+
+import { GodboundNPCActorSheet } from './sheets/actor-npc-sheet.mjs'
 import { GodboundItemSheet } from './sheets/item-sheet.mjs'
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs'
@@ -10,7 +12,12 @@ import {
     registerSystemSettings,
     registerDeferredSettings,
 } from './settings.mjs'
-import { GBDamageRoll, GBHitRoll } from './helpers/roll.mjs'
+import {
+    GBAttackRoll,
+    GBDamageRoll,
+    GBHitRoll,
+    GBSaveRoll,
+} from './helpers/roll.mjs'
 import { GODBOUND } from './helpers/config.mjs'
 // Import DataModel classes
 import * as models from './data/_module.mjs'
@@ -69,9 +76,15 @@ Hooks.once('init', function () {
 
     // Register sheet application classes
     Actors.unregisterSheet('core', ActorSheet)
-    Actors.registerSheet('godbound', GodboundActorSheet, {
+    Actors.registerSheet('godbound', GodboundCharacterActorSheet, {
         makeDefault: true,
-        label: 'GODBOUND.SheetLabels.Actor',
+        types: ['character'],
+        label: 'GODBOUND.SheetLabels.Character',
+    })
+    Actors.registerSheet('godbound', GodboundNPCActorSheet, {
+        makeDefault: true,
+        types: ['npc'],
+        label: 'GODBOUND.SheetLabels.NPC',
     })
     Items.unregisterSheet('core', ItemSheet)
     Items.registerSheet('godbound', GodboundItemSheet, {
@@ -79,7 +92,13 @@ Hooks.once('init', function () {
         label: 'GODBOUND.SheetLabels.Item',
     })
 
-    CONFIG.Dice.rolls = [...CONFIG.Dice.rolls, GBDamageRoll, GBHitRoll]
+    CONFIG.Dice.rolls = [
+        ...CONFIG.Dice.rolls,
+        GBDamageRoll,
+        GBHitRoll,
+        GBSaveRoll,
+        GBAttackRoll,
+    ]
 
     // Register system settings
     registerSystemSettings()

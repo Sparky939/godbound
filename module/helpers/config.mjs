@@ -1,5 +1,9 @@
 export const GODBOUND = {}
 
+export function getGlobalWords() {
+    return game.items.filter((i) => i.type === 'word')
+}
+
 /**
  * The set of Attribute Scores used `within the system.
  * @type {Object}
@@ -112,6 +116,7 @@ GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle'
 GODBOUND.AttributeCheckResult = 'GODBOUND.AttributeCheckResult'
 GODBOUND.PowerCreatePromptTitle = 'GODBOUND.PowerCreatePromptTitle'
 GODBOUND.SaveCheckResult = 'GODBOUND.SaveCheckResult'
+GODBOUND.NPCSaveCheckResult = 'GODBOUND.NPCSaveCheckResult'
 GODBOUND.SavePromptTitle = 'GODBOUND.SavePromptTitle'
 GODBOUND.AttackResult = 'GODBOUND.AttackResult'
 GODBOUND.DamageResult = 'GODBOUND.DamageResult'

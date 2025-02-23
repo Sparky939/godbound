@@ -1,3 +1,4 @@
+import { getGlobalWords, GODBOUND } from '../helpers/config.mjs'
 import {
     onManageActiveEffect,
     prepareActiveEffectCategories,
@@ -63,20 +64,35 @@ export class GodboundItemSheet extends ItemSheet {
         // Add the item's data to context.data for easier access, as well as flags.
         context.system = itemData.system
         context.flags = itemData.flags
-        var items = this.item.actor?.items
-        context.words = (items ?? [])
-            .filter((i) => i.type == 'word')
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .reduce((acc, i) => {
-                acc[i._id] = i.name
-                return acc
-            }, {})
-
+        const ownerType = context.item.parent?.type ?? 'global'
+        context.characterItem = ownerType === 'character'
+        context.npcItem = ownerType === 'npc'
+        context.globalItem = ownerType === 'global'
+        context.words = this.getWords().reduce((acc, i) => {
+            acc[i._id] = i.name
+            return acc
+        }, {})
         // Adding a pointer to CONFIG.GODBOUND
         context.config = CONFIG.GODBOUND
 
         // Prepare active effects for easier access
         context.effects = prepareActiveEffectCategories(this.item.effects)
+        if (this.item.type === 'gift') {
+            context.powerLabel =
+                GODBOUND.gifts.power[context.system.power.value] ??
+                'GODBOUND.Item.Gift.Power.Lesser'
+            context.typeLabel =
+                GODBOUND.gifts.type[context.system.type.value] ??
+                'GODBOUND.Item.Gift.Type.Action'
+            if (context.characterItem && context.item.actor) {
+                const word = this.getWords().find(
+                    (i) => i._id === context.item.system.word.id
+                )
+                if (word) {
+                    context.wordName = word.name
+                }
+            }
+        }
 
         return context
     }
@@ -96,5 +112,11 @@ export class GodboundItemSheet extends ItemSheet {
         html.on('click', '.effect-control', (ev) =>
             onManageActiveEffect(ev, this.item)
         )
+    }
+    getWords() {
+        var items = this.item.actor?.items
+        return (items ?? getGlobalWords())
+            .filter((i) => i.type === 'word')
+            .sort((a, b) => a.name.localeCompare(b.name))
     }
 }

@@ -1,4 +1,4 @@
-import { GODBOUND } from '../../helpers/config.mjs'
+import { getGlobalWords, GODBOUND } from '../../helpers/config.mjs'
 import GodboundItemBase from './base-item.mjs'
 
 /**
@@ -28,6 +28,7 @@ export default class GodboundGift extends GodboundItemBase {
             }),
             name: new fields.StringField({
                 required: true,
+                initial: '',
             }),
         })
 
@@ -37,11 +38,6 @@ export default class GodboundGift extends GodboundItemBase {
                 options: Object.keys(GODBOUND.gifts.power),
                 initial: 'lesser',
             }),
-            label: new fields.StringField({
-                required: true,
-                default: 'GODBOUND.Item.Gift.Power.Lesser',
-                initial: 'GODBOUND.Item.Gift.Power.Lesser',
-            }),
         })
 
         schema.type = new fields.SchemaField({
@@ -49,11 +45,6 @@ export default class GodboundGift extends GodboundItemBase {
                 required: true,
                 options: Object.keys(GODBOUND.gifts.type),
                 initial: 'action',
-            }),
-            label: new fields.StringField({
-                required: true,
-                default: 'GODBOUND.Item.Gift.Type.Action',
-                initial: 'GODBOUND.Item.Gift.Type.Action',
             }),
         })
         schema.effort = new fields.NumberField({
@@ -121,34 +112,5 @@ export default class GodboundGift extends GodboundItemBase {
 
     prepareDerivedData() {
         super.prepareDerivedData()
-        var words = (this.parent?.parent?.items ?? []).filter(
-            (i) => i.type == 'word'
-        )
-        var selectedWord = words.find((i) => i._id == this.word.id) ?? words[0]
-        this.word.id = selectedWord?._id ?? null
-        this.word.name = selectedWord?.name ?? null
-        const powerLabel = GODBOUND.gifts.power[this.power.value]
-        if (powerLabel) {
-            this.power.label = powerLabel
-        } else {
-            this.power.label = 'GODBOUND.Item.Gift.Power.Lesser'
-        }
-        this.power.label =
-            GODBOUND.gifts.power[this.power.value] ??
-            'GODBOUND.Item.Gift.Power.Lesser'
-        this.type.label =
-            GODBOUND.gifts.type[this.type.value] ??
-            'GODBOUND.Item.Gift.Type.Action'
-        this.effort = this.effort ?? 0
-    }
-    createGiftEffect(idx) {
-        const item = new GodboundGiftEffect(this.effects[idx], this)
-        this.parent.actor.createEmbeddedDocuments('Item', [item])
-    }
-    print({ speaker }) {
-        ChatMessage.create({
-            speaker,
-            content: `<b>${this.parent.name}:</b> ${this.description}`,
-        })
     }
 }

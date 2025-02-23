@@ -710,6 +710,12 @@
   border: none;
 }
 
+.dice-roll .dice-flavor {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
 .dice-roll .dice-result .dice-total {
   display: flex;
   justify-content: center;

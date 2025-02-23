@@ -16,13 +16,17 @@ templates. }}
                     placeholder='Name' /></h1>
             <div class='grid grid-3col'>
                 <span>
+                    {{#if characterItem}}
+                    {{wordName}}
+                    {{else}}
                     {{localize system.word.name}}
+                    {{/if}}
                 </span>
                 <span>
-                    {{localize system.power.label}}
+                    {{localize powerLabel}}
                 </span>
                 <span>
-                    {{localize system.type.label}}
+                    {{localize typeLabel}}
                 </span>
             </div>
         </div>
@@ -54,13 +58,18 @@ templates. }}
         <div class='tab attributes' data-group='primary' data-tab='details'>
             <div class='grid grid-2col'>
                 <label>{{localize 'Word'}}:</label>
-                <select name='system.word'>
+                {{#if characterItem}}
+                <select name='system.word.id'>
                     <option value></option>
                     {{selectOptions
                     words
                     selected=system.word.id
                     localize=true
                     }}
+                    {{else}}
+                    <input type='text' name='system.word.name'
+                        value='{{system.word.name}}' />
+                    {{/if}}
                 </select>
                 <label>{{localize 'Power'}}:</label>
                 <select name='system.power.value'>

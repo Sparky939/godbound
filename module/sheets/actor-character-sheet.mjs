@@ -1,17 +1,14 @@
-import {
-    onManageActiveEffect,
-    prepareActiveEffectCategories,
-} from '../helpers/effects.mjs'
+import { onManageActiveEffect } from '../helpers/effects.mjs'
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class GodboundActorSheet extends ActorSheet {
+export class GodboundCharacterActorSheet extends ActorSheet {
     /** @override */
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-            classes: ['godbound', 'sheet', 'actor'],
+            classes: ['godbound', 'sheet', 'actor', 'character'],
             width: 600,
             height: 600,
             tabs: [
@@ -26,7 +23,7 @@ export class GodboundActorSheet extends ActorSheet {
 
     /** @override */
     get template() {
-        return `systems/godbound/templates/actor/actor-${this.actor.type}-sheet.hbs`
+        return `systems/godbound/templates/actor/actor-character-sheet.hbs`
     }
 
     /* -------------------------------------------- */
@@ -50,15 +47,8 @@ export class GodboundActorSheet extends ActorSheet {
         context.config = CONFIG.GODBOUND
 
         // Prepare character data and items.
-        if (actorData.type == 'character') {
-            this._prepareItems(context)
-            this._prepareCharacterData(context)
-        }
-
-        // Prepare NPC data and items.
-        if (actorData.type == 'npc') {
-            this._prepareItems(context)
-        }
+        this._prepareItems(context)
+        this._prepareCharacterData(context)
 
         // Enrich biography info for display
         // Enrichment turns text like `[[/r 1d20]]` into buttons
@@ -75,18 +65,6 @@ export class GodboundActorSheet extends ActorSheet {
                 relativeTo: this.actor,
             }
         )
-
-        // // Prepare active effects
-        // context.effects = prepareActiveEffectCategories(
-        //     // A generator that returns all effects stored on the actor
-        //     // as well as any items
-        //     this.actor.allApplicableEffects()
-        // )
-        // context.wordPassives = []
-        // for (let i of context.effects.passive.effects) {
-        //     if (i.parent.type != 'word') continue
-        //     context.wordPassives.push(i)
-        // }
 
         return context
     }
@@ -132,7 +110,6 @@ export class GodboundActorSheet extends ActorSheet {
      */
     _prepareItems(context) {
         // Initialize containers.
-        // TODO: Move Facts to Characters only
         const items = []
         const weapons = []
         const armours = []
@@ -199,25 +176,38 @@ export class GodboundActorSheet extends ActorSheet {
                 }
             })
             .filter((i) => i.system.effort > 0)
-        context.powers = words
+        var unboundGifts = gifts.sort((a, b) => a.name.localeCompare(b.name))
+        context.powers = [
+            ...words,
+            { name: 'Unbound Gifts', type: 'word', unbound: true },
+        ]
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((word) => {
+                const gifts = unboundGifts.filter((g) => {
+                    return (
+                        g.system.word.id == word._id ||
+                        word.name == 'Unbound Gifts'
+                    )
+                })
+                unboundGifts = unboundGifts.filter((g) => {
+                    return g.system.word.id != word._id
+                })
                 return {
-                    word,
+                    word: {
+                        ...word,
+                        unbound: word.unbound,
+                        show: word.unbound && gifts.length > 0,
+                    },
                     gifts: gifts
                         .filter((g) => {
-                            return g.system.word.id == word._id
+                            return (
+                                g.system.word.id == word._id ||
+                                word.name == 'Unbound Gifts'
+                            )
                         })
                         .sort((a, b) => a.name.localeCompare(b.name)),
                 }
             })
-
-        gifts.forEach((i) => {
-            if (i.system.word.id == null) {
-                const item = this.actor.items.get(i._id)
-                if (item) item.delete()
-            }
-        })
     }
 
     /* -------------------------------------------- */
@@ -252,7 +242,7 @@ export class GodboundActorSheet extends ActorSheet {
         // Get the type of item to create.
         const type = dataset.type
         // Grab any data associated with this control.
-        const data = duplicate(dataset)
+        const data = foundry.utils.duplicate(dataset)
         // Initialize a default name.
         const name = `New ${type.capitalize()}`
         // Prepare the item object.

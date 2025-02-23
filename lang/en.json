@@ -44,7 +44,8 @@
             "Dominion": "Dominion"
         },
         "SheetLabels": {
-            "Actor": "Godbound Actor Sheet",
+            "Character": "Godbound Character Sheet",
+            "NPC": "Godbound NPC Sheet",
             "Item": "Godbound Item Sheet"
         },
         "Item": {
@@ -82,11 +83,12 @@
             "Inactive": "Inactive Effects"
         },
         "AttributePromptTitle": "{attribute} Ability Check",
-        "AttributeCheckResult": "{attribute} Check vs {checkTarget}",
+        "AttributeCheckResult": "{attribute} Check",
         "PowerCreatePromptTitle": "Create Power Item",
         "PowerTypePrompt": "Power Type",
         "SavePromptTitle": "{save} Save",
-        "SaveCheckResult": "{save} Save vs {checkTarget}",
+        "SaveCheckResult": "{save} Save",
+        "NPCSaveCheckResult": "Save",
         "AttackResult": "{item} Attack",
         "DamageResult": "{item} Damage",
         "DifficultyPrompt": "Select Difficulty",

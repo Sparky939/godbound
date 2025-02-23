@@ -13,8 +13,10 @@ export default class GodboundItemBase extends GodboundDataModel {
 
         return schema
     }
-
-    print(opts) {
-        // The bit where it creates a chat message goes here, I guess
+    print({ speaker }) {
+        ChatMessage.create({
+            speaker,
+            content: `<b>${this.parent.name}:</b> ${this.description}`,
+        })
     }
 }

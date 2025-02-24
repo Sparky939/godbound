@@ -34,6 +34,9 @@ export default class GodboundWeapon extends GodboundItem {
             required: true,
             initial: false,
         })
+        schema.damageType = new fields.StringField({
+            initial: '',
+        })
         return schema
     }
 

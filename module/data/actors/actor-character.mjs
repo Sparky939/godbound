@@ -366,6 +366,7 @@ export default class GodboundCharacter extends GodboundActorBase {
             {
                 flavor: `${this.parent.name} attacks with ${item.parent.name}`,
                 straightDamage: item.straightDamage,
+                damageType: item.damageType ?? '',
             }
         ).evaluate()
         attackRoll.toMessage()

@@ -71,6 +71,7 @@ export default class GodboundNPC extends GodboundActorBase {
             }),
             damageDie: new fields.StringField({ initial: '6' }),
             damageBonus: new fields.NumberField({ initial: 0 }),
+            damageType: new fields.StringField({ initial: '' }),
             straightDamage: new fields.BooleanField({ initial: false }),
         })
 
@@ -116,7 +117,9 @@ export default class GodboundNPC extends GodboundActorBase {
             attackParams,
             this.getRollData(),
             {
+                flavor: `${this.parent.name} attacks`,
                 straightDamage: this.offense.straightDamage,
+                damageType: this.offense.damageType,
             }
         ).evaluate()
         attackRoll.toMessage()

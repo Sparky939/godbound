@@ -408,7 +408,7 @@
   width: auto;
 }
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row * input {
-  width: 15px;
+  width: 35px;
   height: 20px;
 }
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .spent-row {
@@ -516,6 +516,22 @@
 }
 .godbound .tox .tox-edit-area {
   padding: 0 8px;
+}
+.godbound form.npc i.npc-toggle-icon.clickable {
+  position: absolute;
+  right: 10px;
+}
+.godbound form.npc.edit .view-sheet {
+  display: none;
+}
+.godbound form.npc.edit .edit-sheet {
+  display: block;
+}
+.godbound form.npc.view .view-sheet {
+  display: block;
+}
+.godbound form.npc.view .edit-sheet {
+  display: none;
 }
 .godbound .resource-label {
   font-weight: bold;

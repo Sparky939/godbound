@@ -183,12 +183,20 @@ export class GodboundCharacterActorSheet extends ActorSheet {
         ]
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((word) => {
-                const gifts = unboundGifts.filter((g) => {
-                    return (
-                        g.system.word.id == word._id ||
-                        word.name == 'Unbound Gifts'
-                    )
-                })
+                const gifts = unboundGifts
+                    .filter((g) => {
+                        return (
+                            g.system.word.id == word._id ||
+                            word.name == 'Unbound Gifts'
+                        )
+                    })
+                    .map((g) => {
+                        g.system.type.label =
+                            CONFIG.GODBOUND.gifts.type[g.system.type.value]
+                        g.system.power.label =
+                            CONFIG.GODBOUND.gifts.power[g.system.power.value]
+                        return g
+                    })
                 unboundGifts = unboundGifts.filter((g) => {
                     return g.system.word.id != word._id
                 })

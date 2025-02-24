@@ -1,15 +1,6 @@
 import { GBSaveRoll } from '../../helpers/roll.mjs'
 import GodboundActorBase from './base-actor.mjs'
 
-const WEAPON_DIE_SIZE = {
-    unarmed: 2,
-    light: 6,
-    medium: 8,
-    heavy: 10,
-    ranged1h: 6,
-    ranged2h: 8,
-}
-
 /**
  * @param {object} resources
  * @param {object} resources.hd
@@ -36,7 +27,11 @@ export default class GodboundNPC extends GodboundActorBase {
         }
         const schema = super.defineSchema()
         schema.settings = new fields.SchemaField({
-            editMode: new fields.BooleanField({ initial: false }),
+            mode: new fields.StringField({
+                required: true,
+                initial: 'edit',
+                options: Object.keys(CONFIG.GODBOUND.SheetModes),
+            }),
         })
 
         schema.resources = new fields.SchemaField({
@@ -74,7 +69,7 @@ export default class GodboundNPC extends GodboundActorBase {
                 ...requiredInteger,
                 initial: 0,
             }),
-            damageDie: new fields.NumberField({ initial: 6 }),
+            damageDie: new fields.StringField({ initial: '6' }),
             damageBonus: new fields.NumberField({ initial: 0 }),
             straightDamage: new fields.BooleanField({ initial: false }),
         })
@@ -100,7 +95,16 @@ export default class GodboundNPC extends GodboundActorBase {
     }
 
     toggleMode() {
-        this.settings.editMode = !this.settings.editMode
+        switch (this.settings.mode) {
+            case 'edit':
+                this.settings.mode = 'view'
+                break
+            case 'view':
+                this.settings.mode = 'edit'
+                break
+            default:
+                this.settings.mode = 'edit'
+        }
     }
 
     async attack() {

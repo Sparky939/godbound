@@ -209,7 +209,7 @@ form.character.godbound {
               vertical-align: middle; 
               width: auto;
               input {
-                width: 15px;
+                width: 35px;
                 height: 20px
               }
             }
@@ -291,7 +291,7 @@ form.character.godbound {
           grid-template-rows: auto 1fr;
           .editor {
             flex: 1 1 100%;
-            min-height: 50px;
+            min-height: 200px;
           }
         }
       }
@@ -331,5 +331,30 @@ form.character.godbound {
 
   .tox-edit-area {
     padding: 0 8px;
+  }
+}
+
+form.npc {
+  i.npc-toggle-icon.clickable {
+    position: absolute;
+    right: 10px;
+  }
+}
+
+form.npc.edit {
+  .view-sheet {
+    display: none;
+  }
+  .edit-sheet {
+    display: block;
+  }
+}
+
+form.npc.view {
+  .view-sheet {
+    display: block;
+  }
+  .edit-sheet {
+    display: none;
   }
 }

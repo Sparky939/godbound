@@ -486,7 +486,7 @@
 }
 .godbound form.character.godbound section.sheet-body .tab.active.facts section section .editor {
   flex: 1 1 100%;
-  min-height: 50px;
+  min-height: 200px;
 }
 .godbound .save-penalty.clickable {
   color: rgb(145, 21, 21);

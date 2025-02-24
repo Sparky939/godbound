@@ -131,7 +131,6 @@ export default class GodboundCharacter extends GodboundActorBase {
 
     prepareDerivedData() {
         this.prepareAttributes()
-        this.prepareSaves()
         this.prepareLevelValues()
         const wornItem = this.parent.items.find((i) => {
             return i.type === 'armour' && i.system.worn
@@ -250,6 +249,7 @@ export default class GodboundCharacter extends GodboundActorBase {
             (this.details.level.value - 1) *
                 (4 + Math.ceil(this.attributes.con.mod / 2))
         this.health.value = fns.bound(this.health.value, 0, this.health.max)
+        this.prepareSaves()
     }
     getSaveMod(save) {
         switch (save) {

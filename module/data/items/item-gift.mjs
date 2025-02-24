@@ -1,4 +1,4 @@
-import { getGlobalWords, GODBOUND } from '../../helpers/config.mjs'
+import { GODBOUND } from '../../helpers/config.mjs'
 import GodboundItemBase from './base-item.mjs'
 
 /**

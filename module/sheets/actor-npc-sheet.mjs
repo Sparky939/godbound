@@ -45,6 +45,10 @@ export class GodboundNPCActorSheet extends ActorSheet {
 
         // Adding a pointer to CONFIG.GODBOUND
         context.config = CONFIG.GODBOUND
+        context.editToggleIcon =
+            actorData.system.settings.mode === 'edit'
+                ? 'fa-magnifying-glass'
+                : 'fa-pen'
         this._prepareItems(context)
 
         // Enrich biography info for display
@@ -89,39 +93,32 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 tactics.push(i)
             }
         }
-
-        // Assign and return
-        context.words = words
-        context.gifts = gifts
-        context.effects = words
-            .concat(gifts)
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map((i) => {
-                return {
-                    ...i,
-                    name: i.type == 'word' ? `${i.name} Miracles` : i.name,
-                }
-            })
-            .filter((i) => i.system.effort > 0)
-        context.powers = words
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map((word) => {
-                return {
-                    word,
-                    gifts: gifts
-                        .filter((g) => {
-                            return g.system.word.id == word._id
-                        })
-                        .sort((a, b) => a.name.localeCompare(b.name)),
-                }
-            })
-
-        gifts.forEach((i) => {
-            if (i.system.word.id == null) {
-                const item = this.actor.items.get(i._id)
-                if (item) item.delete()
-            }
-        })
+        context.tactics = tactics
+        // // Assign and return
+        // context.words = words
+        // context.gifts = gifts
+        // context.effects = words
+        //     .concat(gifts)
+        //     .sort((a, b) => a.name.localeCompare(b.name))
+        //     .map((i) => {
+        //         return {
+        //             ...i,
+        //             name: i.type == 'word' ? `${i.name} Miracles` : i.name,
+        //         }
+        //     })
+        //     .filter((i) => i.system.effort > 0)
+        // context.powers = words
+        //     .sort((a, b) => a.name.localeCompare(b.name))
+        //     .map((word) => {
+        //         return {
+        //             word,
+        //             gifts: gifts
+        //                 .filter((g) => {
+        //                     return g.system.word.id == word._id
+        //                 })
+        //                 .sort((a, b) => a.name.localeCompare(b.name)),
+        //         }
+        //     })
     }
 
     /* -------------------------------------------- */

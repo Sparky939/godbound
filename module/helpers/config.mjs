@@ -111,6 +111,20 @@ GODBOUND.frayDice = {
     10: 'GODBOUND.FrayDice.10',
     12: 'GODBOUND.FrayDice.12',
 }
+GODBOUND.DamageDiceSizes = {
+    2: 'GODBOUND.DamageDiceSizes.2',
+    4: 'GODBOUND.DamageDiceSizes.4',
+    6: 'GODBOUND.DamageDiceSizes.6',
+    8: 'GODBOUND.DamageDiceSizes.8',
+    10: 'GODBOUND.DamageDiceSizes.10',
+    12: 'GODBOUND.DamageDiceSizes.12',
+    20: 'GODBOUND.DamageDiceSizes.20',
+}
+GODBOUND.SheetModes = {
+    edit: 'GODBOUND.SheetModes.Edit',
+    view: 'GODBOUND.SheetModes.View',
+    compact: 'GODBOUND.SheetModes.Compact',
+}
 
 GODBOUND.AttributePromptTitle = 'GODBOUND.AttributePromptTitle'
 GODBOUND.AttributeCheckResult = 'GODBOUND.AttributeCheckResult'

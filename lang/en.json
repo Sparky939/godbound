@@ -20,6 +20,15 @@
             "10": "10",
             "12": "12"
         },
+        "DamageDiceSizes": {
+            "2": "d2",
+            "4": "d4",
+            "6": "d6",
+            "8": "d8",
+            "10": "d10",
+            "12": "d12",
+            "20": "d20"
+        },
         "Armor": {
             "None": "Unarmoured",
             "Light": "Light",
@@ -47,6 +56,11 @@
             "Character": "Godbound Character Sheet",
             "NPC": "Godbound NPC Sheet",
             "Item": "Godbound Item Sheet"
+        },
+        "SheetModes": {
+            "Edit": "Edit",
+            "View": "View",
+            "Compact": "Compact"
         },
         "Item": {
             "Spell": {

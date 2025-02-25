@@ -1,0 +1,98 @@
+<div class="npc-form">
+    <div class="header">
+        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
+            height="100"
+            width="100" />`
+        <input name="name" type="text" value="{{actor.name}}"
+            placeholder="Name" />
+        <div class="input-group-2">
+            <label>
+                {{localize 'HD'}}:
+            </label>
+            <input type="text" name="system.resources.hd.value"
+                value="{{system.resources.hd.value}}" data-dtype="Number" />
+            /
+            <input type="text" name="system.resources.hd.max"
+                value="{{system.resources.hd.max}}" data-dtype="Number" />
+
+        </div>
+        <div class="input-group-1">
+
+            <label>
+                {{localize 'Move'}}
+            </label>
+            <input type="text" name="system.details.move"
+                value="{{system.details.move}}" />
+        </div>
+        <div class="input-group-2">
+            <label>
+                {{localize 'Effort'}}
+            </label>
+            <input type="text" name="system.resources.effort.value"
+                value="{{system.resources.effort.value}}" data-dtype="Number" />
+            /
+            <input type="text" name="system.resources.effort.max"
+                value="{{system.resources.effort.max}}" data-dtype="Number" />
+        </div>
+        <div class="input-group-1">
+            <label>
+                {{localize 'Mob'}}
+                <input type="checkbox" name="system.details.mob" {{checked
+                    system.details.mob}} />
+            </label>
+        </div>
+        <div class="input-group-1">
+            <label>
+                {{localize 'Can use Effort for saves'}}
+                <input type="checkbox" name="system.resources.effort.canSave"
+                    {{checked system.resources.effort.canSave}} />
+            </label>
+        </div>
+
+    </div>
+</div>
+
+<label>
+    {{localize 'Save'}}
+</label>
+<input type="text" name="system.defence.save"
+    value="{{system.defence.save}}"
+    data-dtype="Number" />
+<label>
+    {{localize 'AC'}}
+</label>
+<input type="text" name="system.defence.ac" value="{{system.defence.ac}}"
+    data-dtype="Number" />
+<label>
+    {{localize 'Supernatural Defense'}}
+    <input type="checkbox" name="system.defence.supernatural" {{checked
+        system.defence.supernatural}} />
+</label>
+<label>
+    {{localize 'Actions'}}
+</label>
+<input type="text" name="system.offense.actions"
+    value="{{system.offense.actions}}"
+    data-dtype="Number" />
+<label>
+    {{localize 'Attack'}}
+</label>
+<input type="text" name="system.offense.attack"
+    value="{{system.offense.attack}}" data-dtype="Number" />
+<label>
+    {{localize 'Damage'}}
+</label>
+<select name="system.offense.damageDie">
+    {{selectOptions config.DamageDiceSizes selected=system.offense.damageDie
+    localize=true}}
+</select>
+<label>
+    {{localize 'Damage Type'}}
+</label>
+<input type="text" name="system.offense.damageType"
+    value="{{system.offense.damageType}}" />
+<label>
+    {{localize 'Straight Damage'}}
+</label>
+<input type="checkbox" name="system.offense.straightDamage" {{checked
+    system.offense.straightDamage}} />

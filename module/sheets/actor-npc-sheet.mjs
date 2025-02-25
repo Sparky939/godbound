@@ -208,7 +208,10 @@ export class GodboundNPCActorSheet extends ActorSheet {
         }
     }
     _toggleMode() {
-        return this.actor.system.toggleMode()
+        this.actor.update({
+            'system.settings.mode':
+                this.actor.system.settings.mode === 'edit' ? 'view' : 'edit',
+        })
     }
     _onEffortIncrement(_element, dataset) {
         if (this.actor.system.resources.effort.value > 0) {

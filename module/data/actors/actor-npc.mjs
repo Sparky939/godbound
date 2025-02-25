@@ -77,6 +77,7 @@ export default class GodboundNPC extends GodboundActorBase {
 
         schema.details = new fields.SchemaField({
             move: new fields.StringField({ initial: '30 ft.' }),
+            mob: new fields.BooleanField({ initial: false }),
         })
 
         return schema
@@ -93,19 +94,6 @@ export default class GodboundNPC extends GodboundActorBase {
         data.ac = this.defence.ac
 
         return data
-    }
-
-    toggleMode() {
-        switch (this.settings.mode) {
-            case 'edit':
-                this.settings.mode = 'view'
-                break
-            case 'view':
-                this.settings.mode = 'edit'
-                break
-            default:
-                this.settings.mode = 'edit'
-        }
     }
 
     async attack() {

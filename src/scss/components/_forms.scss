@@ -35,7 +35,7 @@ form.character.godbound {
         align-items: center;
         padding-top: 5px;
         width: 100%;
-        div:has( + label) {
+        div:has(+ label) {
           padding-right: 10px;
         }
         .fa-solid.fa-heart.fa-xl.pr-4px {
@@ -46,10 +46,10 @@ form.character.godbound {
           flex-flow: row nowrap;
           align-items: center;
           width: 100%;
-          div:has( + label) {
+          div:has(+ label) {
             padding-right: 10px;
           }
-          label:has( + input[type="checkbox"]) {
+          label:has(+ input[type="checkbox"]) {
             padding-right: 2px;
           }
           input[type="checkbox"] {
@@ -193,7 +193,7 @@ form.character.godbound {
             grid-row: 2 / 3;
             display: grid;
             grid-template-columns: subgrid;
-            * {              
+            * {
               text-align: center;
               vertical-align: middle;
               width: auto;
@@ -204,22 +204,22 @@ form.character.godbound {
             grid-row: 3 / 4;
             display: grid;
             grid-template-columns: subgrid;
-            * {              
+            * {
               text-align: center;
-              vertical-align: middle; 
+              vertical-align: middle;
               width: auto;
               input {
                 width: 35px;
-                height: 20px
+                height: 20px;
               }
             }
           }
           .spent-row {
             grid-column: label-start / income-end;
             grid-row: 4 / 5;
-            * {              
+            * {
               text-align: left;
-              vertical-align: middle; 
+              vertical-align: middle;
               width: auto;
             }
           }
@@ -260,7 +260,7 @@ form.character.godbound {
           margin: 0 4px;
           .item-delete {
             display: none;
-            margin-left: 5px
+            margin-left: 5px;
           }
         }
         .word-pill:hover {
@@ -354,6 +354,85 @@ form.npc.edit {
   }
   .edit-sheet {
     display: block;
+    div.npc-form {
+      div.header {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: "profile-img top-form-row" "profile-img bottom-form-row";
+        grid-gap: 5px;
+        .profile-img {
+          grid-area: profile-img;
+          width: 100px;
+          height: 100px;
+        }
+        .form-row {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: flex-start;
+          align-items: center;
+          grid-gap: 5px;
+          .npc-name {
+            width: 150px;
+          }
+          .input-group-checkbox {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto;
+            justify-content: center;
+            font-weight: bold;
+            div {
+              grid-area: label;
+            }
+            input[type="checkbox"] {
+              grid-area: checkbox;
+              width: 12px;
+              height: 12px;
+            }
+          }
+          .input-group-1 {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto auto;
+            grid-template-areas: "label" "input";
+            grid-row: 1 / 2;
+            grid-gap: 5px;
+            label {
+              display: flex;
+              font-weight: bold;
+              justify-content: center;
+              grid-area: label;
+            }
+            input {
+              grid-area: input;
+              width: 35px;
+            }
+            input.move {
+              width: 70px;
+            }
+          }
+          .input-group-2 {
+            display: grid;
+            grid-gap: 5px;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-rows: auto auto;
+            grid-template-areas: "label label label" "input-1 divider input-2";
+            label {
+              grid-area: label;
+              display: flex;
+              justify-content: center;
+              font-weight: bold;
+            }
+            input {
+              width: 40px;
+            }
+            .divider {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 

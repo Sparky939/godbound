@@ -9,20 +9,27 @@
                 value="{{actor.name}}"
                 placeholder="Name" />
             <label class="input-group-checkbox">
-                <div>{{localize 'Mob'}}</div>
-                <input type="checkbox" name="system.details.mob" {{checked
+                <div {{#if
+                    system.details.mob}}class="checkbox-label clickable selected"
+                    {{else}}class="checkbox-label clickable"{{/if}}>{{localize
+                    'Mob'}}</div>
+                <input type="checkbox"
+                    name="system.details.mob" {{checked
                     system.details.mob}} />
             </label>
-            <div class="input-group-1 move">
+            <div class="input-group-1">
                 <label>
                     {{localize 'Move'}}
                 </label>
-                <input type="text" name="system.details.move"
+                <input class="move" type="text" name="system.details.move"
                     value="{{system.details.move}}" />
             </div>
-            <div class="input-group-1">
+            <div class="input-group-checkbox">
                 <label>
-                    <div>{{localize 'Effort saves'}}</div>
+                    <div {{#if
+                        system.resources.effort.canSave}}class="checkbox-label clickable selected"
+                        {{else}}class="checkbox-label clickable"{{/if}}>{{localize
+                        'Effort saves'}}</div>
                     <input type="checkbox"
                         name="system.resources.effort.canSave"
                         {{checked system.resources.effort.canSave}} />
@@ -71,7 +78,10 @@
                     data-dtype="Number" />
             </div>
             <label class="input-group-checkbox">
-                <div>{{localize 'Supernatural Defense'}}</div>
+                <div {{#if
+                    system.defence.supernatural}}class="checkbox-label clickable selected"
+                    {{else}}class="checkbox-label clickable"{{/if}}>{{localize
+                    'Supernatural Defense'}}</div>
                 <input type="checkbox" name="system.defence.supernatural"
                     {{checked
                     system.defence.supernatural}} />

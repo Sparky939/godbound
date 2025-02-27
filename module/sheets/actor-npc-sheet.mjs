@@ -161,39 +161,44 @@ export class GodboundNPCActorSheet extends ActorSheet {
      * @private
      */
     _handleClick(event) {
-        event.preventDefault()
         const element = event.currentTarget
         const dataset = element.dataset
-        switch (dataset.clickType) {
-            case 'toggle-mode': {
-                return this._toggleMode(element, dataset)
-            }
-            case 'print': {
-                return this._onPrint(element, dataset)
-            }
-            case 'expand': {
-                return this._onExpand(element, dataset)
-            }
-            case 'attack': {
-                return this.actor.system.attack()
-            }
-            case 'save-check': {
-                return this.actor.system.save()
-            }
-            case 'increment-effort': {
-                return this._onEffortIncrement(element, dataset)
-            }
-            case 'clear-effort': {
-                return this._onEffortClear(element, dataset)
-            }
-            case 'item-edit': {
-                return this._onItemEdit(element, dataset)
-            }
-            case 'item-delete': {
-                return this._onItemDelete(element, dataset)
-            }
-            case 'effect-control': {
-                return this._onEffectControl(element, dataset)
+        if (
+            dataset.clickType &&
+            (dataset.disabled == undefined || !dataset.disabled)
+        ) {
+            event.preventDefault()
+            switch (dataset.clickType) {
+                case 'toggle-mode': {
+                    return this._toggleMode(element, dataset)
+                }
+                case 'print': {
+                    return this._onPrint(element, dataset)
+                }
+                case 'expand': {
+                    return this._onExpand(element, dataset)
+                }
+                case 'attack': {
+                    return this.actor.system.attack()
+                }
+                case 'save-check': {
+                    return this.actor.system.save()
+                }
+                case 'increment-effort': {
+                    return this._onEffortIncrement(element, dataset)
+                }
+                case 'clear-effort': {
+                    return this._onEffortClear(element, dataset)
+                }
+                case 'item-edit': {
+                    return this._onItemEdit(element, dataset)
+                }
+                case 'item-delete': {
+                    return this._onItemDelete(element, dataset)
+                }
+                case 'effect-control': {
+                    return this._onEffectControl(element, dataset)
+                }
             }
         }
     }

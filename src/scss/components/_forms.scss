@@ -376,18 +376,21 @@ form.npc.edit {
             width: 150px;
           }
           .input-group-checkbox {
-            display: grid;
-            grid-template-columns: auto;
-            grid-template-rows: auto auto;
+            display: flex;
             justify-content: center;
+            align-items: center;
             font-weight: bold;
-            div {
+            div.checkbox-label {
+              color: rgb(0, 0, 0, 0.3);
               grid-area: label;
             }
+            div.checkbox-label.selected {
+              color: black;
+            }
             input[type="checkbox"] {
-              grid-area: checkbox;
-              width: 12px;
-              height: 12px;
+              display: none;
+              width: 0px;
+              height: 0px;
             }
           }
           .input-group-1 {

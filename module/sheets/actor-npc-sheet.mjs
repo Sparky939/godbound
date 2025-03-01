@@ -48,6 +48,7 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 ? 'fa-magnifying-glass'
                 : 'fa-pen'
         this._prepareItems(context)
+        context.system.resources.hd.max = this._getMaxHD(actorData.system)
         context.editMode = actorData.system.settings.mode === 'edit'
         context.viewMode = actorData.system.settings.mode === 'view'
         // Enrich biography info for display
@@ -118,6 +119,24 @@ export class GodboundNPCActorSheet extends ActorSheet {
         //                 .sort((a, b) => a.name.localeCompare(b.name)),
         //         }
         //     })
+    }
+    _getMaxHD(system) {
+        if (system.details.mob) {
+            const baseMobMax = system.resources.hd.baseMax + 10
+            switch (system.details.mobType) {
+                case 'small': {
+                    return baseMobMax
+                }
+                case 'large': {
+                    return baseMobMax * 2
+                }
+                case 'vast': {
+                    return baseMobMax * 3
+                }
+            }
+        } else {
+            return system.resources.hd.baseMax
+        }
     }
 
     /* -------------------------------------------- */

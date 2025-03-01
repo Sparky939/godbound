@@ -95,24 +95,7 @@ export default class GodboundNPC extends GodboundActorBase {
         return schema
     }
 
-    prepareDerivedData() {
-        if (this.mob) {
-            switch (this.details.mobType) {
-                case 'small': {
-                    this.resources.hd.max = this.resources.hd.baseMax + 10
-                }
-                case 'large': {
-                    this.resources.hd.max = (this.resources.hd.baseMax + 10) * 2
-                }
-                case 'vast': {
-                    this.resources.hd.max = (this.resources.hd.baseMax + 10) * 3
-                }
-            }
-            this.resources.hd.max = this.resources.hd.baseMax + 10
-        } else {
-            this.resources.hd.max = this.resources.hd.baseMax
-        }
-    }
+    prepareDerivedData() {}
 
     getRollData() {
         const data = {}

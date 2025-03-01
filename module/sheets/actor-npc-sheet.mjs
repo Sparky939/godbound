@@ -1,5 +1,3 @@
-import { onManageActiveEffect } from '../helpers/effects.mjs'
-
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -9,8 +7,8 @@ export class GodboundNPCActorSheet extends ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ['godbound', 'sheet', 'actor', 'npc'],
-            width: 600,
-            height: 600,
+            width: 710,
+            height: 160,
             tabs: [
                 {
                     navSelector: '.sheet-tabs',

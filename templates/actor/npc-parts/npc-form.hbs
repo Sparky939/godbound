@@ -1,122 +1,143 @@
 <div class="npc-form">
-    <div class="header">
-        <img class="profile-img" src="{{actor.img}}" data-edit="img"
-            title="{{actor.name}}"
-            height="100"
-            width="100" />
-        <div class="form-row">
-            <input class="npc-name" name="name" type="text"
-                value="{{actor.name}}"
-                placeholder="Name" />
+    <img class="profile-img" src="{{actor.img}}" data-edit="img"
+        title="{{actor.name}}"
+        height="100"
+        width="100" />
+    <div class="form-row">
+        <input class="npc-name" name="name" type="text"
+            value="{{actor.name}}"
+            placeholder="Name" />
+        <label class="input-group-checkbox">
+            <div {{#if
+                system.details.mob}}class="checkbox-label clickable selected"
+                {{else}}class="checkbox-label clickable"{{/if}}>{{localize
+                'Mob'}}</div>
+            <input type="checkbox"
+                name="system.details.mob" {{checked
+                system.details.mob}} />
+        </label>
+        <div class="input-group-1">
+            <label>
+                {{localize 'Move'}}
+            </label>
+            <input class="move" type="text" name="system.details.move"
+                value="{{system.details.move}}" />
+        </div>
+        <div class="checkbox-group">
             <label class="input-group-checkbox">
                 <div {{#if
-                    system.details.mob}}class="checkbox-label clickable selected"
+                    system.resources.effort.canSave}}class="checkbox-label clickable selected"
                     {{else}}class="checkbox-label clickable"{{/if}}>{{localize
-                    'Mob'}}</div>
+                    'Save with Effort'}}</div>
                 <input type="checkbox"
-                    name="system.details.mob" {{checked
-                    system.details.mob}} />
+                    name="system.resources.effort.canSave"
+                    {{checked system.resources.effort.canSave}} />
             </label>
-            <div class="input-group-1">
-                <label>
-                    {{localize 'Move'}}
-                </label>
-                <input class="move" type="text" name="system.details.move"
-                    value="{{system.details.move}}" />
-            </div>
-            <div class="input-group-checkbox">
-                <label>
-                    <div {{#if
-                        system.resources.effort.canSave}}class="checkbox-label clickable selected"
-                        {{else}}class="checkbox-label clickable"{{/if}}>{{localize
-                        'Effort saves'}}</div>
-                    <input type="checkbox"
-                        name="system.resources.effort.canSave"
-                        {{checked system.resources.effort.canSave}} />
-                </label>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="input-group-2">
-                <label>
-                    {{localize 'HD'}}
-                </label>
-                <input type="text" name="system.resources.hd.value"
-                    value="{{system.resources.hd.value}}" data-dtype="Number" />
-                <div class="divider">
-                    /
-                </div>
-                <input type="text" name="system.resources.hd.max"
-                    value="{{system.resources.hd.max}}" data-dtype="Number" />
-            </div>
-            <div class="input-group-2">
-                <label>
-                    {{localize 'Effort'}}
-                </label>
-                <input type="text" name="system.resources.effort.value"
-                    value="{{system.resources.effort.value}}"
-                    data-dtype="Number" />
-                /
-                <input type="text" name="system.resources.effort.max"
-                    value="{{system.resources.effort.max}}"
-                    data-dtype="Number" />
-            </div>
-            <div class="input-group-1">
-                <label>
-                    {{localize 'Save'}}
-                </label>
-                <input type="text" name="system.defence.save"
-                    value="{{system.defence.save}}"
-                    data-dtype="Number" />
-            </div>
-            <div class="input-group-1">
-                <label>
-                    {{localize 'AC'}}
-                </label>
-                <input type="text" name="system.defence.ac"
-                    value="{{system.defence.ac}}"
-                    data-dtype="Number" />
-            </div>
             <label class="input-group-checkbox">
                 <div {{#if
                     system.defence.supernatural}}class="checkbox-label clickable selected"
                     {{else}}class="checkbox-label clickable"{{/if}}>{{localize
-                    'Supernatural Defense'}}</div>
+                    'Immune to Non-magic damage'}}</div>
                 <input type="checkbox" name="system.defence.supernatural"
                     {{checked
                     system.defence.supernatural}} />
             </label>
         </div>
+        <div class="checkbox-group">
+            <label class="input-group-checkbox">
+                <div {{#if
+                    system.offense.straightDamage}}class="checkbox-label clickable selected"
+                    {{else}}class="checkbox-label clickable"{{/if}}>
+                    {{localize 'Straight Damage'}}
+                </div>
+                <input type="checkbox" name="system.offense.straightDamage"
+                    {{checked
+                    system.offense.straightDamage}} />
+            </label>
+            <label class="input-group-checkbox">
+                <div {{#if
+                    system.offense.magicalAttacks}}class="checkbox-label clickable selected"
+                    {{else}}class="checkbox-label clickable"{{/if}}>
+                    {{localize 'Magic Damage'}}
+                </div>
+                <input type="checkbox" name="system.offense.magicalAttacks"
+                    {{checked
+                    system.offense.magicalAttacks}} />
+            </label>
+        </div>
     </div>
-    <div class="body">
-        <label>
-            {{localize 'Actions'}}
-        </label>
-        <input type="text" name="system.offense.actions"
-            value="{{system.offense.actions}}"
-            data-dtype="Number" />
-        <label>
-            {{localize 'Attack'}}
-        </label>
-        <input type="text" name="system.offense.attack"
-            value="{{system.offense.attack}}" data-dtype="Number" />
-        <label>
-            {{localize 'Damage'}}
-        </label>
-        <select name="system.offense.damageDie">
-            {{selectOptions config.DamageDiceSizes
-            selected=system.offense.damageDie
-            localize=true}}
-        </select>
-        <label>
-            {{localize 'Damage Type'}}
-        </label>
-        <input type="text" name="system.offense.damageType"
-            value="{{system.offense.damageType}}" />
-        <label>
-            {{localize 'Straight Damage'}}
-        </label>
-        <input type="checkbox" name="system.offense.straightDamage" {{checked
-            system.offense.straightDamage}} />
+    <div class="form-row">
+        <div class="input-group-2">
+            <label>
+                {{localize 'HD'}}
+            </label>
+            <input type="text" name="system.resources.hd.value"
+                value="{{system.resources.hd.value}}" data-dtype="Number" />
+            <div class="divider">
+                /
+            </div>
+            <input type="text" name="system.resources.hd.max"
+                value="{{system.resources.hd.max}}" data-dtype="Number" />
+        </div>
+        <div class="input-group-2">
+            <label>
+                {{localize 'Effort'}}
+            </label>
+            <input type="text" name="system.resources.effort.value"
+                value="{{system.resources.effort.value}}"
+                data-dtype="Number" />
+            /
+            <input type="text" name="system.resources.effort.max"
+                value="{{system.resources.effort.max}}"
+                data-dtype="Number" />
+        </div>
+        <div class="input-group-1">
+            <label>
+                {{localize 'Save'}}
+            </label>
+            <input type="text" name="system.defence.save"
+                value="{{system.defence.save}}"
+                data-dtype="Number" />
+        </div>
+        <div class="input-group-1">
+            <label>
+                {{localize 'AC'}}
+            </label>
+            <input type="text" name="system.defence.ac"
+                value="{{system.defence.ac}}"
+                data-dtype="Number" />
+        </div>
+        <div class="input-group-1">
+            <label>
+                {{localize 'Actions'}}
+            </label>
+            <input type="text" name="system.offense.actions"
+                value="{{system.offense.actions}}"
+                data-dtype="Number" />
+        </div>
+        <div class="input-group-1">
+            <label>
+                {{localize 'Attack'}}
+            </label>
+            <input type="text" name="system.offense.attack"
+                value="{{system.offense.attack}}" data-dtype="Number" />
+        </div>
+        <div class="input-group-1">
+            <label>
+                {{localize 'Damage'}}
+            </label>
+            <select name="system.offense.damageDie">
+                {{selectOptions config.DamageDiceSizes
+                selected=system.offense.damageDie
+                localize=true}}
+            </select>
+        </div>
+        <div class="input-group-1">
+            <label>
+                {{localize 'Damage Type'}}
+            </label>
+            <input class="long" type="text" name="system.offense.damageType"
+                value="{{system.offense.damageType}}" />
+        </div>
     </div>
 </div>

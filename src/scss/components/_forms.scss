@@ -289,10 +289,10 @@ form.character.godbound {
         section {
           display: grid;
           grid-template-rows: auto 1fr;
-          .editor {
-            flex: 1 1 100%;
-            min-height: 200px;
-          }
+          // .editor {
+          //   flex: 1 1 100%;
+          //   min-height: 200px;
+          // }
         }
       }
     }
@@ -350,13 +350,31 @@ form.npc.locked {
     }
   }
 }
+.text-wrapper {
+  display: flex;
+  min-height: 0;
+  overflow: auto;
+  .editor {
+    flex: 1 1 100%;
+    min-height: 200px;
+  }
+}
 form.npc {
+  min-height: 0;
+  overflow: auto;
   nav.npc-tabs.tabs {
     flex: 0 0 25px;
     border-bottom: 1px solid var(--color-border-light-primary);
   }
   section.content {
-    div.tab.description {
+    min-height: 0;
+    overflow: auto;
+    div.tab.description.active {
+      height: 100%;
+      min-height: 0;
+      overflow: auto;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
       div.npc-header {
         display: grid;
         grid-template-columns: 100px 1fr;
@@ -368,10 +386,14 @@ form.npc {
           font-size: 20px;
         }
       }
-      div.editor > div.editor-content {
-        min-height: 250px;
-        max-height: 250px;
-        overflow-y: auto;
+      .npc-description {
+        display: flex;
+        min-height: 0;
+        overflow: auto;
+        .editor {
+          flex: 1 1 100%;
+          min-height: 200px;
+        }
       }
     }
     div.tab.details {

@@ -83,6 +83,11 @@ GODBOUND.WeaponTypes = {
     ranged2h: 'GODBOUND.Weapon.TwoHandedRanged',
     custom: 'GODBOUND.Weapon.Custom',
 }
+GODBOUND.MobTypes = {
+    small: 'GODBOUND.MobTypes.Small',
+    large: 'GODBOUND.MobTypes.Large',
+    vast: 'GODBOUND.MobTypes.Vast',
+}
 
 GODBOUND.gifts = {
     power: {

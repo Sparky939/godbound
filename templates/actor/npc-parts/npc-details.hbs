@@ -1,0 +1,13 @@
+<i class="fas {{editToggleIcon}} npc-toggle-icon clickable"
+    data-click-type="toggle-mode"
+    title="View Mode"></i>
+{{#if editMode}}
+<div class="edit-sheet">
+    {{> "systems/godbound/templates/actor/npc-parts/npc-form.hbs"}}
+</div>
+{{/if}}
+{{#if viewMode}}
+<div class="view-sheet">
+    {{> "systems/godbound/templates/actor/npc-parts/npc-view.hbs"}}
+</div>
+{{/if}}

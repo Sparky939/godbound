@@ -137,6 +137,11 @@
             "Light": "Light",
             "Medium": "Medium",
             "Heavy": "Heavy"
+        },
+        "MobTypes": {
+            "Small": "Small",
+            "Large": "Large",
+            "Vast": "Vast"
         }
     },
 

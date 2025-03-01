@@ -40,14 +40,20 @@ export default class GodboundNPC extends GodboundActorBase {
                     ...requiredInteger,
                     initial: 0,
                 }),
-                max: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+                baseMax: new fields.NumberField({
+                    ...requiredInteger,
+                    initial: 0,
+                }),
             }),
             effort: new fields.SchemaField({
                 value: new fields.NumberField({
                     ...requiredInteger,
                     initial: 0,
                 }),
-                max: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+                max: new fields.NumberField({
+                    ...requiredInteger,
+                    initial: 0,
+                }),
                 canSave: new fields.BooleanField({ initial: true }),
             }),
         })
@@ -57,6 +63,7 @@ export default class GodboundNPC extends GodboundActorBase {
                 ...requiredInteger,
                 initial: 12,
             }),
+            morale: new fields.NumberField({ ...requiredInteger, initial: 7 }),
             ac: new fields.NumberField({ ...requiredInteger, initial: 9 }),
             supernatural: new fields.BooleanField({ initial: false }),
         })
@@ -79,12 +86,33 @@ export default class GodboundNPC extends GodboundActorBase {
         schema.details = new fields.SchemaField({
             move: new fields.StringField({ initial: '30 ft.' }),
             mob: new fields.BooleanField({ initial: false }),
+            mobType: new fields.StringField({
+                initial: 'small',
+                choices: CONFIG.GODBOUND.MobTypes,
+            }),
         })
 
         return schema
     }
 
-    prepareDerivedData() {}
+    prepareDerivedData() {
+        if (this.mob) {
+            switch (this.details.mobType) {
+                case 'small': {
+                    this.resources.hd.max = this.resources.hd.baseMax + 10
+                }
+                case 'large': {
+                    this.resources.hd.max = (this.resources.hd.baseMax + 10) * 2
+                }
+                case 'vast': {
+                    this.resources.hd.max = (this.resources.hd.baseMax + 10) * 3
+                }
+            }
+            this.resources.hd.max = this.resources.hd.baseMax + 10
+        } else {
+            this.resources.hd.max = this.resources.hd.baseMax
+        }
+    }
 
     getRollData() {
         const data = {}
@@ -114,6 +142,54 @@ export default class GodboundNPC extends GodboundActorBase {
         attackRoll.toMessage()
         return attackRoll
     }
+
+    // morale() {
+    //     const dialogParams = {
+    //         rollModes: CONFIG.Dice.rollModes,
+    //         defaultRollMode: game.settings.get('core', 'rollMode'),
+    //     }
+    //     renderTemplate(
+    //         'systems/godbound/templates/actor/modal/morale-check.hbs',
+    //         dialogParams
+    //     ).then((content) => {
+    //         return new Promise((resolve) => {
+    //             new Dialog({
+    //                 title: `${game.i18n.localize(
+    //                     CONFIG.GODBOUND.MoralePromptTitle
+    //                 )}: ${this.parent.name}`,
+    //                 content,
+    //                 buttons: {
+    //                     roll: {
+    //                         label: game.i18n.localize(CONFIG.GODBOUND.Roll),
+    //                         callback: (html) =>
+    //                             this._onMoraleDialogSubmit(html),
+    //                     },
+    //                 },
+    //                 default: 'roll',
+    //                 close: () => resolve(null),
+    //             }).render(true)
+    //         })
+    //     })
+    // }
+    // async _onMoraleDialogSubmit(html) {
+    //     const formData = new FormDataExtended(html[0].querySelector('form'))
+    //     const submitData = foundry.utils.expandObject(formData.object)
+    //     // create Roll
+    //     const roll = await new Roll(`2d6`).evaluate();
+    //     const result = roll.total
+    //     const requirement = this.defence.morale + formData.moralModifier;
+    //     const messageData = {
+    //         speaker: {
+    //             alias: this.name,
+    //             actor: this.parent,
+    //         },
+    //         flavor: game.i18n.format(CONFIG.GODBOUND.MoraleCheckResult),
+    //         outcome: `${result} vs. ${requirement}: ${
+    //             result >= requirement ? 'Pass' : 'Fail'
+    //         }`,
+    //         rollMode: submitData.rollMode,
+    //     }
+    // }
 
     async save() {
         const dialogParams = {

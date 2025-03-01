@@ -241,4 +241,14 @@ class GBSaveRoll extends Roll {
     }
 }
 
+// class GBAttributeRoll extends Roll {
+//     constructor(data, options = { rollType: 'Normal', difficulty: 'mortal' }) {
+
+//     }
+// }
+
+// class GBMoraleRoll extends Roll {
+
+// }
+
 export { GBAttackRoll, GBDamageRoll, GBHitRoll, GBSaveRoll }

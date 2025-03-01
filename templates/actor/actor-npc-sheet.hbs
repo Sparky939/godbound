@@ -1,12 +1,20 @@
-<form class="{{cssClass}} {{actor.type}} {{system.settings.mode}} flexcol"
+<form class="{{cssClass}} {{actor.type}} flexcol"
   autocomplete="off">
-  <i class="fas {{editToggleIcon}} npc-toggle-icon clickable"
-    data-click-type="toggle-mode"
-    title="View Mode"></i>
-  <div class="edit-sheet">
-    {{> "systems/godbound/templates/actor/npc-parts/npc-form.hbs"}}
-  </div>
-  <div class="view-sheet">
-    {{> "systems/godbound/templates/actor/npc-parts/npc-view.hbs"}}
-  </div>
+  <nav class="npc-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">Description</a>
+    <a class="item" data-tab="details">Details</a>
+    <a class="item" data-tab="tactics">Tactics</a>
+  </nav>
+  <section class="content">
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{> "systems/godbound/templates/actor/npc-parts/npc-description.hbs"}}
+    </div>
+    <div class="tab details {{system.settings.mode}}" data-group="primary"
+      data-tab="details">
+      {{> "systems/godbound/templates/actor/npc-parts/npc-details.hbs"}}
+    </div>
+    <div class="tab tactics" data-group="primary" data-tab="tactics">
+      {{> "systems/godbound/templates/actor/npc-parts/npc-tactics.hbs"}}
+    </div>
+  </section>
 </form>

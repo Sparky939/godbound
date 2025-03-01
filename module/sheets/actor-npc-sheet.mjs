@@ -7,13 +7,13 @@ export class GodboundNPCActorSheet extends ActorSheet {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ['godbound', 'sheet', 'actor', 'npc'],
-            width: 710,
-            height: 160,
+            width: 600,
+            height: 435,
             tabs: [
                 {
-                    navSelector: '.sheet-tabs',
-                    contentSelector: '.sheet-body',
-                    initial: 'facts',
+                    navSelector: '.npc-tabs',
+                    contentSelector: '.content',
+                    initial: 'description',
                 },
             ],
         })
@@ -48,7 +48,8 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 ? 'fa-magnifying-glass'
                 : 'fa-pen'
         this._prepareItems(context)
-
+        context.editMode = actorData.system.settings.mode === 'edit'
+        context.viewMode = actorData.system.settings.mode === 'view'
         // Enrich biography info for display
         // Enrichment turns text like `[[/r 1d20]]` into buttons
         context.enrichedBiography = await TextEditor.enrichHTML(
@@ -181,6 +182,9 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 }
                 case 'save-check': {
                     return this.actor.system.save()
+                }
+                case 'morale-check': {
+                    return this.actor.system.morale()
                 }
                 case 'increment-effort': {
                     return this._onEffortIncrement(element, dataset)

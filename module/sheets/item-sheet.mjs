@@ -94,12 +94,6 @@ export class GodboundItemSheet extends ItemSheet {
             }
         }
         if (itemData.type === 'weapon') {
-            console.log(
-                this.item.type,
-                itemData,
-                itemData.system.weaponType,
-                itemData.system.weaponType === 'custom'
-            )
             context.isCustomType = itemData.system.weaponType === 'custom'
         }
 

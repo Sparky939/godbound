@@ -94,31 +94,6 @@ export class GodboundNPCActorSheet extends ActorSheet {
             }
         }
         context.tactics = tactics
-        // // Assign and return
-        // context.words = words
-        // context.gifts = gifts
-        // context.effects = words
-        //     .concat(gifts)
-        //     .sort((a, b) => a.name.localeCompare(b.name))
-        //     .map((i) => {
-        //         return {
-        //             ...i,
-        //             name: i.type == 'word' ? `${i.name} Miracles` : i.name,
-        //         }
-        //     })
-        //     .filter((i) => i.system.effort > 0)
-        // context.powers = words
-        //     .sort((a, b) => a.name.localeCompare(b.name))
-        //     .map((word) => {
-        //         return {
-        //             word,
-        //             gifts: gifts
-        //                 .filter((g) => {
-        //                     return g.system.word.id == word._id
-        //                 })
-        //                 .sort((a, b) => a.name.localeCompare(b.name)),
-        //         }
-        //     })
     }
     _getMaxHD(system) {
         if (system.details.mob) {
@@ -179,6 +154,7 @@ export class GodboundNPCActorSheet extends ActorSheet {
      * @private
      */
     _handleClick(event) {
+        const shiftClick = event.shiftKey
         const element = event.currentTarget
         const dataset = element.dataset
         if (
@@ -200,10 +176,10 @@ export class GodboundNPCActorSheet extends ActorSheet {
                     return this.actor.system.attack()
                 }
                 case 'save-check': {
-                    return this.actor.system.save()
+                    return this.actor.system.saveCheck({ shiftClick })
                 }
                 case 'morale-check': {
-                    return this.actor.system.morale()
+                    return this.actor.system.moraleCheck({ shiftClick })
                 }
                 case 'increment-effort': {
                     return this._onEffortIncrement(element, dataset)
@@ -267,9 +243,5 @@ export class GodboundNPCActorSheet extends ActorSheet {
             return item.system.print({
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             })
-    }
-    async _onSaveCheck(_element, dataset) {
-        const saveId = dataset.attribute
-        return this.actor.system.saveCheck(saveId, {})
     }
 }

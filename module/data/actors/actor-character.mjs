@@ -1,7 +1,13 @@
 import { tables } from '../../helpers/tables.mjs'
 import fns from '../../helpers/numbers.mjs'
 import GodboundActorBase from './base-actor.mjs'
-import { GBAttackRoll, GBDamageRoll, GBSaveRoll } from '../../helpers/roll.mjs'
+import {
+    GBAttackRoll,
+    GBDamageRoll,
+    GBSaveRoll,
+    rollAttributeCheck,
+    rollSaveCheck,
+} from '../../helpers/roll.mjs'
 
 export default class GodboundCharacter extends GodboundActorBase {
     static defineSchema() {
@@ -302,42 +308,57 @@ export default class GodboundCharacter extends GodboundActorBase {
         this.useShield = !this.useShield
     }
 
-    attributeCheck(attributeId, options = {}) {
-        const dialogParams = {
-            difficulties: CONFIG.GODBOUND.difficulties,
-            defaultDifficulty: 'Mortal',
-            attribute: CONFIG.GODBOUND.attributes[attributeId]?.label ?? '',
-            rollModes: CONFIG.Dice.rollModes,
-            defaultRollMode: game.settings.get('core', 'rollMode'),
-        }
-        renderTemplate(
-            'systems/godbound/templates/actor/modal/ability-check.hbs',
-            dialogParams
-        ).then((content) => {
-            return new Promise((resolve) =>
-                new Dialog({
-                    title: `${game.i18n.format(
-                        CONFIG.GODBOUND.AttributePromptTitle,
-                        {
-                            attribute: dialogParams.attribute,
-                        }
-                    )}: ${this.parent.name}`,
-                    content,
-                    buttons: {
-                        roll: {
-                            label: game.i18n.localize(CONFIG.GODBOUND.Roll),
-                            callback: (html) =>
-                                this._onAttributeDialogSubmit(
-                                    html,
-                                    attributeId
-                                ),
-                        },
-                    },
-                    default: 'roll',
-                    close: () => resolve(null),
-                }).render(true)
+    attributeCheck(attributeId, options = { shiftClick: false }) {
+        if (options.shiftClick) {
+            this._onAttributeDialogSubmit(
+                {
+                    relevantFact: false,
+                    otherModifiers: '',
+                    difficulty: 'Mortal',
+                },
+                attributeId
             )
-        })
+        } else {
+            const dialogParams = {
+                difficulties: CONFIG.GODBOUND.difficulties,
+                defaultDifficulty: 'Mortal',
+                attribute: CONFIG.GODBOUND.attributes[attributeId]?.label ?? '',
+                rollModes: CONFIG.Dice.rollModes,
+                defaultRollMode: game.settings.get('core', 'rollMode'),
+            }
+            renderTemplate(
+                'systems/godbound/templates/actor/modal/ability-check.hbs',
+                dialogParams
+            ).then((content) => {
+                return new Promise((resolve) =>
+                    new Dialog({
+                        title: `${game.i18n.format(
+                            CONFIG.GODBOUND.AttributePromptTitle,
+                            {
+                                attribute: dialogParams.attribute,
+                            }
+                        )}: ${this.parent.name}`,
+                        content,
+                        buttons: {
+                            roll: {
+                                label: game.i18n.localize(CONFIG.GODBOUND.Roll),
+                                callback: (html) =>
+                                    this._onAttributeDialogSubmit(
+                                        foundry.utils.expandObject(
+                                            new FormDataExtended(
+                                                html[0].querySelector('form')
+                                            ).object
+                                        ),
+                                        attributeId
+                                    ),
+                            },
+                        },
+                        default: 'roll',
+                        close: () => resolve(null),
+                    }).render(true)
+                )
+            })
+        }
     }
 
     // TODO: We need to re-introduce flavour text from the Weapon/Gift used
@@ -373,38 +394,53 @@ export default class GodboundCharacter extends GodboundActorBase {
         return attackRoll
     }
 
-    async saveCheck(saveId, options = {}) {
-        const dialogParams = {
-            options: CONFIG.GODBOUND.rollTypes, // Normal, Advantage, Disadvantage
-            defaultRollType: 'Normal',
-            rollModes: CONFIG.Dice.rollModes,
-            defaultRollMode: game.settings.get('core', 'rollMode'),
-        }
-        renderTemplate(
-            'systems/godbound/templates/actor/modal/save-check.hbs',
-            dialogParams
-        ).then((content) => {
-            return new Promise((resolve) => {
-                new Dialog({
-                    title: `${game.i18n.format(
-                        CONFIG.GODBOUND.SavePromptTitle,
-                        {
-                            save: this.saves[saveId].label,
-                        }
-                    )}: ${this.parent.name}`,
-                    content,
-                    buttons: {
-                        roll: {
-                            label: game.i18n.localize(CONFIG.GODBOUND.Roll),
-                            callback: (html) =>
-                                this._onSaveDialogSubmit(html, saveId),
+    async saveCheck(saveId, options = { shiftClick: false }) {
+        if (options.shiftClick) {
+            this._onSaveDialogSubmit(
+                { rollType: 'Normal', otherModifiers: 0, rollMode: 'roll' },
+                saveId
+            )
+        } else {
+            const dialogParams = {
+                options: CONFIG.GODBOUND.rollTypes, // Normal, Advantage, Disadvantage
+                defaultRollType: 'Normal',
+                rollModes: CONFIG.Dice.rollModes,
+                defaultRollMode: game.settings.get('core', 'rollMode'),
+            }
+            renderTemplate(
+                'systems/godbound/templates/actor/modal/save-check.hbs',
+                dialogParams
+            ).then((content) => {
+                return new Promise((resolve) => {
+                    new Dialog({
+                        title: `${game.i18n.format(
+                            CONFIG.GODBOUND.SavePromptTitle,
+                            {
+                                save: this.saves[saveId].label,
+                                checkTarget: this.saves[saveId].value,
+                            }
+                        )}: ${this.parent.name}`,
+                        content,
+                        buttons: {
+                            roll: {
+                                label: game.i18n.localize(CONFIG.GODBOUND.Roll),
+                                callback: (html) =>
+                                    this._onSaveDialogSubmit(
+                                        foundry.utils.expandObject(
+                                            new FormDataExtended(
+                                                html[0].querySelector('form')
+                                            ).object
+                                        ),
+                                        saveId
+                                    ),
+                            },
                         },
-                    },
-                    default: 'roll',
-                    close: () => resolve(null),
-                }).render(true)
+                        default: 'roll',
+                        close: () => resolve(null),
+                    }).render(true)
+                })
             })
-        })
+        }
     }
 
     async rollFrayDie() {
@@ -417,74 +453,41 @@ export default class GodboundCharacter extends GodboundActorBase {
         return damageRoll
     }
 
-    async _onAttributeDialogSubmit(html, attributeId) {
-        const formData = new FormDataExtended(html[0].querySelector('form'))
-        const submitData = foundry.utils.expandObject(formData.object)
+    async _onAttributeDialogSubmit(submitData, attributeId) {
         // create Roll
-        const roll = await new Roll(
-            'd20' +
-                (submitData.relevantFact ? '+4' : '') +
-                (submitData.bonus ? `+ ${submitData.bonus}` : '')
-        ).evaluate()
-        const result = roll.total
-        const difficulty =
-            submitData.difficulty == 'Mortal'
-                ? 0
-                : submitData.difficulty == 'PushLimits'
-                ? 4
-                : 8
-        const checkRequirement =
-            21 - this.attributes[attributeId].value + difficulty
-        const outcome =
-            (roll.number == 20 || result >= checkRequirement) &&
-            roll.number != 1
-        // translate result into succes/failure
+        const attribute = this.attributes[attributeId]
+        const roll = await rollAttributeCheck({
+            ...submitData,
+            attributeValue: attribute.value,
+            attributeLabel: attribute.label,
+        })
         const messageData = {
             speaker: {
                 alias: this.name,
                 actor: this.parent,
             },
-            flavor: game.i18n.format(CONFIG.GODBOUND.AttributeCheckResult, {
-                attribute: this.attributes[attributeId].label,
-                checkTarget: checkRequirement,
-            }),
-            outcome: `${result} vs. ${checkRequirement}: ${
-                outcome ? 'Pass' : 'Fail'
-            }`,
             rollMode: submitData.rollMode,
         }
         roll.toMessage(messageData)
-
         return roll
     }
-    async _onSaveDialogSubmit(html, saveId) {
-        const formData = new FormDataExtended(html[0].querySelector('form'))
-        const submitData = foundry.utils.expandObject(formData.object)
+    async _onSaveDialogSubmit(submitData, saveId) {
         const penalty = this.saves[saveId].penalty
         // create Roll
-        const roll = await new GBSaveRoll(
-            {
-                modifier: (penalty ? -4 : 0) + submitData.otherModifiers,
-            },
-            {
-                rollType: submitData.rollType,
-                checkRequirement: this.saves[saveId].value,
-            }
-        ).evaluate()
+        const roll = await rollSaveCheck({
+            ...submitData,
+            penalty,
+            checkRequirement: this.saves[saveId].value,
+            saveLabel: this.saves[saveId].label,
+        })
         const messageData = {
             speaker: {
                 alias: this.name,
                 actor: this.parent,
             },
-            flavor: game.i18n.format(CONFIG.GODBOUND.SaveCheckResult, {
-                save: this.saves[saveId].label,
-            }),
             rollMode: submitData.rollMode,
         }
         roll.toMessage(messageData)
-        return roll
-        // translate result into success/failure
-
         return roll
     }
 }

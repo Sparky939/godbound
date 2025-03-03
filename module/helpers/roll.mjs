@@ -1,5 +1,5 @@
 import { systemPath } from '../constants.mjs'
-
+import { GODBOUND } from './config.mjs'
 /**
  * A pair of Rolls that comprise a single attack roll
  * It includes a hit roll and a damage roll
@@ -197,23 +197,50 @@ class GBDamageRoll extends Roll {
     }
 }
 
+export async function rollSaveCheck(
+    opts = { penalty: false, otherModifiers: 0, rollType: 'Normal' }
+) {
+    if (!opts.checkRequirement) {
+        throw new Error('Check requirement is required')
+    }
+    if (!opts.saveLabel) {
+        throw new Error('Save label is required')
+    }
+    var formula = 'd20'
+    if (opts.rollType == 'Advantage') {
+        formula += 'kh'
+    }
+    if (opts.rollType == 'Disadvantage') {
+        formula += 'kl'
+    }
+    if (opts.penalty) {
+        formula += ' - 4'
+    }
+    if (
+        typeof opts.otherModifiers == 'number' &&
+        opts.otherModifiers != 0 &&
+        !isNaN(opts.otherModifiers)
+    ) {
+        formula += `${
+            opts.otherModifiers > 0
+                ? ` + ${opts.otherModifiers}`
+                : opts.otherModifiers
+        }`
+    }
+    if (opts.rollType == 'Normal') {
+        formula = `1${formula}`
+    } else {
+        formula = `2${formula}`
+    }
+    return await new GBSaveRoll(formula, {}, opts).evaluate()
+}
+
 class GBSaveRoll extends Roll {
-    constructor(data, options = { rollType: 'Normal', checkRequirement: 15 }) {
-        let rollAug = ''
-        switch (options.rollType) {
-            case 'Normal':
-                rollAug = ''
-                break
-            case 'Advantage':
-                rollAug = 'kh'
-                break
-            case 'Disadvantage':
-                rollAug = 'kl'
-                break
-        }
-        const formula =
-            `${options.rollType == 'Normal' ? 1 : 2}d20${rollAug}` +
-            (data.modifier ? ` + @modifier` : '')
+    constructor(
+        formula,
+        data,
+        options = { rollType: 'Normal', checkRequirement: 15 }
+    ) {
         super(formula, data, options)
     }
 
@@ -221,7 +248,6 @@ class GBSaveRoll extends Roll {
     static TOOLTIP_TEMPLATE = systemPath('templates/dice/tooltip.html')
 
     async render({
-        flavor,
         template = this.constructor.CHAT_TEMPLATE,
         isPrivate = false,
     } = {}) {
@@ -229,7 +255,12 @@ class GBSaveRoll extends Roll {
             await this.evaluate({ allowInteractive: !isPrivate })
         const chatData = {
             formula: isPrivate ? '???' : this._formula,
-            flavor: isPrivate ? null : flavor ?? this.options.flavor,
+            flavor: isPrivate
+                ? null
+                : game.i18n.format(CONFIG.GODBOUND.SaveCheckResult, {
+                      save: this.options.saveLabel,
+                      checkTarget: this.options.checkRequirement,
+                  }),
             user: game.user.id,
             tooltip: isPrivate ? '' : await this.getTooltip(),
             total: isPrivate ? '?' : Math.round(this.total * 100) / 100,
@@ -241,14 +272,121 @@ class GBSaveRoll extends Roll {
     }
 }
 
-// class GBAttributeRoll extends Roll {
-//     constructor(data, options = { rollType: 'Normal', difficulty: 'mortal' }) {
+export async function rollAttributeCheck(
+    opts = { relevantFact: false, otherModifiers: 0, difficulty: 'Mortal' }
+) {
+    if (!opts.attributeValue) {
+        throw new Error('Attribute value is required')
+    }
+    if (!opts.attributeLabel) {
+        throw new Error('Attribute label is required')
+    }
+    var formula = '1d20'
+    if (opts.relevantFact) {
+        formula += ' + 4'
+    }
+    if (
+        typeof opts.otherModifiers == 'number' &&
+        opts.otherModifiers != 0 &&
+        !isNaN(opts.otherModifiers)
+    ) {
+        formula += `${
+            opts.otherModifiers > 0
+                ? ` + ${opts.otherModifiers}`
+                : opts.otherModifiers
+        }`
+    }
+    return await new GBAttributeRoll(formula, {}, opts).evaluate()
+}
 
-//     }
-// }
+class GBAttributeRoll extends Roll {
+    constructor(formula, data, options = { difficulty: 'mortal' }) {
+        let diffcultyModifier = 0
+        switch (options.difficulty) {
+            case 'Mortal': {
+                diffcultyModifier = 0
+                break
+            }
+            case 'PushLimits': {
+                diffcultyModifier = 4
+                break
+            }
+            case 'Heroic': {
+                diffcultyModifier = 8
+                break
+            }
+        }
+        const checkRequirement = 21 - options.attributeValue + diffcultyModifier
+        super(formula, data, { ...options, checkRequirement })
+    }
 
-// class GBMoraleRoll extends Roll {
+    static CHAT_TEMPLATE = systemPath('templates/dice/saveRoll.html')
+    static TOOLTIP_TEMPLATE = systemPath('templates/dice/tooltip.html')
 
-// }
+    async render({
+        template = this.constructor.CHAT_TEMPLATE,
+        isPrivate = false,
+    } = {}) {
+        if (!this._evaluated)
+            await this.evaluate({ allowInteractive: !isPrivate })
+        const autoSuccess = this.number == 20
+        const autoFailure = this.number == 1
+        const chatData = {
+            formula: isPrivate ? '???' : this._formula,
+            flavor: isPrivate
+                ? null
+                : game.i18n.format(CONFIG.GODBOUND.AttributeCheckResult, {
+                      attribute: this.options.attributeLabel,
+                      checkTarget: this.options.checkRequirement,
+                  }),
+            user: game.user.id,
+            tooltip: isPrivate ? '' : await this.getTooltip(),
+            total: isPrivate ? '?' : Math.round(this.total * 100) / 100,
+            success: isPrivate
+                ? '?'
+                : !autoFailure &&
+                  (autoSuccess || this.total >= this.options.checkRequirement),
+        }
+        return renderTemplate(template, chatData)
+    }
+}
 
-export { GBAttackRoll, GBDamageRoll, GBHitRoll, GBSaveRoll }
+class GBMoraleRoll extends Roll {
+    constructor(_, data, options = { morale: 7 }) {
+        const formula = '2d12'
+        super(formula, data, options)
+    }
+
+    static CHAT_TEMPLATE = systemPath('templates/dice/saveRoll.html')
+    static TOOLTIP_TEMPLATE = systemPath('templates/dice/tooltip.html')
+
+    async render({
+        template = this.constructor.CHAT_TEMPLATE,
+        isPrivate = false,
+    } = {}) {
+        if (!this._evaluated)
+            await this.evaluate({ allowInteractive: !isPrivate })
+        const chatData = {
+            formula: isPrivate ? '???' : this._formula,
+            flavor: isPrivate
+                ? null
+                : game.i18n.format(CONFIG.GODBOUND.MoraleCheckResult, {
+                      checkTarget: this.options.morale,
+                  }),
+            user: game.user.id,
+            tooltip: isPrivate ? '' : await this.getTooltip(),
+            total: isPrivate ? '?' : Math.round(this.total * 100) / 100,
+            success: isPrivate ? '?' : this.total <= this.options.morale,
+        }
+        return renderTemplate(template, chatData)
+    }
+}
+
+export {
+    GBAttributeRoll,
+    GBAttackRoll,
+    GBDamageRoll,
+    GBHitRoll,
+    GBMoraleRoll,
+    GBSaveRoll,
+}

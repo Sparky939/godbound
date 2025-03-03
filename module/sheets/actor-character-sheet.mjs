@@ -307,54 +307,60 @@ export class GodboundCharacterActorSheet extends ActorSheet {
      * @private
      */
     _handleClick(event) {
-        event.preventDefault()
+        const shiftClick = event.shiftKey
         const element = event.currentTarget
         const dataset = element.dataset
-        switch (dataset.clickType) {
-            case 'print': {
-                return this._onPrint(element, dataset)
-            }
-            case 'toggle-shield': {
-                return this._onShieldToggle(element, dataset)
-            }
-            case 'expand': {
-                return this._onExpand(element, dataset)
-            }
-            case 'roll': {
-                return this._onRoll(element, dataset)
-            }
-            case 'attribute-check': {
-                return this._onAttributeCheck(element, dataset)
-            }
-            case 'save-check': {
-                return this._onSaveCheck(element, dataset)
-            }
-            case 'fray-die': {
-                return this._rollFrayDie(element, dataset)
-            }
-            case 'increment-effort': {
-                return this._onEffortIncrement(element, dataset)
-            }
-            case 'clear-effort': {
-                return this._onEffortClear(element, dataset)
-            }
-            case 'create-gift': {
-                return this._onGiftCreate(element, dataset)
-            }
-            case 'item-create': {
-                return this._onItemCreate(element, dataset)
-            }
-            case 'item-edit': {
-                return this._onItemEdit(element, dataset)
-            }
-            case 'item-delete': {
-                return this._onItemDelete(element, dataset)
-            }
-            case 'effect-control': {
-                return this._onEffectControl(element, dataset)
-            }
-            case 'equip': {
-                return this._onEquip(element, dataset)
+        if (
+            dataset.clickType &&
+            (dataset.disabled == undefined || !dataset.disabled)
+        ) {
+            event.preventDefault()
+            switch (dataset.clickType) {
+                case 'print': {
+                    return this._onPrint(element, dataset)
+                }
+                case 'toggle-shield': {
+                    return this._onShieldToggle(element, dataset)
+                }
+                case 'expand': {
+                    return this._onExpand(element, dataset)
+                }
+                case 'roll': {
+                    return this._onRoll(element, dataset)
+                }
+                case 'attribute-check': {
+                    return this._onAttributeCheck(element, dataset, shiftClick)
+                }
+                case 'save-check': {
+                    return this._onSaveCheck(element, dataset, shiftClick)
+                }
+                case 'fray-die': {
+                    return this._rollFrayDie(element, dataset)
+                }
+                case 'increment-effort': {
+                    return this._onEffortIncrement(element, dataset)
+                }
+                case 'clear-effort': {
+                    return this._onEffortClear(element, dataset)
+                }
+                case 'create-gift': {
+                    return this._onGiftCreate(element, dataset)
+                }
+                case 'item-create': {
+                    return this._onItemCreate(element, dataset)
+                }
+                case 'item-edit': {
+                    return this._onItemEdit(element, dataset)
+                }
+                case 'item-delete': {
+                    return this._onItemDelete(element, dataset)
+                }
+                case 'effect-control': {
+                    return this._onEffectControl(element, dataset)
+                }
+                case 'equip': {
+                    return this._onEquip(element, dataset)
+                }
             }
         }
     }
@@ -449,13 +455,13 @@ export class GodboundCharacterActorSheet extends ActorSheet {
         onManageActiveEffect(element, document)
     }
 
-    async _onAttributeCheck(_element, dataset) {
+    async _onAttributeCheck(_element, dataset, shiftClick) {
         const attributeId = dataset.attribute
-        return this.actor.system.attributeCheck(attributeId, {})
+        return this.actor.system.attributeCheck(attributeId, { shiftClick })
     }
-    async _onSaveCheck(_element, dataset) {
+    async _onSaveCheck(_element, dataset, shiftClick) {
         const saveId = dataset.attribute
-        return this.actor.system.saveCheck(saveId, {})
+        return this.actor.system.saveCheck(saveId, { shiftClick })
     }
     async _rollFrayDie() {
         return this.actor.system.rollFrayDie()

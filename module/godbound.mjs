@@ -14,8 +14,10 @@ import {
 } from './settings.mjs'
 import {
     GBAttackRoll,
+    GBAttributeRoll,
     GBDamageRoll,
     GBHitRoll,
+    GBMoraleRoll,
     GBSaveRoll,
 } from './helpers/roll.mjs'
 import { GODBOUND } from './helpers/config.mjs'
@@ -67,6 +69,7 @@ Hooks.once('init', function () {
         weapon: models.GodboundWeapon,
         word: models.GodboundWord,
         gift: models.GodboundGift,
+        // tactic: models.GodboundTactic,
     }
 
     // Active Effects are never copied to the Actor,
@@ -98,6 +101,8 @@ Hooks.once('init', function () {
         GBHitRoll,
         GBSaveRoll,
         GBAttackRoll,
+        GBMoraleRoll,
+        GBAttributeRoll,
     ]
 
     // Register system settings

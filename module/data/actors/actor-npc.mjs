@@ -1,4 +1,9 @@
-import { GBSaveRoll } from '../../helpers/roll.mjs'
+import {
+    GBMoraleRoll,
+    GBSaveRoll,
+    GBAttackRoll,
+    rollSaveCheck,
+} from '../../helpers/roll.mjs'
 import GodboundActorBase from './base-actor.mjs'
 
 /**
@@ -95,7 +100,9 @@ export default class GodboundNPC extends GodboundActorBase {
         return schema
     }
 
-    prepareDerivedData() {}
+    prepareDerivedData() {
+        super.prepareDerivedData()
+    }
 
     getRollData() {
         const data = {}
@@ -112,6 +119,7 @@ export default class GodboundNPC extends GodboundActorBase {
         const attackParams = {
             attackBonus: `@attackBonus`,
             damageBonus: `@damageBonus`,
+            damageDie: `@damageDie`,
         }
         const attackRoll = await new GBAttackRoll(
             attackParams,
@@ -126,112 +134,128 @@ export default class GodboundNPC extends GodboundActorBase {
         return attackRoll
     }
 
-    // morale() {
-    //     const dialogParams = {
-    //         rollModes: CONFIG.Dice.rollModes,
-    //         defaultRollMode: game.settings.get('core', 'rollMode'),
-    //     }
-    //     renderTemplate(
-    //         'systems/godbound/templates/actor/modal/morale-check.hbs',
-    //         dialogParams
-    //     ).then((content) => {
-    //         return new Promise((resolve) => {
-    //             new Dialog({
-    //                 title: `${game.i18n.localize(
-    //                     CONFIG.GODBOUND.MoralePromptTitle
-    //                 )}: ${this.parent.name}`,
-    //                 content,
-    //                 buttons: {
-    //                     roll: {
-    //                         label: game.i18n.localize(CONFIG.GODBOUND.Roll),
-    //                         callback: (html) =>
-    //                             this._onMoraleDialogSubmit(html),
-    //                     },
-    //                 },
-    //                 default: 'roll',
-    //                 close: () => resolve(null),
-    //             }).render(true)
-    //         })
-    //     })
-    // }
-    // async _onMoraleDialogSubmit(html) {
-    //     const formData = new FormDataExtended(html[0].querySelector('form'))
-    //     const submitData = foundry.utils.expandObject(formData.object)
-    //     // create Roll
-    //     const roll = await new Roll(`2d6`).evaluate();
-    //     const result = roll.total
-    //     const requirement = this.defence.morale + formData.moralModifier;
-    //     const messageData = {
-    //         speaker: {
-    //             alias: this.name,
-    //             actor: this.parent,
-    //         },
-    //         flavor: game.i18n.format(CONFIG.GODBOUND.MoraleCheckResult),
-    //         outcome: `${result} vs. ${requirement}: ${
-    //             result >= requirement ? 'Pass' : 'Fail'
-    //         }`,
-    //         rollMode: submitData.rollMode,
-    //     }
-    // }
-
-    async save() {
-        const dialogParams = {
-            options: CONFIG.GODBOUND.rollTypes, // Normal, Advantage, Disadvantage
-            defaultRollType: 'Normal',
-            rollModes: CONFIG.Dice.rollModes,
-            defaultRollMode: game.settings.get('core', 'rollMode'),
-        }
-        renderTemplate(
-            'systems/godbound/templates/actor/modal/save-check.hbs',
-            dialogParams
-        ).then((content) => {
-            return new Promise((resolve) => {
-                new Dialog({
-                    title: `${game.i18n.format(
-                        CONFIG.GODBOUND.SavePromptTitle,
-                        {
-                            save: this.saves[saveId].label,
-                        }
-                    )}: ${this.parent.name}`,
-                    content,
-                    buttons: {
-                        roll: {
-                            label: game.i18n.localize(CONFIG.GODBOUND.Roll),
-                            callback: (html) =>
-                                this._onSaveDialogSubmit(html, saveId),
-                        },
-                    },
-                    default: 'roll',
-                    close: () => resolve(null),
-                }).render(true)
+    moraleCheck(options = { shiftClick: false }) {
+        if (options.shiftClick) {
+            this._onMoraleDialogSubmit({
+                otherModifiers: '',
+                rollMode: game.settings.get('core', 'rollMode'),
             })
-        })
+        } else {
+            const dialogParams = {
+                rollModes: CONFIG.Dice.rollModes,
+                defaultRollMode: game.settings.get('core', 'rollMode'),
+            }
+            renderTemplate(
+                'systems/godbound/templates/actor/modal/bonus-dialog.hbs',
+                dialogParams
+            ).then((content) => {
+                return new Promise((resolve) => {
+                    new Dialog({
+                        title: `${game.i18n.localize(
+                            CONFIG.GODBOUND.MoralePromptTitle
+                        )}: ${this.parent.name}`,
+                        content,
+                        buttons: {
+                            roll: {
+                                label: game.i18n.localize(CONFIG.GODBOUND.Roll),
+                                callback: (html) =>
+                                    this._onMoraleDialogSubmit(
+                                        foundry.utils.expandObject(
+                                            new FormDataExtended(
+                                                html[0].querySelector('form')
+                                            ).object
+                                        )
+                                    ),
+                            },
+                        },
+                        default: 'roll',
+                        close: () => resolve(null),
+                    }).render(true)
+                })
+            })
+        }
     }
-    async _onSaveDialogSubmit(html, saveId) {
-        const formData = new FormDataExtended(html[0].querySelector('form'))
-        const submitData = foundry.utils.expandObject(formData.object)
+    async _onMoraleDialogSubmit(submitData) {
         // create Roll
-        const roll = await new GBSaveRoll(
-            { modifier: submitData.otherModifiers },
-            { rollType: submitData.rollType, checkRequirement: this.save }
+        const roll = await new GBMoraleRoll(
+            '',
+            {},
+            { morale: this.defence.morale + submitData.otherModifiers }
         ).evaluate()
-
-        const result = roll.total
-        const checkRequirement = this.save
-        const outcome = result >= checkRequirement
         const messageData = {
             speaker: {
                 alias: this.name,
                 actor: this.parent,
             },
-            flavor: game.i18n.format(CONFIG.GODBOUND.NPCSaveCheckResult),
-            outcome: `${result} vs. ${checkRequirement}: ${
-                outcome ? 'Pass' : 'Fail'
-            }`,
             rollMode: submitData.rollMode,
         }
         roll.toMessage(messageData)
+        return roll
+    }
 
+    async saveCheck(options = { shiftClick: false }) {
+        if (options.shiftClick) {
+            this._onSaveDialogSubmit({
+                otherModifiers: '',
+                rollType: 'Normal',
+                rollMode: game.settings.get('core', 'rollMode'),
+            })
+        } else {
+            const dialogParams = {
+                options: CONFIG.GODBOUND.rollTypes, // Normal, Advantage, Disadvantage
+                defaultRollType: 'Normal',
+                rollModes: CONFIG.Dice.rollModes,
+                defaultRollMode: game.settings.get('core', 'rollMode'),
+            }
+            renderTemplate(
+                'systems/godbound/templates/actor/modal/save-check.hbs',
+                dialogParams
+            ).then((content) => {
+                return new Promise((resolve) => {
+                    new Dialog({
+                        title: `${game.i18n.format(
+                            CONFIG.GODBOUND.SavePromptTitle,
+                            {
+                                save: 'NPC',
+                            }
+                        )}: ${this.parent.name}`,
+                        content,
+                        buttons: {
+                            roll: {
+                                label: game.i18n.localize(CONFIG.GODBOUND.Roll),
+                                callback: (html) =>
+                                    this._onSaveDialogSubmit(
+                                        foundry.utils.expandObject(
+                                            new FormDataExtended(
+                                                html[0].querySelector('form')
+                                            ).object
+                                        )
+                                    ),
+                            },
+                        },
+                        default: 'roll',
+                        close: () => resolve(null),
+                    }).render(true)
+                })
+            })
+        }
+    }
+    async _onSaveDialogSubmit(submitData) {
+        // create Roll
+        console.log(this)
+        const roll = await rollSaveCheck({
+            ...submitData,
+            checkRequirement: this.defence.save,
+            saveLabel: 'NPC',
+        })
+        const messageData = {
+            speaker: {
+                alias: this.name,
+                actor: this.parent,
+            },
+            rollMode: submitData.rollMode,
+        }
+        roll.toMessage(messageData)
         return roll
     }
 }

@@ -37,6 +37,9 @@ export default class GodboundWeapon extends GodboundItem {
         schema.damageType = new fields.StringField({
             initial: '',
         })
+        schema.customFormula = new fields.StringField({
+            initial: '',
+        })
         return schema
     }
 
@@ -47,8 +50,15 @@ export default class GodboundWeapon extends GodboundItem {
         if (weaponDie && weaponDie != this.damageDie) {
             this.damageDie = weaponDie
         }
-        this.isCustomType = this.type == 'custom'
+        this.isCustomType = this.weaponType == 'custom'
         this.roll.diceBonus = `+@${this.attribute}.mod`
-        this.formula = `${this.roll.diceNum}${this.roll.diceSize}${this.roll.diceBonus}`
+        this.formula = this.isCustomType
+            ? this.customFormula
+            : `${this.roll.diceNum}${this.roll.diceSize}${this.roll.diceBonus}`
+        this.formualDisplay =
+            this.formula +
+            (this.straightDamage
+                ? ` Straight ${this.damageType} Damage`
+                : ` ${this.damageType} Damage`)
     }
 }

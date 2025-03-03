@@ -53,12 +53,11 @@
           localize=true}}
         </select>
         {{#if isCustomType}}
-        <label>Damage Die</label>
+        <label>Custom Damage</label>
         <input
           type='text'
-          name='system.damageDie'
-          value='{{system.damageDie}}'
-          data-dtype='Number' />
+          name='system.customFormula'
+          value='{{system.customFormula}}' />
         {{/if}}
         <label>Straight Damage?</label>
         <input type="checkbox" name="system.straightDamage" {{checked

@@ -22,7 +22,11 @@ class GBAttackRoll {
                 options
             )
             this.damageRoll = new GBDamageRoll(
-                `d${rollParams.damageDie} + ${rollParams.damageBonus || 0}`,
+                options.custom && options.customFormula !== ''
+                    ? options.customFormula
+                    : `d${rollParams.damageDie} + ${
+                          rollParams.damageBonus || 0
+                      }`,
                 data,
                 {
                     ...rest,
@@ -285,6 +289,21 @@ export async function rollAttributeCheck(
     if (opts.relevantFact) {
         formula += ' + 4'
     }
+    let diffcultyModifier = 0
+    switch (opts.difficulty) {
+        case 'Mortal': {
+            diffcultyModifier = 0
+            break
+        }
+        case 'PushLimits': {
+            diffcultyModifier = 4
+            break
+        }
+        case 'Heroic': {
+            diffcultyModifier = 8
+            break
+        }
+    }
     if (
         typeof opts.otherModifiers == 'number' &&
         opts.otherModifiers != 0 &&
@@ -296,27 +315,19 @@ export async function rollAttributeCheck(
                 : opts.otherModifiers
         }`
     }
+    if (diffcultyModifier != 0) {
+        formula += `${
+            diffcultyModifier > 0
+                ? ` - ${diffcultyModifier}`
+                : diffcultyModifier
+        }`
+    }
     return await new GBAttributeRoll(formula, {}, opts).evaluate()
 }
 
 class GBAttributeRoll extends Roll {
     constructor(formula, data, options = { difficulty: 'mortal' }) {
-        let diffcultyModifier = 0
-        switch (options.difficulty) {
-            case 'Mortal': {
-                diffcultyModifier = 0
-                break
-            }
-            case 'PushLimits': {
-                diffcultyModifier = 4
-                break
-            }
-            case 'Heroic': {
-                diffcultyModifier = 8
-                break
-            }
-        }
-        const checkRequirement = 21 - options.attributeValue + diffcultyModifier
+        const checkRequirement = 21 - options.attributeValue
         super(formula, data, { ...options, checkRequirement })
     }
 

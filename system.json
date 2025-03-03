@@ -2,7 +2,7 @@
     "id": "godbound",
     "title": "Godbound",
     "description": "The Godbound system for FoundryVTT!",
-    "version": "0.1.19",
+    "version": "0.1.20",
     "authors": [
         {
             "name": "Cyberspark",
@@ -38,7 +38,7 @@
     "packFolders": [],
     "socket": false,
     "manifest": "https://raw.githubusercontent.com/Sparky939/godbound/refs/heads/main/system.json",
-    "download": "https://github.com/Sparky939/godbound/releases/download/release-0.1.19/godbound.zip",
+    "download": "https://github.com/Sparky939/godbound/releases/download/release-0.1.20/godbound.zip",
     "background": "systems/godbound/assets/anvil-impact.png",
     "grid": {
         "distance": 5,

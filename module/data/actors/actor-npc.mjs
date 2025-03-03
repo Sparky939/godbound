@@ -242,7 +242,6 @@ export default class GodboundNPC extends GodboundActorBase {
     }
     async _onSaveDialogSubmit(submitData) {
         // create Roll
-        console.log(this)
         const roll = await rollSaveCheck({
             ...submitData,
             checkRequirement: this.defence.save,

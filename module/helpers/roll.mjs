@@ -14,6 +14,7 @@ import { GODBOUND } from './config.mjs'
 class GBAttackRoll {
     constructor(rollParams, data, options) {
         const { flavor, ...rest } = options
+        this.options = options
         if (rollParams.damageDie) {
             // TODO: Need to remove the reference to attribute to allow for split modifiers
             this.attackRoll = new GBHitRoll(
@@ -37,6 +38,15 @@ class GBAttackRoll {
             )
         } else {
             throw 'No damage die provided for attack'
+        }
+    }
+
+    getFormulas() {
+        return {
+            attack: this.attackRoll.formula,
+            damage: this.damageRoll.formula,
+            straightDamage: this.options.straightDamage,
+            damageType: this.options.damageType,
         }
     }
 

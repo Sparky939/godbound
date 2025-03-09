@@ -27,7 +27,15 @@
       </div>
       <h4>{{weapon.name}}</h4>
     </div>
-    <div class='item-formula item-prop'>{{weapon.system.formula}}</div>
+    <div class='item-formula item-prop'>
+      <div>
+        {{weapon.system.roll.attack}}
+      </div>
+      <div>
+        {{weapon.system.roll.damage}} {{#if
+        weapon.system.roll.straightDamage}}Straight
+        {{/if}}{{weapon.system.roll.damageType}} Damage</div>
+    </div>
     <div class='item-controls'>
       <a
         class='item-control clickable item-edit' data-click-type="item-edit"

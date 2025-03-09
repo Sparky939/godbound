@@ -364,8 +364,12 @@ export default class GodboundCharacter extends GodboundActorBase {
 
     // TODO: We need to re-introduce flavour text from the Weapon/Gift used
     async attack(rawItem) {
-        // To avoid having to enter AC every time we're calculating the AC
-        // the resulting attack would have successfully hit
+        const attackRoll = await this.getAttackFormula(rawItem).evaluate()
+        attackRoll.toMessage()
+        return attackRoll
+    }
+
+    getAttackFormula(rawItem) {
         const item = rawItem.system
         const attackParams = {
             attackBonus: `@lvl + @${item.attribute}.mod${
@@ -376,7 +380,7 @@ export default class GodboundCharacter extends GodboundActorBase {
             }`,
             damageDie: item.damageDie,
         }
-        const attackRoll = await new GBAttackRoll(
+        const roll = new GBAttackRoll(
             attackParams,
             {
                 ...this.getRollData(),
@@ -392,9 +396,8 @@ export default class GodboundCharacter extends GodboundActorBase {
                 custom: item.isCustomType,
                 customFormula: item.customFormula,
             }
-        ).evaluate()
-        attackRoll.toMessage()
-        return attackRoll
+        )
+        return roll
     }
 
     async saveCheck(saveId, options = { shiftClick: false }) {

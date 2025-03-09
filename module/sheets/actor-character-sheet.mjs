@@ -130,7 +130,10 @@ export class GodboundCharacterActorSheet extends ActorSheet {
                 items.push(i)
             }
             if (i.type === 'weapon') {
-                weapons.push(i)
+                const roll = this.actor.system
+                    .getAttackFormula(this.actor.items.get(i._id))
+                    .getFormulas()
+                weapons.push({ ...i, system: { ...i.system, roll } })
             }
             if (i.type === 'armour') {
                 armours.push(i)

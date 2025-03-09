@@ -59,7 +59,10 @@
           name='system.customFormula'
           value='{{system.customFormula}}' />
         {{/if}}
-        <label>Straight Damage?</label>
+        <label>{{localize 'Damage Type'}}</label>
+        <input type="text" name="system.damageType"
+          value="{{system.damageType}}" />
+        <label>{{localize 'Straight Damage?'}}</label>
         <input type="checkbox" name="system.straightDamage" {{checked
           system.straightDamage}} />
       </div>

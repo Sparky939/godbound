@@ -145,7 +145,10 @@ export default class GodboundNPC extends GodboundActorBase {
                 }
             }, roll.total)
             if (tactic) {
-                tactic.system.print({ whisper: true })
+                tactic.system.print({
+                    whisper: true,
+                    sound: CONFIG.sounds.dice,
+                })
             }
         }
     }

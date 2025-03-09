@@ -13,10 +13,18 @@ export default class GodboundItemBase extends GodboundDataModel {
 
         return schema
     }
-    print({ speaker }) {
-        ChatMessage.create({
-            speaker,
-            content: `<b>${this.parent.name}:</b> ${this.description}`,
-        })
+    print({ speaker, whisper }) {
+        if (whisper) {
+            ChatMessage.create({
+                speaker,
+                content: `<b>${this.parent.name}:</b> ${this.description}`,
+                whisper: ChatMessage.getWhisperRecipients('GM'),
+            })
+        } else {
+            ChatMessage.create({
+                speaker,
+                content: `<b>${this.parent.name}:</b> ${this.description}`,
+            })
+        }
     }
 }

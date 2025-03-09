@@ -160,7 +160,8 @@
             "armour": "Armour",
             "weapon": "Weapon",
             "word": "Word",
-            "gift": "Gift"
+            "gift": "Gift",
+            "tactic": "Tactic"
         }
     }
 }

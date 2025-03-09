@@ -14,7 +14,7 @@ templates. }}
                     type='text'
                     value='{{item.name}}'
                     placeholder='Name' /></h1>
-            <div class='grid grid-3col'>
+            <div class='grid grid-cols-3 col-span-3 gap-2.5 my-2.5 mx-0 p-0'>
                 <span>
                     {{#if characterItem}}
                     {{wordName}}
@@ -56,7 +56,7 @@ templates. }}
 
         {{! Attributes Tab }}
         <div class='tab attributes' data-group='primary' data-tab='details'>
-            <div class='grid grid-2col'>
+            <div class='grid grid-cols-2 gap-2.5 my-2.5 mx-0 p-0'>
                 <label>{{localize 'Word'}}:</label>
                 {{#if characterItem}}
                 <select name='system.word.id'>

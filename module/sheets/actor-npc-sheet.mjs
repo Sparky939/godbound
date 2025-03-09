@@ -136,6 +136,31 @@ export class GodboundNPCActorSheet extends ActorSheet {
             })
         }
     }
+
+    /**
+     * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
+     * @param {Event} event   The originating click event
+     * @private
+     */
+    async _onItemCreate(_element, dataset) {
+        // Get the type of item to create.
+        const type = dataset.type
+        // Grab any data associated with this control.
+        const data = foundry.utils.duplicate(dataset)
+        // Initialize a default name.
+        const name = `New ${type.capitalize()}`
+        // Prepare the item object.
+        const itemData = {
+            name: name,
+            type: type,
+            system: data,
+        }
+        // Remove the type from the dataset since it's in the itemData.type prop.
+        delete itemData.system['type']
+
+        // Finally, create the item!
+        return await Item.create(itemData, { parent: this.actor })
+    }
     _onItemDelete(element) {
         const li = $(element).parents('.item')
         const item = this.actor.items.get(li.data('itemId'))
@@ -166,6 +191,9 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 case 'toggle-mode': {
                     return this._toggleMode(element, dataset)
                 }
+                case 'enable-tactic': {
+                    return this._onTacticToggle(element, dataset)
+                }
                 case 'print': {
                     return this._onPrint(element, dataset)
                 }
@@ -186,6 +214,12 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 }
                 case 'clear-effort': {
                     return this._onEffortClear(element, dataset)
+                }
+                case 'roll-tactics': {
+                    return this.actor.system.rollTactic()
+                }
+                case 'item-create': {
+                    return this._onItemCreate(element, dataset)
                 }
                 case 'item-edit': {
                     return this._onItemEdit(element, dataset)
@@ -235,6 +269,10 @@ export class GodboundNPCActorSheet extends ActorSheet {
     _onExpand(_element, dataset) {
         const item = this.actor.items.get(dataset.itemId)
         item.update({ 'system.dropdown': !item.system.dropdown })
+    }
+    _onTacticToggle(_element, dataset) {
+        const item = this.actor.items.get(dataset.itemId)
+        item.update({ 'system.available': !item.system.available })
     }
     _onPrint(element, _dataset) {
         const itemId = element.closest('.item').dataset.itemId

@@ -66,6 +66,7 @@ GODBOUND.itemTypes = {
     Weapon: 'GODBOUND.ItemTypes.Weapon',
     Word: 'GODBOUND.ItemTypes.Word',
     Gift: 'GODBOUND.ItemTypes.Gift',
+    Tactic: 'GODBOUND.ItemTypes.Tactic',
 }
 
 GODBOUND.ArmourTypes = {

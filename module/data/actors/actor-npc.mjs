@@ -101,7 +101,21 @@ export default class GodboundNPC extends GodboundActorBase {
     }
 
     prepareDerivedData() {
+        this.prepareTactics()
         super.prepareDerivedData()
+    }
+
+    prepareTactics() {
+        // only positive weighted tactics
+        this.tacticalWeight = 0
+        this.tactics = this.parent.items.filter((i) => {
+            const valid =
+                i.type === 'tactic' && i.system.weight > 0 && i.system.available
+            if (valid) {
+                this.tacticalWeight += i.system.weight
+            }
+            return valid
+        })
     }
 
     getRollData() {
@@ -113,6 +127,27 @@ export default class GodboundNPC extends GodboundActorBase {
         data.ac = this.defence.ac
 
         return data
+    }
+
+    async rollTactic() {
+        if (this.tacticalWeight > 0) {
+            const roll = await new Roll(`1d${this.tacticalWeight}`).evaluate()
+            const tactic = this.tactics.reduce((acc, t) => {
+                if (typeof acc == 'number') {
+                    const newWeight = acc - t.system.weight
+                    if (newWeight <= 0) {
+                        return t
+                    } else {
+                        return newWeight
+                    }
+                } else {
+                    return acc
+                }
+            }, roll.total)
+            if (tactic) {
+                tactic.system.print({ whisper: true })
+            }
+        }
     }
 
     async attack() {

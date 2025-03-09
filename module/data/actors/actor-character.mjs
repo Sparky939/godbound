@@ -149,6 +149,7 @@ export default class GodboundCharacter extends GodboundActorBase {
         } else {
             this.ac = 9 - this.attributes.dex.mod - (this.useShield ? 1 : 0)
         }
+        super.prepareDerivedData()
     }
 
     applyActiveEffects() {

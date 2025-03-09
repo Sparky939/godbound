@@ -3,8 +3,8 @@
     "version": "0.1.21",
     "description": "CSS compiler for the Godbound system",
     "scripts": {
-        "build": "sass src/scss/godbound.scss css/godbound.css --style=expanded --no-source-map && rm -rf ./_build/ && mkdir -p ./_build/godbound && cp -a ./css ./assets ./lang ./module ./templates ./LICENSE ./README.md ./system.json ./template.json ./_build/godbound/ && cp -a system.json _build/ && cd _build && zip -r ./godbound.zip ./godbound && cd .. && rm -rf ./_build/godbound",
-        "watch": "sass src/scss/godbound.scss css/godbound.css --style=expanded --source-map --watch",
+        "build": "rm -rf ./_build/ && mkdir -p ./_build/godbound && cp -a ./css ./assets ./lang ./module ./templates ./LICENSE ./README.md ./system.json ./template.json ./_build/godbound/ && cp -a system.json _build/ && cd _build && zip -r ./godbound.zip ./godbound && cd .. && rm -rf ./_build/godbound",
+        "watch": "npx tailwindcss -i ./src/godbound.css -o ./css/godbound.css --watch",
         "load": "rm -rf ~/.local/share/FoundryVTT/Data/system/godbound && unzip ./_build/godbound.zip -d ~/.local/share/FoundryVTT/Data/systems",
         "deploy": "npm run build && npm run load",
         "release": "git fetch && git checkout main && npm run build && gh release create"
@@ -16,7 +16,7 @@
     "license": "MIT",
     "private": true,
     "devDependencies": {
-        "sass": "^1.53.0"
+        "tailwindcss": "^3.4.17"
     },
     "dependencies": {
         "nodejs": "^0.0.0"

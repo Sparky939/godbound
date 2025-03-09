@@ -1,28 +1,828 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+*, ::before, ::after{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::-ms-backdrop{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+/*
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+*/
+
+/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  /* 1 */
+  border-width: 0;
+  /* 2 */
+  border-style: solid;
+  /* 2 */
+  border-color: currentColor;
+  /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -moz-tab-size: 4;
+  /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4;
+  /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* 4 */
+  -webkit-font-feature-settings: normal;
+          font-feature-settings: normal;
+  /* 5 */
+  font-variation-settings: normal;
+  /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0;
+  /* 1 */
+  line-height: inherit;
+  /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  border-top-width: 1px;
+  /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* 1 */
+  -webkit-font-feature-settings: normal;
+          font-feature-settings: normal;
+  /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0;
+  /* 1 */
+  border-color: inherit;
+  /* 2 */
+  border-collapse: collapse;
+  /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  -webkit-font-feature-settings: inherit;
+          font-feature-settings: inherit;
+  /* 1 */
+  font-variation-settings: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  font-weight: inherit;
+  /* 1 */
+  line-height: inherit;
+  /* 1 */
+  letter-spacing: inherit;
+  /* 1 */
+  color: inherit;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  padding: 0;
+  /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button;
+  /* 1 */
+  background-color: transparent;
+  /* 2 */
+  background-image: none;
+  /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
+input::-ms-input-placeholder, textarea::-ms-input-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  /* 1 */
+  vertical-align: middle;
+  /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+
+.col-span-1{
+  grid-column: span 1 / span 1;
+}
+
+.col-span-2{
+  grid-column: span 2 / span 2;
+}
+
+.col-span-3{
+  grid-column: span 3 / span 3;
+}
+
+.col-span-4{
+  grid-column: span 4 / span 4;
+}
+
+.col-span-full{
+  grid-column: 1 / -1;
+}
+
+.row-span-1{
+  grid-row: span 1 / span 1;
+}
+
+.m-0{
+  margin: 0px;
+}
+
+.mx-0{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.my-2\.5{
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+}
+
+.my-\[10px\]{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.flex{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.grid{
+  display: grid;
+}
+
+.h-item-header{
+  height: 28px;
+}
+
+.h-min{
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+
+.auto-rows-auto{
+  grid-auto-rows: auto;
+}
+
+.grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-subgrid{
+  grid-template-columns: subgrid;
+}
+
+.grid-cols-tactics{
+  grid-template-columns: 20px 45px 1fr -webkit-max-content;
+  grid-template-columns: 20px 45px 1fr max-content;
+}
+
+.grid-rows-items{
+  grid-template-rows: 28px;
+}
+
+.flex-row{
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.items-center{
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.justify-start{
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.justify-end{
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.justify-center{
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.gap-2\.5{
+  gap: 0.625rem;
+}
+
+.gap-\[10px\]{
+  gap: 10px;
+}
+
+.gap-x-\[10px\]{
+  -webkit-column-gap: 10px;
+     -moz-column-gap: 10px;
+          column-gap: 10px;
+}
+
+.gap-y-\[5px\]{
+  row-gap: 5px;
+}
+
+.overflow-y-auto{
+  overflow-y: auto;
+}
+
+.p-0{
+  padding: 0px;
+}
+
+.px-\[2px\]{
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.px-\[3px\]{
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.py-\[3px\]{
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.pr-\[5px\]{
+  padding-right: 5px;
+}
+
+.font-bold{
+  font-weight: 700;
+}
+
+.text-list-header{
+  --tw-text-opacity: 1;
+  color: rgb(68 68 68 / var(--tw-text-opacity, 1));
+}
+
 /* Global styles */
+
 .window-app {
   font-family: "Roboto", sans-serif;
 }
 
-.clickable:hover, .clickable:focus {
+.clickable:hover,
+.clickable:focus {
   color: #000;
   text-shadow: 0 0 10px red;
   cursor: pointer;
-}
-
-.grid,
-.grid-2col {
-  display: grid;
-  grid-column: span 2/span 2;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin: 10px 0;
-  padding: 0;
-}
-
-.grid-3col {
-  grid-column: span 3/span 3;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-4col {
@@ -161,55 +961,78 @@
 .flex-group-center,
 .flex-group-left,
 .flex-group-right {
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-align: center;
 }
 
 .flex-group-left {
-  justify-content: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   text-align: left;
 }
 
 .flex-group-right {
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   text-align: right;
 }
 
 .flexshrink {
-  flex: 0;
+  -webkit-box-flex: 0;
+      -ms-flex: 0;
+          flex: 0;
 }
 
 .flex-between {
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .flexlarge {
-  flex: 2;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
 }
 
 .align-left {
-  justify-content: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   text-align: left;
 }
 
 .align-right {
-  justify-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   text-align: right;
 }
 
 .align-center {
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   text-align: center;
 }
 
 /* Styles limited to godbound sheets */
+
 .godbound .item-form {
   font-family: "Roboto", sans-serif;
 }
+
 .godbound .clickable {
   cursor: pointer;
 }
+
 .godbound form.character.godbound {
   display: grid;
   grid-template-areas: "header" "tabs" "body";
@@ -218,104 +1041,174 @@
   row-gap: 10px;
   min-width: 490px;
 }
+
 .godbound form.character.godbound .sheet-header {
-  flex: 0 auto;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 auto;
+          flex: 0 auto;
   overflow: hidden;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
+
 .godbound form.character.godbound .sheet-header .profile-img {
   grid-area: image;
-  flex: 0 0 100px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100px;
+          flex: 0 0 100px;
   height: 100px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields {
   height: 100%;
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-top: 5px;
   width: 100%;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row div:has(+ label) {
   padding-right: 10px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .fa-solid.fa-heart.fa-xl.pr-4px {
   padding-right: 4px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .left-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .left-group div:has(+ label) {
   padding-right: 10px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .left-group label:has(+ input[type=checkbox]) {
   padding-right: 2px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .left-group input[type=checkbox] {
   height: 12px;
   width: 12px;
   margin: 0;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .right-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: auto;
-  flex-shrink: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .short-input {
   width: 35px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row label {
   padding-right: 7px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row input {
   margin-right: 10px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row span.level-value {
   margin-right: 10px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
   padding-right: 10px;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group input {
   margin-right: 0;
   text-align: center;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group .denominator {
   width: 100%;
   text-align: center;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .fraction-group input {
   width: 30px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .fraction-group .span {
   width: 20px;
   border-top: 1px solid black;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .fraction-group .fraction-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields input {
   width: 120px;
 }
+
 .godbound form.character.godbound .sheet-header .header-fields .resources {
   height: 100%;
   margin: 0;
   grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));
 }
+
 .godbound form.character.godbound .sheet-header h1.charname {
   grid-area: name;
   height: 50px;
@@ -323,131 +1216,178 @@
   margin: 5px 0;
   border-bottom: 0;
 }
+
 .godbound form.character.godbound .sheet-header h1.charname input {
   width: 100%;
   height: 100%;
   margin: 0;
 }
+
 .godbound form.character.godbound .sheet-tabs {
   margin: 0;
 }
+
 .godbound form.character.godbound aside.sidebar {
   row-gap: 3px;
   display: grid;
   grid-template-columns: 1fr 50px 50px;
   grid-auto-rows: 26px;
 }
+
 .godbound form.character.godbound aside.sidebar .flexcol {
   display: grid;
   grid-template-rows: subgrid;
   grid-template-columns: subgrid;
 }
+
 .godbound form.character.godbound aside.sidebar .flexcol .flexrow {
   height: 26px;
 }
+
 .godbound form.character.godbound aside.sidebar .saves.flexcol {
   grid-column: 1/-1;
   grid-row: 7/10;
 }
+
 .godbound form.character.godbound aside.sidebar .saves.flexcol .flex-group-center {
   display: grid;
   grid-column: 1/-1;
   grid-template-columns: subgrid;
 }
+
 .godbound form.character.godbound aside.sidebar .attributes.flexcol {
   grid-row: 1/7;
   grid-column: 1/-1;
 }
+
 .godbound form.character.godbound aside.sidebar .attributes.flexcol .flex-group-center {
   display: grid;
   grid-column: 1/-1;
   grid-template-columns: subgrid;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid {
   display: grid;
   grid-template-columns: [label-start] auto [label-end value-start] auto [value-end max-start] auto [max-end income-start] auto [income-end];
   grid-template-rows: 30px 30px 30px 30px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .header {
   grid-column: label-start/income-end;
   grid-row: 1/2;
   grid-template-columns: subgrid;
   display: grid;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-weight: bold;
   font-size: 14px;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .header div {
   border-bottom: 1px solid var(--color-underline-header);
   text-align: center;
   vertical-align: middle;
   padding: 0 5px;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .influence-row {
   grid-column: label-start/income-end;
   grid-row: 2/3;
   display: grid;
   grid-template-columns: subgrid;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .influence-row * {
   text-align: center;
   vertical-align: middle;
   width: auto;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row {
   grid-column: label-start/income-end;
   grid-row: 3/4;
   display: grid;
   grid-template-columns: subgrid;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row * {
   text-align: center;
   vertical-align: middle;
   width: auto;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row * input {
   width: 35px;
   height: 20px;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .spent-row {
   grid-column: label-start/income-end;
   grid-row: 4/5;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .spent-row * {
   text-align: left;
   vertical-align: middle;
   width: auto;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section input {
   width: auto;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .dominon-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
   width: 100%;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .compact-section .dominon-row input {
   width: 30px;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list {
   height: 26px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 0;
   padding: 0;
   font-size: 14px;
   width: 100%;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .row-header {
   width: auto;
   padding-right: 5px;
   font-weight: bold;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .word-pill {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: auto;
   border: 1px solid #a6a6a6;
@@ -455,97 +1395,151 @@
   padding: 3px 7px;
   margin: 0 4px;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .word-pill .item-delete {
   display: none;
   margin-left: 5px;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .committed-effort-list .word-pill:hover .item-delete {
   display: block;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .passives-list {
   padding: 0;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active .passives-list .title-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
   font-weight: bold;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active.facts {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active.facts section {
-  flex: 1 1 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
   margin: 0;
 }
+
 .godbound form.character.godbound section.sheet-body .tab.active.facts section section {
   display: grid;
   grid-template-rows: auto 1fr;
 }
+
 .godbound .save-penalty.clickable {
   color: rgb(145, 21, 21);
 }
+
 .godbound .sheet-tabs {
-  flex: 0;
+  -webkit-box-flex: 0;
+      -ms-flex: 0;
+          flex: 0;
 }
+
 .godbound .sheet-body,
 .godbound .sheet-body .tab,
 .godbound .sheet-body .tab .editor {
   height: 100%;
 }
-.godbound .sheet-body > .tab > .checkbox-list {
+
+.godbound .sheet-body>.tab>.checkbox-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
 }
-.godbound .sheet-body > .tab > .checkbox-list > label {
+
+.godbound .sheet-body>.tab>.checkbox-list>label {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
-.godbound .sheet-body > .tab > .checkbox-list > label > input[type=checkbox] {
+
+.godbound .sheet-body>.tab>.checkbox-list>label>input[type=checkbox] {
   height: 15px;
   width: 15px;
 }
+
 .godbound .tox .tox-editor-container {
   background: #fff;
 }
+
 .godbound .tox .tox-edit-area {
   padding: 0 8px;
 }
+
 .godbound .grid-form {
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
   grid-row-gap: 5px;
 }
+
 .godbound form.npc.locked nav.npc-tabs.tabs a.item[data-tab=details] {
   display: none;
 }
+
 .godbound form.npc.locked nav.npc-tabs.tabs a.item[data-tab=tactics] {
   display: none;
 }
+
 .godbound .text-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   min-height: 0;
   overflow: auto;
 }
+
 .godbound .text-wrapper .editor {
-  flex: 1 1 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
   min-height: 200px;
 }
+
 .godbound form.npc {
   min-height: 0;
   overflow: auto;
 }
+
 .godbound form.npc nav.npc-tabs.tabs {
-  flex: 0 0 25px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 25px;
+          flex: 0 0 25px;
   border-bottom: 1px solid var(--color-border-light-primary);
 }
+
 .godbound form.npc section.content {
   min-height: 0;
   overflow: auto;
 }
+
 .godbound form.npc section.content div.tab.description.active {
   height: 100%;
   min-height: 0;
@@ -553,6 +1547,7 @@
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
 }
+
 .godbound form.npc section.content div.tab.description.active div.npc-header {
   display: grid;
   grid-template-columns: 100px 1fr;
@@ -561,92 +1556,152 @@
   padding: 5px;
   border-bottom: 1px solid var(--color-border-light-primary);
 }
+
 .godbound form.npc section.content div.tab.description.active div.npc-header div.display-name {
   font-size: 20px;
 }
+
 .godbound form.npc section.content div.tab.description.active .npc-description {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   min-height: 0;
   overflow: auto;
 }
+
 .godbound form.npc section.content div.tab.description.active .npc-description .editor {
-  flex: 1 1 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
   min-height: 200px;
 }
+
 .godbound form.npc section.content div.tab.details i.npc-toggle-icon.clickable {
   position: absolute;
   right: 10px;
   top: 70px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
   grid-gap: 10px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .profile-img {
   grid-area: profile-img;
   width: 100px;
   height: 100px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-start;
-  justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   height: 100%;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group .input-group-checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-weight: bold;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group .input-group-checkbox div.checkbox-label {
   color: rgba(0, 0, 0, 0.3);
   grid-area: label;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group .input-group-checkbox div.checkbox-label.selected {
   color: black;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group .input-group-checkbox input[type=checkbox] {
   display: none;
   width: 0px;
   height: 0px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .input-group-checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-weight: bold;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .input-group-checkbox div.checkbox-label {
   color: rgba(0, 0, 0, 0.3);
   grid-area: label;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .input-group-checkbox div.checkbox-label.selected {
   color: black;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .input-group-checkbox input[type=checkbox] {
   display: none;
   width: 0px;
   height: 0px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: flex-end;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   grid-gap: 5px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .checkbox-label {
   font-weight: bold;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .npc-name {
   width: 150px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 {
   display: grid;
   grid-template-columns: auto;
@@ -655,27 +1710,37 @@
   grid-row: 1/2;
   grid-gap: 5px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 label.max-label {
   width: 35px;
   text-wrap: wrap;
   text-align: center;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 label {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-weight: bold;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   grid-area: label;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 input {
   grid-area: input;
   width: 35px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 input.long {
   width: 120px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 input.move {
   width: 70px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-2 {
   display: grid;
   grid-gap: 5px;
@@ -683,43 +1748,69 @@
   grid-template-rows: auto auto;
   grid-template-areas: "label label label" "input-1 divider input-2";
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-2 label {
   grid-area: label;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-weight: bold;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-2 input {
   width: 40px;
 }
+
 .godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-2 .divider {
   font-size: 20px;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
   grid-gap: 5px;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .display-name {
   font-size: 20px;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .mob-select {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   grid-gap: 5px;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .mob-select label {
   font-weight: bold;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .mob-select select {
   width: 100px;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row {
   display: grid;
-  flex-flow: row nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
   grid-template-rows: [label-start] auto [label-end input-start] auto [input-end fraction-start] auto [fraction-end];
   grid-auto-columns: auto;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value {
   display: grid;
   grid-row: 1/-1;
@@ -727,18 +1818,30 @@
   grid-column: span 1;
   grid-gap: 5px;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value label {
   font-weight: bold;
   grid-row: label-start/label-end;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value div {
   grid-gap: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   grid-row: input-start/fraction-end;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.display {
   display: grid;
   grid-row: 1/-1;
@@ -746,11 +1849,17 @@
   justify-items: center;
   text-align: center;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.display div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   grid-row: input-start/fraction-end;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.fraction {
   display: grid;
   grid-row: 1/-1;
@@ -760,67 +1869,101 @@
   text-align: center;
   width: 40px;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.fraction div {
   border-top: 1px solid black;
   grid-row: fraction-start/fraction-end;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100%;
 }
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.fraction input {
   grid-row: input-start/input-end;
   height: 20px;
   width: 40px;
 }
-.godbound form.npc > .content > .tab.details i.npc-toggle-icon.clickable {
+
+.godbound form.npc>.content>.tab.details i.npc-toggle-icon.clickable {
   position: absolute;
   right: 10px;
 }
-.godbound form.npc.edit > .content > .tab.details .view-sheet {
+
+.godbound form.npc.edit>.content>.tab.details .view-sheet {
   display: none;
 }
-.godbound form.npc.edit > .content > .tab.details .edit-sheet {
+
+.godbound form.npc.edit>.content>.tab.details .edit-sheet {
   display: block;
 }
+
 .godbound form.npc.view .view-sheet {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
+
 .godbound form.npc.view .edit-sheet {
   display: none;
 }
+
 .godbound .resource-label {
   font-weight: bold;
 }
+
 .godbound .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background: rgba(0, 0, 0, 0.05);
   border: 2px groove #eeede0;
   font-weight: bold;
 }
-.godbound .items-header > * {
+
+.godbound .items-header>* {
   font-size: 13px;
   text-align: center;
 }
+
 .godbound .items-header .item-name {
   font-weight: bold;
   padding-left: 5px;
   text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
+
+.godbound .items-header .item-enabled {
+  font-weight: bold;
+  padding-left: 5px;
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .godbound .items-header .item-cost {
   font-weight: bold;
   padding-left: 5px;
   text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
+
 .godbound .passives-list {
   list-style: none;
 }
+
 .godbound .passives-list .passive-item {
   margin-left: 5px;
 }
+
 .godbound .items-list {
   list-style: none;
   margin: 0;
@@ -829,145 +1972,228 @@
   scrollbar-width: thin;
   color: #444;
 }
+
 .godbound .items-list .item-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 .godbound .items-list .item-name {
-  flex: 2;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
   margin: 0;
   overflow: hidden;
   font-size: 13px;
   text-align: left;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
-.godbound .items-list .item-name h3, .godbound .items-list .item-name h4 {
+
+.godbound .items-list .item-name h3,
+.godbound .items-list .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
 }
+
 .godbound .items-list .item-worn {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex: 0 1 auto;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
   padding: 0 5px;
 }
+
 .godbound .items-list .item-controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex: 0 0 100px;
-  justify-content: flex-end;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100px;
+          flex: 0 0 100px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
+
 .godbound .items-list .item-controls a {
   font-size: 12px;
   text-align: center;
   margin: 0 6px;
 }
+
 .godbound .items-list .item {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 3px 2px;
   border-bottom: 1px solid #c9c7b8;
 }
+
 .godbound .items-list .item:last-child {
   border-bottom: none;
 }
+
 .godbound .items-list .item .item-name {
   color: #191813;
 }
+
 .godbound .items-list .item .item-name .item-image {
-  flex: 0 0 auto;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   height: 24px;
   width: 24px;
   border: none;
   margin-right: 5px;
 }
+
 .godbound .items-list .item.flex-row {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .godbound .items-list .item.row .fixed-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
-  flex: 1 0 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 100%;
+          flex: 1 0 100%;
 }
+
 .godbound .items-list .item.row .fixed-row i {
-  flex: 0 0 auto;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   padding-right: 5px;
 }
+
 .godbound .items-list .item.row .fixed-row .item-controls {
-  flex: 0 0 150px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 150px;
+          flex: 0 0 150px;
 }
+
 .godbound .items-list .item.row .fixed-row .item-controls i {
   padding: 0;
 }
-.godbound .items-list .item.row > .dropdown-content {
+
+.godbound .items-list .item.row>.dropdown-content {
   display: none;
   width: 100%;
   height: 0;
 }
-.godbound .items-list .item.row.expanded > .dropdown-content {
+
+.godbound .items-list .item.row.expanded>.dropdown-content {
   display: block;
   height: auto;
   width: 100%;
   margin: 0;
   border-top: 1px solid rgb(201, 199, 184);
 }
-.godbound .items-list .item.row.expanded > .fixed-row > .hide-expanded {
+
+.godbound .items-list .item.row.expanded>.fixed-row>.hide-expanded {
   display: none;
 }
-.godbound .items-list .item.row:not(.expanded) > .fixed-row > .hide-collapsed {
+
+.godbound .items-list .item.row:not(.expanded)>.fixed-row>.hide-collapsed {
   display: none;
 }
-.godbound .items-list .item.row.word-row > .fixed-row > div > h4 {
+
+.godbound .items-list .item.row.word-row>.fixed-row>div>h4 {
   font-size: 16px;
   font-weight: bold;
 }
-.godbound .items-list .item.row.gift-row > .fixed-row {
+
+.godbound .items-list .item.row.gift-row>.fixed-row {
   font-size: 13px;
-  flex: 0 0 auto;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
 }
-.godbound .items-list .item.row.gift-row > .fixed-row > .gift-effort {
+
+.godbound .items-list .item.row.gift-row>.fixed-row>.gift-effort {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
 }
-.godbound .items-list .item.row.word-row > .fixed-row > .word-effort {
+
+.godbound .items-list .item.row.word-row>.fixed-row>.word-effort {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
 }
-.godbound .items-list .item.row.gift-row > .fixed-row > .gift-effort > label {
+
+.godbound .items-list .item.row.gift-row>.fixed-row>.gift-effort>label {
   padding-right: 5px;
 }
-.godbound .items-list .item.row.word-row > .fixed-row > .word-effort > label {
+
+.godbound .items-list .item.row.word-row>.fixed-row>.word-effort>label {
   padding-right: 5px;
 }
+
 .godbound .items-list .item-prop {
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
+
 .godbound .items-list .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background: rgba(0, 0, 0, 0.05);
   border: 2px groove #eeede0;
   font-weight: bold;
 }
-.godbound .items-list .items-header > * {
+
+.godbound .items-list .items-header>* {
   font-size: 12px;
   text-align: center;
 }
+
 .godbound .items-list .items-header .item-name {
   padding-left: 5px;
   text-align: left;
 }
+
 .godbound .item-formula {
-  flex: 0 0 200px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 200px;
+          flex: 0 0 200px;
   padding: 0 8px;
 }
+
 .godbound .effects .item .effect-source,
 .godbound .effects .item .effect-duration,
 .godbound .effects .item .effect-controls {
@@ -976,23 +2202,51 @@
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
+
 .godbound .effects .item .effect-controls {
   border: none;
 }
 
 .dice-roll .dice-flavor {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 .dice-roll .dice-result .dice-total {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   grid-gap: 5px;
 }
+
 .dice-roll .dice-result .dice-total .dice-total-details {
   font-weight: normal;
   font-size: 15px;
   padding-left: 5px;
+}
+
+.charname {
+  margin: 0 0 0 0.5rem;
+  padding: 0;
+  font-weight: normal;
+  font-size: 2em;
+}
+
+.small-checkbox {
+  width: 12px;
+  height: 12px;
 }

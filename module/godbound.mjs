@@ -69,7 +69,7 @@ Hooks.once('init', function () {
         weapon: models.GodboundWeapon,
         word: models.GodboundWord,
         gift: models.GodboundGift,
-        // tactic: models.GodboundTactic,
+        tactic: models.GodboundTactic,
     }
 
     // Active Effects are never copied to the Actor,

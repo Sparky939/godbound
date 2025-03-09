@@ -1783,6 +1783,29 @@ video {
   font-size: 20px;
 }
 
+.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .npc-tags {
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 10px;
+     -moz-column-gap: 10px;
+          column-gap: 10px;
+}
+
+.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .npc-tags>div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: auto;
+}
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .mob-select {
   display: -webkit-box;
   display: -ms-flexbox;

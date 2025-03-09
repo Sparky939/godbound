@@ -1,7 +1,8 @@
 <div class="npc-header">
     <img class="npc-img" src="{{actor.img}}" data-edit="img"
         title="{{actor.name}}" height="100" width="100" />
-    <div class="display-name">{{actor.name}}</div>
+    <input type="text" class="display-name" name="name"
+        value="{{actor.name}}" />
 </div>
 <div class="npc-description">
     {{editor enrichedBiography target="system.biography" engine="prosemirror"

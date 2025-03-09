@@ -801,6 +801,19 @@
   font-size: 20px;
 }
 
+.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .npc-tags {
+  font-weight: bold;
+  display: flex;
+  column-gap: 10px;
+}
+
+.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .npc-tags>div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+
 .godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .mob-select {
   display: flex;
   grid-gap: 5px;

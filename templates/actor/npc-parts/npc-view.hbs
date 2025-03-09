@@ -9,6 +9,20 @@
         </select>
     </div>
     {{/if}}
+    <div class="npc-tags">
+        {{#if system.resources.effort.canSave}}
+        <div>Save with Effort</div>
+        {{/if}}
+        {{#if system.defence.supernatural}}
+        <div>Non-magic Immunity</div>
+        {{/if}}
+        {{#if system.offense.straightDamage}}
+        <div>Straight Damage</div>
+        {{/if}}
+        {{#if system.offense.magicalAttacks}}
+        <div>Magic Damage</div>
+        {{/if}}
+    </div>
 </div>
 <div class="npc-details-row">
     <div class="npc-value display">

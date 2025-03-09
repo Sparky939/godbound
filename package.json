@@ -1,6 +1,6 @@
 {
     "name": "godbound",
-    "version": "0.1.22",
+    "version": "0.1.23",
     "description": "CSS compiler for the Godbound system",
     "scripts": {
         "build": "rm -rf ./_build/ && mkdir -p ./_build/godbound && cp -a ./css ./assets ./lang ./module ./templates ./LICENSE ./README.md ./system.json ./template.json ./_build/godbound/ && cp -a system.json _build/ && cd _build && zip -r ./godbound.zip ./godbound && cd .. && rm -rf ./_build/godbound",

@@ -49,7 +49,9 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 : 'fa-pen'
         this._prepareItems(context)
         context.system.resources.hd.max = this._getMaxHD(actorData.system)
-        context.system.offense.actions = this._getMobActions(actorData.system)
+        context.attacksPerAction = this._getMobAttacksPerAction(
+            actorData.system
+        )
         context.editMode = actorData.system.settings.mode === 'edit'
         context.viewMode = actorData.system.settings.mode === 'view'
         // Enrich biography info for display
@@ -114,22 +116,22 @@ export class GodboundNPCActorSheet extends ActorSheet {
             return system.resources.hd.baseMax
         }
     }
-    _getMobActions(system) {
-        const baseActions = system.offense.actions
+    _getMobAttacksPerAction(system) {
+        const baseAttacks = system.offense.attacksPerAction
         if (system.details.mob) {
             switch (system.details.mobType) {
                 case 'small': {
-                    return baseActions
+                    return baseAttacks
                 }
                 case 'large': {
-                    return baseActions * 2
+                    return baseAttacks * 2
                 }
                 case 'vast': {
-                    return baseActions * 3
+                    return baseAttacks * 3
                 }
             }
         }
-        return baseActions
+        return baseAttacks
     }
 
     /* -------------------------------------------- */

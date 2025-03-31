@@ -81,6 +81,10 @@ export default class GodboundNPC extends GodboundActorBase {
                 ...requiredInteger,
                 initial: 0,
             }),
+            attacksPerAction: new fields.NumberField({
+                ...requiredInteger,
+                initial: 1,
+            }),
             magicalAttacks: new fields.BooleanField({ initial: false }),
             damageDie: new fields.StringField({ initial: '6' }),
             damageBonus: new fields.NumberField({ initial: 0 }),

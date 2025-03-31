@@ -43,6 +43,13 @@
             value="{{system.resources.effort.value}}" data-dtype="Number" />
         <div class="npc-effort-max">{{system.resources.effort.max}}</div>
     </div>
+    {{#if system.details.mob}}
+    {{else}}
+    <div class="npc-value display short">
+        <label>{{localize 'Actions'}}</label>
+        <div class="npc-move">{{system.offense.actions}}</div>
+    </div>
+    {{/if}}
     <div class="npc-value">
         <label class="clickable" data-click-type="attack">
             {{localize 'Attack'}}
@@ -52,7 +59,7 @@
                 +{{system.offense.attack}}
             </div>
             <div>
-                x{{system.offense.actions}}
+                x{{attacksPerAction}}
             </div>
             <div>
                 d{{system.offense.damageDie}}

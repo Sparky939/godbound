@@ -111,6 +111,15 @@
             value="{{system.offense.actions}}"
             data-dtype="Number" />
     </div>
+    <div class="input-group-1 short">
+        <label>
+            {{localize 'Attacks per Action'}}
+        </label>
+        <input type="text" name="system.offense.attacksPerAction"
+            value="{{system.offense.attacksPerAction}}"
+            data-dtype="Number" />
+    </div>
+
     <div class="input-group-1">
         <label>
             {{localize 'Attack'}}
@@ -128,7 +137,7 @@
             localize=true}}
         </select>
     </div>
-    <div class="input-group-1">
+    <div class="input-group-1 short">
         <label>
             {{localize 'Damage Bonus'}}
         </label>

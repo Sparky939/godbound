@@ -129,6 +129,7 @@ export default class GodboundNPC extends GodboundActorBase {
         data.damageBonus = this.offense.damageBonus
         data.save = this.defence.save
         data.ac = this.defence.ac
+        data.hd = this.resources.hd.value
 
         return data
     }

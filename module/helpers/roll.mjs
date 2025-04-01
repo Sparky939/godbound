@@ -165,22 +165,51 @@ class GBDamageRoll extends Roll {
      * @returns {number}
      */
     _getTranslatedDamage(damage) {
-        if (damage <= 1) {
-            return 0
-        }
-        if (damage <= 5) {
-            return 1
-        }
-        if (damage <= 9) {
-            return 2
-        }
-        if (damage > 9) {
-            return 4
-        }
+        if (damage <= 1) return 0
+
+        if (damage <= 5) return 1
+
+        if (damage <= 9) return 2
+
+        return 4
     }
 
-    get damage() {
-        return this._getTranslatedDamage(this.total)
+    /**
+     * Calculate the maximum possible translated damage
+     * @param {number[]} rolls - Array of rolled results
+     * @param {number} flatModifier - Flat modifier to be added to one roll
+     * @param {function} getTranslatedDamage - Function to translate damage
+     * @returns {number} - Maximum possible translated damage
+     */
+    calculateMaxTranslatedDamage(rolls, flatModifier) {
+        if (!Array.isArray(rolls) || rolls.length === 0) {
+            throw new Error('Rolls must be a non-empty array')
+        }
+        if (typeof flatModifier !== 'number') {
+            throw new Error('Flat modifier must be a number')
+        }
+
+        // Calculate base translated damage for each roll
+        const baseTranslatedDamage = rolls.map(this._getTranslatedDamage)
+
+        // Calculate the maximum gain from applying the flat modifier
+        let maxGain = 0
+        for (let i = 0; i < rolls.length; i++) {
+            const currentRoll = rolls[i]
+            const currentDamage = this._getTranslatedDamage(currentRoll)
+
+            // Check if applying the modifier crosses a threshold
+            const modifiedDamage = this._getTranslatedDamage(
+                currentRoll + flatModifier
+            )
+
+            // Calculate the gain
+            const gain = modifiedDamage - currentDamage
+            maxGain = Math.max(maxGain, gain)
+        }
+
+        // Total damage is the sum of base damage plus the maximum gain
+        return baseTranslatedDamage.reduce((sum, dmg) => sum + dmg, 0) + maxGain
     }
 
     /**
@@ -205,7 +234,16 @@ class GBDamageRoll extends Roll {
             tooltip: isPrivate ? '' : await this.getTooltip(),
             total: isPrivate ? '?' : Math.round(this.total * 100) / 100,
             convertedDamage: !this.options.straightDamage,
-            damage: isPrivate ? '?' : this._getTranslatedDamage(this.total),
+            damage: isPrivate
+                ? '?'
+                : this.calculateMaxTranslatedDamage(
+                      this.dice.flatMap((d) => d.results.map((r) => r.result)),
+                      [...this.terms]
+                          .filter(
+                              (t) => t instanceof foundry.dice.terms.NumericTerm
+                          )
+                          .reduce((acc, n) => acc + n.number, 0)
+                  ),
         }
         return renderTemplate(template, chatData)
     }

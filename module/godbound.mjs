@@ -27,7 +27,7 @@ import * as models from './data/_module.mjs'
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
-
+window.GBDamageRoll = GBDamageRoll
 Hooks.once('init', function () {
     // Add utility classes to the global game object so that they're more easily
     // accessible in global contexts.

@@ -51,27 +51,15 @@
     </div>
     {{/if}}
     <div class="npc-value">
-        <label class="clickable" data-click-type="attack">
+        <label class="clickable">
             {{localize 'Attack'}}
         </label>
-        <div class="npc-attack clickable" data-click-type="attack">
+        <div class="npc-attack clickable">
             <div>
                 +{{system.offense.attack}}
             </div>
             <div>
                 x{{attacksPerAction}}
-            </div>
-            <div>
-                d{{system.offense.damageDie}}
-            </div>
-            <div>
-                +
-            </div>
-            <div>
-                {{system.offense.damageBonus}}
-            </div>
-            <div>
-                {{system.offense.damageType}}
             </div>
         </div>
     </div>

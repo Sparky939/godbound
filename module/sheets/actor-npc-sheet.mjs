@@ -83,6 +83,7 @@ export class GodboundNPCActorSheet extends ActorSheet {
         const tactics = []
         const words = []
         const gifts = []
+        const weapons = []
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || Item.DEFAULT_ICON
@@ -95,7 +96,14 @@ export class GodboundNPCActorSheet extends ActorSheet {
             if (i.type === 'tactic') {
                 tactics.push(i)
             }
+            if (i.type === 'weapon') {
+                const roll = this.actor.system
+                    .getAttackFormula(this.actor.items.get(i._id))
+                    .getFormulas()
+                weapons.push({ ...i, system: { ...i.system, roll } })
+            }
         }
+        context.weapons = weapons
         context.tactics = tactics
     }
     _getMaxHD(system) {
@@ -220,6 +228,9 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 case 'expand': {
                     return this._onExpand(element, dataset)
                 }
+                case 'roll': {
+                    return this._onRoll(element, dataset)
+                }
                 case 'attack': {
                     return this.actor.system.attack()
                 }
@@ -261,6 +272,41 @@ export class GodboundNPCActorSheet extends ActorSheet {
             case 'decrement-effort': {
                 return this._onEffectDecrement(element, dataset)
             }
+        }
+    }
+
+    /**
+     * Handle clickable rolls.
+     * @param {Event} event   The originating click event
+     * @private
+     */
+    _onRoll(element, dataset) {
+        // Handle item rolls.
+        if (dataset.rollType) {
+            if (dataset.rollType == 'item') {
+                const itemId = element.closest('.item').dataset.itemId
+                const item = this.actor.items.get(itemId)
+                if (item) return item.roll()
+            }
+            if (dataset.rollType == 'weapon') {
+                const itemId = element.closest('.item').dataset.itemId
+                const item = this.actor.items.get(itemId)
+                if (item) {
+                    return this.actor.system.attack(item)
+                }
+            }
+        }
+
+        // Handle rolls that supply the formula directly.
+        if (dataset.roll) {
+            let label = dataset.label ? `[attribute] ${dataset.label}` : ''
+            let roll = new Roll(dataset.roll, this.actor.getRollData())
+            roll.toMessage({
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                flavor: label,
+                rollMode: game.settings.get('core', 'rollMode'),
+            })
+            return roll
         }
     }
     _toggleMode() {

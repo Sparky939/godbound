@@ -157,23 +157,55 @@ export default class GodboundNPC extends GodboundActorBase {
         }
     }
 
-    async attack() {
-        const attackParams = {
-            attackBonus: `@attackBonus`,
-            damageBonus: `@damageBonus`,
-            damageDie: `@damageDie`,
-        }
-        const attackRoll = await new GBAttackRoll(
-            attackParams,
-            this.getRollData(),
-            {
-                flavor: `${this.parent.name} attacks`,
-                straightDamage: this.offense.straightDamage,
-                damageType: this.offense.damageType,
-            }
-        ).evaluate()
+    // async attack() {
+    //     const attackParams = {
+    //         attackBonus: `@attackBonus`,
+    //         damageBonus: `@damageBonus`,
+    //         damageDie: `@damageDie`,
+    //     }
+    //     const attackRoll = await new GBAttackRoll(
+    //         attackParams,
+    //         this.getRollData(),
+    //         {
+    //             flavor: `${this.parent.name} attacks`,
+    //             straightDamage: this.offense.straightDamage,
+    //             damageType: this.offense.damageType,
+    //         }
+    //     ).evaluate()
+    //     attackRoll.toMessage()
+    //     return attackRoll
+    // }
+    async attack(rawItem) {
+        const attackRoll = await this.getAttackFormula(rawItem).evaluate()
         attackRoll.toMessage()
         return attackRoll
+    }
+
+    getAttackFormula(rawItem) {
+        const item = rawItem.system
+        const attackParams = {
+            attackBonus: '@attackBonus',
+            damageBonus: item.damageBonus ? ' + @extraBonus.dmg' : '',
+            damageDie: item.damageDie,
+        }
+        const roll = new GBAttackRoll(
+            attackParams,
+            {
+                ...this.getRollData(),
+                extraBonus: {
+                    hit: item.attackBonus,
+                    dmg: item.damageBonus,
+                },
+            },
+            {
+                flavor: `${this.parent.name} attacks with ${item.parent.name}`,
+                straightDamage: item.straightDamage,
+                damageType: item.damageType,
+                custom: item.isCustomType,
+                customFormula: item.customFormula,
+            }
+        )
+        return roll
     }
 
     moraleCheck(options = { shiftClick: false }) {

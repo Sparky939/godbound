@@ -65,7 +65,7 @@ export class GodboundItemSheet extends ItemSheet {
         context.system = itemData.system
         context.flags = itemData.flags
         const ownerType = context.item.parent?.type ?? 'global'
-        context.characterItem = ownerType === 'character'
+        context.characterItem = ownerType === 'character' || ownerType === 'npc'
         context.npcItem = ownerType === 'npc'
         context.globalItem = ownerType === 'global'
         context.words = this.getWords().reduce((acc, i) => {

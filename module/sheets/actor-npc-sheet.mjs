@@ -15,7 +15,7 @@ export class GodboundNPCActorSheet extends ActorSheet {
                     contentSelector: '.content',
                     initial: 'description',
                 },
-            ],
+            ],scrollY: ["section.content"]
         })
     }
 
@@ -105,6 +105,56 @@ export class GodboundNPCActorSheet extends ActorSheet {
         }
         context.weapons = weapons
         context.tactics = tactics
+        context.words = words
+        context.gifts = gifts
+        context.effects = words
+            .concat(gifts)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((i) => {
+                return {
+                    ...i,
+                    name: i.type == 'word' ? `${i.name} Miracles` : i.name,
+                }
+            })
+            .filter((i) => i.system.effort > 0)
+        var unboundGifts = gifts.sort((a, b) => a.name.localeCompare(b.name))
+        context.powers = [
+            ...words.sort((a, b) => a.name.localeCompare(b.name)),
+            { name: 'Unbound Gifts', type: 'word', unbound: true },
+        ].map((word) => {
+            const gifts = unboundGifts
+                .filter((g) => {
+                    return (
+                        g.system.word.id == word._id ||
+                        word.name == 'Unbound Gifts'
+                    )
+                })
+                .map((g) => {
+                    g.system.type.label =
+                        CONFIG.GODBOUND.gifts.type[g.system.type.value]
+                    g.system.power.label =
+                        CONFIG.GODBOUND.gifts.power[g.system.power.value]
+                    return g
+                })
+            unboundGifts = unboundGifts.filter((g) => {
+                return g.system.word.id != word._id
+            })
+            return {
+                word: {
+                    ...word,
+                    unbound: word.unbound,
+                    show: word.unbound && gifts.length > 0,
+                },
+                gifts: gifts
+                    .filter((g) => {
+                        return (
+                            g.system.word.id == word._id ||
+                            word.name == 'Unbound Gifts'
+                        )
+                    })
+                    .sort((a, b) => a.name.localeCompare(b.name)),
+            }
+        })
     }
     _getMaxHD(system) {
         if (system.details.mob) {

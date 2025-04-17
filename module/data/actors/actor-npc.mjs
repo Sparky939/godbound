@@ -106,6 +106,7 @@ export default class GodboundNPC extends GodboundActorBase {
 
     prepareDerivedData() {
         this.prepareTactics()
+        this.prepareEffortValue()
         super.prepareDerivedData()
     }
 
@@ -120,6 +121,16 @@ export default class GodboundNPC extends GodboundActorBase {
             }
             return valid
         })
+    }
+
+    prepareEffortValue() {
+        this.resources.effort.value = this.parent.items.reduce(
+            (acc, i) =>
+                ['word', 'gift'].includes(i.type)
+                    ? Math.max(acc - i.system.effort, 0)
+                    : acc,
+            this.resources.effort.max
+        )
     }
 
     getRollData() {

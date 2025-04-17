@@ -69,3 +69,211 @@
         {{/each}}
     </ol>
 </div>
+<ol class="committed-effort-list">
+    <label class="row-header">{{localize 'Committed Effort'}}:</label>
+    {{#each effects as |effect id|}}
+    <li class="item word-pill" data-item-id='{{effect._id}}'>
+        <a class="item-control clickable" data-item-id="{{effect._id}}"
+            data-context="decrement-effort" data-click-type="increment-effort">
+            {{effect.name}}
+            {{effect.system.effort}}
+        </a>
+    </li>
+    {{/each}}
+</ol>
+<ol class='items-list'>
+    <li class='item flexrow items-header'>
+        <div class='item-name'>{{localize 'Name'}}</div>
+        <div class='item-controls'>
+            <a
+                class='item-control item-create clickable'
+                data-click-type="item-create"
+                title='Create item'
+                data-type="word"
+                data-show="true">
+                <i class='fas fa-plus'></i>
+                {{localize 'DOCUMENT.New' type='word'}}
+            </a>
+        </div>
+    </li>
+    {{#each powers as |power id|}}
+    {{#if power.word.unbound}}
+    {{#if power.word.show}}
+    <li class="item word-row flexcol row expanded">
+        <div class="fixed-row flexrow">
+            <div class='item-name' data-click-type="print">
+                <h4>{{power.word.name}}</h4>
+            </div>
+        </div>
+        <ol class="dropdown-content">
+            {{#each power.gifts as |giftItem giftId|}}
+            <li {{#if
+                giftItem.system.dropdown}}class='item gift-row flexcol row expanded'
+                {{else}}class='item gift-row flexcol row'{{/if}}
+                data-item-id='{{giftItem._id}}'>
+                <div class="fixed-row flexrow">
+                    <i
+                        class="fa-solid fa-angle-right clickable expandable hide-expanded"
+                        data-item-id="{{giftItem._id}}"
+                        data-click-type="expand"></i>
+                    <i
+                        class="fa-solid fa-angle-down clickable expandable hide-collapsed"
+                        data-item-id="{{giftItem._id}}"
+                        data-click-type="expand"></i>
+                    <i class="fa-solid fa-bolt clickable"
+                        data-item-id="{{giftItem._id}}"
+                        data-context="decrement-effort"
+                        data-click-type="increment-effort"></i>
+                    <div class='item-name clickable' data-click-type="print">
+                        <h4>{{giftItem.name}}</h4>
+                    </div>
+                    <div class="gift-power">
+                        {{localize giftItem.system.power.label}}
+                    </div>
+                    <div class="gift-type">
+                        {{localize giftItem.system.type.label}}
+                    </div>
+                    <div class="gift-effort">
+                        <label>{{localize "Effort"}}:</label>
+                        <div class="item-effort clickable"
+                            data-item-id="{{giftItem._id}}"
+                            data-click-type="clear-effort">
+                            {{giftItem.system.effort}}
+                        </div>
+                    </div>
+                    <div class='item-controls'>
+                        <a
+                            class='item-control clickable item-edit'
+                            data-click-type="item-edit"
+                            title='{{localize "DOCUMENT.Edit" type='gift'}}'>
+                            <i class='fas fa-edit'></i>
+                        </a>
+                        <a
+                            class='item-control item-delete clickable'
+                            data-click-type="item-delete"
+                            title='{{localize "DOCUMENT.Delete" type='gift'}}'>
+                            <i class='fas fa-trash'></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown-content">
+                    {{{giftItem.system.description}}}
+                </div>
+            </li>
+            {{/each}}
+        </ol>
+    </li>
+    {{/if}}
+    {{else}}
+    <li {{#if
+        power.word.system.dropdown}}class="item word-row flexcol row expanded"
+        {{else}}class="item word-row flexcol row"{{/if}}
+        data-item-id="{{power.word._id}}">
+        <div class="fixed-row flexrow">
+            <i
+                class="fa-solid fa-angle-right clickable expandable hide-expanded"
+                data-item-id="{{power.word._id}}"
+                data-click-type="expand"></i>
+            <i
+                class="fa-solid fa-angle-down clickable expandable hide-collapsed"
+                data-item-id="{{power.word._id}}"
+                data-click-type="expand"></i>
+            <i class="fa-solid fa-bolt clickable"
+                data-item-id="{{power.word._id}}"
+                data-context="decrement-effort"
+                data-click-type="increment-effort"></i>
+            <div class='item-name clickable' data-click-type="print">
+                <h4>{{power.word.name}}</h4>
+            </div>
+            <div class="word-effort">
+                <label>{{localize "Effort"}}:</label>
+                <div class="item-effort clickable"
+                    data-item-id="{{power.word._id}}"
+                    data-click-type="clear-effort">
+                    {{power.word.system.effort}}
+                </div>
+            </div>
+            <div class="item-controls">
+                <a class="item-control clickable item-create"
+                    data-click-type="create-gift"
+                    title="Create Gift"
+                    data-type="gift"
+                    data-word-id="{{power.word._id}}"
+                    data-word-name="{{power.word.name}}">
+                    <i class="fas fa-plus"></i>
+                    {{localize 'DOCUMENT.New' type="gift"}}
+                </a>
+                <a class="item-control clickable item-edit"
+                    data-click-type="item-edit"
+                    title="{{localize 'DOCUMENT.Edit' type='word'}}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a
+                    class='item-control item-delete clickable'
+                    data-click-type="item-delete"
+                    title='{{localize "DOCUMENT.Delete" type='word'}}'>
+                    <i class='fas fa-trash'></i>
+                </a>
+            </div>
+        </div>
+        <ol class="dropdown-content">
+            {{#each power.gifts as |giftItem giftId|}}
+            <li {{#if
+                giftItem.system.dropdown}}class='item gift-row flexcol row expanded'
+                {{else}}class='item gift-row flexcol row'{{/if}}
+                data-item-id='{{giftItem._id}}'>
+                <div class="fixed-row flexrow">
+                    <i
+                        class="fa-solid fa-angle-right clickable expandable hide-expanded"
+                        data-item-id="{{giftItem._id}}"
+                        data-click-type="expand"></i>
+                    <i
+                        class="fa-solid fa-angle-down clickable expandable hide-collapsed"
+                        data-item-id="{{giftItem._id}}"
+                        data-click-type="expand"></i>
+                    <i class="fa-solid fa-bolt clickable"
+                        data-item-id="{{giftItem._id}}"
+                        data-context="decrement-effort"
+                        data-click-type="increment-effort"></i>
+                    <div class='item-name clickable' data-click-type="print">
+                        <h4>{{giftItem.name}}</h4>
+                    </div>
+                    <div class="gift-power">
+                        {{localize giftItem.system.power.label}}
+                    </div>
+                    <div class="gift-type">
+                        {{localize giftItem.system.type.label}}
+                    </div>
+                    <div class="gift-effort">
+                        <label>{{localize "Effort"}}:</label>
+                        <div class="item-effort clickable"
+                            data-item-id="{{giftItem._id}}"
+                            data-click-type="clear-effort">
+                            {{giftItem.system.effort}}
+                        </div>
+                    </div>
+                    <div class='item-controls'>
+                        <a
+                            class='item-control clickable item-edit'
+                            data-click-type="item-edit"
+                            title='{{localize "DOCUMENT.Edit" type='gift'}}'>
+                            <i class='fas fa-edit'></i>
+                        </a>
+                        <a
+                            class='item-control item-delete clickable'
+                            data-click-type="item-delete"
+                            title='{{localize "DOCUMENT.Delete" type='gift'}}'>
+                            <i class='fas fa-trash'></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown-content">
+                    {{{giftItem.system.description}}}
+                </div>
+            </li>
+            {{/each}}
+        </ol>
+    </li>
+    {{/if}}
+    {{/each}}
+</ol>

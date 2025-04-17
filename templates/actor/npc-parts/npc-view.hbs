@@ -34,14 +34,12 @@
         <input class="display-input" type="text"
             name="system.resources.hd.value"
             value="{{system.resources.hd.value}}" data-dtype="Number" />
-        <div class="npc-hd-max">{{system.resources.hd.max}}</div>
+        <div class="npc-hd-max total">{{system.resources.hd.max}}</div>
     </div>
     <div class="npc-value fraction">
         <label>{{localize 'Effort'}}</label>
-        <input class="display-input" type="text"
-            name="system.resources.effort.value"
-            value="{{system.resources.effort.value}}" data-dtype="Number" />
-        <div class="npc-effort-max">{{system.resources.effort.max}}</div>
+        <div class="npc-effort-value value">{{system.resources.effort.value}}</div>
+        <div class="npc-effort-max total">{{system.resources.effort.max}}</div>
     </div>
     {{#if system.details.mob}}
     {{else}}

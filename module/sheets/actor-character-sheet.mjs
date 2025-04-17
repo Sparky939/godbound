@@ -18,6 +18,7 @@ export class GodboundCharacterActorSheet extends ActorSheet {
                     initial: 'facts',
                 },
             ],
+            scrollY: ["section.sheet-body"]
         })
     }
 

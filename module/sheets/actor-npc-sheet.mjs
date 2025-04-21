@@ -15,7 +15,8 @@ export class GodboundNPCActorSheet extends ActorSheet {
                     contentSelector: '.content',
                     initial: 'description',
                 },
-            ],scrollY: ["section.content"]
+            ],
+            scrollY: ['section.content'],
         })
     }
 
@@ -239,6 +240,30 @@ export class GodboundNPCActorSheet extends ActorSheet {
         // Finally, create the item!
         return await Item.create(itemData, { parent: this.actor })
     }
+    async _onGiftCreate(_element, dataset) {
+        const type = dataset.type
+        const name = `New ${type.capitalize()}`
+        const giftData = {
+            name,
+            type,
+            system: {
+                dropdown: true,
+                word: {
+                    id: dataset.wordId,
+                    name: dataset.wordName,
+                },
+                power: {
+                    value: 'lesser',
+                    label: 'GODBOUND.Item.Gift.Power.Lesser',
+                },
+                type: {
+                    value: 'action',
+                    label: 'GODBOUND.Item.Gift.Type.Action',
+                },
+            },
+        }
+        return await Item.create(giftData, { parent: this.actor })
+    }
     _onItemDelete(element) {
         const li = $(element).parents('.item')
         const item = this.actor.items.get(li.data('itemId'))
@@ -298,6 +323,9 @@ export class GodboundNPCActorSheet extends ActorSheet {
                 }
                 case 'roll-tactics': {
                     return this.actor.system.rollTactic()
+                }
+                case 'create-gift': {
+                    return this._onGiftCreate(element, dataset)
                 }
                 case 'item-create': {
                     return this._onItemCreate(element, dataset)

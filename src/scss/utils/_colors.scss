@@ -1,0 +1,29 @@
+:root {
+  --godbound-c-dark: #191813;
+  --godbound-c-faint: #c9c7b8;
+  --godbound-c-beige: #b5b3a4;
+  --godbound-c-tan: #444444;
+  --godbound-c-white: #ffffff;
+  --godbound-c-black: #000000;
+  --godbound-c-groove: #eeede0;
+}
+
+.theme-dark {
+  --godbound-c-dark: #c9c7b8;
+  --godbound-c-faint: #191813;
+  --godbound-c-beige: #444444;
+  --godbound-c-tan: #b5b3a4;
+  --godbound-c-white: #000000;
+  --godbound-c-black: #ffffff;
+  --godbound-c-groove: #11121f;
+}
+
+$c-white: var(--godbound-c-white);
+$c-black: var(--godbound-c-black);
+
+$c-dark: var(--godbound-c-dark);
+$c-faint: var(--godbound-c-faint);
+$c-beige: var(--godbound-c-beige);
+$c-tan: var(--godbound-c-tan);
+
+$c-groove: var(--godbound-c-groove);

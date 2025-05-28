@@ -1,193 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-
-.col-span-1 {
-  grid-column: span 1 / span 1;
+:root {
+  --godbound-c-dark: #191813;
+  --godbound-c-faint: #c9c7b8;
+  --godbound-c-beige: #b5b3a4;
+  --godbound-c-tan: #444444;
+  --godbound-c-white: #ffffff;
+  --godbound-c-black: #000000;
+  --godbound-c-groove: #eeede0;
 }
 
-.col-span-2 {
-  grid-column: span 2 / span 2;
-}
-
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
-
-.col-span-4 {
-  grid-column: span 4 / span 4;
-}
-
-.col-span-full {
-  grid-column: 1 / -1;
-}
-
-.row-span-1 {
-  grid-row: span 1 / span 1;
-}
-
-.m-0 {
-  margin: 0px;
-}
-
-.mx-0 {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
-.my-2\.5 {
-  margin-top: 0.625rem;
-  margin-bottom: 0.625rem;
-}
-
-.my-\[10px\] {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.grid {
-  display: grid;
-}
-
-.h-item-header {
-  height: 28px;
-}
-
-.h-min {
-  height: -webkit-min-content;
-  height: -moz-min-content;
-  height: min-content;
-}
-
-.auto-rows-auto {
-  grid-auto-rows: auto;
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.grid-cols-subgrid {
-  grid-template-columns: subgrid;
-}
-
-.grid-cols-tactics {
-  grid-template-columns: 20px 45px 1fr -webkit-max-content;
-  grid-template-columns: 20px 45px 1fr max-content;
-}
-
-.grid-rows-items {
-  grid-template-rows: 28px;
-}
-
-.flex-row {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-.items-center {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.justify-start {
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-}
-
-.justify-end {
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-}
-
-.justify-center {
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.gap-2\.5 {
-  gap: 0.625rem;
-}
-
-.gap-\[10px\] {
-  gap: 10px;
-}
-
-.gap-x-\[10px\] {
-  -webkit-column-gap: 10px;
-  -moz-column-gap: 10px;
-  column-gap: 10px;
-}
-
-.gap-y-\[5px\] {
-  row-gap: 5px;
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
-}
-
-.p-0 {
-  padding: 0px;
-}
-
-.px-\[2px\] {
-  padding-left: 2px;
-  padding-right: 2px;
-}
-
-.px-\[3px\] {
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-.py-\[3px\] {
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-
-.pr-\[5px\] {
-  padding-right: 5px;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.text-list-header {
-  --tw-text-opacity: 1;
-  color: rgb(68 68 68 / var(--tw-text-opacity, 1));
+.theme-dark {
+  --godbound-c-dark: #c9c7b8;
+  --godbound-c-faint: #191813;
+  --godbound-c-beige: #444444;
+  --godbound-c-tan: #b5b3a4;
+  --godbound-c-white: #000000;
+  --godbound-c-black: #ffffff;
+  --godbound-c-groove: #11121f;
 }
 
 /* Global styles */
-
 .window-app {
   font-family: "Roboto", sans-serif;
 }
 
-.clickable:hover,
-.clickable:focus {
-  color: #000;
+.rollable:hover, .rollable:focus {
+  color: var(--godbound-c-black);
   text-shadow: 0 0 10px red;
   cursor: pointer;
+}
+
+.grid,
+.grid-2col {
+  display: grid;
+  grid-column: span 2/span 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.grid-3col {
+  grid-column: span 3/span 3;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-4col {
@@ -326,1286 +181,301 @@
 .flex-group-center,
 .flex-group-left,
 .flex-group-right {
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   text-align: center;
 }
 
 .flex-group-left {
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
   text-align: left;
 }
 
 .flex-group-right {
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
   justify-content: flex-end;
   text-align: right;
 }
 
 .flexshrink {
-  -webkit-box-flex: 0;
-  -ms-flex: 0;
   flex: 0;
 }
 
 .flex-between {
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 
 .flexlarge {
-  -webkit-box-flex: 2;
-  -ms-flex: 2;
   flex: 2;
 }
 
 .align-left {
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
   text-align: left;
 }
 
 .align-right {
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
   justify-content: flex-end;
   text-align: right;
 }
 
 .align-center {
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   text-align: center;
 }
 
 /* Styles limited to godbound sheets */
-
 .godbound .item-form {
   font-family: "Roboto", sans-serif;
 }
-
-.godbound .clickable {
-  cursor: pointer;
-}
-
-.godbound form.character.godbound {
-  display: grid;
-  grid-template-areas: "header" "tabs" "body";
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr;
-  row-gap: 10px;
-  min-width: 490px;
-}
-
-.godbound form.character.godbound .sheet-header {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 auto;
+.godbound .sheet-header {
   flex: 0 auto;
   overflow: hidden;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
+  display: flex;
   flex-direction: row;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
   justify-content: flex-start;
+  margin-bottom: 10px;
 }
-
-.godbound form.character.godbound .sheet-header .profile-img {
-  grid-area: image;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100px;
+.godbound .sheet-header .profile-img {
   flex: 0 0 100px;
   height: 100px;
+  margin-right: 10px;
 }
-
-.godbound form.character.godbound .sheet-header .header-fields {
-  height: 100%;
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
+.godbound .sheet-header .header-fields {
   flex: 1;
 }
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 5px;
-  width: 100%;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row div:has(+ label) {
-  padding-right: 10px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .fa-solid.fa-heart.fa-xl.pr-4px {
-  padding-right: 4px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .left-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .left-group div:has(+ label) {
-  padding-right: 10px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .left-group label:has(+ input[type=checkbox]) {
-  padding-right: 2px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .left-group input[type=checkbox] {
-  height: 12px;
-  width: 12px;
-  margin: 0;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .right-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: auto;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .short-input {
-  width: 35px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row label {
-  padding-right: 7px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row input {
-  margin-right: 10px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row span.level-value {
-  margin-right: 10px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-  padding-right: 10px;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group input {
-  margin-right: 0;
-  text-align: center;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .header-row .fraction-group .denominator {
-  width: 100%;
-  text-align: center;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .fraction-group input {
-  width: 30px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .fraction-group .span {
-  width: 20px;
-  border-top: 1px solid black;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .fraction-group .fraction-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields input {
-  width: 120px;
-}
-
-.godbound form.character.godbound .sheet-header .header-fields .resources {
-  height: 100%;
-  margin: 0;
-  grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));
-}
-
-.godbound form.character.godbound .sheet-header h1.charname {
-  grid-area: name;
-  height: 50px;
-  padding: 0px;
-  margin: 5px 0;
-  border-bottom: 0;
-}
-
-.godbound form.character.godbound .sheet-header h1.charname input {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-
-.godbound form.character.godbound .sheet-tabs {
-  margin: 0;
-}
-
-.godbound form.character.godbound aside.sidebar {
-  row-gap: 3px;
-  display: grid;
-  grid-template-columns: 1fr 50px 50px;
-  grid-auto-rows: 26px;
-}
-
-.godbound form.character.godbound aside.sidebar .flexcol {
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-template-columns: subgrid;
-}
-
-.godbound form.character.godbound aside.sidebar .flexcol .flexrow {
-  height: 26px;
-}
-
-.godbound form.character.godbound aside.sidebar .saves.flexcol {
-  grid-column: 1/-1;
-  grid-row: 7/10;
-}
-
-.godbound form.character.godbound aside.sidebar .saves.flexcol .flex-group-center {
-  display: grid;
-  grid-column: 1/-1;
-  grid-template-columns: subgrid;
-}
-
-.godbound form.character.godbound aside.sidebar .attributes.flexcol {
-  grid-row: 1/7;
-  grid-column: 1/-1;
-}
-
-.godbound form.character.godbound aside.sidebar .attributes.flexcol .flex-group-center {
-  display: grid;
-  grid-column: 1/-1;
-  grid-template-columns: subgrid;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid {
-  display: grid;
-  grid-template-columns: [label-start] auto [label-end value-start] auto [value-end max-start] auto [max-end income-start] auto [income-end];
-  grid-template-rows: 30px 30px 30px 30px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .header {
-  grid-column: label-start/income-end;
-  grid-row: 1/2;
-  grid-template-columns: subgrid;
-  display: grid;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .header div {
-  border-bottom: 1px solid var(--color-underline-header);
-  text-align: center;
-  vertical-align: middle;
-  padding: 0 5px;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .influence-row {
-  grid-column: label-start/income-end;
-  grid-row: 2/3;
-  display: grid;
-  grid-template-columns: subgrid;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .influence-row * {
-  text-align: center;
-  vertical-align: middle;
-  width: auto;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row {
-  grid-column: label-start/income-end;
-  grid-row: 3/4;
-  display: grid;
-  grid-template-columns: subgrid;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row * {
-  text-align: center;
-  vertical-align: middle;
-  width: auto;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .dominion-row * input {
-  width: 35px;
-  height: 20px;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .spent-row {
-  grid-column: label-start/income-end;
-  grid-row: 4/5;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .resources-grid .spent-row * {
-  text-align: left;
-  vertical-align: middle;
-  width: auto;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section input {
-  width: auto;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .dominon-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  width: 100%;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .compact-section .dominon-row input {
-  width: 30px;
-}
-
-.committed-effort-list {
-  height: 26px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-  width: 100%;
-}
-
-.committed-effort-list .row-header {
-  width: auto;
-  padding-right: 5px;
-  font-weight: bold;
-}
-
-.committed-effort-list .word-pill {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: auto;
-  border: 1px solid #a6a6a6;
-  border-radius: 5px;
-  padding: 3px 7px;
-  margin: 0 4px;
-}
-
-.committed-effort-list .word-pill .item-delete {
-  display: none;
-  margin-left: 5px;
-}
-
-.committed-effort-list .word-pill:hover .item-delete {
-  display: block;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .passives-list {
-  padding: 0;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active .passives-list .title-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-  font-weight: bold;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active.facts {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active.facts section {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 100%;
-  flex: 1 1 100%;
-  margin: 0;
-}
-
-.godbound form.character.godbound section.sheet-body .tab.active.facts section section {
-  display: grid;
-  grid-template-rows: auto 1fr;
-}
-
-.godbound .save-penalty.clickable {
-  color: rgb(145, 21, 21);
-}
-
 .godbound .sheet-tabs {
-  -webkit-box-flex: 0;
-  -ms-flex: 0;
   flex: 0;
 }
-
 .godbound .sheet-body,
 .godbound .sheet-body .tab,
 .godbound .sheet-body .tab .editor {
   height: 100%;
 }
-
-.godbound .sheet-body>.tab>.checkbox-list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
+.godbound .tab.biography {
+  flex: 1;
 }
-
-.godbound .sheet-body>.tab>.checkbox-list>label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+.godbound .tab.biography .editor {
+  height: 100%;
 }
-
-.godbound .sheet-body>.tab>.checkbox-list>label>input[type=checkbox] {
-  height: 15px;
-  width: 15px;
-}
-
 .godbound .tox .tox-editor-container {
-  background: #fff;
+  background: var(--godbound-c-white);
 }
-
 .godbound .tox .tox-edit-area {
   padding: 0 8px;
 }
-
-.godbound .grid-form {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto;
-  grid-row-gap: 5px;
-}
-
-.godbound form.npc.locked nav.npc-tabs.tabs a.item[data-tab=details] {
-  display: none;
-}
-
-.godbound form.npc.locked nav.npc-tabs.tabs a.item[data-tab=tactics] {
-  display: none;
-}
-
-.godbound .text-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 0;
-  overflow: auto;
-}
-
-.godbound .text-wrapper .editor {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 100%;
-  flex: 1 1 100%;
-  min-height: 200px;
-}
-
-.godbound form.npc {
-  min-height: 0;
-  overflow: auto;
-}
-
-.godbound form.npc nav.npc-tabs.tabs {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 25px;
-  flex: 0 0 25px;
-  border-bottom: 1px solid var(--color-border-light-primary);
-}
-
-.godbound form.npc section.content {
-  min-height: 0;
-  overflow: auto;
-}
-
-.godbound form.npc section.content div.tab.description.active {
-  height: 100%;
-  min-height: 0;
-  overflow: auto;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-}
-
-.godbound form.npc section.content div.tab.description.active div.npc-header {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  grid-template-rows: 1fr;
-  grid-gap: 10px;
-  padding: 5px;
-  border-bottom: 1px solid var(--color-border-light-primary);
-}
-
-.godbound form.npc section.content div.tab.description.active div.npc-header div.display-name {
-  font-size: 20px;
-}
-
-.godbound form.npc section.content div.tab.description.active .npc-description {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 0;
-  overflow: auto;
-}
-
-.godbound form.npc section.content div.tab.description.active .npc-description .editor {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 100%;
-  flex: 1 1 100%;
-  min-height: 200px;
-}
-
-.godbound form.npc section.content div.tab.details i.npc-toggle-icon.clickable {
-  position: absolute;
-  right: 10px;
-  top: 70px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-  grid-gap: 10px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .profile-img {
-  grid-area: profile-img;
-  width: 100px;
-  height: 100px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-  height: 100%;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group .input-group-checkbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: bold;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group .input-group-checkbox div.checkbox-label {
-  color: rgba(0, 0, 0, 0.3);
-  grid-area: label;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group .input-group-checkbox div.checkbox-label.selected {
-  color: black;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .checkbox-group .input-group-checkbox input[type=checkbox] {
-  display: none;
-  width: 0px;
-  height: 0px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .input-group-checkbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-weight: bold;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .input-group-checkbox div.checkbox-label {
-  color: rgba(0, 0, 0, 0.3);
-  grid-area: label;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .input-group-checkbox div.checkbox-label.selected {
-  color: black;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row:first-child .input-group-checkbox input[type=checkbox] {
-  display: none;
-  width: 0px;
-  height: 0px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-box-align: end;
-  -ms-flex-align: end;
-  align-items: flex-end;
-  grid-gap: 5px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .checkbox-label {
-  font-weight: bold;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .npc-name {
-  width: 150px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto;
-  grid-template-areas: "label" "input";
-  grid-row: 1/2;
-  grid-gap: 5px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1.short {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto;
-  grid-template-areas: "label" "input";
-  grid-row: 1/2;
-  grid-gap: 5px;
-  width: 40px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 label.max-label {
-  width: 35px;
-  text-wrap: wrap;
-  text-align: center;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 label {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-weight: bold;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  grid-area: label;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 input {
-  grid-area: input;
-  width: 35px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 input.long {
-  width: 120px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-1 input.move {
-  width: 70px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-2 {
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: 1fr auto 1fr;
-  grid-template-rows: auto auto;
-  grid-template-areas: "label label label" "input-1 divider input-2";
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-2 label {
-  grid-area: label;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-2 input {
-  width: 40px;
-}
-
-.godbound form.npc section.content div.tab.details div.edit-sheet .form-row .input-group-2 .divider {
-  font-size: 20px;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap;
-  grid-gap: 5px;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .display-name {
-  font-size: 20px;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .npc-tags {
-  font-weight: bold;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-column-gap: 10px;
-  -moz-column-gap: 10px;
-  column-gap: 10px;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .npc-tags>div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: auto;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .mob-select {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  grid-gap: 5px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .mob-select label {
-  font-weight: bold;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-header .mob-select select {
-  width: 100px;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row {
-  display: grid;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  grid-template-rows: [label-start] auto [label-end input-start] auto [input-end fraction-start] auto [fraction-end];
-  grid-auto-columns: auto;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value {
-  display: grid;
-  grid-row: 1/-1;
-  grid-template-rows: subgrid;
-  grid-column: span 1;
-  grid-gap: 5px;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value label {
-  font-weight: bold;
-  grid-row: label-start/label-end;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value div {
-  grid-gap: 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  grid-row: input-start/fraction-end;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.display {
-  display: grid;
-  grid-row: 1/-1;
-  grid-template-rows: subgrid;
-  justify-items: center;
-  text-align: center;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.display.short {
-  display: grid;
-  grid-row: 1/-1;
-  grid-template-rows: subgrid;
-  justify-items: center;
-  text-align: center;
-  width: 40px;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.display div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  grid-row: input-start/fraction-end;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.fraction {
-  display: grid;
-  grid-row: 1/-1;
-  grid-template-rows: subgrid;
-  grid-template-columns: auto;
-  justify-items: center;
-  text-align: center;
-  width: 40px;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.fraction div.total {
-  border-top: 1px solid black;
-  grid-row: fraction-start/fraction-end;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.fraction input {
-  grid-row: input-start/input-end;
-  height: 20px;
-  width: 40px;
-}
-.godbound form.npc section.content div.tab.details div.view-sheet div.npc-details-row .npc-value.fraction div.value {
-  grid-row: input-start/input-end;
-  height: 20px;
-  width: 40px;
-}
-
-.godbound form.npc>.content>.tab.details i.npc-toggle-icon.clickable {
-  position: absolute;
-  right: 10px;
-}
-
-.godbound form.npc.edit>.content>.tab.details .view-sheet {
-  display: none;
-}
-
-.godbound form.npc.edit>.content>.tab.details .edit-sheet {
-  display: block;
-}
-
-.godbound form.npc.view .view-sheet {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.godbound form.npc.view .edit-sheet {
-  display: none;
-}
-
 .godbound .resource-label {
   font-weight: bold;
 }
-
+.godbound .ability {
+  margin-bottom: 2px;
+}
+.godbound .ability-score,
+.godbound .ability-mod {
+  flex: 0 0 44px;
+}
 .godbound .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.05);
-  border: 2px groove #eeede0;
+  border: 2px groove var(--godbound-c-groove);
   font-weight: bold;
 }
-
-.godbound .items-header>* {
-  font-size: 13px;
+.godbound .items-header > * {
+  font-size: 14px;
   text-align: center;
 }
-
 .godbound .items-header .item-name {
   font-weight: bold;
   padding-left: 5px;
   text-align: left;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
-.godbound .items-header .item-enabled {
-  font-weight: bold;
-  padding-left: 5px;
-  text-align: left;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.godbound .items-header .item-cost {
-  font-weight: bold;
-  padding-left: 5px;
-  text-align: left;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.godbound .passives-list {
-  list-style: none;
-}
-
-.godbound .passives-list .passive-item {
-  margin-left: 5px;
-}
-
 .godbound .items-list {
   list-style: none;
   margin: 0;
   padding: 0;
   overflow-y: auto;
   scrollbar-width: thin;
-  color: #444;
+  color: var(--godbound-c-tan);
 }
-
 .godbound .items-list .item-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
 .godbound .items-list .item-name {
-  -webkit-box-flex: 2;
-  -ms-flex: 2;
   flex: 2;
   margin: 0;
   overflow: hidden;
   font-size: 13px;
   text-align: left;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
-
-.godbound .items-list .item-name h3,
-.godbound .items-list .item-name h4 {
+.godbound .items-list .item-name h3, .godbound .items-list .item-name h4 {
   margin: 0;
   white-space: nowrap;
   overflow-x: hidden;
 }
-
-.godbound .items-list .item-worn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 1 auto;
-  flex: 0 1 auto;
-  padding: 0 5px;
-}
-
 .godbound .items-list .item-controls {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100px;
   flex: 0 0 100px;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
   justify-content: flex-end;
 }
-
 .godbound .items-list .item-controls a {
   font-size: 12px;
   text-align: center;
   margin: 0 6px;
 }
-
 .godbound .items-list .item {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  padding: 3px 2px;
-  border-bottom: 1px solid #c9c7b8;
+  padding: 0 2px;
+  border-bottom: 1px solid var(--godbound-c-faint);
 }
-
 .godbound .items-list .item:last-child {
   border-bottom: none;
 }
-
 .godbound .items-list .item .item-name {
-  color: #191813;
+  color: var(--godbound-c-dark);
 }
-
 .godbound .items-list .item .item-name .item-image {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  height: 24px;
-  width: 24px;
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: 30px;
   border: none;
   margin-right: 5px;
 }
-
-.godbound .items-list .item.flex-row {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.godbound .items-list .item.row .fixed-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-  -webkit-box-flex: 1;
-  -ms-flex: 1 0 100%;
-  flex: 1 0 100%;
-}
-
-.godbound .items-list .item.row .fixed-row i {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  padding-right: 5px;
-}
-
-.godbound .items-list .item.row .fixed-row .item-controls {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 150px;
-  flex: 0 0 150px;
-}
-
-.godbound .items-list .item.row .fixed-row .item-controls i {
-  padding: 0;
-}
-
-.godbound .items-list .item.row>.dropdown-content {
-  display: none;
-  width: 100%;
-  height: 0;
-}
-
-.godbound .items-list .item.row.expanded>.dropdown-content {
-  display: block;
-  height: auto;
-  width: 100%;
-  margin: 0;
-  border-top: 1px solid rgb(201, 199, 184);
-}
-
-.godbound .items-list .item.row.expanded>.fixed-row>.hide-expanded {
-  display: none;
-}
-
-.godbound .items-list .item.row:not(.expanded)>.fixed-row>.hide-collapsed {
-  display: none;
-}
-
-.godbound .items-list .item.row.word-row>.fixed-row>div>h4 {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.godbound .items-list .item.row.gift-row>.fixed-row {
-  font-size: 13px;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-}
-
-.godbound .items-list .item.row.gift-row>.fixed-row>.gift-effort {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-}
-
-.godbound .items-list .item.row.word-row>.fixed-row>.word-effort {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-}
-
-.godbound .items-list .item.row.gift-row>.fixed-row>.gift-effort>label {
-  padding-right: 5px;
-}
-
-.godbound .items-list .item.row.word-row>.fixed-row>.word-effort>label {
-  padding-right: 5px;
-}
-
 .godbound .items-list .item-prop {
   text-align: center;
   border-left: 1px solid #c9c7b8;
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
-
 .godbound .items-list .items-header {
   height: 28px;
   margin: 2px 0;
   padding: 0;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.05);
-  border: 2px groove #eeede0;
+  border: 2px groove var(--godbound-c-groove);
   font-weight: bold;
 }
-
-.godbound .items-list .items-header>* {
+.godbound .items-list .items-header > * {
   font-size: 12px;
   text-align: center;
 }
-
 .godbound .items-list .items-header .item-name {
   padding-left: 5px;
   text-align: left;
 }
-
 .godbound .item-formula {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 200px;
   flex: 0 0 200px;
   padding: 0 8px;
 }
-
+.godbound .effects-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove var(--godbound-c-groove);
+  font-weight: bold;
+}
+.godbound .effects-header > * {
+  font-size: 14px;
+  text-align: center;
+}
+.godbound .effects-header .effect-name {
+  font-weight: bold;
+  padding-left: 5px;
+  text-align: left;
+  display: flex;
+}
+.godbound .effects-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: var(--godbound-c-tan);
+}
+.godbound .effects-list .effect-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.godbound .effects-list .effect-name {
+  flex: 2;
+  margin: 0;
+  overflow: hidden;
+  font-size: 13px;
+  text-align: left;
+  align-items: center;
+  display: flex;
+}
+.godbound .effects-list .effect-name h3, .godbound .effects-list .effect-name h4 {
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.godbound .effects-list .effect-controls {
+  display: flex;
+  flex: 0 0 100px;
+  justify-content: flex-end;
+}
+.godbound .effects-list .effect-controls a {
+  font-size: 12px;
+  text-align: center;
+  margin: 0 6px;
+}
+.godbound .effects-list .effect {
+  align-items: center;
+  padding: 0 2px;
+  border-bottom: 1px solid var(--godbound-c-faint);
+}
+.godbound .effects-list .effect:last-child {
+  border-bottom: none;
+}
+.godbound .effects-list .effect .effect-name {
+  color: var(--godbound-c-dark);
+}
+.godbound .effects-list .effect .effect-name .effect-image {
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: 30px;
+  border: none;
+  margin-right: 5px;
+}
+.godbound .effects-list .effect-prop {
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
+}
+.godbound .effects-list .effects-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px groove var(--godbound-c-groove);
+  font-weight: bold;
+}
+.godbound .effects-list .effects-header > * {
+  font-size: 12px;
+  text-align: center;
+}
+.godbound .effects-list .effects-header .effect-name {
+  padding-left: 5px;
+  text-align: left;
+}
+.godbound .effect-formula {
+  flex: 0 0 200px;
+  padding: 0 8px;
+}
 .godbound .effects .item .effect-source,
 .godbound .effects .item .effect-duration,
 .godbound .effects .item .effect-controls {
@@ -1614,51 +484,6 @@
   border-right: 1px solid #c9c7b8;
   font-size: 12px;
 }
-
 .godbound .effects .item .effect-controls {
   border: none;
-}
-
-.dice-roll .dice-flavor {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row nowrap;
-  flex-flow: row nowrap;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.dice-roll .dice-result .dice-total {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  grid-gap: 5px;
-}
-
-.dice-roll .dice-result .dice-total .dice-total-details {
-  font-weight: normal;
-  font-size: 15px;
-  padding-left: 5px;
-}
-
-.charname {
-  margin: 0 0 0 0.5rem;
-  padding: 0;
-  font-weight: normal;
-  font-size: 2em;
-}
-
-.small-checkbox {
-  width: 12px;
-  height: 12px;
 }

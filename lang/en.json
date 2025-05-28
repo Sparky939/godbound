@@ -1,167 +1,91 @@
 {
-    "GODBOUND": {
-        "Attribute": {
-            "Str": { "long": "Strength", "abbr": "str" },
-            "Con": { "long": "Constitution", "abbr": "con" },
-            "Dex": { "long": "Dexterity", "abbr": "dex" },
-            "Int": { "long": "Intelligence", "abbr": "int" },
-            "Wis": { "long": "Wisdom", "abbr": "wis" },
-            "Cha": { "long": "Charisma", "abbr": "cha" }
-        },
-        "Save": {
-            "Hardiness": "Hardiness",
-            "Evasion": "Evasion",
-            "Spirit": "Spirit"
-        },
-        "FrayDice": {
-            "4": "4",
-            "6": "6",
-            "8": "8",
-            "10": "10",
-            "12": "12"
-        },
-        "DamageDiceSizes": {
-            "2": "d2",
-            "4": "d4",
-            "6": "d6",
-            "8": "d8",
-            "10": "d10",
-            "12": "d12",
-            "20": "d20"
-        },
-        "Armor": {
-            "None": "Unarmoured",
-            "Light": "Light",
-            "Medium": "Medium",
-            "Heavy": "Heavy",
-            "Shield": "Shield"
-        },
-        "Weapon": {
-            "Unarmed": "Unarmed",
-            "Light": "Light",
-            "Medium": "Medium",
-            "Heavy": "Heavy",
-            "OneHandedRanged": "One-Handed Ranged",
-            "TwoHandedRanged": "Two-Handed Ranged",
-            "Custom": "Custom"
-        },
-        "Resource": {
-            "Effort": "Effort",
-            "Health": "Health",
-            "Influence": "Influence",
-            "Wealth": "Wealth",
-            "Dominion": "Dominion"
-        },
-        "SheetLabels": {
-            "Character": "Godbound Character Sheet",
-            "NPC": "Godbound NPC Sheet",
-            "Item": "Godbound Item Sheet"
-        },
-        "SheetModes": {
-            "Edit": "Edit",
-            "View": "View",
-            "Compact": "Compact"
-        },
-        "Item": {
-            "Spell": {
-                "Level": {
-                    "Apprentice": "Apprentice",
-                    "Adept": "Adept",
-                    "Master": "Master",
-                    "Archmage": "Archmage"
-                },
-                "Add": "Add Spell",
-                "AddLVL": "{}",
-                "SpellLVL": "Spell Level"
-            },
-            "Gift": {
-                "Power": {
-                    "Lesser": "Lesser",
-                    "Greater": "Greater"
-                },
-                "Type": {
-                    "Passive": "Constant",
-                    "Instant": "Instant",
-                    "Turn": "On Turn",
-                    "Action": "Action"
-                }
-            }
-        },
-        "Effect": {
-            "Source": "Source",
-            "Toggle": "Toggle Effect",
-            "Active": "Active Effects",
-            "Duration": "Duration",
-            "Temporary": "Temporary Effects",
-            "Passive": "Passive Effects",
-            "Inactive": "Inactive Effects"
-        },
-        "AttributePromptTitle": "{attribute} Attribute Check",
-        "AttributeCheckResult": "{attribute} Check vs. {checkTarget}",
-        "PowerCreatePromptTitle": "Create Power Item",
-        "MoraleCheckResult": "Morale Check vs. {checkTarget}",
-        "MoralPromptTitle": "Morale Check",
-        "PowerTypePrompt": "Power Type",
-        "SavePromptTitle": "{save} Save",
-        "SaveCheckResult": "{save} Save vs. {checkTarget}",
-        "NPCSaveCheckResult": "Save",
-        "AttackResult": "{item} Attack",
-        "DamageResult": "{item} Damage",
-        "DifficultyPrompt": "Select Difficulty",
-        "RelevantFactPrompt": "Relevant Fact?",
-        "RollSituationalBonus": "Situational Bonus?",
-        "RollMode": "Roll Mode",
-        "Roll": "Roll",
-        "Create": "Create",
-        "RollType": {
-            "Normal": "Normal",
-            "Advantage": "Advantage",
-            "Disadvantage": "Disadvantage"
-        },
-        "RollTypePrompt": "Roll Type",
-        "Difficulty": {
-            "Mortal": "Mortal Task",
-            "PushLimits": "Pushing Human Limits",
-            "Heroic": "Truly Heroic Challenge"
-        },
-        "PowerType": {
-            "Gift": "Gift",
-            "Word": "Word"
-        },
-        "RollExample": "e.g. d8 + 2",
-        "ItemTypes": {
-            "Weapon": "Weapon",
-            "Armour": "Armour",
-            "Item": "Item"
-        },
-        "ArmourTypes": {
-            "None": "None",
-            "Light": "Light",
-            "Medium": "Medium",
-            "Heavy": "Heavy"
-        },
-        "MobTypes": {
-            "Small": "Small",
-            "Large": "Large",
-            "Vast": "Vast"
-        }
+  "GODBOUND": {
+    "Ability": {
+      "Str": { "long": "Strength", "abbr": "str" },
+      "Con": { "long": "Constitution", "abbr": "con" },
+      "Dex": { "long": "Dexterity", "abbr": "dex" },
+      "Int": { "long": "Intelligence", "abbr": "int" },
+      "Wis": { "long": "Wisdom", "abbr": "wis" },
+      "Cha": { "long": "Charisma", "abbr": "cha" }
     },
-
-    "TYPES": {
-        "Actor": {
-            "character": "Character",
-            "npc": "NPC"
-        },
-        "Item": {
-            "item": "Item",
-            "fact": "Fact",
-            "spell": "Spell",
-            "project": "Project",
-            "armour": "Armour",
-            "weapon": "Weapon",
-            "word": "Word",
-            "gift": "Gift",
-            "tactic": "Tactic"
+    "SheetLabels": {
+      "Actor": "Godbound Actor Sheet",
+      "Item": "Godbound Item Sheet"
+    },
+    "Actor": {
+      "Tabs": {
+        "Biography": "Biography",
+        "Features": "Features",
+        "Gear": "Gear",
+        "Spells": "Spells",
+        "Effects": "Effects"
+      },
+      "base": {
+        "FIELDS": {
+          "biography": {"label": "Biography"},
+          "health": {
+            "value": {"label": "Health"},
+            "max": {"label": "Maximum Health"}
+          },
+          "power": {
+            "value": {"label": "Power"},
+            "max": {"label": "Maximum Power"}
+          }
         }
+      },
+      "Character": {
+        "FIELDS": {
+          "attributes.level.value": {"label": "Level"}
+        }
+      },
+      "NPC": {
+        "FIELDS": {
+          "cr": {"label": "CR"}
+        },
+        "xp": {"label": "XP"}
+      }
+    },
+    "Item": {
+      "Tabs": {
+        "Attributes": "Attributes",
+        "Description": "Description",
+        "Effects": "Effects"
+      },
+      "Gear": {
+        "FIELDS": {
+          "rollFormula": {"label": "Roll Formula"},
+          "numDice": {"label": "Number of Dice"},
+          "dieSize": {"label": "Die Size"},
+          "rollMod": {"label": "Roll Modifier"},
+          "quantity": {"label": "Quantity"},
+          "weight": {"label": "Weight"}
+        }
+      },
+      "Spell": {
+        "FIELDS": {
+          "level": {"label": "Spell Level"}
+        },
+        "SpellLVL": "Level {level} Spells",
+        "AddLVL": "Add LVL {level}"
+      }
+    },
+    "Effect": {
+      "Source": "Source",
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
     }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "NPC"
+    },
+    "Item": {
+      "gear": "Gear",
+      "feature": "Feature",
+      "spell": "Spell"
+    }
+  }
 }
